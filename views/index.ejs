@@ -3,21 +3,109 @@
 
 
 <head>
-    <link rel="stylesheet" href="..\css\style.css">
-    
-   
+     <!-- Required meta tags -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <title> <%= title %></title>
-
-    
-
 </head>
 <body>
-    <div class="main-content">
-     <h1><%= name %></h1>
-         <p>Add User to SQL Database</p>
+    <div class="jumbotron text-center">
+        <h1><%=title%></h1>
+        <p>Select Your Desired Database Below</p>
+      </div>
+      
+      <div class="container">
+        <div class="row mt-2">
+          <div class="col-12">
+            <form>
+              <div class="form-group row">
+                <div class="col-12">
+                  <div class="card-deck">
+                    <div class="container">
+                        <div class="row mt-2">
+                          <div class="col-12">
+                            <form>
+                              <div class="form-group row">
+                                <div class="col-12">
+                                  <div class="card-deck">
 
-
-    </div>
+                                    <% if (catalog.length>0){ %>
+                                        <% catalog.forEach(card =>{ %>
+                                    <div id= "<%=card.name%>-card" class="card mb-4">
+                                        <img class="card-img-top" src=<%=card.img%> alt="Card image cap">
+                                      <div class="card-body" role="button">
+                                        <h5 class="card-title"><input id="<%=card.id%>" type="radio">
+                                          <label for="<%=card.id%>"><%=card.name%></label>
+                                        </h5>
+                                        <p class="card-text"><%=card.text%>.</p>
+                                      </div>
+                                    </div>
+                                    <% }) %>
+                                    <% } %>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
         
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function () {
+    $('input:radio').change(function () {//Clicking input radio
+        var radioClicked = $(this).attr('id');
+        unclickRadio();
+        removeActive();
+        clickRadio(radioClicked);
+        makeActive(radioClicked);
+    });
+    $(".card").click(function () {//Clicking the card
+        var inputElement = $(this).find('input[type=radio]').attr('id');
+        unclickRadio();
+        removeActive();
+        makeActive(inputElement);
+        clickRadio(inputElement);
+    });
+});
+
+
+function unclickRadio() {
+    $("input:radio").prop("checked", false);
+}
+
+function clickRadio(inputElement) {
+    $("#" + inputElement).prop("checked", true);
+}
+
+function removeActive() {
+    $(".card").removeClass("active");
+}
+
+function makeActive(element) {
+    $("#" + element + "-card").addClass("active");
+}
+
+
+
+</script>
+
+
+
 </body>
 </html>
