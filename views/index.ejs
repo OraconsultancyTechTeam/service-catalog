@@ -15,58 +15,72 @@
     <div class="jumbotron text-center">
         <h1><%=title%></h1>
         <p>Select Your Desired Database Below</p>
-      </div>
-      
+    </div>
       <div class="container">
-        <div class="row mt-2">
-          <div class="col-12">
-            <form>
-              <div class="form-group row">
-                <div class="col-12">
-                  <div class="card-deck">
-                    <div class="container">
-                        <div class="row mt-2">
-                          <div class="col-12">
-                            <form>
-                              <div class="form-group row">
-                                <div class="col-12">
-                                  <div class="card-deck">
+        <div class="row">
+          <div class="col-8">
 
-                                    <% if (catalog.length>0){ %>
-                                        <% catalog.forEach(card =>{ %>
-                                    <div id= "<%=card.name%>-card" class="card mb-4">
-                                        <img class="card-img-top" src=<%=card.img%> alt="Card image cap">
-                                      <div class="card-body" role="button">
-                                        <h5 class="card-title"><input id="<%=card.id%>" type="radio">
-                                          <label for="<%=card.id%>"><%=card.name%></label>
-                                        </h5>
-                                        <p class="card-text"><%=card.text%>.</p>
-                                      </div>
-                                    </div>
-                                    <% }) %>
-                                    <% } %>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
+            <div class="container">
+              <div class="row mt-2">
+                <div class="col-12">
+                  <form>
+                    <div class="form-group row">
+                      <div class="col-12">
+                        <div class="card-deck">
+                          <% if (step1.length>0){ %>
+                            <% step1.forEach(card =>{ %>
+                        <div id= "<%=card.name%>-card " class="card mb-4 text-center"  style="min-width: 10rem;">
+                            <img class="card-img-top" src=<%=card.img%> alt="Card image cap">
+                          <div class="card-body" role="button">
+                            <h5 class="card-title"><input id="<%=card.name%>" type="radio">
+                              <label for="<%=card.name%>"><%=card.name%></label>
+                            </h5>
+                            <p class="card-text"><%=card.text%>.</p>
                           </div>
+                          
+                        </div>
+                        <% }) %>
+                        <% } %>
+
+                          
+
                         </div>
                       </div>
-                
-                  </div>
+                    </div>
+                  </form>
                 </div>
               </div>
-            </form>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            
+          </div>
+          <div class="col-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Service Details</h5>
+                <p class="card-text" id="id-text">Choose a Database Service.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+                
+      
         
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script>
 $(document).ready(function () {
     $('input:radio').change(function () {//Clicking input radio
         var radioClicked = $(this).attr('id');
@@ -81,6 +95,7 @@ $(document).ready(function () {
         removeActive();
         makeActive(inputElement);
         clickRadio(inputElement);
+        $('#id-text').html(inputElement);
     });
 });
 
@@ -90,7 +105,7 @@ function unclickRadio() {
 }
 
 function clickRadio(inputElement) {
-    $("#" + inputElement).prop("checked", true);
+    $("#"+inputElement).prop("checked", true);
 }
 
 function removeActive() {
@@ -100,8 +115,6 @@ function removeActive() {
 function makeActive(element) {
     $("#" + element + "-card").addClass("active");
 }
-
-
 
 </script>
 
