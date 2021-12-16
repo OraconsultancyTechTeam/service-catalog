@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row mt-2">
+      <div class="col-12">
+        <form>
+          <div class="form-group row">
+            <div class="col-12">
+              <div class="card-deck">
+                <div class="w-100"> </div>
+                <% if (step1.length>0){ %>
+                    <% step1.forEach(card =>{ %>
+                <div id="elephant-card" class="card mb-4 <%if(card.id==1){%>active<%}%>">
+                  <div class="card-body" role="button">
+                    <h5 class="card-title"><input id="elephant" type="radio" <%if(card.id==1){%>checked=""<%}%> >
+                      <label for="elephant">Elephant</label></h5>
+                    <p class="card-text">It is a long established fact that a reader will be
+                      distracted by the readable content of a page when looking at its layout.</p>
+                  </div>
+                </div>
+                <% }) %>
+                <% } %>
+           
+                
+            
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
