@@ -47,15 +47,8 @@ const step2 = [
   
 ]
 
-<<<<<<< HEAD
 app.get('', (req, res) => {
     res.render('index', {   
-=======
-
-app.get('',(req,res)=>{
-
-    res.render('index',{   
->>>>>>> 8e3178f39d32b2cea87f899d7e2efa441f5edd45
         title:'Service Catalog',
         //step1,
         //step2
