@@ -20,8 +20,8 @@
         <div class="row">
           <div class="col-8">
             <div class="card-deck">
-              <div id="step1" > <%-include('partials/step1partial.ejs')%></div>
-              <div id="step2" class="collapse"> <%-include('partials/step2partial.ejs')%></div>
+              <!--<div id="step1" > <%-include('partials/step1partial.ejs')%></div>
+              <div id="step2" class="collapse"> <%-include('partials/step2partial.ejs')%></div>-->
             </div>
           </div>
           <div class="col-4">
@@ -75,11 +75,11 @@
         $("#" + element + "-card").addClass("active");
     }
 
-    $("#step1").click(function(){
+    /*$("#step1").click(function(){
         $("#step1").collapse('hide');
         $("#step2").collapse('show');
         document.getelementbyId('step2').scrollIntoView();
-      });
+      });*/
   </script>
 
 </body>
