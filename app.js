@@ -47,15 +47,12 @@ const step2 = [
   
 ]
 
-app.get('/',(req,res)=>{
-
-    res.render('index',{   
+app.get('', (req, res) => {
+    res.render('index', {   
         title:'Service Catalog',
-        step1,
-        step2
-    }
-    )
-    
+        //step1,
+        //step2
+    })
 })
 
 app.listen(port,()=>{
