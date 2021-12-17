@@ -20,15 +20,23 @@
         <div class="row">
           <div class="col-8">
             <div class="card-deck">
+<<<<<<< Updated upstream
               <div id="step1" > <%-include('partials/step1partial.ejs')%></div>
               <div id="step2" class="collapse"> <%-include('partials/step2partial.ejs')%></div>
+=======
+
+              <div id="step1" > <%-include('partials/step1.ejs')%></div>
+              <div id="step2"  > <%-include('partials/step2.ejs')%></div>
+              <div id="step2cloud"  > <%-include('partials/step2cloud.ejs')%></div>
+>>>>>>> Stashed changes
             </div>
           </div>
           <div class="col-4">
             <div class="card" style="width: 18rem;">
               <div class="card-body">
                 <h5 class="card-title">Service Details</h5>
-                <p class="card-text" id="id-text">Choose a Database Service.</p>
+                <p class="card-text" id="step1-text">Choose a Database Service.</p>
+                <p  id="step2-text"></p>
               </div>
             </div>
           </div>
@@ -57,7 +65,79 @@
             $('#id-text').html(inputElement);
         });
     });
+<<<<<<< Updated upstream
 
+=======
+    $(".card").click(function () {//Clicking the card
+        var inputElement = $(this).find('input[type=radio]').attr('id');
+        unclickRadio();
+        removeActive();
+        makeActive(inputElement);
+        clickRadio(inputElement);
+
+        cardCheck(inputElement);
+        changeText(inputElement);
+    });
+});
+
+
+function unclickRadio() {
+    $("input:radio").prop("checked", false);
+}
+
+function clickRadio(inputElement) {
+    $("#"+inputElement).prop("checked", true);
+}
+
+function removeActive() {
+    $(".card").removeClass("active");
+}
+
+function makeActive(element) {
+    $("#" + element + "-card").addClass("active");
+}
+
+
+
+
+  function cardCheck(element){
+    switch(element) {
+  case "On-Prem-Database":
+  $("#s2-1").collapse('show');
+  $("#s2-2").collapse('hide');
+    break;
+  case "Cloud-Database":
+  $("#s2-1").collapse('hide');
+  $("#s2-2").collapse('show');
+    break;
+  case "Replication-Goldengate":
+    
+    break;
+  default:
+      Console.log("Error");
+}
+  }
+
+  function changeText(element){
+  
+    var id = document.getElementById(element);
+
+
+    if(document.getElementById("step1").contains(id)){
+      $('#step1-text').html(element);
+    }
+    else if(document.getElementById("step2").contains(id)){
+      $('#step2-text').html(element);
+    }
+    else if(document.getElementById("step2Cloud").contains(id)){
+      $('#step2-text').html(element);
+    }
+    else{
+      $('#step2-text').html("Can't find class");
+    }
+
+  }
+>>>>>>> Stashed changes
 
     function unclickRadio() {
         $("input:radio").prop("checked", false);
