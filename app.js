@@ -45,7 +45,7 @@ const step2 = [
 ]
 
 app.get('', (req, res) => {
-    res.render('index', {   
+    res.render('index.ejs', {   
         title:'Service Catalog',
         step1,
         step2
