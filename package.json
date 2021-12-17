@@ -1,8 +1,7 @@
 {
-  "name": "web-server",
+  "name": "service-catalog",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ejs",
   "scripts": {
     "start": "node app.js"
   },
