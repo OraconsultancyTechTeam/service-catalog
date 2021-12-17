@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000
 
 //define paths for express config
 const publicDirectoryPath = path.join(__dirname,'public')
-const viewsPath = path.join(__dirname,'../service-catalog/views')
+const viewsPath = path.join(__dirname, 'views')
 console.log("Directory Name: "+ viewsPath)
 
 //setup static directory to serve
@@ -24,7 +24,7 @@ app.use(bodyParser.json())
 
 //setup handlebars engine and views location
 app.set('view engine','ejs')
-//app.set('views',viewsPath)
+app.set('views', viewsPath)
 
 app.use(methodOverride('_method'))
 
