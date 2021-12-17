@@ -7,7 +7,7 @@ const express_layouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
 //const connection = require('../db/mySQL')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 //define paths for express config
 const publicDirectoryPath = path.join(__dirname,'public')
