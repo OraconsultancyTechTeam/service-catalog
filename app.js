@@ -24,7 +24,7 @@ app.use(bodyParser.json())
 
 //setup handlebars engine and views location
 app.set('view engine','ejs')
-app.set('views',viewsPath)
+//app.set('views',viewsPath)
 
 app.use(methodOverride('_method'))
 
@@ -45,7 +45,9 @@ const step2 = [
 ]
 
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index', {
+        title: 'service-catalog'
+    })
 })
 
 app.listen(port, () => {
