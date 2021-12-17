@@ -16,7 +16,7 @@ console.log("Directory Name: "+ viewsPath)
 
 //setup handlebars engine and views location
 app.set('view engine','ejs')
-app.set('views',viewsPath)
+//app.set('views',viewsPath)
 
 //setup static directory to serve
 //app.use(express.static(publicDirectoryPath))
@@ -45,11 +45,7 @@ const step2 = [
 ]
 
 app.get('/', (req, res) => {
-    res.render('index.ejs', {   
-        title:'Service Catalog',
-        step1,
-        step2
-    })
+    res.render('index')
 })
 
 app.listen(port, () => {
