@@ -20,13 +20,13 @@ app.set('views',viewsPath)
 
 //setup static directory to serve
 //app.use(express.static(publicDirectoryPath))
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'))
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method'))
 
 
 const step1 = [
@@ -59,9 +59,6 @@ app.get('/',(req,res)=>{
     
 })
 
-
 app.listen(port,()=>{
-    console.log('Server is up on port 3000')
+    console.log('Server is up on port ' + port)
 })
-
-
