@@ -14,17 +14,17 @@ const publicDirectoryPath = path.join(__dirname,'public')
 const viewsPath = path.join(__dirname,'../service-catalog/views')
 console.log("Directory Name: "+ viewsPath)
 
-//setup handlebars engine and views location
-app.set('view engine','ejs')
-//app.set('views',viewsPath)
-
 //setup static directory to serve
 //app.use(express.static(publicDirectoryPath))
-app.use(express.static('public'))
+app.use(express.static('/public'))
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+//setup handlebars engine and views location
+app.set('view engine','ejs')
+app.set('views',viewsPath)
 
 app.use(methodOverride('_method'))
 
