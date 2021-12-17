@@ -47,7 +47,6 @@ const step2 = [
   
 ]
 
-
 app.get('/',(req,res)=>{
 
     res.render('index',{   
