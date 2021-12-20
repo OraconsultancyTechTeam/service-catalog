@@ -44,11 +44,16 @@ const step2 = [
     {img:'/img/redislogo.png', name:'Redis', text:'Redis is an in-memory data structure store, used as a distributed, in-memory key–value database, cache and message broker, with optional durability. ', id:'10'},
 ]
 
+const step3 = [
+    
+]
+
 app.get('/', (req, res) => {
     res.render('index', {
         title: 'Service Catalog',
         step1,
-        step2
+        step2,
+        step3
     })
 })
 
