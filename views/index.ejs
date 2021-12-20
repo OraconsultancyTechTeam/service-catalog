@@ -57,14 +57,6 @@
             makeActive(radioClicked);
 
         });
-        $(".card").click(function () {//Clicking the card
-            var inputElement = $(this).find('input[type=radio]').attr('id');
-            unclickRadio();
-            removeActive();
-            makeActive(inputElement);
-            clickRadio(inputElement);
-            $('#id-text').html(inputElement);
-        });
     });
 
     $(".card").click(function () {//Clicking the card
@@ -106,6 +98,8 @@
           $("#s2-2").collapse('show');
           break;
         case "Replication-Goldengate":
+        $("#s2-1").collapse('hide');
+          $("#s2-2").collapse('hide');
           
           break;
         default:
@@ -125,10 +119,10 @@
         $('#step1-text').html(element);
         $('#step2-text').html("");
       }
-      else if (document.getElementById("step2").contains(id)) {
+      else if (document.getElementById("s2-1").contains(id)) {
         $('#step2-text').html(element);
       }
-      else if (document.getElementById("step2Cloud").contains(id)) {
+      else if (document.getElementById("s2-2").contains(id)) {
         $('#step2-text').html(element);
       }
       else {
