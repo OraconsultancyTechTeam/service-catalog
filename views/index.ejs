@@ -18,118 +18,116 @@
   </head>
 
   <body>
-      <div class="jumbotron text-center">
-          <h1><%=title%></h1>
-          <p>Select Your Desired Database Below</p>
-      </div>
-      
-      <div id="servDetails">
-        <div class="card" style="width: 15rem;">
-          <div class="card-body">
-            <h5 class="card-title">Service Details</h5>
-            <p class="card-text" id="step1-text">Choose a Database Service.</p>
-            <p class="card-text" id="step2-text"></p>
-            <p class="card-text" id="step3-text"></p>
-            <p class="card-text" id="step4-text"></p>
-          </div>
+    
+    <div class="jumbotron text-center">
+        <h1><%=title%></h1>
+        <p>Select Your Desired Database Below</p>
+    </div>
+    
+    <div id="servDetails">
+      <div class="card" style="width: 15rem;">
+        <div class="card-body">
+          <h5 class="card-title">Service Details</h5>
+          <p class="card-text" id="step1-text">Choose a Database Service.</p>
+          <p class="card-text" id="step2-text"></p>
+          <p class="card-text" id="step3-text"></p>
+          <p class="card-text" id="step4-text"></p>
         </div>
       </div>
+    </div>
 
-      <section style="margin-right: 20rem;">
-      <!-- <div class="container" > -->
-        <div class="row">
-          <div class="col-12">
-            <div id="step1"> <%-include('partials/step1.ejs')%></div>
-            <div id="step2"> <%-include('partials/step2.ejs')%></div>
-            <div id="step2cloud"> <%-include('partials/step2cloud.ejs')%></div>
-          </div>
+    <section style="margin-right: 20rem;">
+      <div class="row">
+        <div class="col-12">
+          <div id="step1"> <%-include('partials/step1.ejs')%></div>
+          <div id="step2"> <%-include('partials/step2.ejs')%></div>
+          <div id="step2cloud"> <%-include('partials/step2cloud.ejs')%></div>
         </div>
-      <!-- </div> -->
+      </div>
     </section>
 
-  
-  <script>
+    <script>
 
-    $(document).ready(function () {
-        $('input:radio').change(function () {//Clicking input radio
-            var radioClicked = $(this).attr('id');
-            unclickRadio();
-            removeActive();
-            clickRadio(radioClicked);
-            makeActive(radioClicked);
+      $(document).ready(function () {
+          $('input:radio').change(function () {//Clicking input radio
+              var radioClicked = $(this).attr('id');
+              unclickRadio();
+              removeActive();
+              clickRadio(radioClicked);
+              makeActive(radioClicked);
 
-        });
-    });
+          });
+      });
 
-    $(".card").click(function () {//Clicking the card
-        var inputElement = $(this).find('input[type=radio]').attr('id');
-        unclickRadio();
-        removeActive();
-        makeActive(inputElement);
-        clickRadio(inputElement);
+      $(".card").click(function () {//Clicking the card
+          var inputElement = $(this).find('input[type=radio]').attr('id');
+          unclickRadio();
+          removeActive();
+          makeActive(inputElement);
+          clickRadio(inputElement);
 
-        cardCheck(inputElement);
-        changeText(inputElement);
-    });
+          cardCheck(inputElement);
+          changeText(inputElement);
+      });
 
 
-    function unclickRadio() {
-        $("input:radio").prop("checked", false);
-    }
+      function unclickRadio() {
+          $("input:radio").prop("checked", false);
+      }
 
-    function clickRadio(inputElement) {
-        $("#"+inputElement).prop("checked", true);
-    }
+      function clickRadio(inputElement) {
+          $("#"+inputElement).prop("checked", true);
+      }
 
-    function removeActive() {
-        $(".card").removeClass("active");
-    }
+      function removeActive() {
+          $(".card").removeClass("active");
+      }
 
-    function makeActive(element) {
-        $("#" + element + "-card").addClass("active");
-    }
+      function makeActive(element) {
+          $("#" + element + "-card").addClass("active");
+      }
 
-    function cardCheck(element){
-      switch(element) {
-        case "On-Prem-Database":
-          $("#s2-1").collapse('show');
-          $("#s2-2").collapse('hide');
-          break;
-        case "Cloud-Database":
+      function cardCheck(element){
+        switch(element) {
+          case "On-Prem-Database":
+            $("#s2-1").collapse('show');
+            $("#s2-2").collapse('hide');
+            break;
+          case "Cloud-Database":
+            $("#s2-1").collapse('hide');
+            $("#s2-2").collapse('show');
+            break;
+          case "Replication-Goldengate":
           $("#s2-1").collapse('hide');
-          $("#s2-2").collapse('show');
-          break;
-        case "Replication-Goldengate":
-        $("#s2-1").collapse('hide');
-          $("#s2-2").collapse('hide');
-          
-          break;
-        default:
-            console.log("Error");
-      }
-    }
-
-    function changeText(element){
-    
-      var id = document.getElementById(element);
-
-      if (document.getElementById("step1").contains(id)) {
-        $('#step1-text').html(element);
-        $('#step2-text').html("");
-      }
-      else if (document.getElementById("s2-1").contains(id)) {
-        $('#step2-text').html(element);
-      }
-      else if (document.getElementById("s2-2").contains(id)) {
-        $('#step2-text').html(element);
-      }
-      else {
-        $('#step2-text').html("Can't find class");
+            $("#s2-2").collapse('hide');
+            
+            break;
+          default:
+              console.log("Error");
+        }
       }
 
-    }
+      function changeText(element){
+      
+        var id = document.getElementById(element);
 
-  </script>
+        if (document.getElementById("step1").contains(id)) {
+          $('#step1-text').html(element);
+          $('#step2-text').html("");
+        }
+        else if (document.getElementById("s2-1").contains(id)) {
+          $('#step2-text').html(element);
+        }
+        else if (document.getElementById("s2-2").contains(id)) {
+          $('#step2-text').html(element);
+        }
+        else {
+          $('#step2-text').html("Can't find class");
+        }
 
-</body>
+      }
+
+    </script>
+
+  </body>
 </html>
