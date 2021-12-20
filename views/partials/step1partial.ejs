@@ -1,13 +1,13 @@
 <h3>Step 1</h3>
 <% if (step1.length>0){ %>
     <% step1.forEach(card =>{ %>
-  <div id="<%=card.name%>-card" class="card mb-4 active" style="min-width: 10rem;">
-    <img class="card-img-top m-2" src='<%=card.img%>' style="width:5rem; height:5rem; ;" alt="Card image cap">
-    <div class="card-body" role="button"checked="">
-      <h5 class="card-title"><input id="<%=card.name%>" type="radio">
-        <label for="<%=card.name%>"><%=card.name%></label></h5>
-      <p class="card-text"><%=card.text%></p>
-    </div>
-  </div>
+      <div id="<%=card.name%>-card" class="card mb-4 active" style="min-width: 150px;">
+        <img class="card-img-top m-2" src='<%=card.img%>' style="width:5rem; height:5rem; ;" alt="Card image cap">
+        <div class="card-body" role="button"checked="">
+          <h5 class="card-title"><input id="<%=card.name%>" type="radio">
+            <label for="<%=card.name%>"><%=card.name%></label></h5>
+          <p class="card-text"><%=card.text%></p>
+        </div>
+      </div>
   <% }) %>
 <% } %>

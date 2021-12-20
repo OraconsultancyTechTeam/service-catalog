@@ -46,7 +46,7 @@ const step2 = [
 
 app.get('/', (req, res) => {
     res.render('index', {
-        title: 'service-catalog',
+        title: 'Service Catalog',
         step1,
         step2
     })

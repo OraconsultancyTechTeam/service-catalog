@@ -28,22 +28,22 @@
           <div class="card-body">
             <h5 class="card-title">Service Details</h5>
             <p class="card-text" id="step1-text">Choose a Database Service.</p>
-            <p id="step2-text"></p>
+            <p class="card-text" id="step2-text"></p>
           </div>
         </div>
       </div>
 
-      <div class="container">
+      <section style="margin-right: 20rem;">
+      <!-- <div class="container" > -->
         <div class="row">
-          <div class="col-10">
-            <div class="card-deck">
-              <div id="step1"> <%-include('partials/step1.ejs')%></div>
-              <div id="step2"> <%-include('partials/step2.ejs')%></div>
-              <div id="step2cloud"> <%-include('partials/step2cloud.ejs')%></div>
-            </div>
+          <div class="col-12">
+            <div id="step1"> <%-include('partials/step1.ejs')%></div>
+            <div id="step2"> <%-include('partials/step2.ejs')%></div>
+            <div id="step2cloud"> <%-include('partials/step2cloud.ejs')%></div>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
+    </section>
 
   
   <script>
@@ -109,16 +109,21 @@
           
           break;
         default:
-            Console.log("Error");
+            console.log("Error");
       }
     }
 
     function changeText(element){
+
+      console.log(element)
     
       var id = document.getElementById(element);
 
+      console.log(id)
+
       if (document.getElementById("step1").contains(id)) {
         $('#step1-text').html(element);
+        $('#step2-text').html("");
       }
       else if (document.getElementById("step2").contains(id)) {
         $('#step2-text').html(element);
@@ -151,7 +156,7 @@
     $("#step1").click(function(){
       $("#step1").collapse('hide');
       $("#step2").collapse('show');
-      document.getelementbyId('step2').scrollIntoView();
+      document.getElementById('step2').scrollIntoView();
     });
   </script>
 
