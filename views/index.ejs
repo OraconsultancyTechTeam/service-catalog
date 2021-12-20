@@ -110,12 +110,8 @@
     }
 
     function changeText(element){
-
-      console.log(element)
     
       var id = document.getElementById(element);
-
-      console.log(id)
 
       if (document.getElementById("step1").contains(id)) {
         $('#step1-text').html(element);
@@ -133,27 +129,6 @@
 
     }
 
-    function unclickRadio() {
-        $("input:radio").prop("checked", false);
-    }
-
-    function clickRadio(inputElement) {
-        $("#"+inputElement).prop("checked", true);
-    }
-
-    function removeActive() {
-        $(".card").removeClass("active");
-    }
-
-    function makeActive(element) {
-        $("#" + element + "-card").addClass("active");
-    }
-
-    $("#step1").click(function(){
-      $("#step1").collapse('hide');
-      $("#step2").collapse('show');
-      document.getElementById('step2').scrollIntoView();
-    });
   </script>
 
 </body>
