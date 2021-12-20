@@ -16,7 +16,7 @@ console.log("Directory Name: "+ viewsPath)
 
 //setup static directory to serve
 //app.use(express.static(publicDirectoryPath))
-app.use(express.static('/public'))
+app.use(express.static('public'))
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }))
 // parse application/json
