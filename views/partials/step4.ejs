@@ -1,0 +1,64 @@
+<div class="container collapse" id="s3" style="border-top: 2px solid #222; padding-top: 10px;">
+    <div class="row mt-2">
+      <div class="col-12">
+        <form>
+          <div class="form-group row">
+            <div class="col-md-12" style="padding-bottom: 300px;">
+              <h3 style="padding-bottom: 20px;">Environment</h3>
+              <div style="text-align: center;">
+                <select id="envSelect" class="selectpicker" multiple data-live-search="true" style="width: 1000px;">
+                  <option value="All" style="background-color: #CBE0F7; font-weight: bold;">Select/Deselect All</option>
+                  <% step4.forEach(card => { %>
+                    <option value="<%=card.id%>"><%=card.name%></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    $('select').selectpicker();
+  
+    $('#envSelect').on('change', function() {
+      var thisObj = $(this);
+      var isAllSelected = thisObj.find('option[value="All"]').prop('selected');
+      var lastAllSelected = $(this).data('all');
+      var selectedOptions = (thisObj.val()) ? thisObj.val() : [];
+      var allOptionsLength = thisObj.find('option[value!="All"]').length;
+  
+      var selectedOptionsLength = selectedOptions.length;
+  
+      if (isAllSelected == lastAllSelected) {
+  
+        if ($.inArray("All", selectedOptions) >= 0) {
+          selectedOptionsLength -= 1;
+        }
+  
+        if (allOptionsLength <= selectedOptionsLength) {
+  
+          thisObj.find('option[value="All"]').prop('selected', true).parent().selectpicker('refresh');
+          isAllSelected = true;
+        } else {
+          thisObj.find('option[value="All"]').prop('selected', false).parent().selectpicker('refresh');
+          isAllSelected = false;
+        }
+  
+      } else {
+        thisObj.find('option').prop('selected', isAllSelected).parent().selectpicker('refresh');
+      }
+  
+      $(this).data('all', isAllSelected);
+    }).trigger('change');
+  </script>
+  
+  <style>
+  
+    .bootstrap-select {
+      width: 80% !important;
+    }
+  
+  </style>
