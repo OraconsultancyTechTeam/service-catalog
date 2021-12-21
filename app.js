@@ -9,12 +9,12 @@ const methodOverride = require('method-override')
 const app = express()
 const port = process.env.PORT || 3000
 
-//define paths for express config
+// Define paths for express config
 const publicDirectoryPath = path.join(__dirname,'public')
 const viewsPath = path.join(__dirname, 'views')
-console.log("Directory Name: "+ viewsPath)
+//console.log("Directory Name: "+ viewsPath)
 
-//setup static directory to serve
+// Setup static directory to serve
 //app.use(express.static(publicDirectoryPath))
 app.use(express.static('public'))
 // parse application/x-www-form-urlencoded
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-//setup handlebars engine and views location
+// Setup handlebars engine and views location
 app.set('view engine','ejs')
 app.set('views', viewsPath)
 
