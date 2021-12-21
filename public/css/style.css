@@ -1,4 +1,4 @@
-.active {
+.selected {
   border-color: #28a745 !important;
   background-color: #f2f2f2;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -11,10 +11,50 @@
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   width:500px;
+  margin:5px;
 }
 
 #servDetails {
   position: fixed;
   top: 305px;
   left: 80%;
+}
+
+
+.collapsible {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: solid;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #28a745;
+  color: black;
+  font-weight: bold;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
 }
