@@ -1,7 +1,7 @@
 <h3>Host</h3>
 <% if (step1.length>0){ %>
     <% step1.forEach(card =>{ %>
-      <div id="<%=card.name%>-card" class="card mb-4 active" style="min-width: 150px;">
+      <div id="<%=card.name%>-card" class="card mb-4 active" style="min-width: 5rem;">
         <img class="card-img-top m-2" src='<%=card.img%>' style="width:5rem; height:5rem; ;" alt="Card image cap">
         <div class="card-body" role="button"checked="">
           <h5 class="card-title"><input id="<%=card.name%>" type="radio">
