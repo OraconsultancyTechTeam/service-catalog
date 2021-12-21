@@ -45,7 +45,10 @@ const step2 = [
 ]
 
 const step3 = [
-    
+    {name:'PRD', id:1}, 
+    {name:'TRG', id:2},
+    {name:'UAT', id:3}, 
+    {name:'DVP', id:4}
 ]
 
 app.get('/', (req, res) => {
