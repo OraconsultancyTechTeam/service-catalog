@@ -60,6 +60,7 @@
               makeActive(radioClicked);
 
           });
+
       });
 
       $(".card").click(function () {//Clicking the card
@@ -92,6 +93,7 @@
 
       function cardCheck(element) {
         var id = document.getElementById(element);
+      
 
         // Step 1 - Host
         if (document.getElementById("step1").contains(id)) {
@@ -100,6 +102,7 @@
               $("#s2-1").collapse('show');
               $("#s2-2").collapse('hide');
               $("#s3").collapse('hide');
+              
               break;
 
             case "Cloud-Database":
