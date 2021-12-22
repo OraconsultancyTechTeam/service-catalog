@@ -7,13 +7,14 @@
 
             <h3 style="padding-bottom: 20px;">Step 3: Environment</h3>
             <div style="text-align: center;">
-              <select id="envSelect" class="selectpicker" multiple data-live-search="true" style="width: 1000px;">
-                <option value="All" style="background-color: #CBE0F7; font-weight: bold;">Select/Deselect All</option>
+              <select id="envSelect" class="selectpicker" data-live-search="true" style="width: 1000px;" onchange="envSelected()">
+                <!-- <option value="All" style="background-color: #CBE0F7; font-weight: bold;">Select/Deselect All</option> -->
+                <option value="" disabled selected style="background-color: white;">Select Environment</option>
                 <% step3.forEach(card => { %>
                   <option value="<%=card.id%>"><%=card.name%></option>
                 <% }) %>
               </select>
-              <button type="button" onclick="var el = document.getElementsByTagName('select')[0]; $('#step3-text').html(getSelectValues(el));">Add Environment(s)</button>
+              <!-- <button type="button" onclick="var el = document.getElementsByTagName('select')[0]; $('#step3-text').html(getSelectValues(el));">Add Environment(s)</button> -->
             </div>
           </div>
         </div>
@@ -23,56 +24,61 @@
 </div>
 
 <script>
-  $('select').selectpicker();
+  //$('select').selectpicker();
 
-  $('#envSelect').on('change', function() {
-    var thisObj = $(this);
-    var isAllSelected = thisObj.find('option[value="All"]').prop('selected');
-    var lastAllSelected = $(this).data('all');
-    var selectedOptions = (thisObj.val()) ? thisObj.val() : [];
-    var allOptionsLength = thisObj.find('option[value!="All"]').length;
+  // $('#envSelect').on('change', function() {
+  //   var thisObj = $(this);
+  //   var isAllSelected = thisObj.find('option[value="All"]').prop('selected');
+  //   var lastAllSelected = $(this).data('all');
+  //   var selectedOptions = (thisObj.val()) ? thisObj.val() : [];
+  //   var allOptionsLength = thisObj.find('option[value!="All"]').length;
 
-    var selectedOptionsLength = selectedOptions.length;
+  //   var selectedOptionsLength = selectedOptions.length;
 
-    if (isAllSelected == lastAllSelected) {
+  //   if (isAllSelected == lastAllSelected) {
 
-      if ($.inArray("All", selectedOptions) >= 0) {
-        selectedOptionsLength -= 1;
-      }
+  //     if ($.inArray("All", selectedOptions) >= 0) {
+  //       selectedOptionsLength -= 1;
+  //     }
 
-      if (allOptionsLength <= selectedOptionsLength) {
+  //     if (allOptionsLength <= selectedOptionsLength) {
 
-        thisObj.find('option[value="All"]').prop('selected', true).parent().selectpicker('refresh');
-        isAllSelected = true;
-      } else {
-        thisObj.find('option[value="All"]').prop('selected', false).parent().selectpicker('refresh');
-        isAllSelected = false;
-      }
+  //       thisObj.find('option[value="All"]').prop('selected', true).parent().selectpicker('refresh');
+  //       isAllSelected = true;
+  //     } else {
+  //       thisObj.find('option[value="All"]').prop('selected', false).parent().selectpicker('refresh');
+  //       isAllSelected = false;
+  //     }
 
-    } else {
-      thisObj.find('option').prop('selected', isAllSelected).parent().selectpicker('refresh');
-    }
+  //   } else {
+  //     thisObj.find('option').prop('selected', isAllSelected).parent().selectpicker('refresh');
+  //   }
 
-    $(this).data('all', isAllSelected);
-  }).trigger('change');
+  //   $(this).data('all', isAllSelected);
+  // }).trigger('change');
 
-  function getSelectValues(select) {
-    var result = [];
-    var options = select && select.options;
-    var opt;
+  // function getSelectValues(select) {
+  //   var result = [];
+  //   var options = select && select.options;
+  //   var opt;
 
-    for (var i=0, iLen=options.length; i<iLen; i++) {
-      opt = options[i];
+  //   for (var i=0, iLen=options.length; i<iLen; i++) {
+  //     opt = options[i];
 
-      if (opt.selected) {
-        result.push(opt.text + ', ');
-      }
-    }
+  //     if (opt.selected) {
+  //       result.push(opt.text + ', ');
+  //     }
+  //   }
 
-    console.log(result)
-    console.log(result[-1].slice(0, -1))
+  //   console.log(result)
+  //   console.log(result[-1].slice(0, -1))
 
-    return result;
+  //   return result;
+  // }
+
+  function envSelected() {
+    var element = $("#envSelect option:selected").text()
+    $('#step3-text').html(element)
   }
 
 </script>
