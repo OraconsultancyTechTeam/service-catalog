@@ -197,37 +197,31 @@
           $('#step3-text').html(element+" Environment");
         }
         else {
-          $('#step2-text').html("Can't find class");
+          //$('#step2-text').html("Can't find class");
+          console.log('error')
         }
       }
 
       //collapisbile div button
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          triggerCollapisble(this);
+        });
+      }
+
+      function triggerCollapisble(element){
+        element.classList.toggle("active");
+          var content = element.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+      }
       
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    triggerCollapisble(this);
-  });
-}
-
-function triggerCollapisble(element){
-  element.classList.toggle("active");
-    var content = element.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-}
-
-
-
-
-
-
-
     </script>
 
   </body>
