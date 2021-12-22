@@ -16,7 +16,7 @@
 
 #servDetails {
   position: fixed;
-  top: 325px;
+  top: 1vh / 2;
   left: 80%;
 }
 
