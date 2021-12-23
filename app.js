@@ -51,12 +51,31 @@ const step3 = [
     {name:'DVP', id:4}
 ]
 
+const step4 = [
+    {size:'2 CPU',id:1},
+    {size:'4 CPU',id:2},
+    {size:'8 CPU',id:3},
+    {size:'16 CPU',id:4},
+    {size:'10 CPU',id:5},
+    {size:'12 CPU',id:6},
+    {size:'24 CPU',id:7},
+    {size:'30 CPU',id:8},
+    {size:'Custom - Please provide comment',id:9}
+]
+
+const step6 = [
+    {licence:'Enterprise Edition',id:1},
+    {licence:'Advanced Security',id:2},
+    {licence:'Advanced Compression',id:3}
+]
+
 app.get('/', (req, res) => {
     res.render('index', {
         title: 'Service Catalog',
         step1,
         step2,
-        step3
+        step3,
+        step4
     })
 })
 

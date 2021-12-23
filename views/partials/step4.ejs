@@ -7,7 +7,7 @@
               <h3 style="padding-bottom: 20px;">Environment</h3>
               <div style="text-align: center;">
                 <select id="envSelect" class="selectpicker" multiple data-live-search="true" style="width: 1000px;">
-                  <option value="All" style="background-color: #CBE0F7; font-weight: bold;">Select/Deselect All</option>
+                  <option value="" disabled selected style="background-color: white;">Select T-shirt Size</option>
                   <% step4.forEach(card => { %>
                     <option value="<%=card.id%>"><%=card.name%></option>
                   <% }) %>
