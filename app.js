@@ -54,8 +54,8 @@ const step3 = [
 const step4 = [
     {size:'2 CPU',id:1},
     {size:'4 CPU',id:2},
-    {size:'8 CPU',id:3},
-    {size:'16 CPU',id:4},
+    {size:'6 CPU',id:3},
+    {size:'8 CPU',id:4},
     {size:'10 CPU',id:5},
     {size:'12 CPU',id:6},
     {size:'24 CPU',id:7},
