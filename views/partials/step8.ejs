@@ -1,0 +1,36 @@
+<div class="container collapse" id="s8">
+    <div class="row mt-2">
+        <div class="col-12">
+            <form>
+                <div class="form-group row">
+                    <div class="col-md-12">
+
+                        <button type="button" class="collapsible active" style="margin: 5px 0;">Step 8: Details</button>
+                            
+                        <div class="content" style="text-align: center; display: inline-block;">
+                            <label>Due Date:</label>
+                            <input id="dueDate" placeholder="">
+                            <label>Requested By:</label>
+                            <input id="reqBy">
+                            <label>Manager's Email:</label>
+                            <input id="mangEmail">
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function commentArea() {
+        var element = $("#content").text()
+        $('#step8-text').html(element)
+        //$('#s4').collapse('hide')
+        //$('#s8').collapse('show')
+        //document.getElementById("step8").scrollIntoView();
+    }
+
+</script>

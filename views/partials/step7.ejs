@@ -1,0 +1,41 @@
+<div class="container collapse" id="s7">
+    <div class="row mt-2">
+        <div class="col-12">
+            <form>
+                <div class="form-group row">
+                    <div class="col-md-12">
+
+                        <button type="button" class="collapsible active" style="margin: 5px 0;">Step 7: Comments</button>
+                            
+                        <div class="content" style="text-align: center; display: block;">
+                            <textarea id="comText" rows="15" cols="100" maxlength=1000 onchange="var textbox = document.getElementById('comText'); 
+                                                                                                document.getElementById('step7-text').innerHTML=textbox.value; 
+                                                                                                $('#s8').collapse('show');
+                                                                                                document.getElementById('step8').scrollIntoView();" 
+                                                                                                placeholder="Place any additional comments here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    //var textbox = document.getElementById('comText')
+    // textbox.addEventListener(oninput, function () {
+    //     console.log('testing')
+    //     $('#step7-text').html(element)
+    // })
+
+    // function commentArea() {
+    //     var element = document.getElementById('comText').value
+    //     console.log(element)
+    //     $('#step7-text').html(element)
+    //     //$('#s4').collapse('hide')
+    //     $('#s8').collapse('show');
+    //     document.getElementById("step8").scrollIntoView();
+    // }
+
+</script>

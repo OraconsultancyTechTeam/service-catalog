@@ -1,0 +1,44 @@
+<div class="container collapse" id="s6">
+    <div class="row mt-2">
+        <div class="col-12">
+            <form>
+                <div class="form-group row">
+                    <div class="col-md-12">
+
+                        <button type="button" class="collapsible active" style="margin: 5px 0;">Step 6: Licencing</button>
+                            
+                        <div class="content" style="text-align: center; display: block;">
+                            <select id="licenceSelect" class="selectpicker" data-live-search="true" style="width: 800px;" onchange="licenceSelected()">
+                                
+                                <option value="" disabled selected style="background-color: white;">Select Licencing</option>
+                                <% step6.forEach(card => { %>
+                                    <option value="<%=card.id%>"><%=card.name%></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function licenceSelected() {
+        var element = $("#licenceSelect option:selected").text()
+        $('#step6-text').html(element)
+        //$('#s4').collapse('hide')
+        $('#s7').collapse('show')
+        document.getElementById("step7").scrollIntoView();
+    }
+
+</script>
+
+<style>
+
+    .bootstrap-select {
+        width: 80% !important;
+    }
+
+</style>

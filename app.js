@@ -64,9 +64,9 @@ const step4 = [
 ]
 
 const step6 = [
-    {licence:'Enterprise Edition',id:1},
-    {licence:'Advanced Security',id:2},
-    {licence:'Advanced Compression',id:3}
+    {name:'Enterprise Edition',id:1},
+    {name:'Advanced Security',id:2},
+    {name:'Advanced Compression',id:3}
 ]
 
 app.get('/', (req, res) => {
@@ -75,7 +75,8 @@ app.get('/', (req, res) => {
         step1,
         step2,
         step3,
-        step4
+        step4,
+        step6
     })
 })
 
