@@ -60,9 +60,11 @@
           $('input:radio').change(function () {//Clicking input radio
               var radioClicked = $(this).attr('id');
               unclickRadio();
-              removeActive();
+           //   removeActive();
               clickRadio(radioClicked);
-              makeActive(radioClicked);
+          //  makeActive(radioClicked);
+
+          filterTest(inputElement);
 
           });
 
@@ -71,9 +73,13 @@
       $(".card").click(function () {//Clicking the card
           var inputElement = $(this).find('input[type=radio]').attr('id');
           unclickRadio();
-          removeActive();
-          makeActive(inputElement);
-          clickRadio(inputElement);
+     //    removeActive();
+      //   makeActive(inputElement);
+         clickRadio(inputElement);
+
+         filterTest(inputElement);
+
+         
 
           cardCheck(inputElement);
           changeText(inputElement);
@@ -94,6 +100,31 @@
 
       function makeActive(element) {
           $("#" + element + "-card").addClass("selected");
+      }
+
+      function makeSelect(element,group){
+
+
+        $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected");
+      
+        $("#" + element + "-card").removeClass("unselected").addClass("selected");
+       
+      }
+
+      function filterTest(element){
+   
+      if($("#" + element + "-card").filter(".group1")){
+        makeSelect(element, "group1");
+      }
+      else if($("#" + element + "-card").filter(".group2")){
+
+        makeSelect(element, "group2");
+
+      }
+      else{
+        $('#step8-text').html("apricot");
+
+      }
       }
 
       function cardCheck(element) {
