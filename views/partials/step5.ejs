@@ -1,0 +1,38 @@
+<div class="container collapse" id="s5">
+    <div class="row mt-2">
+      <div class="col-12">
+        <form>
+          <div class="form-group row">
+            <div class="col-md-12">
+  
+              <button type="button" class="collapsible active" style="margin: 5px 0;">Step 5: Database Size</button>
+              
+              <div class="content" style="text-align: center; display: block;">
+                <input id="dbsize" type="number" onchange="dbSize()"><span style="margin-left: 10px;">GB</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    
+  <script>
+    $(document).on("keydown", "form", function(event) {
+        return event.key != "Enter";
+    });
+
+    function dbSize() {
+      var element = document.getElementById("dbsize").value
+      document.getElementById("dbsize").disabled
+      $('#step6-text').html(element + ' GB(s)')
+      //$('#s4').collapse('hide')
+      $('#s6').collapse('show')
+      document.getElementById("step6").scrollIntoView();
+    }
+  
+  </script>
+  
+  <style>
+  
+  </style>
