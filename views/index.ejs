@@ -62,13 +62,13 @@
 
       $(document).ready(function () {
           $('input:radio').change(function () {//Clicking input radio
-              var radioClicked = $(this).attr('id');
-              unclickRadio();
-           //   removeActive();
-              clickRadio(radioClicked);
-          //  makeActive(radioClicked);
+            var radioClicked = $(this).attr('id');
+            unclickRadio();
+            //   removeActive();
+            clickRadio(radioClicked);
+            //  makeActive(radioClicked);
 
-          filterTest(inputElement);
+            filterTest(inputElement);
 
           });
 
@@ -91,6 +91,9 @@
 
           cardCheck(inputElement);
           changeText(inputElement);
+
+          $content = $('.header1').next()
+          $content.hide()
       });
 
 
@@ -121,18 +124,16 @@
 
       function filterTest(element){
    
-      if($("#" + element + "-card").filter(".group1")){
-        makeSelect(element, "group1");
-      }
-      else if($("#" + element + "-card").filter(".group2")){
+        if($("#" + element + "-card").filter(".group1")){
+          makeSelect(element, "group1");
+        }
+        else if($("#" + element + "-card").filter(".group2")){
 
-        makeSelect(element, "group2");
-
-      }
-      else{
-        $('#step8-text').html("apricot");
-
-      }
+          makeSelect(element, "group2");
+        }
+        else{
+          $('#step8-text').html("apricot");
+        }
       }
 
       function cardCheck(element) {
@@ -144,30 +145,35 @@
           
           switch(element) {
             case "On-Prem-Database":
+              $("#s1").collapse('hide');
               $("#s2-1").collapse('show');
               $("#s2-2").collapse('hide');
               $("#s3").collapse('hide');
               break;
 
             case "Cloud-Database":
+              $("#s1").collapse('hide');
               $("#s2-1").collapse('hide');
               $("#s2-2").collapse('show');
               $("#s3").collapse('hide');
               break;
 
             case "Replication-Goldengate":
+              $("#s1").collapse('hide');
               $("#s2-1").collapse('hide');
               $("#s2-2").collapse('hide');   
               $("#s3").collapse('hide');       
               break;
 
             case "Replication-Nifi":
+              $("#s1").collapse('hide');
               $("#s2-1").collapse('hide');
               $("#s2-2").collapse('hide'); 
               $("#s3").collapse('hide');         
               break;
 
             case "Replication-Kafka":
+              $("#s1").collapse('hide');
               $("#s2-1").collapse('hide');
               $("#s2-2").collapse('hide');   
               $("#s3").collapse('hide');       
@@ -177,7 +183,7 @@
                 console.log("Error");
           }
 
-          $("#s1").collapse('hide')
+          //$("#s1").collapse('hide')
           
           // Scroll to Step 2.1
           document.getElementById("step2").scrollIntoView();
@@ -266,16 +272,7 @@
           $('#step7-text').html("");
           $('#step8-text').html("");
         }
-        else if (document.getElementById("s3").contains(id)) {
-          $('#step3-text').html(element+" Environment");
-          $('#step4-text').html("");
-          $('#step5-text').html("");
-          $('#step6-text').html("");
-          $('#step7-text').html("");
-          $('#step8-text').html("");
-        }
         else {
-          //$('#step2-text').html("Can't find class");
           console.log('error')
         }
       }
@@ -290,7 +287,7 @@
         });
       }
 
-      function triggerCollapisble(element){
+      function triggerCollapisble(element) {
         element.classList.toggle("active");
           var content = element.nextElementSibling;
           if (content.style.display === "block") {
