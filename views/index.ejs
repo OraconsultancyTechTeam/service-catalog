@@ -75,25 +75,33 @@
       });
 
       $(".card").click(function () {//Clicking the card
-          var inputElement = $(this).find('input[type=radio]').attr('id');
-          
-          /* if in same step
-            unclickRadio()*/
+        var inputElement = $(this).find('input[type=radio]').attr('id');
+        
+        /* if in same step
+          unclickRadio()*/
 
-          unclickRadio();
-     //    removeActive();
-      //   makeActive(inputElement);
-         clickRadio(inputElement);
+        unclickRadio();
+        //    removeActive();
+        //   makeActive(inputElement);
+        clickRadio(inputElement);
 
-         filterTest(inputElement);
+        filterTest(inputElement);
 
-         
+        cardCheck(inputElement);
+        changeText(inputElement);
 
-          cardCheck(inputElement);
-          changeText(inputElement);
+        var test = $(this).previousElementSibling;
+        console.log(test)
+        
+        // var groupId = $(this).find('input[type=radio]').attr('id');
+        // var el = document.getElementsByClassName('header')[0]
+        // var content = el.nextElementSibling;
+        // if (content.style.display === "block") {
+        //   content.style.display = "none";
+        // } else {
+        //   content.style.display = "block";
+        // }
 
-          $content = $('.header1').next()
-          $content.hide()
       });
 
 
@@ -202,10 +210,10 @@
               $("#s3").collapse('show');          
               break;
             case "Apache-Cassandra":
-            $("#s3").collapse('show');             
+              $("#s3").collapse('show');             
               break;
             case "Redis":
-            $("#s3").collapse('show');            
+              $("#s3").collapse('show');            
               break;
             
             default:
