@@ -62,6 +62,6 @@
   margin-left: 5px;
 }
 
-/* .active:after {
+.active:after {
   content: "\2212";
-} */
+}
