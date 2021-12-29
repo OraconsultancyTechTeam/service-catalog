@@ -27,8 +27,17 @@
 
     function commentArea() {
         var element = $("#cont8").text();
-        console.log(element)
-        $('#step8-text').html(element);
+        var due = 'Due By: ' + $('#dueDate').val()
+        var req = 'Requested by: ' + $('#reqBy').val()
+        var mang = "Manager's Email: " + $('#mangEmail').val()
+        
+        $('#step8-text').html(due + '<br>' + req + '<br>' + mang);
+
+        $("#cont8").css("display", "none");
+        $("#header8").removeClass("active");
+
+        $('#submit').collapse('show')
+        document.getElementById("submit").scrollIntoView();
     }
 
 </script>

@@ -54,6 +54,7 @@
           <div id="step6"> <%-include('partials/step6.ejs')%></div>
           <div id="step7"> <%-include('partials/step7.ejs')%></div>
           <div id="step8"> <%-include('partials/step8.ejs')%></div>
+          <div id="submit"> <%-include('partials/submit.ejs')%></div>
         </div>
       </div>
     </section>
@@ -76,7 +77,6 @@
 
       $(".card").click(function () {//Clicking the card
         var inputElement = $(this).find('input[type=radio]').attr('id');
-        console.log(inputElement)
         
         /* if in same step
           unclickRadio()*/
@@ -90,18 +90,6 @@
 
         cardCheck(inputElement);
         changeText(inputElement);
-
-        var test = $(this).previousElementSibling;
-        //console.log(test)
-        
-        // var groupId = $(this).find('input[type=radio]').attr('id');
-        // var el = document.getElementsByClassName('header')[0]
-        // var content = el.nextElementSibling;
-        // if (content.style.display === "block") {
-        //   content.style.display = "none";
-        // } else {
-        //   content.style.display = "block";
-        // }
 
       });
 
