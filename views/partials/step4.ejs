@@ -5,9 +5,10 @@
         <div class="form-group row">
           <div class="col-md-12">
 
-            <button type="button" class="collapsible active" style="margin: 5px 0;">Step 4: T-Shirt Size</button>
+            <button type="button" class="collapsible active" id="header4" style="margin: 5px 0;">Step 4: T-Shirt Size</button>
             
-            <div class="content" style="text-align: center; display: block;">
+            <div class="content" id="cont4" style="text-align: center; display: block;">
+
               <select id="tshirtSelect" class="selectpicker" data-live-search="true" style="width: 800px;" onchange="tshirtSelected()">
                 
                 <option value="" disabled selected style="background-color: white;">Select T-shirt Size</option>
@@ -28,7 +29,10 @@
   function tshirtSelected() {
     var element = $("#tshirtSelect option:selected").text()
     $('#step4-text').html(element)
-    //$('#s4').collapse('hide')
+    
+    $("#cont4").css("display", "none");
+    $("#header4").removeClass("active");
+    
     $('#s5').collapse('show')
     document.getElementById("step5").scrollIntoView();
   }

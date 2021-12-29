@@ -5,9 +5,10 @@
         <div class="form-group row">
           <div class="col-md-12">
 
-            <button type="button" class="collapsible active" style="margin: 5px 0;">Step 3: Environment</button>
+            <button type="button" class="collapsible active" id="header3" style="margin: 5px 0;">Step 3: Environment</button>
             <!-- <div class="content" style="display:block;"> -->
-            <div class="content" style="text-align: center; display: block;">
+            <div class="content" id="cont3" style="text-align: center; display: block;">
+
               <select id="envSelect" class="selectpicker" data-live-search="true" style="width: 800px;" onchange="envSelected()">
                 <!-- <option value="All" style="background-color: #CBE0F7; font-weight: bold;">Select/Deselect All</option> -->
                 <option value="" disabled selected style="background-color: white;">Select Environment</option>
@@ -80,7 +81,10 @@
   function envSelected() {
     var element = $("#envSelect option:selected").text()
     $('#step3-text').html(element)
-    //$('#s3').collapse('hide')
+
+    $("#cont3").css("display", "none");
+    $("#header3").removeClass("active");
+
     $('#s4').collapse('show')
     document.getElementById("step4").scrollIntoView();
   }

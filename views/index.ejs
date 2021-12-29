@@ -76,6 +76,7 @@
 
       $(".card").click(function () {//Clicking the card
         var inputElement = $(this).find('input[type=radio]').attr('id');
+        console.log(inputElement)
         
         /* if in same step
           unclickRadio()*/
@@ -91,7 +92,7 @@
         changeText(inputElement);
 
         var test = $(this).previousElementSibling;
-        console.log(test)
+        //console.log(test)
         
         // var groupId = $(this).find('input[type=radio]').attr('id');
         // var el = document.getElementsByClassName('header')[0]
@@ -191,7 +192,8 @@
                 console.log("Error");
           }
 
-          //$("#s1").collapse('hide')
+          $("#cont1").css("display", "none")
+          $("#header1").removeClass("active");
           
           // Scroll to Step 2.1
           document.getElementById("step2").scrollIntoView();
@@ -219,8 +221,12 @@
             default:
                 console.log("Error");
           }
-           // Scroll to Step 2.2
-           document.getElementById("step2cloud").scrollIntoView();
+
+          $("#cont2").css("display", "none");
+          $("#header2").removeClass("active");
+          
+          // Scroll to Step 2.2
+          document.getElementById("step2cloud").scrollIntoView();
         }
 
         // Step 2.2 - Database
@@ -235,17 +241,20 @@
             default:
                 console.log("Error");
           }
+
+          $("#cont2.2").css("display", "none");
+          $("#header2.2").removeClass("active");
+
            // Scroll to Step 3
            document.getElementById("step3").scrollIntoView();
         }
 
         // Step 3 - Enivronment
-        else if (document.getElementById("s3").contains(id)) {
-          // Hide Step 3
-          $('s3').collapse('hide');
-          // Scroll to Step 4
-          document.getElementById("step4").scrollIntoView();
-        }
+        // else if (document.getElementById("s3").contains(id)) {
+          
+        //   // Scroll to Step 4
+        //   document.getElementById("step4").scrollIntoView();
+        // }
       }
 
       function changeText(element){

@@ -5,9 +5,9 @@
                 <div class="form-group row">
                     <div class="col-md-12">
 
-                        <button type="button" class="collapsible active" style="margin: 5px 0;">Step 8: Details</button>
+                        <button type="button" class="collapsible active" id="header8" style="margin: 5px 0;">Step 8: Details</button>
                             
-                        <div class="content" style="text-align: center; display: block;">
+                        <div class="content" id="cont8" style="text-align: center; display: block;" onchange="commentArea()">
                             <label>Due Date:</label>
                             <input id="dueDate" placeholder="">
                             <label>Requested By:</label>
@@ -26,11 +26,9 @@
 <script>
 
     function commentArea() {
-        var element = $("#content").text()
-        $('#step8-text').html(element)
-        //$('#s4').collapse('hide')
-        //$('#s8').collapse('show')
-        //document.getElementById("step8").scrollIntoView();
+        var element = $("#cont8").text();
+        console.log(element)
+        $('#step8-text').html(element);
     }
 
 </script>

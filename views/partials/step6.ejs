@@ -5,9 +5,9 @@
                 <div class="form-group row">
                     <div class="col-md-12">
 
-                        <button type="button" class="collapsible active" style="margin: 5px 0;">Step 6: Licencing</button>
+                        <button type="button" class="collapsible active" id="header6" style="margin: 5px 0;">Step 6: Licencing</button>
                             
-                        <div class="content" style="text-align: center; display: block;">
+                        <div class="content" id="cont6" style="text-align: center; display: block;">
                             <select id="licenceSelect" class="selectpicker" data-live-search="true" style="width: 800px;" onchange="licenceSelected()">
                                 
                                 <option value="" disabled selected style="background-color: white;">Select Licencing</option>
@@ -28,7 +28,10 @@
     function licenceSelected() {
         var element = $("#licenceSelect option:selected").text()
         $('#step6-text').html(element)
-        //$('#s4').collapse('hide')
+    
+        $("#cont6").css("display", "none");
+        $("#header6").removeClass("active");
+
         $('#s7').collapse('show')
         document.getElementById("step7").scrollIntoView();
     }
