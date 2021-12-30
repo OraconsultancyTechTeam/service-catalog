@@ -9,11 +9,11 @@
                             
                         <div class="content" id="cont8" style="text-align: center; display: block;" onchange="commentArea()">
                             <label>Due Date:</label>
-                            <input id="dueDate" placeholder="">
+                            <input id="dueDate" placeholder="" required>
                             <label>Requested By:</label>
-                            <input id="reqBy">
+                            <input id="reqBy" required>
                             <label>Manager's Email:</label>
-                            <input id="mangEmail">
+                            <input id="mangEmail" required>
                         </div>
 
                     </div>
@@ -32,12 +32,14 @@
         var mang = "Manager's Email: " + $('#mangEmail').val()
         
         $('#step8-text').html(due + '<br>' + req + '<br>' + mang);
-
-        $("#cont8").css("display", "none");
-        $("#header8").removeClass("active");
-
-        $('#sub').collapse('show')
-        document.getElementById("sub").scrollIntoView();
+        
+        if ($('#dueDate').val() && $('#reqBy').val() && $('#mangEmail').val()) {
+            $("#cont8").css("display", "none");
+            $("#header8").removeClass("active");
+            $('#sub').collapse('show');
+            document.getElementById("sub").scrollIntoView();
+        }
+        
     }
 
 </script>
