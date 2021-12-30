@@ -28,6 +28,11 @@
     function licenceSelected() {
         var element = $("#licenceSelect option:selected").text()
         $('#step6-text').html(element)
+
+        // Setting service details height to be centered in all viewports
+        var servDetHeight = document.querySelector('#servDetails').offsetHeight;
+        var offsetServDet = servDetHeight / 2;
+        $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
     
         $("#cont6").css("display", "none");
         $("#header6").removeClass("active");

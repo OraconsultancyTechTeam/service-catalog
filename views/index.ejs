@@ -61,6 +61,8 @@
   
     <script>
 
+      
+
       $(document).ready(function () {
           $('input:radio').change(function () {//Clicking input radio
             var radioClicked = $(this).attr('id');
@@ -177,6 +179,11 @@
           
           // Scroll to Step 2.1
           document.getElementById("cont2").scrollIntoView({behavior: "smooth"});
+
+          // Setting service details height to be centered in all viewports
+          var servDetHeight = document.querySelector('#servDetails').offsetHeight;
+          var offsetServDet = servDetHeight / 2;
+          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
         }
 
         // Step 2.1 - Database
@@ -207,6 +214,11 @@
           
           // Scroll to Step 2.2
           document.getElementById("step2cloud").scrollIntoView();
+
+          // Setting service details height to be centered in all viewports
+          var servDetHeight = document.querySelector('#servDetails').offsetHeight;
+          var offsetServDet = servDetHeight / 2;
+          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
         }
 
         // Step 2.2 - Database
@@ -225,16 +237,14 @@
           $("#cont2.2").css("display", "none");
           $("#header2.2").removeClass("active");
 
-           // Scroll to Step 3
-           document.getElementById("step3").scrollIntoView();
-        }
+          // Scroll to Step 3
+          document.getElementById("step3").scrollIntoView();
 
-        // Step 3 - Enivronment
-        // else if (document.getElementById("s3").contains(id)) {
-          
-        //   // Scroll to Step 4
-        //   document.getElementById("step4").scrollIntoView();
-        // }
+          // Setting service details height to be centered in all viewports
+          var servDetHeight = document.querySelector('#servDetails').offsetHeight;
+          var offsetServDet = servDetHeight / 2;
+          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
+        }
       }
 
       function changeText(element){
@@ -293,7 +303,7 @@
             content.style.display = "block";
           }
       }
-      
+
     </script>
 
   </body>

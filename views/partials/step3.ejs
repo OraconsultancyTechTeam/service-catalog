@@ -82,11 +82,17 @@
     var element = $("#envSelect option:selected").text()
     $('#step3-text').html(element)
 
+    // Setting service details height to be centered in all viewports
+    var servDetHeight = document.querySelector('#servDetails').offsetHeight;
+    var offsetServDet = servDetHeight / 2;
+    $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
+
     $("#cont3").css("display", "none");
     $("#header3").removeClass("active");
 
     $('#s4').collapse('show')
     document.getElementById("step4").scrollIntoView();
+
   }
 
 </script>
