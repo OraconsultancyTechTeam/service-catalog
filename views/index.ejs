@@ -64,12 +64,12 @@
       $(document).ready(function () {
           $('input:radio').change(function () {//Clicking input radio
             var radioClicked = $(this).attr('id');
-            unclickRadio();
+           // unclickRadio();
             //   removeActive();
-            clickRadio(radioClicked);
+           // clickRadio(radioClicked);
             //  makeActive(radioClicked);
 
-            filterTest(inputElement);
+            filterTest(radioClicked);
 
           });
 
@@ -77,14 +77,10 @@
 
       $(".card").click(function () {//Clicking the card
         var inputElement = $(this).find('input[type=radio]').attr('id');
-        
-        /* if in same step
-          unclickRadio()*/
-
-        unclickRadio();
+       // unclickRadio();
         //    removeActive();
         //   makeActive(inputElement);
-        clickRadio(inputElement);
+       // clickRadio(inputElement);
 
         filterTest(inputElement);
 
@@ -113,18 +109,21 @@
       function makeSelect(element, group){
 
         $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected");
-      
+        $("input:radio").filter("."+group).prop("checked", false);     
         $("#" + element + "-card").removeClass("unselected").addClass("selected");
+        $("#"+element).prop("checked", true);
        
       }
 
       function filterTest(element){
    
-        if($("#" + element + "-card").filter(".group1")){
+        if($("#" + element + "-card").hasClass("group1")){
           makeSelect(element, "group1");
         }
-        if($("#" + element + "-card").filter(".group2")){
+        else if($("#" + element + "-card").hasClass("group2")){
+
           makeSelect(element, "group2");
+
         }
         else{
           $('#step8-text').html("apricot");
