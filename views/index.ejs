@@ -110,8 +110,7 @@
           $("#" + element + "-card").addClass("selected");
       }
 
-      function makeSelect(element,group){
-
+      function makeSelect(element, group){
 
         $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected");
       
@@ -124,8 +123,7 @@
         if($("#" + element + "-card").filter(".group1")){
           makeSelect(element, "group1");
         }
-       if($("#" + element + "-card").filter(".group2")){
-
+        if($("#" + element + "-card").filter(".group2")){
           makeSelect(element, "group2");
         }
         else{
@@ -144,15 +142,12 @@
             case "On-Prem-Database":
               $("#s1").collapse('hide');
               $("#s2-1").collapse('show');
-              $("#s2-2").collapse('hide');
-              $("#s3").collapse('hide');
               break;
 
             case "Cloud-Database":
               $("#s1").collapse('hide');
               $("#s2-1").collapse('hide');
               $("#s2-2").collapse('show');
-              $("#s3").collapse('hide');
               break;
 
             case "Replication-Goldengate":
@@ -165,15 +160,13 @@
             case "Replication-Nifi":
               $("#s1").collapse('hide');
               $("#s2-1").collapse('hide');
-              $("#s2-2").collapse('hide'); 
-              $("#s3").collapse('hide');         
+              $("#s2-2").collapse('hide');    
               break;
 
             case "Replication-Kafka":
               $("#s1").collapse('hide');
               $("#s2-1").collapse('hide');
-              $("#s2-2").collapse('hide');   
-              $("#s3").collapse('hide');       
+              $("#s2-2").collapse('hide'); 
               break;
             
             default:
@@ -184,7 +177,7 @@
           $("#header1").removeClass("active");
           
           // Scroll to Step 2.1
-          document.getElementById("step2").scrollIntoView();
+          document.getElementById("cont2").scrollIntoView({behavior: "smooth"});
         }
 
         // Step 2.1 - Database
