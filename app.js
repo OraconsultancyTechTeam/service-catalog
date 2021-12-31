@@ -5,7 +5,7 @@ const validator = require('validator')
 const ejs = require('ejs')
 const express_layouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
-//const connection = require('../db/mySQL')
+const connection = require(__dirname,'/db/mySQL')
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -78,6 +78,35 @@ app.get('/', (req, res) => {
         step4,
         step6
     })
+})
+
+
+
+app.post('/submit',(req,res)=>{
+
+
+    const step_1 = req.body.step1
+    const step_2 = req.body.step2
+    const step_3 = req.body.step3
+    const step_4 = req.body.step4
+    const step_5 = req.body.step5
+    const step_6 = req.body.step6
+    const step_7 = req.body.step7
+    const step_8 = req.body.step8
+
+    const sql = "insert into requests values(null,'"+step_1+"','"+step_2+"','"+step_3+"','"+step_4+"','"+step_5+"','"+step_6+"','"+step_7+"','"+step_8+"',default,null)";
+    connection.query(sql,(err,rows,fields)=>{
+        if(err) throw err
+        res.render('index',{
+            title: 'Service Catalog',
+            step1,
+            step2,
+            step3,
+            step4,
+            step6
+    })
+   
+})
 })
 
 app.listen(port, () => {

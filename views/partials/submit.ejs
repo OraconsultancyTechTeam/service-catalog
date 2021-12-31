@@ -2,9 +2,10 @@
     <div class="row mt-2">
         <div class="col-md-12">
             <div style="text-align: center;">
+                <form id="addForm" class="form-horizontal" method="post" action="/submit">
 
-                <button type="button" class="active btn btn-primary" onclick="submitForms()">Submit</button>
-
+                <button type="button" class="active btn btn-primary" id="submitBtn" onclick="submitTest()">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -33,4 +34,22 @@
 
     }
 
+    function submitTest() {
+    var txt;
+    if (confirm("Confirm Submitting!")) {
+         document.getElementById("serviceDetailsForm").submit();
+      txt = "Data Submit Confirmed";
+    } else {
+      txt = "Data Submit";
+     }
+     document.getElementById("step1-text").innerHTML = txt;
+     document.getElementById("step2-text").innerHTML = "";
+     document.getElementById("step3-text").innerHTML = "";
+     document.getElementById("step4-text").innerHTML = "";
+     document.getElementById("step5-text").innerHTML = "";
+     document.getElementById("step6-text").innerHTML = "";
+     document.getElementById("step7-text").innerHTML ="";
+     document.getElementById("step8-text").innerHTML = "";
+
+    }
 </script>

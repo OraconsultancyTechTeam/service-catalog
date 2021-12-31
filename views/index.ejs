@@ -29,15 +29,17 @@
     <div id="servDetails">
       <div class="card" style="width: 15rem;">
         <div class="card-body">
+          <form id="serviceDetailsForm">
           <h5 class="card-title">Service Details</h5>
-          <p class="card-text" id="step1-text">Choose a Database Service.</p>
-          <p class="card-text" id="step2-text"></p>
-          <p class="card-text" id="step3-text"></p>
-          <p class="card-text" id="step4-text"></p>
-          <p class="card-text" id="step5-text"></p>
-          <p class="card-text" id="step6-text"></p>
-          <p class="card-text" id="step7-text"></p>
-          <p class="card-text" id="step8-text"></p>
+          <p class="card-text" name="step1" id="step1-text">Choose a Database Service.</p>
+          <p class="card-text" name="step2"id="step2-text"></p>
+          <p class="card-text" name="step3"id="step3-text"></p>
+          <p class="card-text" name="step4"id="step4-text"></p>
+          <p class="card-text" name="step5"id="step5-text"></p>
+          <p class="card-text" name="step6"id="step6-text"></p>
+          <p class="card-text" name="step7"id="step7-text"></p>
+          <p class="card-text" name="step8"id="step8-text"></p>
+        </form>
         </div>
       </div>
     </div>
@@ -173,14 +175,16 @@
 
           $("#cont1").css("display", "none")
           $("#header1").removeClass("open");
-          
+         
+        
+         /* 
           // Scroll to Step 2.1
           document.getElementById("cont2").scrollIntoView({behavior: "smooth"});
 
           // Setting service details height to be centered in all viewports
           var servDetHeight = document.querySelector('#servDetails').offsetHeight;
           var offsetServDet = servDetHeight / 2;
-          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
+          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)*/
         }
 
         // Step 2.1 - Database
