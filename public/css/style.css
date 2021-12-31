@@ -40,7 +40,7 @@
   margin:5px;
 }
 
-.active, .collapsible:hover {
+.open, .collapsible:hover {
   background-color: #28a745;
   color: black;
   font-weight: bold;
@@ -62,6 +62,6 @@
   margin-left: 5px;
 }
 
-.active:after {
+.open:after {
   content: "\2212";
 }
