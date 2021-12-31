@@ -120,9 +120,7 @@
           makeSelect(element, "group1");
         }
         else if($("#" + element + "-card").hasClass("group2")){
-
           makeSelect(element, "group2");
-
         }
         else{
           $('#step8-text').html("apricot");
@@ -173,7 +171,12 @@
 
           $("#cont1").css("display", "none")
           $("#header1").removeClass("active");
-          
+
+          if ($("#cont2").css('display') == 'block') {
+            // console.log('testing class')
+            document.getElementById("cont2").scrollIntoView({behavior: "smooth"});
+          }
+
           // Scroll to Step 2.1
           document.getElementById("cont2").scrollIntoView({behavior: "smooth"});
 
