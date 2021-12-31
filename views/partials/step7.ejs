@@ -5,7 +5,7 @@
                 <div class="form-group row">
                     <div class="col-md-12">
 
-                        <button type="button" class="collapsible active" id="header7" style="margin: 5px 0;">Step 7: Comments</button>
+                        <button type="button" class="collapsible open" id="header7" style="margin: 5px 0;">Step 7: Comments</button>
                             
                         <div class="content" id="cont7" style="text-align: center; display: block;">
                             <textarea id="comText" rows="15" cols="100" maxlength=1000 onchange="var textbox = document.getElementById('comText'); 
@@ -14,7 +14,7 @@
                                                                                                 var offsetServDet = servDetHeight / 2;
                                                                                                 $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
                                                                                                 $('#cont7').css('display','none');
-                                                                                                $('#header7').removeClass('active');
+                                                                                                $('#header7').removeClass('open');
                                                                                                 $('#s8').collapse('show');
                                                                                                 document.getElementById('step8').scrollIntoView();" 
                                                                                                 placeholder="Place any additional comments here..."></textarea>

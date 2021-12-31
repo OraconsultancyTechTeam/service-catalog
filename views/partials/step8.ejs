@@ -5,7 +5,7 @@
                 <div class="form-group row">
                     <div class="col-md-12">
 
-                        <button type="button" class="collapsible active" id="header8" style="margin: 5px 0;">Step 8: Details</button>
+                        <button type="button" class="collapsible open" id="header8" style="margin: 5px 0;">Step 8: Details</button>
                             
                         <div class="content" id="cont8" style="text-align: center; display: block;" onchange="commentArea()">
                             <label>Due Date:</label>
@@ -40,7 +40,7 @@
         
         if ($('#dueDate').val() && $('#reqBy').val() && $('#mangEmail').val()) {
             $("#cont8").css("display", "none");
-            $("#header8").removeClass("active");
+            $("#header8").removeClass("open");
             $('#sub').collapse('show');
             document.getElementById("sub").scrollIntoView();
         }

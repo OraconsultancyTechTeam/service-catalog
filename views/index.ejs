@@ -65,9 +65,9 @@
           $('input:radio').change(function () {//Clicking input radio
             var radioClicked = $(this).attr('id');
            // unclickRadio();
-            //   removeActive();
+            //   removeopen();
            // clickRadio(radioClicked);
-            //  makeActive(radioClicked);
+            //  makeopen(radioClicked);
 
             filterTest(radioClicked);
 
@@ -78,8 +78,8 @@
       $(".card").click(function () {//Clicking the card
         var inputElement = $(this).find('input[type=radio]').attr('id');
        // unclickRadio();
-        //    removeActive();
-        //   makeActive(inputElement);
+        //    removeopen();
+        //   makeopen(inputElement);
        // clickRadio(inputElement);
 
         filterTest(inputElement);
@@ -97,11 +97,11 @@
           $("#"+inputElement).prop("checked", true);
       }
 
-      function removeActive() {
+      function removeopen() {
           $(".card").removeClass("selected");
       }
 
-      function makeActive(element) {
+      function makeopen(element) {
           $("#" + element + "-card").addClass("selected");
       }
 
@@ -172,7 +172,7 @@
           }
 
           $("#cont1").css("display", "none")
-          $("#header1").removeClass("active");
+          $("#header1").removeClass("open");
           
           // Scroll to Step 2.1
           document.getElementById("cont2").scrollIntoView({behavior: "smooth"});
@@ -207,7 +207,7 @@
           }
 
           $("#cont2").css("display", "none");
-          $("#header2").removeClass("active");
+          $("#header2").removeClass("open");
           
           // Scroll to Step 2.2
           document.getElementById("step2cloud").scrollIntoView();
@@ -232,7 +232,7 @@
           }
 
           $("#cont2.2").css("display", "none");
-          $("#header2.2").removeClass("active");
+          $("#header2.2").removeClass("open");
 
           // Scroll to Step 3
           document.getElementById("step3").scrollIntoView();
@@ -286,7 +286,7 @@
       }
 
       function triggerCollapisble(element) {
-        element.classList.toggle("active");
+        element.classList.toggle("open");
           var content = element.nextElementSibling;
           if (content.style.display === "block") {
             content.style.display = "none";

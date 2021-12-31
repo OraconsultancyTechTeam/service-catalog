@@ -5,7 +5,7 @@
                 <div class="form-group row">
                     <div class="col-md-12">
 
-                        <button type="button" class="collapsible active" id="header6" style="margin: 5px 0;">Step 6: Licencing</button>
+                        <button type="button" class="collapsible open" id="header6" style="margin: 5px 0;">Step 6: Licencing</button>
                             
                         <div class="content" id="cont6" style="text-align: center; display: block;">
                             <select id="licenceSelect" class="selectpicker" data-live-search="true" style="width: 800px;" onchange="licenceSelected()">
@@ -35,7 +35,7 @@
         $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
     
         $("#cont6").css("display", "none");
-        $("#header6").removeClass("active");
+        $("#header6").removeClass("open");
 
         $('#s7').collapse('show')
         document.getElementById("step7").scrollIntoView();
