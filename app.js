@@ -5,7 +5,7 @@ const validator = require('validator')
 const ejs = require('ejs')
 const express_layouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
-const connection = require(__dirname,'/db/mySQL')
+const connection = require('./db/mySQL')
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -85,20 +85,22 @@ app.get('/', (req, res) => {
 app.post('/submit',(req,res)=>{
 
 
-    const step_1 = req.body.step1
-    const step_2 = req.body.step2
-    const step_3 = req.body.step3
-    const step_4 = req.body.step4
-    const step_5 = req.body.step5
-    const step_6 = req.body.step6
-    const step_7 = req.body.step7
-    const step_8 = req.body.step8
+    const host = "Host: On-Prem-Database";
+    const db = "DB: Oracle-Database";
+    const env = "VHS";
+    const tshirt = 64;
+    const dbsize = 100;
+    const licence = "licence: Enterprise Edition";
+    const comment = "comments: Test Comment";
+    const due_by = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const req_by = "Bob";
+    const mang_email = "bob@mail.com"
 
-    const sql = "insert into requests values(null,'"+step_1+"','"+step_2+"','"+step_3+"','"+step_4+"','"+step_5+"','"+step_6+"','"+step_7+"','"+step_8+"',default,null)";
+    const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{
         if(err) throw err
         res.render('index',{
-            title: 'Service Catalog',
+            title: 'Submission Complete',
             step1,
             step2,
             step3,

@@ -1,11 +1,12 @@
-const mysqli = require('mysqli')
+const mysql = require('mysql')
 
-const connection = mysqli.createConnection({
+const connection = mysql.createConnection({
     host:"demodb.grammarschooluk.co.uk",
-    user:"dbu1178930",
-    password:"dbPW$998536$d3m0",
+    user:"aaron",
+    password:"",
     database:"aaron"
 })
+
 
 connection.connect()
 
