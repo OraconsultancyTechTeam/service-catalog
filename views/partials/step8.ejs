@@ -42,7 +42,10 @@
             $("#cont8").css("display", "none");
             $("#header8").removeClass("open");
             $('#sub').collapse('show');
-            document.getElementById("sub").scrollIntoView();
+            //document.getElementById("sub").scrollIntoView();
+            setTimeout(function () {
+                document.querySelector("#sub").scrollIntoView(true, { behavior: "smooth" });    
+            }, 250);
         }
         
     }

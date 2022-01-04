@@ -38,7 +38,10 @@
         $("#header6").removeClass("open");
 
         $('#s7').collapse('show')
-        document.getElementById("step7").scrollIntoView();
+        
+        setTimeout(function () {
+            document.querySelector("#cont7").scrollIntoView(true, { behavior: "smooth" });    
+        }, 250);
     }
 
 </script>

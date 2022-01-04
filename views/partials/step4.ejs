@@ -27,6 +27,7 @@
 <script>
   
   function tshirtSelected() {
+    document.querySelector("#cont4").scrollIntoView();
     var element = $("#tshirtSelect option:selected").text()
     $('#step4-text').html(element)
 
@@ -39,7 +40,10 @@
     $("#header4").removeClass("open");
     
     $('#s5').collapse('show')
-    document.getElementById("cont5").scrollIntoView();
+    
+    setTimeout(function () {
+      document.querySelector("#cont5").scrollIntoView(true, { behavior: "smooth" });    
+    }, 250);
   }
 
 </script>

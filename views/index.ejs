@@ -135,7 +135,7 @@
 
         // Step 1 - Host
         if (document.getElementById("step1").contains(id)) {
-          
+
           switch(element) {
             case "On-Prem-Database":
               $("#s1").collapse('hide');
@@ -174,7 +174,11 @@
           $("#cont1").css("display", "none")
           $("#header1").removeClass("open");
          
-        
+          setTimeout(function () {
+            document.querySelector("#cont2").scrollIntoView(true, { behavior: "smooth" });    
+          }, 250);
+          
+
          /* 
           // Scroll to Step 2.1
           document.getElementById("cont2").scrollIntoView({behavior: "smooth"});
@@ -187,6 +191,7 @@
 
         // Step 2.1 - Database
         else if (document.getElementById("s2-1").contains(id)) {
+          
           switch(element) {
             case "Oracle-Database":
               $("#s3").collapse('show');
@@ -212,7 +217,9 @@
           $("#header2").removeClass("open");
           
           // Scroll to Step 2.2
-          document.getElementById("step2cloud").scrollIntoView();
+          setTimeout(function () {
+            document.querySelector("#cont2.2").scrollIntoView(true, { behavior: "smooth" });    
+          }, 250);
 
           // Setting service details height to be centered in all viewports
           var servDetHeight = document.querySelector('#servDetails').offsetHeight;
@@ -222,6 +229,7 @@
 
         // Step 2.2 - Database
         else if (document.getElementById("s2-2").contains(id)) {
+          
           switch(element) {
             case "Oracle-RDS":
               $("#s3").collapse('show');
@@ -237,7 +245,9 @@
           $("#header2.2").removeClass("open");
 
           // Scroll to Step 3
-          document.getElementById("step3").scrollIntoView();
+          setTimeout(function () {
+            document.querySelector("#cont3").scrollIntoView(true, { behavior: "smooth" });    
+          }, 250);
 
           // Setting service details height to be centered in all viewports
           var servDetHeight = document.querySelector('#servDetails').offsetHeight;
@@ -256,21 +266,9 @@
         }
         else if (document.getElementById("s2-1").contains(id)) {
           $('#step2-text').html(element);
-          $('#step3-text').html("");
-          $('#step4-text').html("");
-          $('#step5-text').html("");
-          $('#step6-text').html("");
-          $('#step7-text').html("");
-          $('#step8-text').html("");
         }
         else if (document.getElementById("s2-2").contains(id)) {
           $('#step2-text').html(element);
-          $('#step3-text').html("");
-          $('#step4-text').html("");
-          $('#step5-text').html("");
-          $('#step6-text').html("");
-          $('#step7-text').html("");
-          $('#step8-text').html("");
         }
         else {
           console.log('error')
