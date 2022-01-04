@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <section style="margin-right: 20rem;">
+    <section style="margin-right: 20%;">
       <div class="row">
         <div class="col-md-12">
           <div id="step1"> <%-include('partials/step1.ejs')%></div>
@@ -140,6 +140,7 @@
             case "On-Prem-Database":
               $("#s1").collapse('hide');
               $("#s2-1").collapse('show');
+              $("#s2-2").collapse('hide');
               break;
 
             case "Cloud-Database":
@@ -152,7 +153,6 @@
               $("#s1").collapse('hide');
               $("#s2-1").collapse('hide');
               $("#s2-2").collapse('hide');   
-              $("#s3").collapse('hide');       
               break;
 
             case "Replication-Nifi":
@@ -181,12 +181,12 @@
 
          /* 
           // Scroll to Step 2.1
-          document.getElementById("cont2").scrollIntoView({behavior: "smooth"});
+          document.getElementById("cont2").scrollIntoView({behavior: "smooth"});*/
 
           // Setting service details height to be centered in all viewports
           var servDetHeight = document.querySelector('#servDetails').offsetHeight;
           var offsetServDet = servDetHeight / 2;
-          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)*/
+          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
         }
 
         // Step 2.1 - Database
@@ -218,7 +218,7 @@
           
           // Scroll to Step 2.2
           setTimeout(function () {
-            document.querySelector("#cont2.2").scrollIntoView(true, { behavior: "smooth" });    
+            document.querySelector("#cont3").scrollIntoView(true, { behavior: "smooth" });    
           }, 250);
 
           // Setting service details height to be centered in all viewports
