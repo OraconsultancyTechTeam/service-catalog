@@ -176,15 +176,11 @@
           $("#cont1").css("display", "none")
           $("#header1").removeClass("open");
          
+          // Scroll to Step 2.1
           setTimeout(function () {
             document.querySelector("#cont2").scrollIntoView(true, { behavior: "smooth" });    
           }, 250);
           
-
-         /* 
-          // Scroll to Step 2.1
-          document.getElementById("cont2").scrollIntoView({behavior: "smooth"});*/
-
           // Setting service details height to be centered in all viewports
           var servDetHeight = document.querySelector('#servDetails').offsetHeight;
           var offsetServDet = servDetHeight / 2;
