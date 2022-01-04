@@ -93,8 +93,8 @@ app.post('/submit',(req,res)=>{
     const licence = "licence: Enterprise Edition";
     const comment = "comments: Test Comment";
     const due_by = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    const req_by = "Bob";
-    const mang_email = "bob@mail.com"
+    const req_by = req.body.req_by;
+    const mang_email = req.body.mang_email;
 
     const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{

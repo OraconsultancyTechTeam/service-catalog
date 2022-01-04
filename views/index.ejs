@@ -47,6 +47,7 @@
     <section style="margin-right: 20%;">
       <div class="row">
         <div class="col-md-12">
+          <form id="addForm" class="form-horizontal" method="post" action="/submit">
           <div id="step1"> <%-include('partials/step1.ejs')%></div>
           <div id="step2"> <%-include('partials/step2.ejs')%></div>
           <div id="step2cloud"> <%-include('partials/step2cloud.ejs')%></div>
@@ -57,6 +58,7 @@
           <div id="step7"> <%-include('partials/step7.ejs')%></div>
           <div id="step8"> <%-include('partials/step8.ejs')%></div>
           <div id="submit"> <%-include('partials/submit.ejs')%></div>
+        </form>
         </div>
       </div>
     </section>
