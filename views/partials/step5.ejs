@@ -19,6 +19,10 @@
     
 <script>
     
+    // document.addEventListener('load', (e) => {
+    //     document.getElementById("header5").scrollIntoView({behavior: "smooth"});
+    // });
+
     $(document).on("keydown", "form", function(event) {
         return event.key != "Enter";
     });
@@ -37,7 +41,10 @@
         $("#header5").removeClass("open");
     
         $('#s6').collapse('show')
-        document.getElementById("step6").scrollIntoView();
+        
+        setTimeout(function () {
+            document.querySelector("#cont6").scrollIntoView(true, { behavior: "smooth" });    
+        }, 250);
     }
 
 </script>

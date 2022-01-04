@@ -78,7 +78,12 @@
   //   return result;
   // }
 
+    // document.addEventListener('load', (e) => {
+    //   document.getElementById("header3").scrollIntoView({behavior: "smooth"});
+    // });
+
   function envSelected() {
+    
     var element = $("#envSelect option:selected").text()
     $('#step3-text').html(element)
 
@@ -91,7 +96,9 @@
     $("#header3").removeClass("open");
 
     $('#s4').collapse('show')
-    document.getElementById("step4").scrollIntoView();
+    setTimeout(function () {
+      document.querySelector("#cont4").scrollIntoView(false, { behavior: "smooth" });    
+    }, 250);
 
   }
 

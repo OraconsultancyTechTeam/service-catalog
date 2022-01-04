@@ -16,7 +16,9 @@
                                                                                                 $('#cont7').css('display','none');
                                                                                                 $('#header7').removeClass('open');
                                                                                                 $('#s8').collapse('show');
-                                                                                                document.getElementById('step8').scrollIntoView();" 
+                                                                                                setTimeout(function () {
+                                                                                                    document.querySelector('#cont8').scrollIntoView(true, { behavior: 'smooth' });    
+                                                                                                }, 250);" 
                                                                                                 placeholder="Place any additional comments here..."></textarea>
                         </div>
                     </div>

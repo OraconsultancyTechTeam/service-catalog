@@ -9,6 +9,8 @@ const connection = require('./db/mySQL')
 const app = express()
 const port = process.env.PORT || 3000
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 // Define paths for express config
 const publicDirectoryPath = path.join(__dirname,'public')
 const viewsPath = path.join(__dirname, 'views')
@@ -83,8 +85,6 @@ app.get('/', (req, res) => {
 
 
 app.post('/submit',(req,res)=>{
-
-
     const host = "Host: On-Prem-Database";
     const db = "DB: Oracle-Database";
     const env = "VHS";
@@ -108,9 +108,11 @@ app.post('/submit',(req,res)=>{
             step6
     })
    
-})
+    // })
+    })
 })
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
+
