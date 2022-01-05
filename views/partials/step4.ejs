@@ -8,11 +8,11 @@
             
             <div class="content" id="cont4" style="text-align: center; display: block;">
 
-              <select id="tshirtSelect" class="selectpicker" data-live-search="true" style="width: 800px; content: none;" onchange="tshirtSelected()">
+              <select name="tshirtsize" id="tshirtSelect" class="selectpicker" data-live-search="true" style="width: 800px; content: none;" onchange="tshirtSelected()">
                 
                 <option value="" disabled selected style="background-color: white;">Select T-shirt Size</option>
                 <% step4.forEach(card => { %>
-                  <option name="tshirtsize"value="<%=card.id%>"><%=card.size%></option>
+                  <option value="<%=card.id%>"><%=card.size%></option>
                 <% }) %>
               </select>
             </div>

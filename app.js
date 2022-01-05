@@ -88,11 +88,12 @@ app.post('/submit',(req,res)=>{
     const host = req.body.radio1;
     const db = req.body.radio2;
     const env = req.body.env1;
-    const tshirt = 64;
-    const dbsize = 100;
-    const licence = "licence: Enterprise Edition";
-    const comment = "comments: Test Comment";
-    const due_by = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const tshirt = req.body.tshirtsize;
+    const dbsize = req.body.dbsize;
+    const licence = req.body.licensetype;
+    const comment = req.body.commentBox;
+    //const due_by = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const due_by = req.body.dueDate;
     const req_by = req.body.reqBy;
     const mang_email = req.body.mangEmail;
 
