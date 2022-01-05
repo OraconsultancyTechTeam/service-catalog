@@ -7,11 +7,11 @@
                         <button type="button" class="collapsible open" id="header6" style="margin: 5px 0;">Step 6: Licencing</button>
                             
                         <div class="content" id="cont6" style="text-align: center; display: block;">
-                            <select id="licenceSelect" class="selectpicker" data-live-search="true" style="width: 800px;" onchange="licenceSelected()">
+                            <select name="licensetype" id="licenceSelect" class="selectpicker" data-live-search="true" style="width: 800px;" onchange="licenceSelected()">
                                 
                                 <option value="" disabled selected style="background-color: white;">Select Licencing</option>
                                 <% step6.forEach(card => { %>
-                                    <option name="licensetype"value="<%=card.id%>"><%=card.name%></option>
+                                    <option value="<%=card.id%>"><%=card.name%></option>
                                 <% }) %>
                             </select>
                         </div>
