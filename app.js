@@ -74,6 +74,7 @@ const step6 = [
 app.get('/', (req, res) => {
     res.render('index', {
         title: 'Service Catalog',
+        msg1:'',
         step1,
         step2,
         step3,
@@ -97,11 +98,27 @@ app.post('/submit',(req,res)=>{
     const req_by = req.body.reqBy;
     const mang_email = req.body.mangEmail;
 
+    if(!validator.isEmail(mang_email)){
+        res.render('index',{
+            title: 'Service Catalog',
+            msg1:'Please Enter Valid Email Address for Manager',
+            step1,
+            step2,
+            step3,
+            step4,
+            step6
+
+    })
+    return;
+    }
+
+
     const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{
         if(err) throw err
         res.render('index',{
-            title: 'Submission Complete',
+            title: 'Service Catalog',
+            msg1:'Submission Successful, Data Saved',
             step1,
             step2,
             step3,
