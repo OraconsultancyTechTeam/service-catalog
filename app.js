@@ -85,16 +85,16 @@ app.get('/', (req, res) => {
 
 
 app.post('/submit',(req,res)=>{
-    const host = "Host: On-Prem-Database";
-    const db = "DB: Oracle-Database";
-    const env = "VHS";
+    const host = req.body.radio1;
+    const db = req.body.radio2;
+    const env = req.body.env1;
     const tshirt = 64;
     const dbsize = 100;
     const licence = "licence: Enterprise Edition";
     const comment = "comments: Test Comment";
     const due_by = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    const req_by = req.body.req_by;
-    const mang_email = req.body.mang_email;
+    const req_by = req.body.reqBy;
+    const mang_email = req.body.mangEmail;
 
     const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{

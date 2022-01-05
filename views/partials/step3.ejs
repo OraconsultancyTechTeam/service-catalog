@@ -1,7 +1,6 @@
 <div class="container collapse" id="s3">
   <div class="row mt-2">
     <div class="col-12">
-      <form id="form3" method="post" action="/submit">
         <div class="form-group row">
           <div class="col-md-12">
 
@@ -13,14 +12,13 @@
                 <!-- <option value="All" style="background-color: #CBE0F7; font-weight: bold;">Select/Deselect All</option> -->
                 <option value="" disabled selected style="background-color: white;">Select Environment</option>
                 <% step3.forEach(card => { %>
-                  <option value="<%=card.id%>"><%=card.name%></option>
+                  <option name="env1" value="<%=card.name%>"><%=card.name%></option>
                 <% }) %>
               </select>
               <!-- <button type="button" onclick="var el = document.getElementsByTagName('select')[0]; $('#step3-text').html(getSelectValues(el));">Add Environment(s)</button> -->
             </div>
           </div>
         </div>
-      </form>
     </div>
   </div>
 </div>

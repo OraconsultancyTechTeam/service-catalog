@@ -1,7 +1,6 @@
 <div class="container collapse" id="s6">
     <div class="row mt-2">
         <div class="col-12">
-            <form id="form6" method="post" action="/submit">
                 <div class="form-group row">
                     <div class="col-md-12">
 
@@ -12,13 +11,12 @@
                                 
                                 <option value="" disabled selected style="background-color: white;">Select Licencing</option>
                                 <% step6.forEach(card => { %>
-                                    <option value="<%=card.id%>"><%=card.name%></option>
+                                    <option name="licensetype"value="<%=card.id%>"><%=card.name%></option>
                                 <% }) %>
                             </select>
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 </div>

@@ -1,7 +1,6 @@
 <div class="container collapse" id="s4">
   <div class="row mt-2">
     <div class="col-12">
-      <form id="form4" method="post" action="/submit">
         <div class="form-group row">
           <div class="col-md-12">
 
@@ -13,13 +12,12 @@
                 
                 <option value="" disabled selected style="background-color: white;">Select T-shirt Size</option>
                 <% step4.forEach(card => { %>
-                  <option value="<%=card.id%>"><%=card.size%></option>
+                  <option name="tshirtsize"value="<%=card.id%>"><%=card.size%></option>
                 <% }) %>
               </select>
             </div>
           </div>
         </div>
-      </form>
     </div>
   </div>
 </div>
