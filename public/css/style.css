@@ -64,3 +64,28 @@
 .open:after {
   content: "\2212";
 }
+
+/*
+* Breakpoints
+*/
+@media screen and (max-width:768px) {
+  /* #servDetails:nth-child(2)  */
+  #servDetails {
+    width: 100%;
+  }
+
+  #details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    /* margin-right: 20%; */
+    z-index: 10;
+  }
+}
+
+@media screen and (max-width:1072px) {
+  #section1 {
+    width: 100%;
+  }
+}
