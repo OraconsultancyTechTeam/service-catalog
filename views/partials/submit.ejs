@@ -37,11 +37,9 @@
     function submitTest() {
     var txt;
     if (confirm("Confirm Submitting!")) {
-
-
+            document.getElementById("addForm").submit();
+            txt = "Data Submit Confirmed";
         
-         document.getElementById("addForm").submit();
-      txt = "Data Submit Confirmed";
     } else {
       txt = "Data Submit";
      }
