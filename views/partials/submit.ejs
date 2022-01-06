@@ -37,11 +37,20 @@
     function submitTest() {
     var txt;
     if (confirm("Confirm Submitting!")) {
+
+        var mail = document.getElementById("mangEmail");
+        if(ValidateEmail(mail)==true){
             document.getElementById("addForm").submit();
             txt = "Data Submit Confirmed";
-        
+        }
+        else{
+           var el = document.getElementById("emailAlert");
+           el.style.display = "block";         
+            return;
+        }
+
     } else {
-      txt = "Data Submit";
+      txt = "Data Submit Cancelled";
      }
      document.getElementById("step1-text").innerHTML = txt;
      document.getElementById("step2-text").innerHTML = "";
@@ -53,4 +62,16 @@
      document.getElementById("step8-text").innerHTML = "";
 
     }
+
+    function ValidateEmail(inputText) 
+{
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(inputText.value.match(mailformat)){
+    
+        return true}
+    else{
+    
+        return false}
+}
+
 </script>

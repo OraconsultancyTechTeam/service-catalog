@@ -113,7 +113,7 @@ app.post('/submit',(req,res)=>{
     const due_by = req.body.dueDate;
     const req_by = req.body.reqBy;
     const mang_email = req.body.mangEmail;
-
+    /*
     if(!validator.isEmail(mang_email)){
 
         req.session.message = {
@@ -126,7 +126,7 @@ app.post('/submit',(req,res)=>{
     return;
     }
 
-
+*/
     const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{
         if(err) throw err
