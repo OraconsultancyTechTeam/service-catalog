@@ -1,6 +1,8 @@
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 const validator = require('validator')
 const ejs = require('ejs')
 const express_layouts = require('express-ejs-layouts')
@@ -23,6 +25,11 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+
+app.use(cookieParser('secret'))
+app.use(session({cookie:{maxAge:null}}))
+
 
 // Setup handlebars engine and views location
 app.set('view engine','ejs')
@@ -71,6 +78,15 @@ const step6 = [
     {name:'Advanced Compression',id:3}
 ]
 
+app.use((req, res, next)=>{
+    res.locals.message = req.session.message
+    delete req.session.message
+    next()
+})
+
+
+
+
 app.get('/', (req, res) => {
     res.render('index', {
         title: 'Service Catalog',
@@ -99,16 +115,14 @@ app.post('/submit',(req,res)=>{
     const mang_email = req.body.mangEmail;
 
     if(!validator.isEmail(mang_email)){
-        res.render('index',{
-            title: 'Service Catalog',
-            msg1:'Please Enter Valid Email Address for Manager',
-            step1,
-            step2,
-            step3,
-            step4,
-            step6
 
-    })
+        req.session.message = {
+            type:'danger',
+            intro:'Wrong Format',
+            message:'Please enter the manager email in an email format'
+        }
+        
+        res.redirect('/')
     return;
     }
 
@@ -116,6 +130,15 @@ app.post('/submit',(req,res)=>{
     const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{
         if(err) throw err
+
+        req.session.message = {
+            type:'success',
+            intro:'Data Saved',
+            message:'Submission has been successfully sent'
+        }
+        res.redirect('/')
+
+/*
         res.render('index',{
             title: 'Service Catalog',
             msg1:'Submission Successful, Data Saved',
@@ -125,7 +148,7 @@ app.post('/submit',(req,res)=>{
             step4,
             step6
     })
-   
+   */
     // })
     })
 })
