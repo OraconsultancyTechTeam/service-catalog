@@ -79,7 +79,7 @@
 
   #details {
     position: sticky;
-    top: 0;
+    /* top: 0; */
     /* left: 0; */
     width: 100% !important;
     /* margin-right: 20%; */
