@@ -294,6 +294,16 @@
             content.style.display = "block";
           }
       }
+console.log(screen.availWidth)
+      /* For smaller viewports */
+      $(window).scroll(function(){
+          
+        if (screen.availWidth <= 768) {
+              
+          console.log('testing')
+          
+        }
+      });
 
     </script>
 
