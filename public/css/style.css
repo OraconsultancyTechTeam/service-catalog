@@ -22,10 +22,11 @@
 
 #servDetails {
   position: fixed;
-  top: 1vh / 2;
-  right: -17%;
-  margin-right: 20%;
+  /* top: 100vh / 2; */
+  right: 0;
+  margin-right: 2% ;
   z-index: 10;
+  min-width: 210px;
 }
 
 .collapsible {
@@ -65,30 +66,45 @@
   content: "\2212";
 }
 
+.card-settings {
+  min-width: 153px !important;
+  width: 100%;
+  margin: 0;
+}
+
+.header-settings {
+  min-width: 153px !important;
+  width: 100%;
+  margin: 5px 0;
+}
+
 /*
 * Breakpoints
 */
 @media screen and (max-width:768px) {
-  /* #servDetails:nth-child(2)  */
+  
   #servDetails {
     width: 100%;
     margin-right: 0;
+    /* right: 0;
     left: 0;
-    top: 224px;
+    top: 224px; */
+    position: static;
   }
 
   #details {
-    position: sticky;
     /* top: 0; */
     /* left: 0; */
     width: 100% !important;
+    margin: 0;
+    border: 0,1px solid;
     /* margin-right: 20%; */
     z-index: 10;
   }
-}
 
-@media screen and (max-width:1072px) {
   #section1 {
     width: 100%;
+    margin-right: 0;
+    left: 0;
   }
 }
