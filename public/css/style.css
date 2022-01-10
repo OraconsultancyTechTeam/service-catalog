@@ -78,6 +78,13 @@
   margin: 5px 0;
 }
 
+/* 
+* Navbar Styles
+*/
+.nav-link {
+  color: white !important;
+}
+
 /*
 * Breakpoints
 */
