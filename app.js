@@ -37,13 +37,28 @@ app.set('views', viewsPath)
 
 app.use(methodOverride('_method'))
 
-const step1 = [
-    {img:'/img/OnPremDatabaseLogo.png', name:'On-Prem Database', text:'The term "on premises" refers to local hardware, meaning data is stored on local servers, computers or other devices.', id:'1', g:'1'},
-    {img:'/img/CloudDatabaseLogo.png', name:'Cloud Database', text:'A cloud database is a database that typically runs on a cloud computing platform and access to the database is provided as-a-service.', id:'2', g:'1'},
-    {img:'/img/GoldenGate.png', name:'Replication - Goldengate', text:'Oracle GoldenGate enables you to replicate data between Oracle databases to other supported heterogeneous database, and between heterogeneous databases.', id:'3', g:'1'},
-    {img:'/img/ApacheNifi.png', name:'Replication - Nifi', text:'Apache NiFi is a software project from the Apache Software Foundation designed to automate the flow of data between software systems. ', id:'4', g:'1'},
-    {img:'/img/ApacheKafka.png', name:'Replication - Kafka', text:'Apache Kafka is a framework implementation of a software bus using stream-processing.', id:'5', g:'1'},
-]
+
+// Data for Step1
+connection.query(`select * from catalog_services where status=1`, (err,res) => {
+    if (err) throw err
+    console.log(res)
+    return step1 = res
+})
+
+// Data for Step2
+// var service_id = 1
+// connection.query(`select * from step2 where service_id=`+service_id+``, (err,res) => {
+//     if (err) throw err
+//     return step2 = res
+// })
+
+// const step1 = [
+//     {img:'/img/OnPremDatabaseLogo.png', name:'On-Prem Database', text:'The term "on premises" refers to local hardware, meaning data is stored on local servers, computers or other devices.', id:'1', g:'1'},
+//     {img:'/img/CloudDatabaseLogo.png', name:'Cloud Database', text:'A cloud database is a database that typically runs on a cloud computing platform and access to the database is provided as-a-service.', id:'2', g:'1'},
+//     {img:'/img/GoldenGate.png', name:'Replication - Goldengate', text:'Oracle GoldenGate enables you to replicate data between Oracle databases to other supported heterogeneous database, and between heterogeneous databases.', id:'3', g:'1'},
+//     {img:'/img/ApacheNifi.png', name:'Replication - Nifi', text:'Apache NiFi is a software project from the Apache Software Foundation designed to automate the flow of data between software systems. ', id:'4', g:'1'},
+//     {img:'/img/ApacheKafka.png', name:'Replication - Kafka', text:'Apache Kafka is a framework implementation of a software bus using stream-processing.', id:'5', g:'1'},
+// ]
 
 const step2 = [
     {img:'/img/oracledatabase.png', name:'Oracle Database', text:'Oracle Database is a multi-model database management system produced and marketed by Oracle Corporation', id:'6', g:'2'},
