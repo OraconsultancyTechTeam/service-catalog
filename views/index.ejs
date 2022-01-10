@@ -1,350 +1,352 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="stylesheet" type="text/css" href="/css/style.css">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-      
-      <title> <%= title %></title>
+    <head>
+          
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+        
+        <title> <%= title %></title>
 
-      <!-- Scripts -->
-      <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-  
-  </head>
-
-  <body>
-    <div id="header"> <%-include('user/header.ejs')%></div>
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     
-    <div class="jumbotron text-center">
-        <h1><%=title%></h1>
-        <p>Select Your Desired Database Below</p>
-    </div>
+    </head>
 
-    <%if(message){ %>
-      <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
-        <strong><%= message.intro %></strong> <%= message.message %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <% } %>
+    <body>
 
-    <div class="container-fluid">
-      <div class="row">
-
-        <section id="section1" class="col-md-10">
-          <div class="row">
-            <div class="col-md-12">
-              <form id="addForm" class="form-horizontal" method="post" action="/submit">   
-                <div id="step1"> <%-include('partials/step1.ejs')%></div>
-                <div id="step2"> <%-include('partials/step2.ejs')%></div>
-                <div id="step2cloud"> <%-include('partials/step2cloud.ejs')%></div>
-                <div id="step3"> <%-include('partials/step3.ejs')%></div>
-                <div id="step4"> <%-include('partials/step4.ejs')%></div>
-                <div id="step5"> <%-include('partials/step5.ejs')%></div>
-                <div id="step6"> <%-include('partials/step6.ejs')%></div>
-                <div id="step7"> <%-include('partials/step7.ejs')%></div>
-                <div id="step8"> <%-include('partials/step8.ejs')%></div>
-                
-                <div id="emailAlert" style="text-align: center; display: none;"class="alert alert-danger" role="alert">
-                  <strong>Wrong Format</strong> Please enter the manager email in an email format
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-
-                <div id="submit"> <%-include('partials/submit.ejs')%></div>
-              </form>
-            </div>
-          </div>
-        </section>
-
-        <div id="servDetails" class="col-md-2" style="min-width: 300px;">
-          <div id="details" class="card" style="width: 100%;">
-            <div class="card-body">
-              <form id="serviceDetailsForm">
-              <h5 class="card-title">Service Details</h5>
-              <div id="detail-div" style="display: block;">
-                <p class="card-text" name="step1" id="step1-text">Choose a Database Service.</p>
-                <p class="card-text" name="step2"id="step2-text"><%= msg1 %></p>
-                <p class="card-text" name="step3"id="step3-text"></p>
-                <p class="card-text" name="step4"id="step4-text"></p>
-                <p class="card-text" name="step5"id="step5-text"></p>
-                <p class="card-text" name="step6"id="step6-text"></p>
-                <p class="card-text" name="step7"id="step7-text"></p>
-                <p class="card-text" name="step8"id="step8-text"></p>
-              </div>
-            </form>
-            </div>
-          </div>
+        <div id="header"> <%-include('user/header.ejs')%></div>
+        
+        <div class="jumbotron text-center">
+            <h1><%=title%></h1>
+            <p>Select Your Desired Database Below</p>
         </div>
-      </div>
-    </div>
-  
-    <script>
 
-      $(document).ready(function () {
-          $('input:radio').change(function () {//Clicking input radio
-            var radioClicked = $(this).attr('id');
-           // unclickRadio();
-            //   removeopen();
-           // clickRadio(radioClicked);
-            //  makeopen(radioClicked);
+        <%if(message){ %>
+            <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
+                <strong><%= message.intro %></strong> <%= message.message %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
 
-            filterTest(radioClicked);
+        <div class="container-fluid">
+            <div class="row">
+
+                <section id="section1" class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="addForm" class="form-horizontal" method="post" action="/submit">   
+                                <div id="step1"> <%-include('partials/step1.ejs')%></div>
+                                <div id="step2"> <%-include('partials/step2.ejs')%></div>
+                                <div id="step2cloud"> <%-include('partials/step2cloud.ejs')%></div>
+                                <div id="step3"> <%-include('partials/step3.ejs')%></div>
+                                <div id="step4"> <%-include('partials/step4.ejs')%></div>
+                                <div id="step5"> <%-include('partials/step5.ejs')%></div>
+                                <div id="step6"> <%-include('partials/step6.ejs')%></div>
+                                <div id="step7"> <%-include('partials/step7.ejs')%></div>
+                                <div id="step8"> <%-include('partials/step8.ejs')%></div>
+                                
+                                <div id="emailAlert" style="text-align: center; display: none;"class="alert alert-danger" role="alert">
+                                    <strong>Wrong Format</strong> Please enter the manager email in an email format
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div id="submit"> <%-include('partials/submit.ejs')%></div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <div id="servDetails" class="col-md-2" style="min-width: 300px;">
+                    <div id="details" class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <form id="serviceDetailsForm">
+                                <h5 class="card-title">Service Details</h5>
+                                <div id="detail-div" style="display: block;">
+                                    <p class="card-text" name="step1" id="step1-text">Choose a Database Service.</p>
+                                    <p class="card-text" name="step2"id="step2-text"><%= msg1 %></p>
+                                    <p class="card-text" name="step3"id="step3-text"></p>
+                                    <p class="card-text" name="step4"id="step4-text"></p>
+                                    <p class="card-text" name="step5"id="step5-text"></p>
+                                    <p class="card-text" name="step6"id="step6-text"></p>
+                                    <p class="card-text" name="step7"id="step7-text"></p>
+                                    <p class="card-text" name="step8"id="step8-text"></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <script>
+
+          $(document).ready(function () {
+              $('input:radio').change(function () {//Clicking input radio
+                  var radioClicked = $(this).attr('id');
+                  //  unclickRadio();
+                  //  removeopen();
+                  //  clickRadio(radioClicked);
+                  //  makeopen(radioClicked);
+
+                  filterTest(radioClicked);
+              });
 
           });
 
-      });
+          $(".card").click(function () {//Clicking the card
+              var inputElement = $(this).find('input[type=radio]').attr('service_id');
+              //  unclickRadio();
+              //  removeopen();
+              //  makeopen(inputElement);
+              //  clickRadio(inputElement);
+              //  console.log(inputElement)
+              console.log('testing')
 
-      $(".card").click(function () {//Clicking the card
-        var inputElement = $(this).find('input[type=radio]').attr('id');
-       // unclickRadio();
-        //    removeopen();
-        //   makeopen(inputElement);
-       // clickRadio(inputElement);
+              filterTest(inputElement);
 
-        filterTest(inputElement);
+              cardCheck(inputElement);
+              changeText(inputElement);
+          });
 
-        cardCheck(inputElement);
-        changeText(inputElement);
-
-      });
-
-      function unclickRadio() {
-          $("input:radio").prop("checked", false);
-      }
-
-      function clickRadio(inputElement) {
-          $("#"+inputElement).prop("checked", true);
-      }
-
-      function removeopen() {
-          $(".card").removeClass("selected");
-      }
-
-      function makeopen(element) {
-          $("#" + element + "-card").addClass("selected");
-      }
-
-      function makeSelect(element, group){
-
-        $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected");
-        $("input:radio").filter("."+group).prop("checked", false);     
-        $("#" + element + "-card").removeClass("unselected").addClass("selected");
-        $("#"+element).prop("checked", true);
-       
-      }
-
-      function filterTest(element){
-   
-        if($("#" + element + "-card").hasClass("group1")){
-          makeSelect(element, "group1");
-        }
-        else if($("#" + element + "-card").hasClass("group2")){
-          makeSelect(element, "group2");
-        }
-        // else{
-        //   $('#step8-text').html("apricot");
-        // }
-      }
-
-      function cardCheck(element) {
-
-        var id = document.getElementById(element);
-
-        // Step 1 - Host
-        if (document.getElementById("step1").contains(id)) {
-
-          switch(element) {
-            case "On-Prem-Database":
-              $("#s1").collapse('hide');
-              $("#s2-1").collapse('show');
-              $("#s2-2").collapse('hide');
-              break;
-
-            case "Cloud-Database":
-              $("#s1").collapse('hide');
-              $("#s2-1").collapse('hide');
-              $("#s2-2").collapse('show');
-              break;
-
-            case "Replication-Goldengate":
-              $("#s1").collapse('hide');
-              $("#s2-1").collapse('hide');
-              $("#s2-2").collapse('hide');   
-              break;
-
-            case "Replication-Nifi":
-              $("#s1").collapse('hide');
-              $("#s2-1").collapse('hide');
-              $("#s2-2").collapse('hide');    
-              break;
-
-            case "Replication-Kafka":
-              $("#s1").collapse('hide');
-              $("#s2-1").collapse('hide');
-              $("#s2-2").collapse('hide'); 
-              break;
-            
-            default:
-                console.log("Error");
+          function unclickRadio() {
+              $("input:radio").prop("checked", false);
           }
 
-          $("#cont1").css("display", "none")
-          $("#header1").removeClass("open");
-         
-          // Scroll to Step 2.1
-          setTimeout(function () {
-            document.querySelector("#cont2").scrollIntoView({ behavior: "smooth" });    
-          }, 350);
-          
-          // Setting service details height to be centered in all viewports
-          var servDetHeight = document.querySelector('#servDetails').offsetHeight;
-          var offsetServDet = servDetHeight / 2;
-          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
-        }
-
-        // Step 2.1 - Database
-        else if (document.getElementById("s2-1").contains(id)) {
-          
-          switch(element) {
-            case "Oracle-Database":
-              $("#s3").collapse('show');
-              break;
-            case "SQL-Server":
-              $("#s3").collapse('show');
-              break;
-            case "My-SQL":
-              $("#s3").collapse('show');          
-              break;
-            case "Apache-Cassandra":
-              $("#s3").collapse('show');             
-              break;
-            case "Redis":
-              $("#s3").collapse('show');            
-              break;
-            
-            default:
-                console.log("Error");
+          function clickRadio(inputElement) {
+              $("#"+inputElement).prop("checked", true);
           }
 
-          $("#cont2").css("display", "none");
-          $("#header2").removeClass("open");
-          
-          // Scroll to Step 2.2
-          setTimeout(function () {
-            document.querySelector("#cont3").scrollIntoView({ behavior: "smooth" });    
-          }, 350);
-          
-
-          // Setting service details height to be centered in all viewports
-          var servDetHeight = document.querySelector('#servDetails').offsetHeight;
-          var offsetServDet = servDetHeight / 2;
-          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
-        }
-
-        // Step 2.2 - Database
-        else if (document.getElementById("s2-2").contains(id)) {
-          
-          switch(element) {
-            case "Oracle-RDS":
-              $("#s3").collapse('show');
-              break;
-            case "SQL-RDS":
-              $("#s3").collapse('show');
-              break;
-            default:
-                console.log("Error");
+          function removeopen() {
+              $(".card").removeClass("selected");
           }
 
-          $("#cont2.2").css("display", "none");
-          $("#header2.2").removeClass("open");
+          function makeopen(element) {
+              $("#" + element + "-card").addClass("selected");
+          }
 
-          // Scroll to Step 3
-          setTimeout(function () {
-            document.querySelector("#cont3").scrollIntoView({ behavior: "smooth" });    
-          }, 350);
+          function makeSelect(element, group){
 
-          // Setting service details height to be centered in all viewports
-          var servDetHeight = document.querySelector('#servDetails').offsetHeight;
-          var offsetServDet = servDetHeight / 2;
-          $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
-        }
-      }
+            $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected");
+            $("input:radio").filter("."+group).prop("checked", false);     
+            $("#" + element + "-card").removeClass("unselected").addClass("selected");
+            $("#"+element).prop("checked", true);
+          
+          }
 
-      function changeText(element){
+          function filterTest(element){
       
-        var id = document.getElementById(element);
-
-        if (document.getElementById("step1").contains(id)) {
-          $('#step1-text').html(element);
-          $('#step2-text').html("");
-        }
-        else if (document.getElementById("s2-1").contains(id)) {
-          $('#step2-text').html(element);
-        }
-        else if (document.getElementById("s2-2").contains(id)) {
-          $('#step2-text').html(element);
-        }
-        else {
-          console.log('error')
-        }
-      }
-
-      //collapisbile div button
-      var coll = document.getElementsByClassName("collapsible");
-      var i;
-
-      for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-          triggerCollapisble(this);
-        });
-      }
-
-      function triggerCollapisble(element) {
-        element.classList.toggle("open");
-          var content = element.nextElementSibling;
-          if (content.style.display === "block") {
-            content.style.display = "none";
-          } else {
-            content.style.display = "block";
+            if($("#" + element + "-card").hasClass("group1")){
+              makeSelect(element, "group1");
+            }
+            else if($("#" + element + "-card").hasClass("group2")){
+              makeSelect(element, "group2");
+            }
+            // else{
+            //   $('#step8-text').html("apricot");
+            // }
           }
-      }
 
-      /* For smaller viewports */
-      $(window).resize(function () {
+          function cardCheck(element) {
 
-        if (innerWidth <= 492) {
-          var serv = document.getElementById('servDetails');
-          var dets = document.getElementById('detail-div');
+            var id = document.getElementById(element);
+
+            // Step 1 - Host
+            if (document.getElementById("step1").contains(id)) {
+
+              switch(element) {
+                case "On-Prem-Database":
+                  $("#s1").collapse('hide');
+                  $("#s2-1").collapse('show');
+                  $("#s2-2").collapse('hide');
+                  break;
+
+                case "Cloud-Database":
+                  $("#s1").collapse('hide');
+                  $("#s2-1").collapse('hide');
+                  $("#s2-2").collapse('show');
+                  break;
+
+                case "Replication-Goldengate":
+                  $("#s1").collapse('hide');
+                  $("#s2-1").collapse('hide');
+                  $("#s2-2").collapse('hide');   
+                  break;
+
+                case "Replication-Nifi":
+                  $("#s1").collapse('hide');
+                  $("#s2-1").collapse('hide');
+                  $("#s2-2").collapse('hide');    
+                  break;
+
+                case "Replication-Kafka":
+                  $("#s1").collapse('hide');
+                  $("#s2-1").collapse('hide');
+                  $("#s2-2").collapse('hide'); 
+                  break;
+                
+                default:
+                    console.log("Error");
+              }
+
+              $("#cont1").css("display", "none")
+              $("#header1").removeClass("open");
+            
+              // Scroll to Step 2.1
+              setTimeout(function () {
+                document.querySelector("#cont2").scrollIntoView({ behavior: "smooth" });    
+              }, 350);
+              
+              // Setting service details height to be centered in all viewports
+              var servDetHeight = document.querySelector('#servDetails').offsetHeight;
+              var offsetServDet = servDetHeight / 2;
+              $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
+            }
+
+            // Step 2.1 - Database
+            else if (document.getElementById("s2-1").contains(id)) {
+              
+              switch(element) {
+                case "Oracle-Database":
+                  $("#s3").collapse('show');
+                  break;
+                case "SQL-Server":
+                  $("#s3").collapse('show');
+                  break;
+                case "My-SQL":
+                  $("#s3").collapse('show');          
+                  break;
+                case "Apache-Cassandra":
+                  $("#s3").collapse('show');             
+                  break;
+                case "Redis":
+                  $("#s3").collapse('show');            
+                  break;
+                
+                default:
+                    console.log("Error");
+              }
+
+              $("#cont2").css("display", "none");
+              $("#header2").removeClass("open");
+              
+              // Scroll to Step 2.2
+              setTimeout(function () {
+                document.querySelector("#cont3").scrollIntoView({ behavior: "smooth" });    
+              }, 350);
+              
+
+              // Setting service details height to be centered in all viewports
+              var servDetHeight = document.querySelector('#servDetails').offsetHeight;
+              var offsetServDet = servDetHeight / 2;
+              $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
+            }
+
+            // Step 2.2 - Database
+            else if (document.getElementById("s2-2").contains(id)) {
+              
+              switch(element) {
+                case "Oracle-RDS":
+                  $("#s3").collapse('show');
+                  break;
+                case "SQL-RDS":
+                  $("#s3").collapse('show');
+                  break;
+                default:
+                    console.log("Error");
+              }
+
+              $("#cont2.2").css("display", "none");
+              $("#header2.2").removeClass("open");
+
+              // Scroll to Step 3
+              setTimeout(function () {
+                document.querySelector("#cont3").scrollIntoView({ behavior: "smooth" });    
+              }, 350);
+
+              // Setting service details height to be centered in all viewports
+              var servDetHeight = document.querySelector('#servDetails').offsetHeight;
+              var offsetServDet = servDetHeight / 2;
+              $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
+            }
+          }
+
+          function changeText(element){
           
-          //dets.classList.add('collapsible')
-          serv.style.cursor = 'pointer';
+            var id = document.getElementById(element);
 
-          serv.addEventListener('click', function () {
-            if (dets.style.display === "block") {
-              dets.style.display = "none";
+            if (document.getElementById("step1").contains(id)) {
+              $('#step1-text').html(element);
+              $('#step2-text').html("");
+            }
+            else if (document.getElementById("s2-1").contains(id)) {
+              $('#step2-text').html(element);
+            }
+            else if (document.getElementById("s2-2").contains(id)) {
+              $('#step2-text').html(element);
+            }
+            else {
+              console.log('error')
+            }
+          }
+
+          //collapisbile div button
+          var coll = document.getElementsByClassName("collapsible");
+          var i;
+
+          for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+              triggerCollapisble(this);
+            });
+          }
+
+          function triggerCollapisble(element) {
+            element.classList.toggle("open");
+              var content = element.nextElementSibling;
+              if (content.style.display === "block") {
+                content.style.display = "none";
+              } else {
+                content.style.display = "block";
+              }
+          }
+
+          /* For smaller viewports */
+          $(window).resize(function () {
+
+            if (innerWidth <= 492) {
+              var serv = document.getElementById('servDetails');
+              var dets = document.getElementById('detail-div');
+              
+              //dets.classList.add('collapsible')
+              serv.style.cursor = 'pointer';
+
+              serv.addEventListener('click', function () {
+                if (dets.style.display === "block") {
+                  dets.style.display = "none";
+                } else {
+                  dets.style.display = "block";
+                }
+              })
+
             } else {
+              //serv.style.cursor = 'auto';
               dets.style.display = "block";
             }
+
           })
 
-        } else {
-          serv.style.cursor = 'auto';
-          dets.style.display = "block";
-        }
+        </script>
 
-      })
-
-    </script>
-
-  </body>
+    </body>
 </html>

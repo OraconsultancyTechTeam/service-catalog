@@ -9,11 +9,24 @@
             <div class="content" id="cont2" style="display:block;">
               
               <div class="card-deck">
+
+                <!-- <% step2.forEach(card => { %>
+                  <div id="<%=card.service_name%>-card" class="card mb-4 group2 card-settings">
+                    <img class="card-img-top m-2" src='/img/<%=card.service_icon%>' style="width:5rem; height:5rem; ;" alt="Card image cap">
+                    <div class="card-body" role="button">
+                      <h5 class="card-title"><input id="<%=card.service_name%>" class="group2" name="radio2" value="<%=card.service_name%>" type="radio">
+                        <label for="<%=card.service_name%>"><%=card.service_name%></label></h5>
+                      <p class="card-text"><%=card.service_desc%></p>
+                    </div>
+                  </div>
+                <% }) %> -->
+
+                
                 
                 <div id="Oracle-Database-card" class="card mb-4 selected group2 card-settings">
                   <img class="card-img-top m-2" src='/img/oracledatabase.png' style="width:5rem; height:5rem; ;" alt="Card image cap">
                   <div class="card-body" role="button">
-                    <h5 class="card-title"><input id="Oracle-Database" class="group2" name="radio2" value="Oracle-Database" type="radio"  checked="">
+                    <h5 class="card-title"><input id="Oracle-Database" class="group2" name="radio2" value="Oracle-Database" type="radio" checked="">
                       <label for="Oracle-Database">Oracle Database</label></h5>
                     <p class="card-text">Oracle Database is a multi-model database management system produced and marketed by Oracle Corporation</p>
                   </div>
@@ -22,7 +35,7 @@
                 <div id="SQL-Server-card" class="card mb-4 unselected group2 card-settings">
                   <img class="card-img-top m-2" src='/img/sql-server.png' style="width:5rem; height:5rem; ;" alt="Card image cap">
                   <div class="card-body" role="button">
-                    <h5 class="card-title"><input id="SQL-Server" class="group2" name="radio2" value="SQL-Server" type="radio" > <label for="SQL-Server">SQL Server</label></h5>
+                    <h5 class="card-title"><input id="SQL-Server" class="group2" name="radio2" value="SQL-Server" type="radio"> <label for="SQL-Server">SQL Server</label></h5>
                     <p class="card-text">Microsoft SQL Server is a relational database management system developed by Microsoft.</p>
                   </div>
                 </div>

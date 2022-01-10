@@ -8,10 +8,22 @@
             <button type="button" class="collapsible active header-settings" id="header1">Step 1: Host</button>
             <div class="content" id="cont1" style="display:block; min-width: 266px;">
               <div class="card-deck" >
-                <div id="On-Prem-Database-card" class="card mb-4 selected group1 card-settings">
+
+                <% step1.forEach(card => { %>
+                  <div id="<%=card.service_name%>-card" class="card mb-4 group1 card-settings">
+                    <img class="card-img-top m-2" src='/img/<%=card.service_icon%>' style="width:5rem; height:5rem; ;" alt="Card image cap">
+                    <div class="card-body" role="button">
+                      <h5 class="card-title"><input id="<%=card.service_name%>" class="group1" name="radio1" value="<%=card.service_name%>" type="radio">
+                        <label for="<%=card.service_name%>"><%=card.service_name%></label></h5>
+                      <p class="card-text"><%=card.service_desc%></p>
+                    </div>
+                  </div>
+                <% }) %>
+
+                <!-- <div id="On-Prem-Database-card" class="card mb-4 selected group1 card-settings">
                   <img class="card-img-top m-2" src='/img/OnPremDatabaseLogo.png' style="width:5rem; height:5rem; ;" alt="Card image cap">
                   <div class="card-body" role="button">
-                    <h5 class="card-title"><input  id="On-Prem-Database" name="radio1" value="On-Prem-Database"  class="group1" type="radio" checked="">
+                    <h5 class="card-title"><input id="On-Prem-Database" name="radio1" value="On-Prem-Database"  class="group1" type="radio" checked="">
                       <label for="On-Prem-Database">On-Prem Database</label></h5>
                     <p class="card-text">The term "on premises" refers to local hardware, meaning data is stored on local servers, computers or other devices.</p>
                   </div>
@@ -47,7 +59,7 @@
                     <h5 class="card-title"><input  id="Replication-Kafka" class="group1" name="radio1" value="Replication-Kafka" type="radio" > <label for="Replication-Kafka">Replication - Kafka</label></h5>
                     <p class="card-text">Apache Kafka is a framework implementation of a software bus using stream-processing.</p>
                   </div>
-                </div>
+                </div> -->
                 
               </div>
             </div>
