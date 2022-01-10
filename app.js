@@ -85,9 +85,57 @@ app.use((req, res, next)=>{
 })
 
 
-
-
 app.get('/', (req, res) => {
+    res.render('home', {
+        title: 'Service Catalog'
+    })
+})
+
+app.get('/login', (req, res) => {
+    res.render('login', {
+        title: 'Service Catalog'
+    })
+})
+app.get('/register', (req, res) => {
+    res.render('register', {
+        title: 'Service Catalog'
+    })
+})
+
+app.post('/register',(req,res)=>{
+
+    const userName = req.body.userName
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const email = req.body.email
+    const password = req.body.password
+    const permission = req.body.permission
+    const currentDate = Date.now()
+    const salt = "veryImportantString"
+    
+    if(!validator.isEmail(email)){
+        res.render('index',{
+            title: 'Service Catalog',
+            msg1:"Please Enter Valid Email",
+            msg2:"Data is not saved"
+
+    })
+    }
+
+    const sql = "insert into users values(null,'"+userName+"','"+password+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
+    connection.query(sql,(err,rows,fields)=>{
+        if(err) throw err
+        res.render('register',{
+            title:'Service Catalog',
+            msg1:"User Added",
+    })
+   
+})
+})
+
+
+
+app.get('/catalog', (req, res) => {
     res.render('index', {
         title: 'Service Catalog',
         msg1:'',
