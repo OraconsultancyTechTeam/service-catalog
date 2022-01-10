@@ -114,21 +114,42 @@ app.post('/register',(req,res)=>{
     const salt = "veryImportantString"
     
     if(!validator.isEmail(email)){
-        res.render('index',{
-            title: 'Service Catalog',
-            msg1:"Please Enter Valid Email",
-            msg2:"Data is not saved"
-
-    })
+        req.session.message = {
+            type:'warning',
+            intro:'Invalid Email',
+            message:'Please Enter a Valid Email'
+        }
+        res.redirect('/register')
+        return;
     }
+
+    connection.query('SELECT email FROM users WHERE email = ?',[email],(error,result)=>{
+        if(error) throw error
+
+        if(result.length>0){
+            req.session.message = {
+                type:'warning',
+                intro:'Invalid Email',
+                message:'Email is already in use'
+            }
+            res.redirect('/register')
+            return;
+        }
+    })
+
+
+
+
 
     const sql = "insert into users values(null,'"+userName+"','"+password+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
     connection.query(sql,(err,rows,fields)=>{
         if(err) throw err
-        res.render('register',{
-            title:'Service Catalog',
-            msg1:"User Added",
-    })
+        req.session.message = {
+            type:'success',
+            intro:'Data Saved',
+            message:'Account has been successfully created'
+        }
+        res.redirect('/')
    
 })
 })
@@ -161,7 +182,7 @@ app.post('/submit',(req,res)=>{
     const due_by = req.body.dueDate;
     const req_by = req.body.reqBy;
     const mang_email = req.body.mangEmail;
-    /*
+    
     if(!validator.isEmail(mang_email)){
 
         req.session.message = {
@@ -174,7 +195,7 @@ app.post('/submit',(req,res)=>{
     return;
     }
 
-*/
+
     const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{
         if(err) throw err

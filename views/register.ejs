@@ -46,20 +46,50 @@
         </div>
         <div class="card-body">
             <form id="addUserForm" class="form-horizontal" method="post" action="/register">
-                <div><input placeholder="User Name" type="text" name="userName" required></div> 
-                <div><input placeholder="First Name" type="text" name="firstName" required></div>  
-              <div><input placeholder="Last Name" type="text" name="lastName" required></div> 
-              <div><input placeholder="Email" type="text" name="email" required></div>
-              <div><input placeholder="Password" type="password"name="password" required></div>
-              <div>
-                 <div class="permission">
-                       <label for="permission">Choose a role:</label>
-                       <select id="permission" name="permission">
-                         <option value="1">Member</option>
-                         <option value="2">Admin</option>
-                       </select>
-                   </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div><input placeholder="User Name" type="text" name="userName" required></div> 
+                        </div>
+                    </div>
+                    <div class="col">
+                         
+                <div class="form-group">
+                    <div><input placeholder="Email" type="text" name="email" required></div>
+                  </div>
+                    </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div><input placeholder="First Name" type="text" name="firstName" required></div> 
+                        </div>
+                    </div>
+                    <div class="col">
+                         
+                <div class="form-group">
+                    <div><input placeholder="Last Name" type="text" name="lastName" required></div>
+                  </div>
+                    </div>
+                </div>
+    
+              
+              <div class="form-group">
+                <div><input placeholder="Password" type="password"name="password" required></div>
+              </div>
+              <div class="form-check">
+                <div class="permission">
+                    <label for="permission">Choose a role:</label>
+                    <select id="permission" name="permission">
+                      <option value="1">Member</option>
+                      <option value="2">Admin</option>
+                    </select>
+                </div>
+              </div>
+              
+
+                
                  <div class="dataBtns">
                    <a type="button" id="registerBtn" onclick="myFunction()">Create</a>
                  </div>
