@@ -37,17 +37,42 @@
       </div>
       <% } %>
 
-      
-
-    <div class="container-fluid">
-       
-      <div class="row">
-       
-       
-
-     
+      <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                Login Form
+            </div>
+            <div class="card-body">
+                <form id="loginForm" class="form-horizontal" method="post" action="/login">
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                                <div><input placeholder="User Name" type="text" name="userName" required></div> 
+                            </div>
+                        </div>
+                        <div class="col">
+                             
+                    <div class="form-group">
+                        <div><input placeholder="Password" type="text" name="password" required></div>
+                      </div>
+                        </div>
+                    </div>
+                        
+                     <div class="dataBtns">
+                       <a type="button" id="registerBtn" onclick="myFunction()">Login</a>
+                     </div>
+                 </form>
+                 <p id="demo"></p>
+            </div>
+        </div>
       </div>
-    </div>
+      
+    
+      <script>
+        function myFunction() {
+            document.getElementById("loginForm").submit();
+        }
+        </script>
   
 
 

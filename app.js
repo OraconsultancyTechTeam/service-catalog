@@ -96,6 +96,32 @@ app.get('/login', (req, res) => {
         title: 'Service Catalog'
     })
 })
+
+app.post('/login', (req, res) => {
+    const userName = req.body.userName
+    const password = req.body.password
+    connection.query('SELECT * FROM users where username = ? and password = ?',[userName,password],(error,result)=>{
+        if(error) throw error
+
+        if(result.length>0){
+
+            res.redirect('/catalog')
+            
+            return;
+        }
+        else{
+            req.session.message = {
+                type:'danger',
+                intro:'Invalid Login',
+                message:'Login Details Incorrect'
+            }
+            res.redirect('/login')
+            return;
+        }
+    })
+})
+
+
 app.get('/register', (req, res) => {
     res.render('register', {
         title: 'Service Catalog'
