@@ -106,13 +106,12 @@
           });
 
           $(".card").click(function () {//Clicking the card
-              var inputElement = $(this).find('input[type=radio]').attr('service_id');
+              var inputElement = $(this).find('input[type=radio]').attr('id');
               //  unclickRadio();
               //  removeopen();
               //  makeopen(inputElement);
               //  clickRadio(inputElement);
-              //  console.log(inputElement)
-              console.log('testing')
+              $(this).find('input[type=radio]').prop('checked', true)
 
               filterTest(inputElement);
 
@@ -161,36 +160,37 @@
           function cardCheck(element) {
 
             var id = document.getElementById(element);
+            
 
             // Step 1 - Host
             if (document.getElementById("step1").contains(id)) {
-
+              console.log(element)
               switch(element) {
-                case "On-Prem-Database":
+                case "On-Prem Database":
                   $("#s1").collapse('hide');
                   $("#s2-1").collapse('show');
                   $("#s2-2").collapse('hide');
                   break;
 
-                case "Cloud-Database":
+                case "Cloud Database":
                   $("#s1").collapse('hide');
                   $("#s2-1").collapse('hide');
                   $("#s2-2").collapse('show');
                   break;
 
-                case "Replication-Goldengate":
+                case "Replication - Goldengate":
                   $("#s1").collapse('hide');
                   $("#s2-1").collapse('hide');
                   $("#s2-2").collapse('hide');   
                   break;
 
-                case "Replication-Nifi":
+                case "Replication - Nifi":
                   $("#s1").collapse('hide');
                   $("#s2-1").collapse('hide');
                   $("#s2-2").collapse('hide');    
                   break;
 
-                case "Replication-Kafka":
+                case "Replication - Kafka":
                   $("#s1").collapse('hide');
                   $("#s2-1").collapse('hide');
                   $("#s2-2").collapse('hide'); 
@@ -341,7 +341,7 @@
 
             } else {
               //serv.style.cursor = 'auto';
-              dets.style.display = "block";
+              //dets.style.display = "block";
             }
 
           })
