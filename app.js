@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const validator = require('validator')
+const bcrypt = require('bcrypt')
+const saltRounds = 10;
 const ejs = require('ejs')
 const express_layouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
@@ -100,20 +102,34 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     const userName = req.body.userName
     const password = req.body.password
-    connection.query('SELECT * FROM users where username = ? and password = ?',[userName,password],(error,result)=>{
+    connection.query('SELECT * FROM users where username = ?',userName,(error,result)=>{
         if(error) throw error
 
         if(result.length>0){
 
-            res.redirect('/catalog')
-            
-            return;
+            bcrypt.compare(password, result[0].password,(err,response)=>{
+                if(response){
+                    
+                    res.redirect('/catalog')
+                    return;
+                }
+                else{
+                    req.session.message = {
+                        type:'danger',
+                        intro:'Invalid Login',
+                        message:'Login Details Incorrect'
+                    }
+                    res.redirect('/login')
+                    return;
+                }
+            })
+
         }
         else{
             req.session.message = {
                 type:'danger',
                 intro:'Invalid Login',
-                message:'Login Details Incorrect'
+                message:'User does not exist'
             }
             res.redirect('/login')
             return;
@@ -164,20 +180,29 @@ app.post('/register',(req,res)=>{
     })
 
 
-
-
-
-    const sql = "insert into users values(null,'"+userName+"','"+password+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
-    connection.query(sql,(err,rows,fields)=>{
-        if(err) throw err
-        req.session.message = {
-            type:'success',
-            intro:'Data Saved',
-            message:'Account has been successfully created'
-        }
-        res.redirect('/')
+    //hashing password
+    bcrypt.hash(password,saltRounds,(err,hash)=>{
+        const sql = "insert into users values(null,'"+userName+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
+        connection.query(sql,(err,rows,fields)=>{
+            if(err) throw err
+            req.session.message = {
+                type:'success',
+                intro:'Data Saved',
+                message:'Account has been successfully created'
+            }
+            res.redirect('/')
+       
+    })
    
-})
+   
+    })
+
+
+
+
+
+    //const sql = "insert into users values(null,'"+userName+"','"+password+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
+  
 })
 
 
@@ -217,7 +242,7 @@ app.post('/submit',(req,res)=>{
             message:'Please enter the manager email in an email format'
         }
         
-        res.redirect('/')
+        res.redirect('/catalog')
     return;
     }
 
@@ -231,7 +256,7 @@ app.post('/submit',(req,res)=>{
             intro:'Data Saved',
             message:'Submission has been successfully sent'
         }
-        res.redirect('/')
+        res.redirect('/catalog')
 
 /*
         res.render('index',{
