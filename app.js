@@ -100,9 +100,104 @@ app.use((req, res, next)=>{
 })
 
 
-
-
 app.get('/', (req, res) => {
+    res.render('home', {
+        title: 'Service Catalog'
+    })
+})
+
+app.get('/login', (req, res) => {
+    res.render('login', {
+        title: 'Service Catalog'
+    })
+})
+
+app.post('/login', (req, res) => {
+    const userName = req.body.userName
+    const password = req.body.password
+    connection.query('SELECT * FROM users where username = ? and password = ?',[userName,password],(error,result)=>{
+        if(error) throw error
+
+        if(result.length>0){
+
+            res.redirect('/catalog')
+            
+            return;
+        }
+        else{
+            req.session.message = {
+                type:'danger',
+                intro:'Invalid Login',
+                message:'Login Details Incorrect'
+            }
+            res.redirect('/login')
+            return;
+        }
+    })
+})
+
+
+app.get('/register', (req, res) => {
+    res.render('register', {
+        title: 'Service Catalog'
+    })
+})
+
+app.post('/register',(req,res)=>{
+
+    const userName = req.body.userName
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const email = req.body.email
+    const password = req.body.password
+    const permission = req.body.permission
+    const currentDate = Date.now()
+    const salt = "veryImportantString"
+    
+    if(!validator.isEmail(email)){
+        req.session.message = {
+            type:'warning',
+            intro:'Invalid Email',
+            message:'Please Enter a Valid Email'
+        }
+        res.redirect('/register')
+        return;
+    }
+
+    connection.query('SELECT email FROM users WHERE email = ?',[email],(error,result)=>{
+        if(error) throw error
+
+        if(result.length>0){
+            req.session.message = {
+                type:'warning',
+                intro:'Invalid Email',
+                message:'Email is already in use'
+            }
+            res.redirect('/register')
+            return;
+        }
+    })
+
+
+
+
+
+    const sql = "insert into users values(null,'"+userName+"','"+password+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
+    connection.query(sql,(err,rows,fields)=>{
+        if(err) throw err
+        req.session.message = {
+            type:'success',
+            intro:'Data Saved',
+            message:'Account has been successfully created'
+        }
+        res.redirect('/')
+   
+})
+})
+
+
+
+app.get('/catalog', (req, res) => {
     res.render('index', {
         title: 'Service Catalog',
         msg1:'',
@@ -128,7 +223,7 @@ app.post('/submit',(req,res)=>{
     const due_by = req.body.dueDate;
     const req_by = req.body.reqBy;
     const mang_email = req.body.mangEmail;
-    /*
+    
     if(!validator.isEmail(mang_email)){
 
         req.session.message = {
@@ -141,7 +236,7 @@ app.post('/submit',(req,res)=>{
     return;
     }
 
-*/
+
     const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{
         if(err) throw err

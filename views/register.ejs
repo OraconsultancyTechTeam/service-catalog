@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" type="text/css" href="/css/style.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+      
+      <title> <%= title %></title>
+
+      <!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  
+  </head>
+
+  <body>
+    <div>
+        <%- include('partials/navbar.ejs', {active: "Register"}); %>
+      </div>
+    <div class="jumbotron text-center" style="background-color: #3EB489;">
+        <h1><%=title%></h1>
+        <p>Register</p>
+    </div>
+
+    <%if(message){ %>
+      <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
+        <strong><%= message.intro %></strong> <%= message.message %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <% } %>
+
+      
+
+  <div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Register Form
+        </div>
+        <div class="card-body">
+            <form id="addUserForm" class="form-horizontal" method="post" action="/register">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div><input placeholder="User Name" type="text" name="userName" required></div> 
+                        </div>
+                    </div>
+                    <div class="col">
+                         
+                <div class="form-group">
+                    <div><input placeholder="Email" type="text" name="email" required></div>
+                  </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div><input placeholder="First Name" type="text" name="firstName" required></div> 
+                        </div>
+                    </div>
+                    <div class="col">
+                         
+                <div class="form-group">
+                    <div><input placeholder="Last Name" type="text" name="lastName" required></div>
+                  </div>
+                    </div>
+                </div>
+    
+              
+              <div class="form-group">
+                <div><input placeholder="Password" type="password"name="password" required></div>
+              </div>
+              <div class="form-check">
+                <div class="permission">
+                    <label for="permission">Choose a role:</label>
+                    <select id="permission" name="permission">
+                      <option value="1">Member</option>
+                      <option value="2">Admin</option>
+                    </select>
+                </div>
+              </div>
+              
+
+                
+                 <div class="dataBtns">
+                   <a type="button" id="registerBtn" onclick="myFunction()">Create</a>
+                 </div>
+             </form>
+             <p id="demo"></p>
+        </div>
+    </div>
+  </div>
+  
+
+  <script>
+    function myFunction() {
+      var txt;
+      if (confirm("Confirm Adding User!")) {
+        document.getElementById("addUserForm").submit();
+        txt = "Add Confirmed";
+      } else {
+        txt = "Add Cancelled";
+      }
+      document.getElementById("demo").innerHTML = txt;
+    }
+    </script>
+  </body>
+</html>

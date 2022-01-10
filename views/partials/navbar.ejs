@@ -1,0 +1,41 @@
+<style>nav{
+    background-color: silver;
+    color:#fff;
+    padding: 30px 60px;
+    display:flex;
+    justify-content: space-between;
+}
+nav ul{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav li{
+    list-style: none;
+}
+nav li a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 8px;
+}
+nav li a:hover{
+    color:#3EB489;
+    text-decoration: none;
+}
+
+.nav-active {
+  color:black;
+}
+
+</style>
+<nav>
+    <h4>Service Catalog</h4>
+    <ul>
+        <li><a <%if(active=="Home"){%>class="nav-active"<%}%> href="/">Home</a></li>
+        <li><a <%if(active=="Login"){%>class="nav-active"<%}%> href="/login">Login</a></li>
+        <li><a <%if(active=="Register"){%>class="nav-active"<%}%> href="/register">Register</a></li>
+        
+    </ul>
+</nav>
