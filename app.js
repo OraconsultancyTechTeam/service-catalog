@@ -12,6 +12,7 @@ const methodOverride = require('method-override')
 const connection = require('./db/mySQL')
 const app = express()
 const port = process.env.PORT || 3000
+const axios = require('axios')
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -41,14 +42,21 @@ app.use(methodOverride('_method'))
 
 
 // Data for Step1
+let step1
 connection.query(`select * from catalog_services where status=1`, (err,res) => {
     if (err) throw err
-    console.log(res)
+    //console.log(res)
     return step1 = res
 })
 
+// app.get('/test', (req,res) => {
+//     console.log(req)
+// })
+
+
 // Data for Step2
 // var service_id = 1
+// //console.log(req.body.radio1)
 // connection.query(`select * from step2 where service_id=`+service_id+``, (err,res) => {
 //     if (err) throw err
 //     return step2 = res
@@ -62,13 +70,13 @@ connection.query(`select * from catalog_services where status=1`, (err,res) => {
 //     {img:'/img/ApacheKafka.png', name:'Replication - Kafka', text:'Apache Kafka is a framework implementation of a software bus using stream-processing.', id:'5', g:'1'},
 // ]
 
-const step2 = [
-    {img:'/img/oracledatabase.png', name:'Oracle Database', text:'Oracle Database is a multi-model database management system produced and marketed by Oracle Corporation', id:'6', g:'2'},
-    {img:'/img/sql-server.png', name:'SQL Server', text:'Microsoft SQL Server is a relational database management system developed by Microsoft.', id:'7', g:'2'},
-    {img:'/img/mysqllogo.png', name:'My SQL', text:'MySQL is an open-source relational database management system.', id:'8', g:'2'},
-    {img:'/img/apachecassandra.png', name:'Apache Cassandra', text:'Cassandra is a free and open-source, distributed, wide-column store, NoSQL database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure.', id:'9', g:'2'},
-    {img:'/img/redislogo.png', name:'Redis', text:'Redis is an in-memory data structure store, used as a distributed, in-memory key–value database, cache and message broker, with optional durability. ', id:'10', g:'2'},
-]
+// const step2 = [
+//     {img:'/img/oracledatabase.png', name:'Oracle Database', text:'Oracle Database is a multi-model database management system produced and marketed by Oracle Corporation', id:'6', g:'2'},
+//     {img:'/img/sql-server.png', name:'SQL Server', text:'Microsoft SQL Server is a relational database management system developed by Microsoft.', id:'7', g:'2'},
+//     {img:'/img/mysqllogo.png', name:'My SQL', text:'MySQL is an open-source relational database management system.', id:'8', g:'2'},
+//     {img:'/img/apachecassandra.png', name:'Apache Cassandra', text:'Cassandra is a free and open-source, distributed, wide-column store, NoSQL database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure.', id:'9', g:'2'},
+//     {img:'/img/redislogo.png', name:'Redis', text:'Redis is an in-memory data structure store, used as a distributed, in-memory key–value database, cache and message broker, with optional durability. ', id:'10', g:'2'},
+// ]
 
 const step3 = [
     {name:'PRD', id:1}, 
@@ -216,11 +224,6 @@ app.post('/register',(req,res)=>{
    
    
     })
-
-
-
-
-
     //const sql = "insert into users values(null,'"+userName+"','"+password+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
   
 })
@@ -238,10 +241,39 @@ app.get('/catalog', (req, res) => {
         step6
     })
 })
+let service_stages
+app.post('/catalog', (req,res) => {
+    //console.log(req.body.stepCard)
+    //console.log(step1)
+    // step1.forEach(element => {
+    //     if (req.body.stepCard == element.service_name) {
+    //         connection.query(`select * from service_stages where service_id=`+element.service_id, (err,res) => {
+    //             if (err) throw err
+    //             step2 = res
+    //             console.log(step2)
+    //         })
+    //     }
+    // });
+    stepLooper(req.body.stepCard)
+
+})
+
+function stepLooper(stepCard) {
+    step1.forEach(element => {
+        if (stepCard == element.service_name) {
+            connection.query(`select * from service_stages where service_id=`+element.service_id, (err,res) => {
+                if (err) throw err
+                service_stages = res
+            })
+            service_stages.forEach(stage => {
+                
+            });
+        }
+    });
+}
 
 
-
-app.post('/submit',(req,res)=>{
+app.post('/submit',(req,res) => {
     const host = req.body.radio1;
     const db = req.body.radio2;
     const env = req.body.env1;

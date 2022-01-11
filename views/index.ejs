@@ -95,11 +95,6 @@
           $(document).ready(function () {
               $('input:radio').change(function () {//Clicking input radio
                   var radioClicked = $(this).attr('id');
-                  //  unclickRadio();
-                  //  removeopen();
-                  //  clickRadio(radioClicked);
-                  //  makeopen(radioClicked);
-
                   filterTest(radioClicked);
               });
 
@@ -107,17 +102,37 @@
 
           $(".card").click(function () {//Clicking the card
               var inputElement = $(this).find('input[type=radio]').attr('id');
-              //  unclickRadio();
-              //  removeopen();
-              //  makeopen(inputElement);
-              //  clickRadio(inputElement);
+              console.log(inputElement)
               $(this).find('input[type=radio]').prop('checked', true)
-
+              stepToBackend(inputElement)
               filterTest(inputElement);
-
               cardCheck(inputElement);
               changeText(inputElement);
           });
+
+          function stepToBackend(inputElement) {
+              var http = new XMLHttpRequest();
+              http.open("POST", "/catalog", true);
+              http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+              var params = "stepCard=" + inputElement;
+              http.send(params);
+          }
+
+          // function step1ToBackend(inputElement) {
+          //     var http = new XMLHttpRequest();
+          //     http.open("POST", "/catalog", true);
+          //     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+          //     var params = "step1Card=" + inputElement;
+          //     http.send(params);
+          // }
+
+          // function step2ToBackend(inputElement) {
+          //     var http = new XMLHttpRequest();
+          //     http.open("POST", "/catalog", true);
+          //     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+          //     var params = "step2Card=" + inputElement;
+          //     http.send(params);
+          // }
 
           function unclickRadio() {
               $("input:radio").prop("checked", false);
@@ -145,12 +160,14 @@
           }
 
           function filterTest(element){
-      
-            if($("#" + element + "-card").hasClass("group1")){
+            //console.log(element)
+            if ($("#" + element + "-card").hasClass("group1")){
               makeSelect(element, "group1");
+              //step1ToBackend(element)
             }
-            else if($("#" + element + "-card").hasClass("group2")){
+            else if ($("#" + element + "-card").hasClass("group2")){
               makeSelect(element, "group2");
+              //step2ToBackend(element)
             }
             // else{
             //   $('#step8-text').html("apricot");
@@ -164,7 +181,7 @@
 
             // Step 1 - Host
             if (document.getElementById("step1").contains(id)) {
-              console.log(element)
+              //console.log(element)
               switch(element) {
                 case "On-Prem Database":
                   $("#s1").collapse('hide');
