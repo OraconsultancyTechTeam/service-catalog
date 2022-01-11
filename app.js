@@ -152,6 +152,11 @@ app.post('/login', (req, res) => {
     })
 })
 
+app.post('/logout', (req, res) => {
+    const userName = req.body.userName
+    const password = req.body.password
+    // Needs completing
+})
 
 app.get('/register', (req, res) => {
     res.render('register', {
