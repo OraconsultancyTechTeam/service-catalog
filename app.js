@@ -19,7 +19,6 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 // Define paths for express config
 const publicDirectoryPath = path.join(__dirname,'public')
 const viewsPath = path.join(__dirname, 'views')
-//console.log("Directory Name: "+ viewsPath)
 
 // Setup static directory to serve
 //app.use(express.static(publicDirectoryPath))
@@ -29,10 +28,8 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-
 app.use(cookieParser('secret'))
 app.use(session({cookie:{maxAge:null}}))
-
 
 // Setup handlebars engine and views location
 app.set('view engine','ejs')
@@ -40,19 +37,20 @@ app.set('views', viewsPath)
 
 app.use(methodOverride('_method'))
 
+// Stages data
+let stages
+connection.query(`select stage_id, stage_name from stages where status=1 order by stage_order`, (err,res) => {
+    if (err) throw err
+    console.log(res)
+    return stages = res
+})
 
 // Data for Step1
 let step1
 connection.query(`select * from catalog_services where status=1`, (err,res) => {
     if (err) throw err
-    //console.log(res)
     return step1 = res
 })
-
-// app.get('/test', (req,res) => {
-//     console.log(req)
-// })
-
 
 // Data for Step2
 // var service_id = 1
@@ -126,17 +124,15 @@ app.post('/login', (req, res) => {
     const userName = req.body.userName
     const password = req.body.password
     connection.query('SELECT * FROM users where username = ?',userName,(error,result)=>{
-        if(error) throw error
+        if (error) throw error
 
-        if(result.length>0){
+        if (result.length>0){
 
-            bcrypt.compare(password, result[0].password,(err,response)=>{
-                if(response){
-                    
+            bcrypt.compare(password, result[0].password,(err,response) => {
+                if (response) {
                     res.redirect('/catalog')
                     return;
-                }
-                else{
+                } else {
                     req.session.message = {
                         type:'danger',
                         intro:'Invalid Login',
@@ -147,8 +143,7 @@ app.post('/login', (req, res) => {
                 }
             })
 
-        }
-        else{
+        } else {
             req.session.message = {
                 type:'danger',
                 intro:'Invalid Login',
@@ -207,8 +202,7 @@ app.post('/register',(req,res)=>{
         }
     })
 
-
-    //hashing password
+    // Hashing password
     bcrypt.hash(password,saltRounds,(err,hash)=>{
         const sql = "insert into users values(null,'"+userName+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
         connection.query(sql,(err,rows,fields)=>{
@@ -220,20 +214,14 @@ app.post('/register',(req,res)=>{
             }
             res.redirect('/')
        
+        })
     })
-   
-   
-    })
-    //const sql = "insert into users values(null,'"+userName+"','"+password+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
-  
 })
-
-
 
 app.get('/catalog', (req, res) => {
     res.render('index', {
         title: 'Service Catalog',
-        msg1:'',
+        stages,
         step1,
         step2,
         step3,
@@ -241,37 +229,33 @@ app.get('/catalog', (req, res) => {
         step6
     })
 })
-let service_stages
-app.post('/catalog', (req,res) => {
-    //console.log(req.body.stepCard)
-    //console.log(step1)
-    // step1.forEach(element => {
-    //     if (req.body.stepCard == element.service_name) {
-    //         connection.query(`select * from service_stages where service_id=`+element.service_id, (err,res) => {
-    //             if (err) throw err
-    //             step2 = res
-    //             console.log(step2)
-    //         })
-    //     }
-    // });
-    stepLooper(req.body.stepCard)
 
+let service_stages
+let step2
+app.post('/catalog', (req,res) => {
+    stepLooper(req.body.stepCard)
+    res.render('index', {
+        title: 'Service Catalog',
+        stages,
+        service_stages,
+        step1,
+        step2,
+        step3,
+        step4,
+        step6
+    })
 })
 
 function stepLooper(stepCard) {
     step1.forEach(element => {
         if (stepCard == element.service_name) {
-            connection.query(`select * from service_stages where service_id=`+element.service_id, (err,res) => {
+            connection.query(`select stage_id, stage_name from service_stages where (service_id=` + element.service_id + ` and status=1) order by stage_order ASC`, (err,res) => {
                 if (err) throw err
-                service_stages = res
+                return service_stages = res
             })
-            service_stages.forEach(stage => {
-                
-            });
         }
     });
 }
-
 
 app.post('/submit',(req,res) => {
     const host = req.body.radio1;
@@ -328,4 +312,3 @@ app.post('/submit',(req,res) => {
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
-
