@@ -9,9 +9,9 @@ html,body {
 }
 
 .unselected{
-  background-color: red;
-  border-color: purple;
+  background-color: #222;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 3px 6px rgba(0, 0, 0, 0.23);
+  opacity: 0.5;
 }
   
 .card {
@@ -22,6 +22,12 @@ html,body {
   transition: all 0.5s ease;
   width:500px;
   margin:5px;
+  cursor: pointer;
+}
+
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
 #servDetails {
@@ -37,15 +43,16 @@ html,body {
   background-color: #222;
 }
 
-#details {
-  width: 100%;
+/* #details {
   height: 100%;
-}
+  position: fixed;
+  bottom: 0;
+  right: 0;
+} */
 
-body {
-  height: 100%;
-  background-color: #222;
-}
+/* body {
+  overflow-y: hidden;
+} */
 
 .collapsible {
   background-color: white;

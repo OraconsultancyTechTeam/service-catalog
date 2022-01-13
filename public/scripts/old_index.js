@@ -1,25 +1,16 @@
-/*
-*   Change stage when clicked
-*/
-$('.stages').click(function () {
-    var id = $(this).attr('id')
-    var stage = document.getElementById(id).innerHTML
-    $('#current_stage').html(stage)
-    
-    // Need to add in loading content specific to chosen stage
-    // and set to content div
-})
+$(document).ready(function () {
+    $('input:radio').change(function () {//Clicking input radio
+        var radioClicked = $(this).attr('id');
+        filterTest(radioClicked);
+    });
+});
 
-/*
-*   When a card option is clicked
-*/
-$(".card").click(function () {
+$(".card").click(function () {//Clicking the card
     var inputElement = $(this).find('input[type=radio]').attr('id');
     $(this).find('input[type=radio]').prop('checked', true)
-    //$(this).css('background-color', 'blue')
-    // stepToBackend(inputElement)
+    stepToBackend(inputElement)
     filterTest(inputElement);
-    // cardCheck(inputElement);
+    cardCheck(inputElement);
     changeText(inputElement);
 });
 
@@ -31,6 +22,22 @@ function stepToBackend(inputElement) {
     http.send(params);
 }
 
+// function step1ToBackend(inputElement) {
+//     var http = new XMLHttpRequest();
+//     http.open("POST", "/catalog", true);
+//     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//     var params = "step1Card=" + inputElement;
+//     http.send(params);
+// }
+
+// function step2ToBackend(inputElement) {
+//     var http = new XMLHttpRequest();
+//     http.open("POST", "/catalog", true);
+//     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//     var params = "step2Card=" + inputElement;
+//     http.send(params);
+// }
+
 function unclickRadio() {
     $("input:radio").prop("checked", false);
 }
@@ -39,25 +46,31 @@ function clickRadio(inputElement) {
     $("#"+inputElement).prop("checked", true);
 }
 
+function removeopen() {
+    $(".card").removeClass("selected");
+}
+
+function makeopen(element) {
+    $("#" + element + "-card").addClass("selected");
+}
+
 function makeSelect(element, group){
 
-    $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected");
-    $('.' + group).addClass('unselected')
-    //$("input:radio").filter("."+group).prop("checked", false);     
-    $("#" + element + "-card").removeClass("unselected").addClass("selected");
-    // $("#"+element).prop("checked", true);
+  $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected");
+  $("input:radio").filter("."+group).prop("checked", false);     
+  $("#" + element + "-card").removeClass("unselected").addClass("selected");
+  $("#"+element).prop("checked", true);
 
 }
 
 function filterTest(element){
-    var id = element.replace(/\s+/g,'')
-    if ($("#" + id + "-card").hasClass("group1")) {
-        makeSelect(id, "group1");
-    }
-    else if ($("#" + id + "-card").hasClass("group2")) {
-        makeSelect(id, "group2");
-    }
 
+  if ($("#" + element + "-card").hasClass("group1")){
+    makeSelect(element, "group1");
+  }
+  else if ($("#" + element + "-card").hasClass("group2")){
+    makeSelect(element, "group2");
+  }
 }
 
 function cardCheck(element) {
@@ -184,12 +197,71 @@ function cardCheck(element) {
   }
 }
 
-/*
-*   Update service details
-*/
 function changeText(element){
-    
-    var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
-    $('#' + stage_id).html(element)
 
+  var id = document.getElementById(element);
+
+  if (document.getElementById("step1").contains(id)) {
+    $('#step1-text').html(element);
+    $('#step2-text').html("");
+  }
+  else if (document.getElementById("s2-1").contains(id)) {
+    $('#step2-text').html(element);
+  }
+  else if (document.getElementById("s2-2").contains(id)) {
+    $('#step2-text').html(element);
+  }
+  else {
+    console.log('error changing text')
+  }
 }
+
+//collapisbile div button
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    triggerCollapisble(this);
+  });
+}
+
+function triggerCollapisble(element) {
+  element.classList.toggle("open");
+    var content = element.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+}
+
+/* For smaller viewports */
+$(window).resize(function () {
+
+  if (innerWidth <= 492) {
+    var serv = document.getElementById('servDetails');
+    var dets = document.getElementById('detail-div');
+    
+    //dets.classList.add('collapsible')
+    serv.style.cursor = 'pointer';
+
+    serv.addEventListener('click', function () {
+      if (dets.style.display === "block") {
+        dets.style.display = "none";
+      } else {
+        dets.style.display = "block";
+      }
+    })
+
+  } else {
+    //serv.style.cursor = 'auto';
+    //dets.style.display = "block";
+  }
+
+})
+
+$('.stages').click(function () {
+  var id = $(this).attr('id')
+  console.log(id)
+})

@@ -41,7 +41,7 @@ app.use(methodOverride('_method'))
 let stages
 connection.query(`select stage_id, stage_name from stages where status=1 order by stage_order`, (err,res) => {
     if (err) throw err
-    console.log(res)
+    //console.log(res)
     return stages = res
 })
 
