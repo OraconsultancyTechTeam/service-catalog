@@ -26,15 +26,34 @@ app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const cookieParser = require('cookie-parser')
+const passport = require('passport')
 const session = require('express-session')
+const flash = require('connect-flash')
 
-app.use(cookieParser('secret'))
+//Alert Messages
+app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(session({cookie:{maxAge:null}}))
 app.use((req, res, next)=>{
     res.locals.message = req.session.message
     delete req.session.message
     next()
 })
+
+/*
+//config session
+app.use(session({
+    secret:process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    cookie:{
+        secure: true,
+        maxAge:1000*60*60*24 //86400000 1 day
+    }
+}))
+
+//Enable flash message
+app.use(flash());
+*/
 
 
 // Setup handlebars engine and views location
@@ -43,6 +62,7 @@ app.set('views', viewsPath)
 
 app.use(methodOverride('_method'))
 
+//Routers
 app.use(userRouter)
 app.use(catalogRouter)
 

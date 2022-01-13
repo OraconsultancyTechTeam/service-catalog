@@ -6,6 +6,8 @@ const saltRounds = 10;
 
 
 const router = new express.Router()
+
+
 let message
 //loads login page
 router.get('/login', (req, res) => {
@@ -25,7 +27,7 @@ router.post('/login', (req, res) => {
 
             bcrypt.compare(password, result[0].password,(err,response)=>{
                 if(response){
-                    
+                    //username password correct logs in
                     res.redirect('/catalog')
                     return;
                 }
@@ -91,6 +93,7 @@ router.post('/register',(req,res)=>{
         if(error) throw error
         else{
             if(result.length>0){
+                
                 req.session.message = {
                     type:'warning',
                     intro:'Invalid Email',

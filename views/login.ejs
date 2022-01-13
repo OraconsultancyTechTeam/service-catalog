@@ -28,6 +28,7 @@
         <p>Login</p>
     </div>
 
+    <!-- show any messages that come back with authentication -->
     <%if(message){ %>
       <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
         <strong><%= message.intro %></strong> <%= message.message %>
@@ -62,6 +63,10 @@
                        <a type="button" id="registerBtn" onclick="myFunction()">Login</a>
                      </div>
                  </form>
+                 <hr>
+
+            <p>Need an account? <a href="/register">Register</a></p>
+            <p>Or go <a href="/">home</a>.</p>
                  <p id="demo"></p>
             </div>
         </div>
