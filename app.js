@@ -10,6 +10,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const userRouter = require('./routers/users')
 const catalogRouter = require('./routers/catalog')
+//const authRouter = require('./routers/auth')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Define paths for express config
@@ -25,36 +26,26 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-const cookieParser = require('cookie-parser')
-const passport = require('passport')
 const session = require('express-session')
+const passport = require('passport')
 const flash = require('connect-flash')
 
-//Alert Messages
-app.use(cookieParser(process.env.COOKIE_SECRET))
-app.use(session({cookie:{maxAge:null}}))
-app.use((req, res, next)=>{
-    res.locals.message = req.session.message
-    delete req.session.message
-    next()
-})
+require('./middleware/passport')(passport);
 
-/*
 //config session
 app.use(session({
     secret:process.env.SESSION_SECRET,
+    saveUninitialized: true,
     resave: true,
-    saveUninitialized: false,
     cookie:{
-        secure: true,
+        secure: false,
         maxAge:1000*60*60*24 //86400000 1 day
     }
 }))
 
-//Enable flash message
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
-*/
-
 
 // Setup handlebars engine and views location
 app.set('view engine','ejs')
@@ -65,6 +56,7 @@ app.use(methodOverride('_method'))
 //Routers
 app.use(userRouter)
 app.use(catalogRouter)
+require('./routers/auth.js')(app,passport); 
 
 
 app.listen(port, () => {

@@ -9,58 +9,6 @@ const router = new express.Router()
 
 
 let message
-//loads login page
-router.get('/login', (req, res) => {
-    res.render('login', {
-        title: 'Service Catalog'
-    })
-})
-
-//checks login credientials and logins in if correct
-router.post('/login', (req, res) => {
-    const userName = req.body.userName
-    const password = req.body.password
-    connection.query('SELECT * FROM users where username = ?',userName,(error,result)=>{
-        if(error) throw error
-
-        if(result.length>0){
-
-            bcrypt.compare(password, result[0].password,(err,response)=>{
-                if(response){
-                    //username password correct logs in
-                    res.redirect('/catalog')
-                    return;
-                }
-                else{
-                    req.session.message = {
-                        type:'danger',
-                        intro:'Invalid Login',
-                        message:'Login Details Incorrect'
-                    }
-                    res.redirect('/login')
-                    return;
-                }
-            })
-
-        }
-        else{
-            req.session.message = {
-                type:'danger',
-                intro:'Invalid Login',
-                message:'User does not exist'
-            }
-            res.redirect('/login')
-            return;
-        }
-    })
-})
-
-//logs user out of account
-router.post('/logout', (req, res) => {
-    const userName = req.body.userName
-    const password = req.body.password
-    // Needs completing
-})
 
 //loads register page
 router.get('/register', (req, res) => {

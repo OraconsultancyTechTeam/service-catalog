@@ -29,14 +29,9 @@
     </div>
 
     <!-- show any messages that come back with authentication -->
-    <%if(message){ %>
-      <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
-        <strong><%= message.intro %></strong> <%= message.message %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <% } %>
+    <% if (message.length > 0) { %>
+      <div class="alert alert-danger"><%= message %></div>
+  <% } %>
 
       <div class="container mt-4">
         <div class="card">
@@ -48,7 +43,7 @@
                     <div class="form-row">
                         <div class="col">
                             <div class="form-group">
-                                <div><input placeholder="User Name" type="text" name="userName" required></div> 
+                                <div><input placeholder="User Name" type="text" name="username" required></div> 
                             </div>
                         </div>
                         <div class="col">

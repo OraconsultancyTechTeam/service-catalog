@@ -29,14 +29,10 @@
             <p>Select Your Desired Database Below</p>
         </div>
 
-        <%if(message){ %>
-            <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
-                <strong><%= message.intro %></strong> <%= message.message %>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <% } %>
+       <!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+      <div class="alert alert-danger"><%= message %></div>
+  <% } %>
 
         <div class="container-fluid">
             <div class="row">
