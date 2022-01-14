@@ -6,7 +6,10 @@ var LocalStrategy   = require('passport-local').Strategy;
 // load up the user model
 var mysql = require('mysql');
 var bcrypt = require('bcrypt');
+const validator = require('validator')
 var connection = require('../db/mySQL')
+const saltRounds = 10;
+
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -34,7 +37,7 @@ module.exports = function(passport) {
     // =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
+    // we are using named strategies since we have one for login and one for register
     // by default, if there was no name, it would just be called 'local'
 
     passport.use(
@@ -60,6 +63,75 @@ module.exports = function(passport) {
 
                 // all is well, return successful user
                 return done(null, users[0]);
+            });
+            
+        })
+    );
+
+    // =========================================================================
+    // LOCAL register ============================================================
+    // =========================================================================
+    // we are using named strategies since we have one for login and one for register
+    // by default, if there was no name, it would just be called 'local'
+
+    passport.use(
+        'local-register',
+        new LocalStrategy({
+            // by default, local strategy uses username and password, we will override with email
+            usernameField : 'username',
+            passwordField : 'password',
+            passReqToCallback : true // allows us to pass back the entire request to the callback
+        },
+        function(req, username, password, done) {
+            // find a user whose email is the same as the forms email
+            // we are checking to see if the user trying to login already exists
+
+            const firstName = req.body.firstName
+            const lastName = req.body.lastName
+            const email = req.body.email
+            const permission = req.body.permission
+
+            if(!validator.isEmail(email)){
+                return done(null, false, req.flash('registerMessage', 'Please enter correct email format'));
+                
+            }
+
+
+            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
+                if (err)
+                    return done(err);
+                if (rows.length) {
+                    return done(null, false, req.flash('registerMessage', 'That username is already taken.'));
+                }else{
+                    connection.query("SELECT * FROM users WHERE email = ?",[email],function(err,row){
+                        if(err)
+                            return done(err);
+                        if(row.length){
+                            return done(null,false,req.flash('registerMessage','That email is already taken'));
+                        }
+                        else{
+
+                            bcrypt.hash(password,saltRounds,(err,hash)=>{
+                                if(err)
+                                    return done(err);
+                                else{
+                                    const sql = "insert into users values(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
+                                connection.query(sql,(err,users,fields)=>{
+                                    if(err) throw err
+                                    else{
+                                        // all is well, return successful user
+                                        return done(null, users[0]);
+                                    }
+                                 })
+                                }
+                            })
+                        }
+                    })
+
+
+
+
+                }
             });
             
         })

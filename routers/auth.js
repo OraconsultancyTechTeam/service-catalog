@@ -13,11 +13,46 @@ app.get('/login', isLoggedIn, (req, res) => {
     })
 })
 
+
 app.post('/login', 
   passport.authenticate('local-login', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/catalog');
   });
+
+  // process the login form
+	app.post('/login', passport.authenticate('local-login', {
+    successRedirect : '/catalog', // redirect to the secure profile section
+    failureRedirect : '/login', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+  }),
+  function(req, res) {
+      console.log("hello");
+
+      if (req.body.remember) {
+        req.session.cookie.maxAge = 1000 * 60 * 3;
+      } else {
+        req.session.cookie.expires = false;
+      }
+  res.redirect('/login');
+  });
+
+
+//loads register page
+app.get('/register',isLoggedIn, (req, res) => {
+  res.render('register', {
+      title: 'Service Catalog',
+      message: req.flash('registerMessage') 
+  })
+})
+
+app.post('/register',
+  passport.authenticate('local-register',{failureRedirect:'/register'}),
+  function(req,res){
+    res.redirect('/login');
+  });
+
+
 
 
 // =====================================

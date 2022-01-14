@@ -8,9 +8,7 @@ const methodOverride = require('method-override')
 const connection = require('./db/mySQL')
 const app = express()
 const port = process.env.PORT || 3000
-const userRouter = require('./routers/users')
 const catalogRouter = require('./routers/catalog')
-//const authRouter = require('./routers/auth')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Define paths for express config
@@ -39,7 +37,7 @@ app.use(session({
     resave: true,
     cookie:{
         secure: false,
-        maxAge:1000*60*60*24 //86400000 1 day
+       // maxAge:1000*60*60*24 //86400000 1 day
     }
 }))
 
@@ -54,7 +52,6 @@ app.set('views', viewsPath)
 app.use(methodOverride('_method'))
 
 //Routers
-app.use(userRouter)
 app.use(catalogRouter)
 require('./routers/auth.js')(app,passport); 
 
