@@ -13,6 +13,8 @@ const connection = require('./db/mySQL')
 const app = express()
 const port = process.env.PORT || 3000
 const axios = require('axios')
+const { consumers } = require('stream')
+const util = require('util')
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -37,7 +39,7 @@ app.set('views', viewsPath)
 
 app.use(methodOverride('_method'))
 
-// Stages data
+// Initial stages data
 let stages
 connection.query(`select stage_id, stage_name from stages where status=1 order by stage_order`, (err,res) => {
     if (err) throw err
@@ -223,16 +225,45 @@ app.get('/catalog', (req, res) => {
         title: 'Service Catalog',
         stages,
         step1,
-        step2,
-        step3,
-        step4,
-        step6
+        // step2,
+        // step3,
+        // step4,
+        // step6
     })
 })
 
 let service_stages
 let step2
-app.post('/catalog', (req,res) => {
+
+app.post('/catalog', async (req,res) => {
+
+    /*
+    *   Get hold of the stage_id and then pull the relevent data for that stage  
+    */
+    
+    // let result = await test()
+
+    // console.log(result)
+
+    // console.log(test)
+    // var test = getData(1, async function (result) {return await result})
+    // console.log(test)
+
+    await connection.query(`select stage_id from stages where (stage_name='` + req.body.stage_id + `' and status=1)`, (err,res) => {
+        if (err) throw(err)
+        var stage_id = JSON.parse(JSON.stringify(res))[0].stage_id
+        console.log(stage_id)
+        return stage_id
+    })
+
+    console.log(stage_id)
+    
+    // connection.query(`select option_id, option_heading from stage_options where (stage_id=` + stage_id + ` and status=1) order by option_order`, (err,res) => {
+    //     if (err) throw err
+    //     console.log(res)
+    //     return options = res
+    // })
+
     stepLooper(req.body.stepCard)
     res.render('index', {
         title: 'Service Catalog',
@@ -240,11 +271,36 @@ app.post('/catalog', (req,res) => {
         service_stages,
         step1,
         step2,
-        step3,
-        step4,
-        step6
+        // step3,
+        // step4,
+        // step6
     })
 })
+
+async function something () {
+    let result = await new Promise((resolve, reject) => {
+        var res = 10+30
+        return res
+    })
+
+    let sum = await result
+    return sum + 10
+}
+
+// let test = async () => {
+//     let results = await new Promise((resolve, reject) => connection.query(`select stage_id from stages where (stage_name='Database Engine' and status=1)`, (err,results) => {
+//         if (err) { reject(err) } else {
+//         var stage_id = JSON.parse(JSON.stringify(res))[0].stage_id
+//         resolve(results)}
+//     }))
+
+//     let res = await bar(results)
+//     return res
+// }
+
+// let bar = (results) => {
+//     return results
+// }
 
 function stepLooper(stepCard) {
     step1.forEach(element => {

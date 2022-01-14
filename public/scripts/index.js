@@ -14,20 +14,27 @@ $('.stages').click(function () {
 *   When a card option is clicked
 */
 $(".card").click(function () {
-    var inputElement = $(this).find('input[type=radio]').attr('id');
+    var inputElement = $(this).find('input[type=radio]').attr('id')
+    var stage_id = document.getElementById('current_stage').innerHTML
+    //console.log(inputElement)
     $(this).find('input[type=radio]').prop('checked', true)
-    //$(this).css('background-color', 'blue')
-    // stepToBackend(inputElement)
+    stepToBackend(inputElement,stage_id)
     filterTest(inputElement);
     // cardCheck(inputElement);
     changeText(inputElement);
 });
 
-function stepToBackend(inputElement) {
+function stepToBackend(inputElement, stage_id) {
     var http = new XMLHttpRequest();
     http.open("POST", "/catalog", true);
-    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    var params = "stepCard=" + inputElement;
+    http.setRequestHeader("Content-type","application/json")
+    // http.onreadystatechange = () => {
+    //   if (http.readyState === 4 && http.status === 201) {
+    //     var object = JSON.parse(http.response)
+    //     console.log(object)
+    //   }
+    // }
+    var params = JSON.stringify({ 'stepCard': inputElement, stage_id })
     http.send(params);
 }
 
