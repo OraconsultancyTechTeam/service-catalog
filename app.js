@@ -225,7 +225,7 @@ app.get('/catalog', (req, res) => {
         title: 'Service Catalog',
         stages,
         step1,
-        // step2,
+        step2,
         // step3,
         // step4,
         // step6
@@ -235,7 +235,7 @@ app.get('/catalog', (req, res) => {
 let service_stages
 let step2
 
-app.post('/catalog', async (req,res) => {
+app.post('/catalog', (req,res) => {
 
     /*
     *   Get hold of the stage_id and then pull the relevent data for that stage  
@@ -248,34 +248,37 @@ app.post('/catalog', async (req,res) => {
     // console.log(test)
     // var test = getData(1, async function (result) {return await result})
     // console.log(test)
-
-    await connection.query(`select stage_id from stages where (stage_name='` + req.body.stage_id + `' and status=1)`, (err,res) => {
-        if (err) throw(err)
-        var stage_id = JSON.parse(JSON.stringify(res))[0].stage_id
-        console.log(stage_id)
-        return stage_id
-    })
-
-    console.log(stage_id)
     
-    // connection.query(`select option_id, option_heading from stage_options where (stage_id=` + stage_id + ` and status=1) order by option_order`, (err,res) => {
-    //     if (err) throw err
-    //     console.log(res)
-    //     return options = res
-    // })
-
-    stepLooper(req.body.stepCard)
-    res.render('index', {
-        title: 'Service Catalog',
-        stages,
-        service_stages,
-        step1,
-        step2,
-        // step3,
-        // step4,
-        // step6
+    connection.query(`select stage_id from stages where (stage_name='` + req.body.stage_id + `' and status=1)`, (err,response) => {
+        if (err) throw (err) 
+        else {
+            var stage_id = response[0].stage_id
+            // var stage_id = JSON.parse(JSON.stringify(res))[0].stage_id
+            // console.log('this is inside the query: ' + stage_id)
+            
+            connection.query(`select option_id, option_heading from stage_options where (stage_id=` + stage_id + ` and status=1) order by option_order`, (err,result) => {
+                if (err) throw err
+                step2 = result
+                return res.send(step2)
+            })
+            
+        }
     })
+    
+    // stepLooper(req.body.stepCard)
+    // res.render('index', {
+    //     title: 'Service Catalog',
+    //     stages,
+    //     service_stages,
+    //     step1,
+    //     step2,
+    //     // step3,
+    //     // step4,
+    //     // step6
+    // })
 })
+
+
 
 async function something () {
     let result = await new Promise((resolve, reject) => {

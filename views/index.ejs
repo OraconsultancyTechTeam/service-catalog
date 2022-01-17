@@ -48,7 +48,7 @@
               <div style="padding: 1%; margin: 1% 0 4%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;">
 
                 <div style="margin: 1% 3%; padding: 2%; background-color: #F4F6F9; border-radius: 5px;">
-                  <div class="card-deck">
+                  <div id="group1" class="card-deck">
 
                     <% step1.forEach(card => { %>
                       <div id="<%= card.service_name.replace(/\s+/g,'') %>-card" class="card group1 card-settings" style="text-align: center; max-width: 204px;">
@@ -60,6 +60,22 @@
                         </div>
                       </div>
                     <% }) %>
+
+                  </div>
+
+                  <div id="group2" class="card-deck">
+                    <!-- <%# if (step2) { %>
+                      <%# step2.forEach(card => { %>
+                        <p><%#=card.option_heading%></p>
+                        <div id="<%#= card.option_heading.replace(/\s+/g,'') %>-card" class="card group2 card-settings" style="text-align: center; max-width: 204px;">
+                          <img class="card-img-top mx-auto mt-1" src='/img/<%#=card.option_heading%>' style="width:5rem; height:5rem;" alt="Card image cap">
+                          <div class="card-body" role="button">
+                            <h6 class="card-title"><input id="<%#=card.option_heading%>" name="radio1" value="<%#=card.option_heading%>" type="radio">
+                              <label for="<%#=card.option_heading%>"><%#=card.option_heading%></label></h6>
+                            <p class="card-text"><%#=card.service_desc%></p>
+                          </div>
+                        </div>
+                    <%# })} else {console.log('no step2 data')} %> -->
 
                   </div>
 
