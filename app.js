@@ -220,20 +220,19 @@ app.post('/register',(req,res)=>{
     })
 })
 
+let step2
+
 app.get('/catalog', (req, res) => {
     res.render('index', {
         title: 'Service Catalog',
         stages,
         step1,
-        step2,
+        // step2,
         // step3,
         // step4,
         // step6
     })
 })
-
-let service_stages
-let step2
 
 app.post('/catalog', (req,res) => {
 

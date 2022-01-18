@@ -33,37 +33,42 @@ function stepToBackend(inputElement, stage_id) {
         
         if (!$('#group2').has('div').length) {
           step2 = JSON.parse(http.response)
-          // console.log(step2)
-          id = document.getElementById(group2)
+          console.log(step2)
+
+          // var loopDiv = document.getElementById('loopDiv')
+          // loopDiv.innerText = '<%= console.log(step2) %>'
+
+          document.getElementById('loopDiv').innerHTML = step2
           
-          step2.forEach(card => {
-            var newdiv = document.createElement('div')
-            newdiv.setAttribute('id',card.option_heading.replace(/\s+/g,'') + '-card')
-            newdiv.setAttribute('class','card group2 card-settings')
-            newdiv.setAttribute('style','text-align: center; max-width: 204px;')
-            var img = document.createElement('img')
-            img.setAttribute('class','card-img-top mx-auto mt-1')
-            img.setAttribute('src','/img/' + card.option_heading.replace(/\s+/g,'') + '.png')
-            img.setAttribute('style','width:5rem; height:5rem;')
-            img.setAttribute('alt','Card image cap')
-            var button = document.createElement('div')
-            button.setAttribute('class','card-body')
-            button.setAttribute('role','button')
-            var head = document.createElement('h6')
-            head.setAttribute('class', 'card-title')
-            var label = document.createElement('label')
-            var input = document.createElement('input')
-            input.setAttribute('id',card.option_heading)
-            input.setAttribute('value',card.option_heading)
-            input.setAttribute('type','radio')
-            input.setAttribute('name','radio2')
-            label.setAttribute('for',card.option_heading)
-            label.innerHTML = card.option_heading
-            $(newdiv).append(img,button)
-            $(button).append(head)
-            $(head).append(input,label)
-            $('#group2').append(newdiv)
-          })
+          // step2.forEach(card => {
+          //   var newdiv = document.createElement('div')
+          //   newdiv.setAttribute('id',card.option_heading.replace(/\s+/g,'') + '-card')
+          //   newdiv.setAttribute('class','card group2 card-settings')
+          //   newdiv.setAttribute('style','text-align: center; max-width: 204px;')
+          //   // newdiv.setAttribute('onclick','if (!$(this).hasClass("card")) {console.log("card")}')
+          //   var img = document.createElement('img')
+          //   img.setAttribute('class','card-img-top mx-auto mt-1')
+          //   img.setAttribute('src','/img/' + card.option_heading.replace(/\s+/g,'') + '.png')
+          //   img.setAttribute('style','width:5rem; height:5rem;')
+          //   img.setAttribute('alt','Card image cap')
+          //   var button = document.createElement('div')
+          //   button.setAttribute('class','card-body')
+          //   button.setAttribute('role','button')
+          //   var head = document.createElement('h6')
+          //   head.setAttribute('class', 'card-title')
+          //   var label = document.createElement('label')
+          //   var input = document.createElement('input')
+          //   input.setAttribute('id',card.option_heading)
+          //   input.setAttribute('value',card.option_heading)
+          //   input.setAttribute('type','radio')
+          //   input.setAttribute('name','radio2')
+          //   label.setAttribute('for',card.option_heading)
+          //   label.innerHTML = card.option_heading
+          //   $(newdiv).append(img,button)
+          //   $(button).append(head)
+          //   $(head).append(input,label)
+          //   $('#group2').append(newdiv)
+          // })
         } else {
           console.log('testing')
         }
