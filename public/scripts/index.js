@@ -253,6 +253,7 @@ function changeText(element,option){
     case 1:
       var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
       $('#' + stage_id+'1').html(element)
+      document.getElementById('block2').style.display='block'
      
       break;
     case 2:
