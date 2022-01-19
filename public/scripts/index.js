@@ -13,6 +13,7 @@ $('.stages').click(function () {
 /*
 *   When a card option is clicked
 */
+/*
 $(".card").click(function () {
     var inputElement = $(this).find('input[type=radio]').attr('id')
     console.log(inputElement)
@@ -23,6 +24,17 @@ $(".card").click(function () {
     // cardCheck(inputElement);
     changeText(inputElement);
 });
+*/
+function clickTheCard(item,option){
+  var inputElement = $(item).find('input[type=radio]').attr('id')
+    console.log(inputElement+option)
+    var stage_id = document.getElementById('current_stage').innerHTML
+    $(item).find('input[type=radio]').prop('checked', true)
+    stepToBackend(inputElement,stage_id)
+    filterTest(inputElement);
+    // cardCheck(inputElement);
+    changeText(inputElement,option);
+}
 
 function stepToBackend(inputElement, stage_id) {
     var http = new XMLHttpRequest();
@@ -38,37 +50,37 @@ function stepToBackend(inputElement, stage_id) {
           // var loopDiv = document.getElementById('loopDiv')
           // loopDiv.innerText = '<%= console.log(step2) %>'
 
-          document.getElementById('loopDiv').innerHTML = step2
+          //document.getElementById('loopDiv').innerHTML = step2
           
-          // step2.forEach(card => {
-          //   var newdiv = document.createElement('div')
-          //   newdiv.setAttribute('id',card.option_heading.replace(/\s+/g,'') + '-card')
-          //   newdiv.setAttribute('class','card group2 card-settings')
-          //   newdiv.setAttribute('style','text-align: center; max-width: 204px;')
-          //   // newdiv.setAttribute('onclick','if (!$(this).hasClass("card")) {console.log("card")}')
-          //   var img = document.createElement('img')
-          //   img.setAttribute('class','card-img-top mx-auto mt-1')
-          //   img.setAttribute('src','/img/' + card.option_heading.replace(/\s+/g,'') + '.png')
-          //   img.setAttribute('style','width:5rem; height:5rem;')
-          //   img.setAttribute('alt','Card image cap')
-          //   var button = document.createElement('div')
-          //   button.setAttribute('class','card-body')
-          //   button.setAttribute('role','button')
-          //   var head = document.createElement('h6')
-          //   head.setAttribute('class', 'card-title')
-          //   var label = document.createElement('label')
-          //   var input = document.createElement('input')
-          //   input.setAttribute('id',card.option_heading)
-          //   input.setAttribute('value',card.option_heading)
-          //   input.setAttribute('type','radio')
-          //   input.setAttribute('name','radio2')
-          //   label.setAttribute('for',card.option_heading)
-          //   label.innerHTML = card.option_heading
-          //   $(newdiv).append(img,button)
-          //   $(button).append(head)
-          //   $(head).append(input,label)
-          //   $('#group2').append(newdiv)
-          // })
+          step2.forEach(card => {
+            var newdiv = document.createElement('div')
+            newdiv.setAttribute('id',card.option_heading.replace(/\s+/g,'') + '-card')
+            newdiv.setAttribute('class','card group2 card-settings')
+            newdiv.setAttribute('style','text-align: center; max-width: 204px;')
+            newdiv.setAttribute('onclick',"clickTheCard(this,2)")
+            var img = document.createElement('img')
+            img.setAttribute('class','card-img-top mx-auto mt-1')
+            img.setAttribute('src','/img/' + card.option_heading.replace(/\s+/g,'') + '.png')
+            img.setAttribute('style','width:5rem; height:5rem;')
+            img.setAttribute('alt','Card image cap')
+            var button = document.createElement('div')
+            button.setAttribute('class','card-body')
+            button.setAttribute('role','button')
+            var head = document.createElement('h6')
+            head.setAttribute('class', 'card-title')
+            var label = document.createElement('label')
+            var input = document.createElement('input')
+            input.setAttribute('id',card.option_heading)
+            input.setAttribute('value',card.option_heading)
+            input.setAttribute('type','radio')
+            input.setAttribute('name','radio2')
+            label.setAttribute('for',card.option_heading)
+            label.innerHTML = card.option_heading
+            $(newdiv).append(img,button)
+            $(button).append(head)
+            $(head).append(input,label)
+            $('#group2').append(newdiv)
+          })
         } else {
           console.log('testing')
         }
@@ -235,9 +247,24 @@ function cardCheck(element) {
 /*
 *   Update service details
 */
-function changeText(element){
+function changeText(element,option){
+
+   switch(option) {
+    case 1:
+      var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+      $('#' + stage_id+'1').html(element)
+     
+      break;
+    case 2:
+      var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+      $('#' + stage_id+'2').html(element);
+      document.getElementById(stage_id+'2').style.display='block'
+      
+      break;
+    default:
+      var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+      $('#' + stage_id)+'1'.html(element)
+  }
     
-    var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
-    $('#' + stage_id).html(element)
 
 }

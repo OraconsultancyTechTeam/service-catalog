@@ -3,7 +3,7 @@ html,body {
 }
 
 .selected {
-  border-color: #28a745 !important;
+  border-color: 3EB489 !important;
   background-color: #f2f2f2;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -68,7 +68,7 @@ html,body {
 }
 
 .open, .collapsible:hover {
-  background-color: #28a745;
+  background-color: #3EB489;
   color: black;
   font-weight: bold;
 }
