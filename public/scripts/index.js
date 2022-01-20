@@ -5,10 +5,38 @@ $('.stages').click(function () {
     var id = $(this).attr('id')
     var stage = document.getElementById(id).innerHTML
     $('#current_stage').html(stage)
+    blockController(stage)
     
     // Need to add in loading content specific to chosen stage
     // and set to content div
 })
+
+//this controlle opens and closes blocks
+function blockController(stage){
+  switch(stage) {
+    case 'Database Engine':
+      document.getElementById('block1').style.display='block'
+      document.getElementById('block2').style.display='block'
+
+      document.getElementById('block3').style.display='none'
+     
+      break;
+    case 'Features':
+      document.getElementById('block1').style.display='none'
+      document.getElementById('block2').style.display='none'
+
+      document.getElementById('block3').style.display='block'
+      
+      break;
+    default:
+      var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+      $('#' + stage_id)+'1'.html(element)
+  }
+
+}
+
+
+
 
 /*
 *   When a card option is clicked
@@ -27,7 +55,6 @@ $(".card").click(function () {
 */
 function clickTheCard(item,option){
   var inputElement = $(item).find('input[type=radio]').attr('id')
-    console.log(inputElement+option)
     var stage_id = document.getElementById('current_stage').innerHTML
     $(item).find('input[type=radio]').prop('checked', true)
     stepToBackend(inputElement,stage_id)
@@ -42,6 +69,7 @@ function stepToBackend(inputElement, stage_id) {
     http.setRequestHeader("Content-type","application/json")
     http.onreadystatechange = () => {
       if (http.readyState === 4 && http.status === 200) {
+
         
         if (!$('#group2').has('div').length) {
           step2 = JSON.parse(http.response)
@@ -81,8 +109,13 @@ function stepToBackend(inputElement, stage_id) {
             $(head).append(input,label)
             $('#group2').append(newdiv)
           })
-        } else {
-          console.log('testing')
+        } 
+        else {
+          var stage = document.getElementById("stage2").innerHTML
+          $('#current_stage').html(stage)
+          blockController(stage)
+          getStep3()
+          
         }
         
       }
@@ -90,6 +123,27 @@ function stepToBackend(inputElement, stage_id) {
     var params = JSON.stringify({ 'stepCard': inputElement, stage_id })
     http.send(params);
 }
+
+
+function getStep3(){
+  var http = new XMLHttpRequest();
+    http.open("POST", "/catalog3", true);
+    http.setRequestHeader("Content-type","application/json")
+    http.onreadystatechange = () => {
+      if (http.readyState === 4 && http.status === 200) {
+        step3 = JSON.parse(http.response)
+        step3.forEach(card => { 
+          var option = document.createElement('option');
+          option.setAttribute('value', card.option_heading)
+         }) 
+
+
+      }
+    var params = JSON.stringify({ 'stepCard': inputElement, stage_id })
+    http.send(params);
+}
+
+
 
 function unclickRadio() {
     $("input:radio").prop("checked", false);
