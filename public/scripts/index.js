@@ -124,23 +124,22 @@ function stepToBackend(inputElement, stage_id) {
     http.send(params);
 }
 
-
 function getStep3(){
   var http = new XMLHttpRequest();
-    http.open("POST", "/catalog3", true);
-    http.setRequestHeader("Content-type","application/json")
-    http.onreadystatechange = () => {
-      if (http.readyState === 4 && http.status === 200) {
-        step3 = JSON.parse(http.response)
-        step3.forEach(card => { 
-          var option = document.createElement('option');
-          option.setAttribute('value', card.option_heading)
-         }) 
+  http.open("POST", "/catalog3", true);
+  http.setRequestHeader("Content-type","application/json")
+  http.onreadystatechange = () => {
+    if (http.readyState === 4 && http.status === 200) {
+      step3 = JSON.parse(http.response)
+      step3.forEach(card => { 
+        var option = document.createElement('option');
+        option.setAttribute('value', card.option_heading)
+      }) 
 
-
-      }
+    }
     var params = JSON.stringify({ 'stepCard': inputElement, stage_id })
     http.send(params);
+  }
 }
 
 
