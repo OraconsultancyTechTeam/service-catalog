@@ -55,12 +55,14 @@ $(".card").click(function () {
 */
 function clickTheCard(item,option){
   var inputElement = $(item).find('input[type=radio]').attr('id')
-    var stage_id = document.getElementById('current_stage').innerHTML
+    
     $(item).find('input[type=radio]').prop('checked', true)
-    stepToBackend(inputElement,stage_id)
+    
     filterTest(inputElement);
     // cardCheck(inputElement);
     changeText(inputElement,option);
+    var stage_id = document.getElementById('current_stage').innerHTML
+    stepToBackend(inputElement,stage_id)
 }
 
 function stepToBackend(inputElement, stage_id) {
@@ -73,13 +75,7 @@ function stepToBackend(inputElement, stage_id) {
         
         if (!$('#group2').has('div').length) {
           step2 = JSON.parse(http.response)
-          console.log(step2)
-
-          // var loopDiv = document.getElementById('loopDiv')
-          // loopDiv.innerText = '<%= console.log(step2) %>'
-
-          //document.getElementById('loopDiv').innerHTML = step2
-          
+         // console.log(step2)          
           step2.forEach(card => {
             var newdiv = document.createElement('div')
             newdiv.setAttribute('id',card.option_heading.replace(/\s+/g,'') + '-card')
@@ -114,7 +110,7 @@ function stepToBackend(inputElement, stage_id) {
           var stage = document.getElementById("stage2").innerHTML
           $('#current_stage').html(stage)
           blockController(stage)
-          getStep3()
+          getStep3(stage)
           
         }
         
@@ -124,22 +120,37 @@ function stepToBackend(inputElement, stage_id) {
     http.send(params);
 }
 
-function getStep3(){
-  var http = new XMLHttpRequest();
-  http.open("POST", "/catalog3", true);
-  http.setRequestHeader("Content-type","application/json")
-  http.onreadystatechange = () => {
-    if (http.readyState === 4 && http.status === 200) {
-      step3 = JSON.parse(http.response)
-      step3.forEach(card => { 
-        var option = document.createElement('option');
-        option.setAttribute('value', card.option_heading)
-      }) 
 
-    }
-    var params = JSON.stringify({ 'stepCard': inputElement, stage_id })
+function getStep3(stage_id){
+  var http = new XMLHttpRequest();
+    http.open("POST", "/catalog", true);
+    http.setRequestHeader("Content-type","application/json")
+    http.onreadystatechange = () => {
+      if (http.readyState === 4 && http.status === 200) {
+        step3 = JSON.parse(http.response)
+        //console.log(step3)
+        select = document.getElementById('envSelect');
+        
+        step3.forEach(card => { 
+
+          if(card.option_id==1){
+           // console.log("The card id is: "+card.option_id+". The card heading is: "+card.option_heading)
+            // Append the option to select
+            $('#envSelect').append('<option value="'+card.option_heading+'">'+card.option_heading+'</option>');
+  
+            // Set the select value with new option
+             $("#envSelect").val(card.option_heading);
+  
+            // Refresh the selectpicker
+             $("#envSelect").selectpicker("refresh");
+          }
+          
+         }) 
+
+
+      }}
+    var params = JSON.stringify({stage_id })
     http.send(params);
-  }
 }
 
 
@@ -322,3 +333,5 @@ function changeText(element,option){
     
 
 }
+
+
