@@ -77,14 +77,14 @@ connection.query(`select * from catalog_services where status=1`, (err,res) => {
 //     {img:'/img/apachecassandra.png', name:'Apache Cassandra', text:'Cassandra is a free and open-source, distributed, wide-column store, NoSQL database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure.', id:'9', g:'2'},
 //     {img:'/img/redislogo.png', name:'Redis', text:'Redis is an in-memory data structure store, used as a distributed, in-memory key–value database, cache and message broker, with optional durability. ', id:'10', g:'2'},
 // ]
-
+/*
 const step3 = [
     {name:'PRD', id:1}, 
     {name:'TRG', id:2},
     {name:'UAT', id:3}, 
     {name:'DVP', id:4}
 ]
-
+*/
 const step4 = [
     {size:'2 CPU',id:1},
     {size:'4 CPU',id:2},
@@ -221,6 +221,7 @@ app.post('/register',(req,res)=>{
 })
 
 let step2
+let step3
 
 app.get('/catalog', (req, res) => {
     res.render('index', {
@@ -235,18 +236,6 @@ app.get('/catalog', (req, res) => {
 })
 
 app.post('/catalog', (req,res) => {
-
-    /*
-    *   Get hold of the stage_id and then pull the relevent data for that stage  
-    */
-    
-    // let result = await test()
-
-    // console.log(result)
-
-    // console.log(test)
-    // var test = getData(1, async function (result) {return await result})
-    // console.log(test)
     
     connection.query(`select stage_id from stages where (stage_name='` + req.body.stage_id + `' and status=1)`, (err,response) => {
         if (err) throw (err) 
@@ -263,20 +252,8 @@ app.post('/catalog', (req,res) => {
             
         }
     })
-    
-    // stepLooper(req.body.stepCard)
-    // res.render('index', {
-    //     title: 'Service Catalog',
-    //     stages,
-    //     service_stages,
-    //     step1,
-    //     step2,
-    //     // step3,
-    //     // step4,
-    //     // step6
-    // })
-})
 
+})
 
 
 async function something () {
