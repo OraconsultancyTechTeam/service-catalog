@@ -28,14 +28,10 @@
         <p>Register</p>
     </div>
 
-    <%if(message){ %>
-      <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
-        <strong><%= message.intro %></strong> <%= message.message %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <% } %>
+    <!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+      <div class="alert alert-danger"><%= message %></div>
+  <% } %>
 
       
 
@@ -49,7 +45,7 @@
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
-                            <div><input placeholder="User Name" type="text" name="userName" required></div> 
+                            <div><input placeholder="User Name" type="text" name="username" required></div> 
                         </div>
                     </div>
                     <div class="col">
@@ -87,13 +83,14 @@
                     </select>
                 </div>
               </div>
-              
-
-                
                  <div class="dataBtns">
                    <a type="button" id="registerBtn" onclick="myFunction()">Create</a>
                  </div>
              </form>
+             <hr>
+
+	          <p>Already have an account? <a href="/login">Login</a></p>
+          	<p>Or go <a href="/">home</a>.</p>
              <p id="demo"></p>
         </div>
     </div>
