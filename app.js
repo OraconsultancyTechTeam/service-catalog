@@ -103,7 +103,7 @@ const step6 = [
     {name:'Advanced Compression',id:3}
 ]
 
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
     res.locals.message = req.session.message
     delete req.session.message
     next()
@@ -125,18 +125,17 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     const userName = req.body.userName
     const password = req.body.password
-    connection.query('SELECT * FROM users where username = ?',userName,(error,result)=>{
-        if(error) throw error
+    connection.query('SELECT * FROM users WHERE username = ?',userName, (error,result) => {
+        if (error) throw error
 
-        if(result.length>0){
+        if (result.length > 0) {
 
-            bcrypt.compare(password, result[0].password,(err,response)=>{
-                if(response){
+            bcrypt.compare(password, result[0].password, (err,response) => {
+                if (response) {
                     
                     res.redirect('/catalog')
                     return;
-                }
-                else{
+                } else {
                     req.session.message = {
                         type:'danger',
                         intro:'Invalid Login',
@@ -147,8 +146,7 @@ app.post('/login', (req, res) => {
                 }
             })
 
-        }
-        else{
+        } else {
             req.session.message = {
                 type:'danger',
                 intro:'Invalid Login',
