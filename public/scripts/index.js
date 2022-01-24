@@ -10,8 +10,8 @@ $('.stages').click(function () {
     // Need to add in loading content specific to chosen stage
     // and set to content div
 })
-
-//this controlle opens and closes blocks
+var step = false;
+//this controller opens and closes blocks
 function blockController(stage){
   switch(stage) {
     case 'Database Engine':
@@ -36,8 +36,6 @@ function blockController(stage){
 }
 
 
-
-
 /*
 *   When a card option is clicked
 */
@@ -55,15 +53,13 @@ $(".card").click(function () {
 */
 function clickTheCard(item,option){
   var inputElement = $(item).find('input[type=radio]').attr('id')
-    
     $(item).find('input[type=radio]').prop('checked', true)
-    
     filterTest(inputElement);
-    // cardCheck(inputElement);
     changeText(inputElement,option);
     var stage_id = document.getElementById('current_stage').innerHTML
     stepToBackend(inputElement,stage_id)
 }
+
 
 function stepToBackend(inputElement, stage_id) {
     var http = new XMLHttpRequest();
@@ -107,11 +103,23 @@ function stepToBackend(inputElement, stage_id) {
           })
         } 
         else {
-          var stage = document.getElementById("stage2").innerHTML
-          $('#current_stage').html(stage)
-          blockController(stage)
-          getStep3(stage)
+          /*
+          if(step==2){
+            getStep3()
+            console.log('stage 2 is clicked')
+
+          }
+          else{
+            console.log('stage 1 is clicked')
+          }
+         */
+        if(step == true){
+         // console.log('Only step 2 clicked')
+          getStep3()
+        }
           
+          
+       
         }
         
       }
@@ -121,7 +129,11 @@ function stepToBackend(inputElement, stage_id) {
 }
 
 
-function getStep3(stage_id){
+function getStep3(){
+  var stage_id = document.getElementById("stage2").innerHTML
+  $('#current_stage').html(stage_id)
+  blockController(stage_id)
+
   var http = new XMLHttpRequest();
     http.open("POST", "/catalog", true);
     http.setRequestHeader("Content-type","application/json")
@@ -155,6 +167,7 @@ function getStep3(stage_id){
 
 
 
+
 function unclickRadio() {
     $("input:radio").prop("checked", false);
 }
@@ -177,9 +190,11 @@ function filterTest(element){
     var id = element.replace(/\s+/g,'')
     if ($("#" + id + "-card").hasClass("group1")) {
         makeSelect(id, "group1");
+        document.getElementById('block2').style.display='block'
     }
     else if ($("#" + id + "-card").hasClass("group2")) {
         makeSelect(id, "group2");
+        step = true
     }
 
 }
@@ -308,26 +323,33 @@ function cardCheck(element) {
   }
 }
 
+
+function envSelected(item, option){
+
+  var elementValue = item.value;
+changeText(elementValue,option)
+}
+
+
+
 /*
 *   Update service details
 */
 function changeText(element,option){
-
+  var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+  console.log(element+" "+option+" "+stage_id)
    switch(option) {
     case 1:
-      var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+      
       $('#' + stage_id+'1').html(element)
-      document.getElementById('block2').style.display='block'
-     
       break;
     case 2:
-      var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+
       $('#' + stage_id+'2').html(element);
       document.getElementById(stage_id+'2').style.display='block'
-      
       break;
     default:
-      var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+
       $('#' + stage_id)+'1'.html(element)
   }
     
