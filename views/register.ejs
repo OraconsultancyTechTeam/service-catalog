@@ -19,95 +19,159 @@
   
   </head>
 
-  <body>
-    <div>
-        <%- include('partials/navbar.ejs', {active: "Register"}); %>
-      </div>
-    <div class="jumbotron text-center" style="background-color: #3EB489;">
-        <h1><%=title%></h1>
+  <body style="height: 100vh; background-color: #F4F6F9;">
+    
+    <div><%- include('general/header.ejs', {active: "Register"}); %></div>
+
+    <!-- <div class="jumbotron text-center" style="background-color: #3EB489;">
+        <h1><%#=title%></h1>
         <p>Register</p>
-    </div>
+    </div> -->
 
     <!-- show any messages that come back with authentication -->
     <% if (message.length > 0) { %>
       <div class="alert alert-danger"><%= message %></div>
-  <% } %>
+    <% } %>
+    <div class="container-fluid mt-4">
 
-      
+      <div class="row justify-content-center">
 
-  <div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            Register Form
-        </div>
-        <div class="card-body">
-            <form id="addUserForm" class="form-horizontal" method="post" action="/register">
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <div><input placeholder="User Name" type="text" name="username" required></div> 
-                        </div>
-                    </div>
-                    <div class="col">
-                         
-                <div class="form-group">
-                    <div><input placeholder="Email" type="text" name="email" required></div>
-                  </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <div><input placeholder="First Name" type="text" name="firstName" required></div> 
-                        </div>
-                    </div>
-                    <div class="col">
-                         
-                <div class="form-group">
-                    <div><input placeholder="Last Name" type="text" name="lastName" required></div>
-                  </div>
-                    </div>
-                </div>
-    
+        <div class="col-12 col-sm-6 col-md-4 justify-content-center" style="display: flex; padding-top: 1vh;">
+          
+          <div class="card">
+            
+            <div class="card-header">Register Form</div>
+          
+            <div class="card-body">
               
-              <div class="form-group">
-                <div><input placeholder="Password" type="password"name="password" required></div>
-              </div>
-              <div class="form-check">
-                <div class="permission">
-                    <label for="permission">Choose a role:</label>
+              <form id="addUserForm" class="form-horizontal p-2" method="post" action="/register">
+                  
+                <div class="form-row justify-content-center">
+                          
+                  <div class="row form-group">
+                      
+                    <div class="col-md-12 mb-3 mb-md-0">
+                      
+                      <div>
+                        <label class="font-weight-bold">Username</label>
+                        <input class="form-control" placeholder="User Name" type="text" name="username" required>
+                      </div>
+                          
+                    </div>
+                      
+                  </div>
+                       
+                  <div class="row form-group">
+
+                    <div class="col-md-12 mb-3 mb-md-0">
+                      
+                      <div>
+                        <label class="font-weight-bold">Email</label>
+                        <input class="form-control" placeholder="Email" type="text" name="email" required>
+                      </div>
+                    
+                    </div>
+                      
+                  </div>
+                  
+                </div>
+
+                <div class="form-row justify-content-center">
+                      
+                  <div class="row form-group">
+
+                    <div class="col-md-12 mb-3 mb-md-0">
+                    
+                      <div>
+                        <label class="font-weight-bold">First Name</label>
+                        <input class="form-control" placeholder="First Name" type="text" name="firstName" required>
+                      </div>
+                  
+                    </div>
+
+                  </div>
+                      
+                  <div class="row form-group">
+                          
+                    <div class="col-md-12 mb-3 mb-md-0">
+                        
+                      <div>
+                        <label class="font-weight-bold">Surname</label>
+                        <input class="form-control" placeholder="Last Name" type="text" name="lastName" required>
+                      </div>
+                      
+                    </div>
+                        
+                  </div>
+                    
+                </div>
+      
+                <div class="form-row justify-content-center">
+
+                  <div class="row form-group">
+
+                    <div class="col-md-12 mb-3 mb-md-0">
+                  
+                      <div>
+                        <label class="font-weight-bold">Password</label>
+                        <input class="form-control" placeholder="Password" type="password" name="password" required>
+                      </div>
+
+                    </div>
+                  
+                  </div>
+                
+                </div>
+
+                <br>
+                
+                <div class="form-row justify-content-center">
+                  
+                  <div class="permission">
+                      
+                    <label for="permission">Account Type:</label>
+                      
                     <select id="permission" name="permission">
                       <option value="1">Member</option>
                       <option value="2">Admin</option>
                     </select>
+                  
+                  </div>
+                
                 </div>
-              </div>
-                 <div class="dataBtns">
-                   <a type="button" id="registerBtn" onclick="myFunction()">Create</a>
-                 </div>
-             </form>
-             <hr>
 
-	          <p>Already have an account? <a href="/login">Login</a></p>
-          	<p>Or go <a href="/">home</a>.</p>
-             <p id="demo"></p>
-        </div>
+                <br>
+                  
+                <div class="dataBtns" style="text-align: center;">
+                    
+                  <a type="button" class="btn btn-success" id="registerBtn" onclick="myFunction()">Create</a>
+                  
+                </div>
+              
+              </form>
+              
+              <hr>
+
+              <p>Already have an account? <a href="/login">Login</a></p>
+              <p>Or go <a href="/">home</a>.</p>
+          </div>
+      </div>
     </div>
   </div>
+    </div>
   
 
-  <script>
-    function myFunction() {
-      var txt;
-      if (confirm("Confirm Adding User!")) {
-        document.getElementById("addUserForm").submit();
-        txt = "Add Confirmed";
-      } else {
-        txt = "Add Cancelled";
+    <script>
+      function myFunction() {
+        var txt;
+        if (confirm("Confirm Adding User!")) {
+          document.getElementById("addUserForm").submit();
+          txt = "Add Confirmed";
+        } else {
+          txt = "Add Cancelled";
+        }
+        document.getElementById("demo").innerHTML = txt;
       }
-      document.getElementById("demo").innerHTML = txt;
-    }
     </script>
   </body>
 </html>
