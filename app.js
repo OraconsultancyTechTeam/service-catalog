@@ -8,7 +8,7 @@ const methodOverride = require('method-override')
 const connection = require('./db/mySQL')
 const app = express()
 const port = process.env.PORT || 3000
-const catalogRouter = require('./routers/catalog')
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Define paths for express config
@@ -52,6 +52,7 @@ app.set('views', viewsPath)
 app.use(methodOverride('_method'))
 
 //Routers
+const catalogRouter = require('./routers/catalog.js')
 app.use(catalogRouter)
 require('./routers/auth.js')(app,passport); 
 

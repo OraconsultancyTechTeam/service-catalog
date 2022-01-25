@@ -47,6 +47,7 @@ const step6 = [
 
 //Gets Logged Out Home Page
 router.get('/', (req, res) => {
+    req.flash('message', 'testing')
     res.render('home', {
         title: 'Service Catalog'
     })

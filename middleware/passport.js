@@ -4,7 +4,7 @@
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
-var mysql = require('mysql');
+// var mysql = require('mysql');
 var bcrypt = require('bcrypt');
 const validator = require('validator')
 var connection = require('../db/mySQL')
@@ -93,47 +93,40 @@ module.exports = function(passport) {
 
             if(!validator.isEmail(email)){
                 return done(null, false, req.flash('registerMessage', 'Please enter correct email format'));
-                
             }
 
-
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
+            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err,rows) {
                 if (err)
                     return done(err);
                 if (rows.length) {
                     return done(null, false, req.flash('registerMessage', 'That username is already taken.'));
-                }else{
-                    connection.query("SELECT * FROM users WHERE email = ?",[email],function(err,row){
-                        if(err)
+                } else {
+                    connection.query("SELECT * FROM users WHERE email = ?",[email],function(err,row) {
+                        if (err)
                             return done(err);
-                        if(row.length){
+                        if (row.length) {
                             return done(null,false,req.flash('registerMessage','That email is already taken'));
                         }
                         else{
 
-                            bcrypt.hash(password,saltRounds,(err,hash)=>{
-                                if(err)
+                            bcrypt.hash(password,saltRounds,(err,hash) => {
+                                if (err)
                                     return done(err);
-                                else{
+                                else {
                                     const sql = "insert into users values(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
-                                connection.query(sql,(err,users,fields)=>{
-                                    if(err) throw err
-                                    else{
-                                        // all is well, return successful user
-                                        return done(null, users[0]);
-                                    }
-                                 })
+                                    connection.query(sql,(err,users,fields) => {
+                                        if(err) throw err
+                                        else{
+                                            // all is well, return successful user
+                                            return done(null, users[0]);
+                                        }
+                                    })
                                 }
                             })
                         }
                     })
-
-
-
-
                 }
-            });
-            
+            })
         })
-    );
-};
+    )
+}
