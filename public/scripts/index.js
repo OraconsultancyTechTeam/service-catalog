@@ -11,26 +11,61 @@ $('.stages').click(function () {
     // and set to content div
 })
 var step = false;
+var section1 ='Database Engine'
+var section2 = 'Features'
+var section3 = 'Sizing and Parameters'
+var section4= 'Additional Info & Save'
+
 //this controller opens and closes blocks
 function blockController(stage){
   switch(stage) {
-    case 'Database Engine':
+    case section1:
       document.getElementById('block1').style.display='block'
       document.getElementById('block2').style.display='block'
 
       document.getElementById('block3').style.display='none'
+      document.getElementById('block4').style.display='none'
+      document.getElementById('block5').style.display='none'
+      document.getElementById('block6').style.display='none'
      
       break;
-    case 'Features':
+    case section2:
       document.getElementById('block1').style.display='none'
       document.getElementById('block2').style.display='none'
 
       document.getElementById('block3').style.display='block'
+      //document.getElementById('block4').style.display='block'
+      document.getElementById('block5').style.display='none'
+      document.getElementById('block6').style.display='none'
       
       break;
+    case section3:
+    document.getElementById('block1').style.display='none'
+    document.getElementById('block2').style.display='none'
+
+    document.getElementById('block3').style.display='none'
+    document.getElementById('block4').style.display='none'
+
+    document.getElementById('block5').style.display='block'
+    //document.getElementById('block6').style.display='block'
+      
+    break;
+    case section4:
+      document.getElementById('block1').style.display='none'
+      document.getElementById('block2').style.display='none'
+  
+      document.getElementById('block3').style.display='none'
+      document.getElementById('block4').style.display='none'
+  
+      document.getElementById('block5').style.display='none'
+      document.getElementById('block6').style.display='none'
+
+      document.getElementById('block7').style.display='block'
+        
+      break;
     default:
-      var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
-      $('#' + stage_id)+'1'.html(element)
+      var stage_id = document.getElementById("stage4").innerHTML
+      console.log(section4+":--------: "+stage_id+" 2")
   }
 
 }
@@ -117,8 +152,6 @@ function stepToBackend(inputElement, stage_id) {
          // console.log('Only step 2 clicked')
           getStep3()
         }
-          
-          
        
         }
         
@@ -165,9 +198,70 @@ function getStep3() {
     http.send(params);
 }
 
+function getStep4() {
+  var stage_id = document.getElementById("stage2").innerHTML
+  var http = new XMLHttpRequest();
+    http.open("POST", "/catalog", true);
+    http.setRequestHeader("Content-type","application/json")
+    http.onreadystatechange = () => {
+      if (http.readyState === 4 && http.status === 200) {
+        step4 = JSON.parse(http.response)
+
+        select = document.getElementById('licenceSelect');
+        
+        step4.forEach(card => { 
+
+          if(card.option_id==2){
+           // console.log("The card id is: "+card.option_id+". The card heading is: "+card.option_heading)
+            // Append the option to select
+            $('#licenceSelect').append('<option value="'+card.option_heading+'">'+card.option_heading+'</option>');
+  
+            // Set the select value with new option
+            //  $("#envSelect").val(card.option_heading);
+  
+            // Refresh the selectpicker
+             $("#licenceSelect").selectpicker("refresh");
+          }
+          
+         })
+
+      }}
+    var params = JSON.stringify({ stage_id })
+    http.send(params);
+}
 
 
+function getStep5() {
+  var stage_id = document.getElementById("stage3").innerHTML
+  var http = new XMLHttpRequest();
+    http.open("POST", "/catalog", true);
+    http.setRequestHeader("Content-type","application/json")
+    http.onreadystatechange = () => {
+      if (http.readyState === 4 && http.status === 200) {
+        step5 = JSON.parse(http.response)
 
+        select = document.getElementById('tshirtSelect');
+        
+        step5.forEach(card => { 
+
+          if(card.option_id==1){
+           // console.log("The card id is: "+card.option_id+". The card heading is: "+card.option_heading)
+            // Append the option to select
+            $('#tshirtSelect').append('<option value="'+card.option_heading+'">'+card.option_heading+'</option>');
+  
+            // Set the select value with new option
+            //  $("#envSelect").val(card.option_heading);
+  
+            // Refresh the selectpicker
+             $("#tshirtSelect").selectpicker("refresh");
+          }
+          
+         })
+
+      }}
+    var params = JSON.stringify({ stage_id })
+    http.send(params);
+}
 function unclickRadio() {
     $("input:radio").prop("checked", false);
 }
@@ -199,144 +293,51 @@ function filterTest(element) {
 
 }
 
-function cardCheck(element) {
-
-  var id = document.getElementById(element);
-
-  // Step 1 - Host
-  if (document.getElementById("step1").contains(id)) {
-
-    switch(element) {
-      case "On-Prem Database":
-        $("#s1").collapse('hide');
-        $("#s2-1").collapse('show');
-        $("#s2-2").collapse('hide');
-        break;
-
-      case "Cloud Database":
-        $("#s1").collapse('hide');
-        $("#s2-1").collapse('hide');
-        $("#s2-2").collapse('show');
-        break;
-
-      case "Replication - Goldengate":
-        $("#s1").collapse('hide');
-        $("#s2-1").collapse('hide');
-        $("#s2-2").collapse('hide');   
-        break;
-
-      case "Replication - Nifi":
-        $("#s1").collapse('hide');
-        $("#s2-1").collapse('hide');
-        $("#s2-2").collapse('hide');    
-        break;
-
-      case "Replication - Kafka":
-        $("#s1").collapse('hide');
-        $("#s2-1").collapse('hide');
-        $("#s2-2").collapse('hide'); 
-        break;
-      
-      default:
-          console.log("Error");
-    }
-
-    $("#cont1").css("display", "none")
-    $("#header1").removeClass("open");
-  
-    // Scroll to Step 2.1
-    setTimeout(function () {
-      document.querySelector("#cont2").scrollIntoView({ behavior: "smooth" });    
-    }, 350);
-    
-    // Setting service details height to be centered in all viewports
-    var servDetHeight = document.querySelector('#servDetails').offsetHeight;
-    var offsetServDet = servDetHeight / 2;
-    $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
-  }
-
-  // Step 2.1 - Database
-  else if (document.getElementById("s2-1").contains(id)) {
-    
-    switch(element) {
-      case "Oracle-Database":
-        $("#s3").collapse('show');
-        break;
-      case "SQL-Server":
-        $("#s3").collapse('show');
-        break;
-      case "My-SQL":
-        $("#s3").collapse('show');          
-        break;
-      case "Apache-Cassandra":
-        $("#s3").collapse('show');             
-        break;
-      case "Redis":
-        $("#s3").collapse('show');            
-        break;
-      
-      default:
-          console.log("Error");
-    }
-
-    $("#cont2").css("display", "none");
-    $("#header2").removeClass("open");
-    
-    // Scroll to Step 2.2
-    setTimeout(function () {
-      document.querySelector("#cont3").scrollIntoView({ behavior: "smooth" });    
-    }, 350);
-    
-
-    // Setting service details height to be centered in all viewports
-    var servDetHeight = document.querySelector('#servDetails').offsetHeight;
-    var offsetServDet = servDetHeight / 2;
-    $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
-  }
-
-  // Step 2.2 - Database
-  else if (document.getElementById("s2-2").contains(id)) {
-    
-    switch(element) {
-      case "Oracle-RDS":
-        $("#s3").collapse('show');
-        break;
-      case "SQL-RDS":
-        $("#s3").collapse('show');
-        break;
-      default:
-          console.log("Error");
-    }
-
-    $("#cont2.2").css("display", "none");
-    $("#header2.2").removeClass("open");
-
-    // Scroll to Step 3
-    setTimeout(function () {
-      document.querySelector("#cont3").scrollIntoView({ behavior: "smooth" });    
-    }, 350);
-
-    // Setting service details height to be centered in all viewports
-    var servDetHeight = document.querySelector('#servDetails').offsetHeight;
-    var offsetServDet = servDetHeight / 2;
-    $('#servDetails').css('top', window.innerHeight / 2 - offsetServDet)
-  }
-}
-
 function envSelected(item, option){
-
+  var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
   var elementValue = item.value;
-  console.log(elementValue)
+  console.log(elementValue+'=='+stage_id)
   changeText(elementValue,option)
+
+  if (stage_id==section2.replace(/\s+/g,'') && option==1) {
+    //var stage_id = document.getElementById("stage2").innerHTML
+    //blockController(stage_id)
+    document.getElementById('block4').style.display='block'
+    getStep4()
+    console.log('getting step 4')
+  }
+  else if(stage_id==section2.replace(/\s+/g,'') && option==2){
+     var stage_id = document.getElementById("stage3").innerHTML
+     $('#current_stage').html(stage_id)
+    blockController(stage_id)
+    getStep5()
+    console.log('getting step 5')
+    //document.getElementById('block4').style.display='block'
+  }
+  else if(stage_id==section3.replace(/\s+/g,'') && option==1){
+    document.getElementById('block6').style.display='block'
+
+ }
+ else if(stage_id==section3.replace(/\s+/g,'') && option==2){
+    var stage_id = document.getElementById("stage4").innerHTML
+    console.log(stage_id+" 1")
+    $('#current_stage').html(stage_id)
+    blockController(stage_id)
+
+}
+  else{
+    console.log('step 3/4 error')
+  }
+ 
 
 }
 
 /*
 *   Update service details
 */
-function changeText(element,option){
+function changeText(element,option, stage_id){
   var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
-  console.log(element+" "+option+" "+stage_id)
+
    switch(option) {
     case 1:
       

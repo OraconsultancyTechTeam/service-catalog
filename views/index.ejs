@@ -45,59 +45,23 @@
 
               </div>
 
-              <div id="block1" style="padding: 1%; margin: 1% 0 4%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;">
+              <div id="step1"> <%-include('partials/step1partial.ejs')%></div>
+              <div id="step3"> <%-include('partials/step3partial.ejs')%></div>
+              <div id="step4"> <%-include('partials/step4partial.ejs')%></div>
+              <div id="step5"> <%-include('partials/step5partial.ejs')%></div>
+              <div id="step6"> <%-include('partials/step6partial.ejs')%></div>
+              <div id="step7"> <%-include('partials/step7partial.ejs')%></div>
+           
+            
+            
 
-                <div style="margin: 1% 3%; padding: 2%; background-color: #F4F6F9; border-radius: 5px;">
-                  
-                  <div id="group1" class="card-deck">
+             
 
-                    <% step1.forEach(card => { %>
-                      <div id="<%= card.service_name.replace(/\s+/g,'') %>-card" class="card group1 card-settings"  onclick="clickTheCard(this,1)" style="text-align: center; max-width: 204px;">
-                        <img class="card-img-top mx-auto mt-1" src='/img/<%=card.service_icon%>' style="width:5rem; height:5rem;" alt="Card image cap">
-                        <div class="card-body" role="button">
-                          <h6 class="card-title"><input id="<%=card.service_name%>" class="" name="radio1" value="<%=card.service_name%>" type="radio">
-                            <label for="<%=card.service_name%>"><%=card.service_name%></label></h6>
-                          <!-- <p class="card-text"><%#=card.service_desc%></p> -->
-                        </div>
-                      </div>
-                    <% }) %>
 
-                  </div>
+             
 
-                </div>
 
-                <div id="block2" style="display:none; margin: 1% 3%; padding: 2%; background-color: #F4F6F9; border-radius: 5px;">
-                  
-                  <div id="group2" class="card-deck">
-              
-                  </div>
 
-                </div>
-
-              </div>
-
-              <div id="block3" style="display: none; padding: 1%; margin: 1% 0 4%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;">
-                
-                <div class="col-md-12">
-
-                  <div style="margin: 1%; padding: 2%; background-color: #F4F6F9; border-radius: 5px; text-align: center;">
-                
-                    <div id="group3" class="">
-              
-                      <select id="envSelect" size="5" name="env1" class="selectpicker" data-live-search="true" style="width: 100%;" onchange="envSelected(this,1)" required>
-                        
-                        <option value="" disabled selected hidden>Select Environment</option>
-                      
-                      </select>
-                      
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-                
             </section>
 
             <section id="details" class="col-3 right" style="background-color: #343A40; padding: 2% 0;">
