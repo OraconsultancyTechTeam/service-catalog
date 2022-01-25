@@ -97,11 +97,11 @@ const step4 = [
     {size:'Custom - Please provide comment',id:9}
 ]
 
-const step6 = [
-    {name:'Enterprise Edition',id:1},
-    {name:'Advanced Security',id:2},
-    {name:'Advanced Compression',id:3}
-]
+// const step6 = [
+//     {name:'Enterprise Edition',id:1},
+//     {name:'Advanced Security',id:2},
+//     {name:'Advanced Compression',id:3}
+// ]
 
 app.use((req, res, next)=>{
     res.locals.message = req.session.message
