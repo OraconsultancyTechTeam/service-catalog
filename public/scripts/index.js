@@ -129,7 +129,8 @@ function stepToBackend(inputElement, stage_id) {
 }
 
 
-function getStep3(){
+function getStep3() {
+
   var stage_id = document.getElementById("stage2").innerHTML
   $('#current_stage').html(stage_id)
   blockController(stage_id)
@@ -140,7 +141,7 @@ function getStep3(){
     http.onreadystatechange = () => {
       if (http.readyState === 4 && http.status === 200) {
         step3 = JSON.parse(http.response)
-        //console.log(step3)
+
         select = document.getElementById('envSelect');
         
         step3.forEach(card => { 
@@ -157,11 +158,10 @@ function getStep3(){
              $("#envSelect").selectpicker("refresh");
           }
           
-         }) 
-
+         })
 
       }}
-    var params = JSON.stringify({stage_id })
+    var params = JSON.stringify({ stage_id })
     http.send(params);
 }
 
@@ -186,13 +186,13 @@ function makeSelect(element, group){
 
 }
 
-function filterTest(element){
+function filterTest(element) {
+
     var id = element.replace(/\s+/g,'')
     if ($("#" + id + "-card").hasClass("group1")) {
         makeSelect(id, "group1");
         document.getElementById('block2').style.display='block'
-    }
-    else if ($("#" + id + "-card").hasClass("group2")) {
+    } else if ( $("#" + id + "-card").hasClass("group2") ) {
         makeSelect(id, "group2");
         step = true
     }
@@ -323,14 +323,12 @@ function cardCheck(element) {
   }
 }
 
-
 function envSelected(item, option){
 
   var elementValue = item.value;
-changeText(elementValue,option)
+  changeText(elementValue,option)
+
 }
-
-
 
 /*
 *   Update service details
@@ -352,8 +350,5 @@ function changeText(element,option){
 
       $('#' + stage_id)+'1'.html(element)
   }
-    
 
 }
-
-
