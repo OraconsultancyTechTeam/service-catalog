@@ -81,11 +81,11 @@
                 </div> -->
               <%# } %>
 
-              <% if (message.length>0) { %>
+              <% if (message.length > 0) { %>
                 <div class="alert alert-danger"><%= message %></div>
               <% } %>
 
-              <form method="post" action="/login">
+              <form id="loginForm" method="post" action="/login">
 
                 <div class="form-group">
 
@@ -97,7 +97,7 @@
                     
                     </div>
 
-                  <input name="userName" class="form-control" placeholder="Email or login">
+                  <input name="username" class="form-control" placeholder="Email or login">
 
                   </div>
 

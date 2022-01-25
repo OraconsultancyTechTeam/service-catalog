@@ -51,7 +51,7 @@ app.set('views', viewsPath)
 
 app.use(methodOverride('_method'))
 
-//Routers
+// Routers
 const catalogRouter = require('./routers/catalog.js')
 app.use(catalogRouter)
 require('./routers/auth.js')(app,passport); 
