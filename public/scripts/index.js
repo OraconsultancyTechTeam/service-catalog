@@ -152,7 +152,7 @@ function getStep3() {
             $('#envSelect').append('<option value="'+card.option_heading+'">'+card.option_heading+'</option>');
   
             // Set the select value with new option
-             $("#envSelect").val(card.option_heading);
+            //  $("#envSelect").val(card.option_heading);
   
             // Refresh the selectpicker
              $("#envSelect").selectpicker("refresh");
@@ -326,6 +326,7 @@ function cardCheck(element) {
 function envSelected(item, option){
 
   var elementValue = item.value;
+  console.log(elementValue)
   changeText(elementValue,option)
 
 }
