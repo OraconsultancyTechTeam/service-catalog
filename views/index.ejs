@@ -25,7 +25,7 @@
       <div id="header"> <%-include('user/header.ejs')%></div>
 
       <% if (message) { %>
-          <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
+          <div style="text-align: center; margin-bottom: 0;"class="alert alert-<%= message.type %>" role="alert">
               <strong><%= message.intro %></strong> <%= message.message %>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
