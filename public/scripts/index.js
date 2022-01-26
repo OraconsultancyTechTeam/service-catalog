@@ -24,9 +24,13 @@ function blockController(stage){
       document.getElementById('block2').style.display='block'
 
       document.getElementById('block3').style.display='none'
-      document.getElementById('block4').style.display='none'
+      document.getElementById('block4').style.display='none' 
+
       document.getElementById('block5').style.display='none'
       document.getElementById('block6').style.display='none'
+      
+      document.getElementById('block7').style.display='none'
+      document.getElementById('block8').style.display='none'
      
       break;
     case section2:
@@ -34,9 +38,13 @@ function blockController(stage){
       document.getElementById('block2').style.display='none'
 
       document.getElementById('block3').style.display='block'
-      //document.getElementById('block4').style.display='block'
+      document.getElementById('block4').style.display='block'
+      
       document.getElementById('block5').style.display='none'
       document.getElementById('block6').style.display='none'
+
+      document.getElementById('block7').style.display='none'
+      document.getElementById('block8').style.display='none'
       
       break;
     case section3:
@@ -47,7 +55,10 @@ function blockController(stage){
     document.getElementById('block4').style.display='none'
 
     document.getElementById('block5').style.display='block'
-    //document.getElementById('block6').style.display='block'
+    document.getElementById('block6').style.display='block'
+
+    document.getElementById('block7').style.display='none'
+    document.getElementById('block8').style.display='none'
       
     break;
     case section4:
@@ -61,7 +72,7 @@ function blockController(stage){
       document.getElementById('block6').style.display='none'
 
       document.getElementById('block7').style.display='block'
-
+      document.getElementById('block8').style.display='block'
       break;
     default:
       var stage_id = document.getElementById("stage4").innerHTML
