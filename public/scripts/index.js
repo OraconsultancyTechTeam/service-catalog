@@ -14,7 +14,7 @@ var step = false;
 var section1 ='Database Engine'
 var section2 = 'Features'
 var section3 = 'Sizing and Parameters'
-var section4= 'Additional Info & Save'
+var section4= 'Additional Info and Save'
 
 //this controller opens and closes blocks
 function blockController(stage){
@@ -61,7 +61,7 @@ function blockController(stage){
       document.getElementById('block6').style.display='none'
 
       document.getElementById('block7').style.display='block'
-        
+
       break;
     default:
       var stage_id = document.getElementById("stage4").innerHTML
@@ -248,7 +248,8 @@ function getStep5() {
            // console.log("The card id is: "+card.option_id+". The card heading is: "+card.option_heading)
             // Append the option to select
             $('#tshirtSelect').append('<option value="'+card.option_heading+'">'+card.option_heading+'</option>');
-  
+            console.log((card.option_heading).match(/\d+/g))
+            
             // Set the select value with new option
             //  $("#envSelect").val(card.option_heading);
   
@@ -293,26 +294,36 @@ function filterTest(element) {
 
 }
 
+var finalText = '';
+function step8Var(item,option,i){
+ 
+  var elementValue = item.value;
+  finalText = finalText.concat("\n" +elementValue+"\n");
+
+  changeText(finalText,option)
+
+  if(i==3){
+    document.getElementById('subblock').style.display='block'
+  }
+
+}
+
+
 function envSelected(item, option){
   var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
   var elementValue = item.value;
-  console.log(elementValue+'=='+stage_id)
+  console.log(elementValue+'=='+stage_id+" : "+option)
   changeText(elementValue,option)
 
   if (stage_id==section2.replace(/\s+/g,'') && option==1) {
-    //var stage_id = document.getElementById("stage2").innerHTML
-    //blockController(stage_id)
     document.getElementById('block4').style.display='block'
     getStep4()
-    console.log('getting step 4')
   }
   else if(stage_id==section2.replace(/\s+/g,'') && option==2){
      var stage_id = document.getElementById("stage3").innerHTML
      $('#current_stage').html(stage_id)
     blockController(stage_id)
     getStep5()
-    console.log('getting step 5')
-    //document.getElementById('block4').style.display='block'
   }
   else if(stage_id==section3.replace(/\s+/g,'') && option==1){
     document.getElementById('block6').style.display='block'
@@ -324,6 +335,9 @@ function envSelected(item, option){
     $('#current_stage').html(stage_id)
     blockController(stage_id)
 
+}
+  else if(stage_id==section4.replace(/\s+/g,'') && option==1){
+    document.getElementById('block8').style.display='block'
 }
   else{
     console.log('step 3/4 error')

@@ -1,4 +1,4 @@
-<div class="container collapse" id="sub" style="margin-bottom: 50px;">
+<div class="container collapse" id="subblock" style="margin-bottom: 50px; display: none;">
     <div class="row mt-2">
         <div class="col-md-12">
             <div style="text-align: center;">
@@ -12,28 +12,6 @@
 </div>
 
 <script>
-
-    function submitForms() {
-        document.getElementById("form1").submit();
-
-        var step21 = document.getElementById('step2.1-text').innerHTML
-        var step22 = document.getElementById('step2.2-text').innerHTML
-
-        if (step21 == null || step21 == "") {
-            document.getElementById("form2").submit();
-        } else if (step22 == null || step22 == "") {
-            document.getElementById("form2.2").submit();
-        }
-        
-        document.getElementById("form3").submit();
-        document.getElementById("form4").submit();
-        document.getElementById("form5").submit();
-        document.getElementById("form6").submit();
-        document.getElementById("form7").submit();
-        document.getElementById("form8").submit();
-        document.getElementById("addForm").submit();
-    }
-
     function submitTest() {
     var txt;
     if (confirm("Confirm Submitting!")) {

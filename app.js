@@ -296,7 +296,7 @@ app.post('/submit',(req,res) => {
     const host = req.body.radio1;
     const db = req.body.radio2;
     const env = req.body.env1;
-    const tshirt = req.body.tshirtsize;
+    var tshirt = req.body.tshirtsize;
     const dbsize = req.body.dbsize;
     const licence = req.body.licensetype;
     const comment = req.body.commentBox;
@@ -317,7 +317,7 @@ app.post('/submit',(req,res) => {
     return;
     }
 
-
+    tshirt = tshirt.match(/\d+/g);
     const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
     connection.query(sql,(err,rows,fields)=>{
         if(err) throw err

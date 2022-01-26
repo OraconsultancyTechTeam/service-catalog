@@ -44,13 +44,16 @@
                 <h2 id="current_stage">Database Engine</h2>
 
               </div>
-
+              <form id="addForm" class="form-horizontal" method="post" action="/submit">   
               <div id="step1"> <%-include('partials/step1partial.ejs')%></div>
               <div id="step3"> <%-include('partials/step3partial.ejs')%></div>
               <div id="step4"> <%-include('partials/step4partial.ejs')%></div>
               <div id="step5"> <%-include('partials/step5partial.ejs')%></div>
               <div id="step6"> <%-include('partials/step6partial.ejs')%></div>
               <div id="step7"> <%-include('partials/step7partial.ejs')%></div>
+              <div id="step8"> <%-include('partials/step8partial.ejs')%></div>
+              <div id="submitBtn"> <%-include('partials/submit.ejs')%></div>
+            </form>
            
             
             
@@ -76,7 +79,7 @@
 
                 <% }) %>
               </div>
-
+              
             </section>
 
         </div>
