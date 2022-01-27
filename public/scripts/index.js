@@ -81,7 +81,6 @@ function blockController(stage){
 
 }
 
-
 /*
 *   When a card option is clicked
 */

@@ -23,14 +23,14 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(cookieParser('secret'))
-app.use(session({cookie:{maxAge:null}}))
+// app.use(cookieParser('secret'))
+// app.use(session({cookie:{maxAge:null}}))
 
 const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
 
-require('./middleware/passport')(passport);
+require('./middleware/passport')(passport)
 
 //config session
 app.use(session({

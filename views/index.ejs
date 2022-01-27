@@ -21,15 +21,19 @@
 
   <body>
 
-    <div id="header"> <%-include('user/header.ejs')%></div>
+    <div id="header"> <%-include('user/header.ejs', { active: 'Catalog' })%></div>
 
-    <% if (message) { %>
-      <div style="text-align: center; margin-bottom: 0;"class="alert alert-<%= message.type %>" role="alert">
-          <strong><%= message.intro %></strong> <%= message.message %>
+    <!-- <%# if (message) { %>
+      <div style="text-align: center; margin-bottom: 0;"class="alert alert-<%#= message.type %>" role="alert">
+          <strong><%#= message.intro %></strong> <%#= message.message %>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
       </div>
+    <%# } %> -->
+
+    <% if (messages.length > 0) { %>
+      <div class="alert alert-success"><%= messages %></div>
     <% } %>
     
     <div style="height: 100%;">
