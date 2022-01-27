@@ -19,62 +19,125 @@
   
   </head>
 
-  <body>
-    <div>
-        <%- include('partials/navbar.ejs', {active: "Login"}); %>
-      </div>
-    <div class="jumbotron text-center" style="background-color: #3EB489;">
-        <h1><%=title%></h1>
-        <p>Login</p>
-    </div>
-
-    <%if(message){ %>
-      <div style="text-align: center; margin-bottom: 0;" class="alert alert-<%= message.type %>" role="alert">
-        <strong><%= message.intro %></strong> <%= message.message %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <% } %>
-
-      <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">
-                Login Form
-            </div>
-            <div class="card-body">
-                <form id="loginForm" class="form-horizontal" method="post" action="/login">
-                    <div class="form-row">
-                        <div class="col">
-                            <div class="form-group">
-                                <div><input placeholder="User Name" type="text" name="userName" required></div> 
-                            </div>
-                        </div>
-                        <div class="col">
-                             
-                    <div class="form-group">
-                        <div><input placeholder="Password" type="text" name="password" required></div>
-                      </div>
-                        </div>
-                    </div>
-                        
-                     <div class="dataBtns">
-                       <a type="button" id="registerBtn" onclick="myFunction()">Login</a>
-                     </div>
-                 </form>
-                 <p id="demo"></p>
-            </div>
-        </div>
-      </div>
-      
+  <body style="height: 100vh; background-color: #F4F6F9;">
     
-      <script>
-        function myFunction() {
-            document.getElementById("loginForm").submit();
-        }
-        </script>
-  
+    <div><%- include('general/header.ejs', {active: "Login"}); %></div>
 
+    <div class="container-fluid mt-4">
+
+      <div class="row justify-content-center">
+
+        <div class="col-12 col-sm-6 col-md-4" style="display: flex; padding-top: 10vh;">
+
+          <div class="card">
+            
+            <!-- <div class="card-header">Login Form</div>
+            
+            <div class="card-body" style="text-align: center;">
+              
+              <form id="loginForm" class="form-horizontal" method="post" action="/login">
+                
+                <div class="form-row">
+                  
+                  <div class="col">
+                    
+                    <div class="form-group">
+                          
+                      <input placeholder="User Name" type="text" name="userName" required> 
+                      
+                    </div>
+                  
+                  </div>
+                  
+                  <div class="col">
+                            
+                    <div class="form-group">
+                      
+                      <div><input placeholder="Password" type="text" name="password" required></div>
+                    
+                    </div>
+                      
+                  </div>
+                  
+                </div>
+                      
+                <div class="dataBtns"><a type="button" id="registerBtn" class="btn btn-success" onclick="myFunction()">Login</a></div>
+              
+              </form>
+            
+            </div> -->
+
+            <div class="card-body">
+
+              <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
+              <hr>
+
+              <%# if (message) { %>
+                <!-- <div style="text-align: center;"class="alert alert-<%#= message %>" role="alert">
+                  <strong><%#= message %></strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div> -->
+              <%# } %>
+
+              <% if (message.length > 0) { %>
+                <div class="alert alert-danger"><%= message %></div>
+              <% } %>
+
+              <form id="loginForm" method="post" action="/login">
+
+                <div class="form-group">
+
+                  <div class="input-group">
+
+                    <div class="input-group-prepend">
+
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    
+                    </div>
+
+                  <input name="username" class="form-control" placeholder="Email or login">
+
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+
+                  <div class="input-group">
+
+                    <div class="input-group-prepend">
+
+                        <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
+
+                    </div>
+
+                      <input name="password" class="form-control" placeholder="******" type="password">
+
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+
+                  <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+                </div>
+
+                <p class="text-center"><a href="/forgotpassword" class="btn">Forgot password?</a></p>
+
+              </form>
+
+            </div>
+          
+          </div>
+        
+        </div>
+
+      </div>
+
+    </div>
 
   </body>
 </html>

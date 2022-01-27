@@ -16,101 +16,138 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+      <style>
+
+        label {
+          margin-bottom: 0;
+          font-size: small;
+        }
+
+      </style>
   
   </head>
 
-  <body>
-    <div>
-        <%- include('partials/navbar.ejs', {active: "Register"}); %>
-      </div>
-    <div class="jumbotron text-center" style="background-color: #3EB489;">
-        <h1><%=title%></h1>
-        <p>Register</p>
-    </div>
-
-    <%if(message){ %>
-      <div style="text-align: center;"class="alert alert-<%= message.type %>" role="alert">
-        <strong><%= message.intro %></strong> <%= message.message %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <% } %>
-
-      
-
-  <div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            Register Form
-        </div>
-        <div class="card-body">
-            <form id="addUserForm" class="form-horizontal" method="post" action="/register">
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <div><input placeholder="User Name" type="text" name="userName" required></div> 
-                        </div>
-                    </div>
-                    <div class="col">
-                         
-                <div class="form-group">
-                    <div><input placeholder="Email" type="text" name="email" required></div>
-                  </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <div><input placeholder="First Name" type="text" name="firstName" required></div> 
-                        </div>
-                    </div>
-                    <div class="col">
-                         
-                <div class="form-group">
-                    <div><input placeholder="Last Name" type="text" name="lastName" required></div>
-                  </div>
-                    </div>
-                </div>
+  <body style="height: 100vh; background-color: #F4F6F9;">
     
-              
-              <div class="form-group">
-                <div><input placeholder="Password" type="password"name="password" required></div>
-              </div>
-              <div class="form-check">
-                <div class="permission">
-                    <label for="permission">Choose a role:</label>
-                    <select id="permission" name="permission">
-                      <option value="1">Member</option>
-                      <option value="2">Admin</option>
-                    </select>
-                </div>
-              </div>
-              
+    <div><%- include('general/header.ejs', {active: "Register"}); %></div>
 
-                
-                 <div class="dataBtns">
-                   <a type="button" id="registerBtn" onclick="myFunction()">Create</a>
-                 </div>
-             </form>
-             <p id="demo"></p>
-        </div>
+    <!-- <div class="jumbotron text-center" style="background-color: #3EB489;">
+        <h1><%#=title%></h1>
+        <p>Register</p>
+    </div> -->
+
+    <!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+      <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+    <div class="container-fluid mt-4">
+
+      <div class="row justify-content-center">
+
+        <div class="col-12 col-sm-6 col-md-4 justify-content-center" style="display: flex; padding-top: 1vh;">
+          
+          <div class="card">
+            
+            <div class="card-header">Register Form</div>
+          
+            <div class="card-body">
+              
+              <form id="addUserForm" class="form-horizontal p-2" method="post" action="/register">
+
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label" for="firstName" style="margin-left: 0px;">Username</label>
+                      <input type="text" id="lastName" class="form-control" placeholder="Username" name="username" required>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
+                      <input type="text" id="email" class="form-control" placeholder="Email" name="email" required>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label" for="firstName" style="margin-left: 0px;">First Name</label>
+                      <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName" required>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
+                      <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" required>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label" for="password" style="margin-left: 0px;">Password</label>
+                      <input type="text" id="password" class="form-control" placeholder="Password" name="password" required>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label select-label" for="accountType" style="margin-left: 0px;">Access Level</label>
+                      <select id="permission" class="select form-control" name="permission" required>
+                        <option value="" hidden selected disabled>Select access level</option>
+                        <option value="1">Member</option>
+                        <option value="2">Admin</option>
+                      </select>
+                    </div>
+
+                  </div>
+                </div>
+
+                <br>
+                  
+                <div class="dataBtns" style="text-align: center;">
+                    
+                  <a type="button" class="btn btn-success" id="registerBtn" onclick="myFunction()">Create</a>
+                  
+                </div>
+              
+              </form>
+              
+              <hr>
+
+              <p>Already have an account? <a href="/login">Login</a></p>
+              <p>Or go <a href="/">home</a>.</p>
+          </div>
+      </div>
     </div>
   </div>
+    </div>
   
 
-  <script>
-    function myFunction() {
-      var txt;
-      if (confirm("Confirm Adding User!")) {
-        document.getElementById("addUserForm").submit();
-        txt = "Add Confirmed";
-      } else {
-        txt = "Add Cancelled";
+    <script>
+      function myFunction() {
+        var txt;
+        if (confirm("Confirm Adding User!")) {
+          document.getElementById("addUserForm").submit();
+          txt = "Add Confirmed";
+        } else {
+          txt = "Add Cancelled";
+        }
+        document.getElementById("demo").innerHTML = txt;
       }
-      document.getElementById("demo").innerHTML = txt;
-    }
     </script>
   </body>
 </html>
