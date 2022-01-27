@@ -1,3 +1,6 @@
+html,body {
+  height: 100%;
+  
 /* 
 * Navbar Styles
 */
@@ -19,15 +22,15 @@
 }
 
 .selected {
-  border-color: #28a745 !important;
+  border-color: #3EB489 !important;
   background-color: #f2f2f2;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .unselected{
-  background-color: red;
-  border-color: purple;
+  background-color: #222;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 3px 6px rgba(0, 0, 0, 0.23);
+  opacity: 0.5;
 }
   
 .card {
@@ -38,16 +41,37 @@
   transition: all 0.5s ease;
   width:500px;
   margin:5px;
+  cursor: pointer;
+}
+
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
 #servDetails {
-  position: fixed;
+  position: absolute;
   /* top: 100vh / 2; */
   right: 0;
-  margin-right: 2% ;
+  /* margin-right: 2% ; */
   z-index: 10;
-  min-width: 210px;
+  padding: 0;
+  /* min-width: 210px; */
+  height: 100%;
+  top: 280px;
+  background-color: #222;
 }
+
+/* #details {
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+} */
+
+/* body {
+  overflow-y: hidden;
+} */
 
 .collapsible {
   background-color: white;
@@ -63,7 +87,7 @@
 }
 
 .open, .collapsible:hover {
-  background-color: #28a745;
+  background-color: #3EB489;
   color: black;
   font-weight: bold;
 }

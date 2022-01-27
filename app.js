@@ -14,7 +14,6 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 // Define paths for express config
 const publicDirectoryPath = path.join(__dirname,'public')
 const viewsPath = path.join(__dirname, 'views')
-//console.log("Directory Name: "+ viewsPath)
 
 // Setup static directory to serve
 //app.use(express.static(publicDirectoryPath))
@@ -23,6 +22,9 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+app.use(cookieParser('secret'))
+app.use(session({cookie:{maxAge:null}}))
 
 const session = require('express-session')
 const passport = require('passport')
@@ -56,8 +58,6 @@ const catalogRouter = require('./routers/catalog.js')
 app.use(catalogRouter)
 require('./routers/auth.js')(app,passport); 
 
-
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
-
