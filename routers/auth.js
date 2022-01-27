@@ -16,17 +16,9 @@ module.exports = function(app,passport) {
     })
       
   })
-
-
-  app.post('/login', 
-    passport.authenticate('local-login', { failureRedirect: '/login' }),
-    function(req, res) {
-      res.redirect('/catalog');
-  });
-
   // Process login form
   app.post('/login', passport.authenticate('local-login', {
-      successRedirect : '/catalog', // redirect to the secure profile section
+      successRedirect : '/profile', // redirect to the secure profile section
       failureRedirect : '/login', // redirect back to the signup page if there is an error
       failureFlash : true // allow flash messages
     }),
@@ -40,6 +32,10 @@ module.exports = function(app,passport) {
       res.redirect('/login');
   });
 
+
+// =====================================
+	// SIGNUP ==============================
+	// =====================================
   // Load register page
   app.get('/register',isLoggedIn, (req, res) => {
     res.render('register', {
@@ -47,12 +43,14 @@ module.exports = function(app,passport) {
         message: req.flash('registerMessage') 
     })
   })
+	// process the signup form
+	app.post('/register', passport.authenticate('local-register', {
+		successRedirect : '/profile', // redirect to the secure profile section
+		failureRedirect : '/register', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+	}));
 
-  app.post('/register',
-    passport.authenticate('local-register',{failureRedirect:'/register'}),
-    function(req,res){
-      res.redirect('/login');
-  });
+
 
   // =====================================
 	// LOGOUT ==============================
@@ -70,6 +68,6 @@ function isLoggedIn(req, res, next) {
 		return next();
   } else {
       // if they aren't redirect them to the home page
-    res.redirect('/catalog');
+    res.redirect('/profile');
   }
 }

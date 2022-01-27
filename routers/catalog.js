@@ -70,6 +70,8 @@ router.get('/', (req, res) => {
             message: req.flash('loginMessage') 
 		});
 	});
+
+
 //method checks selected card service id to find corresponding service stages
 let service_stages
 function stepLooper(stepCard) {
@@ -102,6 +104,19 @@ router.post('/catalog', (req,res) => {
     stepLooper(req.body.stepCard)
 
 })
+
+
+
+router.get('/profile',isLoggedIn, (req, res) => {
+    req.flash('message')
+    res.render('profile', {
+        title: 'Service Catalog',
+        user : req.user
+        
+    })
+})
+
+
 
 //Method submits data of catalog to database
 router.post('/submit',(req,res) => {
