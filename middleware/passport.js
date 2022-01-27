@@ -114,10 +114,22 @@ module.exports = function(passport) {
                                 else {
                                     const sql = "insert into users values(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
                                     connection.query(sql,(err,users,fields) => {
-                                        if(err) throw err
+                                        if(err)
+                                          return done(err);
                                         else{
                                             // all is well, return successful user
-                                            return done(null, users[0]);
+                                            var newUserMysql = {
+                                                username: username,
+                                                password: hash,
+                                                firstname: firstName,
+                                                lastname: lastName,
+                                                permission:permission,
+                                                email:email
+                                                 // use the generateHash function in our user model
+                                            };
+
+                                            newUserMysql.id = users.insertId;
+                                            return done(null, newUserMysql);
                                         }
                                     })
                                 }
