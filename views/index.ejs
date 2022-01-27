@@ -32,8 +32,8 @@
       </div>
     <%# } %> -->
 
-    <% if (messages.length > 0) { %>
-      <div class="alert alert-success"><%= messages %></div>
+    <% if (typeof catalogMessages != "undefined" && catalogMessages.length > 0) { %>
+      <div id='catalogAlert' class="alert alert-success"><%= catalogMessages %></div>
     <% } %>
     
     <div style="height: 100%;">
