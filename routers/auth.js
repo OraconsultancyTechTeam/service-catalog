@@ -52,7 +52,16 @@ module.exports = function(app,passport) {
     passport.authenticate('local-register',{failureRedirect:'/register'}),
     function(req,res){
       res.redirect('/login');
-  });
+  })
+
+  app.get('/forgotpassword', (req,res) => {
+    res.render('forgotpassword', {
+      title: 'Change Password',
+      message: req.flash('changePasswordMessage')
+    })
+  })
+
+  app.post('/forgotpassword', passport.authenticate('local-changepassword',{ successRedirect:'/login', failureRedirect:'/forgotpassword', failureFlash: true }))
 
   // =====================================
 	// LOGOUT ==============================
