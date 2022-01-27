@@ -54,119 +54,69 @@
             <div class="card-body">
               
               <form id="addUserForm" class="form-horizontal p-2" method="post" action="/register">
-                  
-                <div class="form-row justify-content-center">
-                          
-                  <div class="row form-group">
-                      
-                    <div class="col-md-12 mb-3 mb-md-0">
-                      
-                      <div>
-                        <label class="font-weight-bold">Username</label>
-                        <input class="form-control" placeholder="User Name" type="text" name="username" required>
-                      </div>
-                          
-                    </div>
-                      
-                  </div>
-                       
-                  <div class="row form-group">
 
-                    <div class="col-md-12 mb-3 mb-md-0">
-                      
-                      <div>
-                        <label class="font-weight-bold">Email</label>
-                        <input class="form-control" placeholder="Email" type="text" name="email" required>
-                      </div>
-                    
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label" for="firstName" style="margin-left: 0px;">Username</label>
+                      <input type="text" id="lastName" class="form-control" placeholder="Username" name="username" required>
                     </div>
-                      
+
                   </div>
-                  
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
+                      <input type="text" id="email" class="form-control" placeholder="Email" name="email" required>
+                    </div>
+
+                  </div>
                 </div>
 
-                <div class="form-row justify-content-center">
-                      
-                  <div class="row form-group">
+                <div class="row">
+                  <div class="col-md-6 mb-2">
 
-                    <div class="col-md-12 mb-3 mb-md-0">
-                    
-                      <div>
-                        <label class="font-weight-bold">First Name</label>
-                        <input class="form-control" placeholder="First Name" type="text" name="firstName" required>
-                      </div>
-                  
+                    <div class="form-outline">
+                      <label class="form-label" for="firstName" style="margin-left: 0px;">First Name</label>
+                      <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName" required>
                     </div>
 
                   </div>
-                      
-                  <div class="row form-group">
-                          
-                    <div class="col-md-12 mb-3 mb-md-0">
-                        
-                      <div>
-                        <label class="font-weight-bold">Surname</label>
-                        <input class="form-control" placeholder="Last Name" type="text" name="lastName" required>
-                      </div>
-                      
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
+                      <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" required>
                     </div>
-                        
+
                   </div>
-                    
-                </div>
-      
-                <div class="form-row justify-content-center">
-
-                  <div class="row form-group">
-
-                    <div class="col-md-12 mb-3 mb-md-0">
-                  
-                      <div>
-                        <label class="font-weight-bold">Password</label>
-                        <input class="form-control" placeholder="Password" type="password" name="password" required>
-                      </div>
-
-                    </div>
-                  
-                  </div>
-
-                  <div class="row form-group">
-
-                    <div class="col-md-12 mb-3 mb-md-0">
-                  
-                      <div>
-                        <label for="permission" class="font-weight-bold">Account Type</label>
-                        <select id="permission" class="form-control" name="permission" style="width: 206.8px;" required>
-                          <option value="" hidden selected disabled>Select access level</option>
-                          <option value="1">Member</option>
-                          <option value="2">Admin</option>
-                        </select>
-                      </div>
-
-                    </div>
-                  
-                  </div>
-                
                 </div>
 
-                <!-- <br> -->
-                
-                <!-- <div class="form-row justify-content-center">
-                  
-                  <div class="permission">
-                      
-                    <label for="permission">Account Type:</label>
-                      
-                    <select id="permission" name="permission">
-                      <option value="1">Member</option>
-                      <option value="2">Admin</option>
-                    </select>
-                  
-                  </div> 
-                
-                </div> -->
+                <div class="row">
+                  <div class="col-md-6 mb-2">
 
-                <!-- <br> -->
+                    <div class="form-outline">
+                      <label class="form-label" for="password" style="margin-left: 0px;">Password</label>
+                      <input type="text" id="password" class="form-control" placeholder="Password" name="password" required>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                      <label class="form-label select-label" for="accountType" style="margin-left: 0px;">Access Level</label>
+                      <select id="permission" class="select form-control" name="permission" required>
+                        <option value="" hidden selected disabled>Select access level</option>
+                        <option value="1">Member</option>
+                        <option value="2">Admin</option>
+                      </select>
+                    </div>
+
+                  </div>
+                </div>
+
+                <br>
                   
                 <div class="dataBtns" style="text-align: center;">
                     
