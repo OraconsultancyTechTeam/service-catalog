@@ -133,19 +133,30 @@ router.post('/submit', (req,res) => {
 // REQUESTS ============================
 // =====================================
 
-let requests = connection.query('SELECT * FROM requests ORDER BY due_by ASC', (err,res) => {
-    return requests = res
-})
+// let requests
 
 router.get('/requests', (req,res) => {
-    res.render('requests',{
-        title: 'Service Catalog Requests',
-        requests
-    });
+    connection.query('SELECT * FROM requests ORDER BY due_by ASC', (err,result) => {
+        res.render('requests',{
+            title: 'Service Catalog Requests',
+            requests: result
+        });
+    })
+    
 })
 
 router.post('/requests', (req,res) => {
 
+})
+
+router.get('/deleteRequest/:id', (req,res) => {
+    connection.query('DELETE FROM requests WHERE id=' + req.params.id, (err,response) => {
+        if (err) throw err
+        else {
+            console.log('Request deleted successfully')
+        }
+        return res.redirect('/requests')
+    })
 })
 
 // =====================================
