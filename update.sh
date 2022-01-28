@@ -1,3 +1,3 @@
 git add .
-git commit -m "Version $1"
-git push service-catalog redesign
+git commit -m "$1"
+git push service-catalog main
