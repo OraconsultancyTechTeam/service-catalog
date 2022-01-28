@@ -1,6 +1,7 @@
 /*
-*   Change stage when clicked
+*   Change Menu stage when clicked
 */
+/*
 $('.stages').click(function () {
     var id = $(this).attr('id')
     var stage = document.getElementById(id).innerHTML
@@ -9,7 +10,7 @@ $('.stages').click(function () {
     
     // Need to add in loading content specific to chosen stage
     // and set to content div
-})
+})*/
 var step = false;
 var section1 ='Database Engine'
 var section2 = 'Features'
@@ -305,6 +306,9 @@ function filterTest(element) {
 }
 
 var finalText = '';
+var inputA = false;
+var inputB = false;
+var inputC = false;
 function step8Var(item,option,i){
  
   var elementValue = item.value;
@@ -312,12 +316,25 @@ function step8Var(item,option,i){
 
   changeText(finalText,option)
 
-  if(i==3){
+  if(i==1){
+    inputA = true;
+  }
+  else if(i==2){
+    inputB = true;
+  }
+  else if(i==3){
+    inputC = true;
+  }
+  
+  if(inputA==true && inputB==true && inputC==true){
     document.getElementById('subblock').style.display='block'
   }
 
-}
+ 
 
+}
+var s3a =false;
+var s3b =false;
 
 function envSelected(item, option){
   var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
@@ -337,13 +354,13 @@ function envSelected(item, option){
   }
   else if(stage_id==section3.replace(/\s+/g,'') && option==1){
     document.getElementById('block6').style.display='block'
+    s3a=true;
+    checkInputs()
 
  }
  else if(stage_id==section3.replace(/\s+/g,'') && option==2){
-    var stage_id = document.getElementById("stage4").innerHTML
-    //console.log(stage_id+" 1")
-    $('#current_stage').html(stage_id)
-    blockController(stage_id)
+    s3b=true;
+    checkInputs();
 
 }
   else if(stage_id==section4.replace(/\s+/g,'') && option==1){
@@ -355,6 +372,19 @@ function envSelected(item, option){
  
 
 }
+
+function checkInputs(){
+
+  if(s3a==true && s3b==true){
+    var stage_id = document.getElementById("stage4").innerHTML
+    $('#current_stage').html(stage_id)
+    blockController(stage_id)
+    return true
+  }
+return false
+
+}
+
 
 /*
 *   Update service details
@@ -377,4 +407,71 @@ function changeText(element,option, stage_id){
       $('#' + stage_id)+'1'.html(element)
   }
 
+
+
+
+
+}
+
+//for step buttons on catalog page
+function cycleThroughPages(direction){
+
+  var current_stage = document.getElementById("current_stage").innerHTML
+
+  
+  if (current_stage==section1 && direction=="R") {
+    var stage = current_stage.replace(/\s+/g,'')+'2';
+    var step2Check = document.getElementById(stage).innerHTML
+    if(step2Check == ""){
+    console.log('Variable "step2Check" is empty.');
+  }
+  else{
+    var stage_id = document.getElementById("stage2").innerHTML
+     $('#current_stage').html(stage_id)
+     blockController(stage_id)
+  }
+}
+
+else if (current_stage==section2 && direction=="L") {
+    var stage_id = document.getElementById("stage1").innerHTML
+    $('#current_stage').html(stage_id)
+    blockController(stage_id)
+}
+else if (current_stage==section2 && direction=="R") {
+  var stage = current_stage.replace(/\s+/g,'')+'2';
+  var step2Check = document.getElementById(stage).innerHTML
+  if(step2Check == ""){
+  console.log('Variable "step2Check" is empty.');
+}
+else{
+  var stage_id = document.getElementById("stage3").innerHTML
+  $('#current_stage').html(stage_id)
+  blockController(stage_id)
+} 
+}
+else if (current_stage==section3 && direction=="L") {
+var stage_id = document.getElementById("stage2").innerHTML
+ $('#current_stage').html(stage_id)
+blockController(stage_id)
+}
+else if (current_stage==section3 && direction=="R") {
+  var stage = current_stage.replace(/\s+/g,'')+'2';
+  var step2Check = document.getElementById(stage).innerHTML
+  if(step2Check == ""){
+  console.log('Variable "step2Check" is empty.');
+  }
+  else{
+    if(checkInputs()==true){
+      var stage_id = document.getElementById("stage4").innerHTML
+      $('#current_stage').html(stage_id)
+      blockController(stage_id)
+    }
+  
+  } 
+}
+else if (current_stage==section4 && direction=="L") {
+var stage_id = document.getElementById("stage3").innerHTML
+ $('#current_stage').html(stage_id)
+blockController(stage_id)
+}
 }
