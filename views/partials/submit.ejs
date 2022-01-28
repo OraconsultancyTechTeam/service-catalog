@@ -17,30 +17,66 @@
     if (confirm("Confirm Submitting!")) {
 
         var mail = document.getElementById("mangEmail");
+        var cStage_id = document.getElementById("stage4").innerHTML
         if(ValidateEmail(mail)==true){
-            document.getElementById("addForm").submit();
-            txt = "Data Submit Confirmed";
+            if(customCheck(cStage_id)==false){
+                document.getElementById("addForm").submit();
+                txt = "Data Submit Confirmed";
+            }
+            else{
+                var comAl = document.getElementById("commentAlert");
+                 comAl.style.display = "block"; 
+                return;
+            }
+
         }
         else{
-           
+            var el = document.getElementById("emailAlert");
+            el.style.display = "block"; 
             return;
         }
 
     } else {
       txt = "Data Submit Cancelled";
+      customCheck()
+      
      }
 
     }
+
+  
 
     function ValidateEmail(inputText) 
 {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(inputText.value.match(mailformat)){
+       
     
         return true}
     else{
     
         return false}
 }
+
+
+function customCheck(cStage_id){
+    var stage_id = document.getElementById("stage3").innerHTML
+    var stage = stage_id.replace(/\s+/g,'')+'1';
+    var tshirtcheck = document.getElementById(stage).innerHTML
+
+    if(tshirtcheck=='Custom'){
+        
+        var cStage = cStage_id.replace(/\s+/g,'')+'1';
+        var commentcheck = document.getElementById(cStage).innerHTML
+        if(typeof commentcheck == "undefined" || commentcheck.length == 0 || commentcheck=="-------------------------------" ){
+           return true;
+        }
+        else{
+            return false;
+        }
+    }
+    return false
+}
+
 
 </script>
