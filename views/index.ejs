@@ -26,16 +26,16 @@
           </button>
       </div>
     <%# } %> -->
-
-    <% if (typeof catalogMessages != "undefined" && catalogMessages.length > 0) { %>
-      <div id='catalogAlert' class="alert alert-success"><%= catalogMessages %></div>
-    <% } %>
     
     <div style="height: 100%;">
 
       <div class="row" style="height:100%; margin: 0;">
 
         <section id="display_content" class="col-9" style="display: flex; flex-flow: column; background-color: #F4F6F9;">
+
+          <% if (typeof catalogMessages != "undefined" && catalogMessages.length > 0) { %>
+            <div id='catalogAlert' class="alert alert-success" style="margin-bottom: 0;"><%= catalogMessages %></div>
+          <% } %>
           
           <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
 
