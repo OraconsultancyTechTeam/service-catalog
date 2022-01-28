@@ -1,11 +1,8 @@
-//const express = require('express')
-
-
-//const router = new express.Router()
-
 module.exports = function(app,passport) {
-  
-  let message
+
+  // =====================================
+	// LOGIN ===============================
+	// =====================================
 
   // Load login page
   app.get('/login', isLoggedIn, (req, res) => {
@@ -16,6 +13,7 @@ module.exports = function(app,passport) {
     })
       
   })
+
   // Process login form
   app.post('/login', passport.authenticate('local-login', {
       successRedirect : '/profile', // redirect to the secure profile section
@@ -30,12 +28,12 @@ module.exports = function(app,passport) {
         req.session.cookie.expires = false;
       }
       res.redirect('/login');
-  });
+  })
 
-
-// =====================================
+  // =====================================
 	// SIGNUP ==============================
 	// =====================================
+
   // Load register page
   app.get('/register',isLoggedIn, (req, res) => {
     res.render('register', {
@@ -43,13 +41,19 @@ module.exports = function(app,passport) {
         message: req.flash('registerMessage') 
     })
   })
-	// process the signup form
+
+	// Process the signup form
 	app.post('/register', passport.authenticate('local-register', {
 		successRedirect : '/profile', // redirect to the secure profile section
 		failureRedirect : '/register', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}))
 
+  // =====================================
+	// FORGOT PASSWORD =====================
+	// =====================================
+
+  // Load forgot password page
   app.get('/forgotpassword', (req,res) => {
     res.render('forgotpassword', {
       title: 'Change Password',
@@ -57,11 +61,14 @@ module.exports = function(app,passport) {
     })
   })
 
+  // Process the forgot password information
   app.post('/forgotpassword', passport.authenticate('local-changepassword',{ successRedirect:'/login', failureRedirect:'/forgotpassword', failureFlash: true }))
 
   // =====================================
 	// LOGOUT ==============================
 	// =====================================
+
+  // Log the user out
 	app.get('/logout', function(req, res) {
 		req.logout()
 		res.redirect('/')
@@ -74,7 +81,7 @@ function isLoggedIn(req, res, next) {
 	if (!req.isAuthenticated()){
 		return next();
   } else {
-      // if they aren't redirect them to the home page
+    // if they aren't redirect them to the home page
     res.redirect('/profile');
   }
 }

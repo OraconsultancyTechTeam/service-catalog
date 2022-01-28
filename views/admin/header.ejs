@@ -1,0 +1,72 @@
+<!--
+    CDN imports
+-->
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+</head>
+<!--
+    Navbar
+-->
+
+<style> nav div a{
+    margin: 5px 20px;
+}
+</style>
+
+<nav class="navbar navbar-dark bg-dark justify-content-between" style="display: flex; flex-direction: row; justify-content: flex-start;">
+    <!-- Navbar content -->
+    <a class="navbar-brand" style="font-size: 1.5rem; font-weight: bold; margin-right: 120px;" href="#">Service Catalog</a>
+    <!--<div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div> -->
+    <div class="navbar-nav" style="flex-direction: row;">
+        <a <% if (active == "Requests") { %> class="nav-active" <% } else { %> class="nav-link" <% } %> href="/requests">Requests <% if (active == "Requests") { %> <span class="sr-only">(current)</span> <% } %></a>
+        <a <% if (active == "Catalog") { %> class="nav-active" <% } else { %> class="nav-link" <% } %> href="/catalog">Catalog <% if (active == "Catalog") { %> <span class="sr-only">(current)</span> <% } %></a>
+        <a <% if (active == "Profile") { %> class="nav-active" <% } else { %> class="nav-link" <% } %> href="/profile">Profile <% if (active == "Profile") { %> <span class="sr-only">(current)</span> <% } %></a>
+        <a <% if (active == "Logout") { %> class="nav-active" <% } else { %> class="nav-link" <% } %> href="/logout">Logout <% if (active == "Logout") { %> <span class="sr-only">(current)</span> <% } %></a>
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+
+<script>
+
+    // DATATABLES
+    $(document).ready(function() {
+        $('#requestsTable').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          'columnDefs': [ { 
+                'targets': [-1,-2,-4], /* column index */ 
+                'orderable': false, /* true or false */ 
+          }],
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+        });
+    })
+
+</script>

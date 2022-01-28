@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <title> <%= title %></title>
+    </head>
+
+    <body style="height: 100vh; display: flex; flex-direction: column;">
+        
+        <div style="flex: 0 1 auto;">
+            <%- include('admin/header.ejs', {active: "Requests"}); %>
+        </div>
+        
+        <!-- <div class="jumbotron text-center" style="background-color: #3EB489; margin-bottom: 0; border-radius: 0;">
+            <h1><%#=title%></h1>
+        </div> -->
+    
+        <div class="container-fluid" style="flex: 1 1 auto;">
+        
+        <div class="row" style="height: 100%;">
+        
+            <section id="news_content" class="col-12" style="display: flex; flex-flow: column; background-color: #F4F6F9; height: 100%;">
+                
+            <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
+
+                <h2><%=title%></h2>
+
+            </div>
+
+            <div style="padding: 1%; margin: 1% 0 2%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;">
+
+                <div style="margin: 1% 3%; padding: 2%; border-radius: 5px;">
+                
+                <div id="pageContent" class="card-deck" style="display: flex; flex-wrap: wrap;">
+
+                    <table id="requestsTable" class="table table-striped" style="border: 1px solid #ddd;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Host</th>
+                                <th>Database</th>
+                                <th>Environment</th>
+                                <th>Tshirt Size</th>
+                                <th>Database Size</th>
+                                <th>Licence</th>
+                                <th>Comments</th>
+                                <th>Due Date</th>
+                                <th>Requested By</th>
+                                <th>Manager's Email</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% requests.forEach(req => { %>
+                                <tr>
+                                    <td><%= req.id %></td>
+                                    <td><%= req.host %></td>
+                                    <td><%= req.db %></td>
+                                    <td><%= req.environment %></td>
+                                    <td><%= req.tshirt_size %></td>
+                                    <td><%= req.db_size %></td>
+                                    <td><%= req.licence %></td>
+                                    <td><%= req.comments %></td>
+                                    <td><%= req.due_by.toLocaleDateString() %></td>
+                                    <td><%= req.req_by %></td>
+                                    <td><%= req.mang_email %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                </div>
+
+            </div>
+                
+            </section>
+        
+        </div>
+        
+        </div>
+
+        <!-- <div style="flex: 0 1 40px;">
+        <%#- include('user/footer.ejs') %>
+        </div> -->
+        
+        
+        
+    </body>
+</html>
