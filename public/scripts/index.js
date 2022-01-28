@@ -76,7 +76,7 @@ function blockController(stage){
       break;
     default:
       var stage_id = document.getElementById("stage4").innerHTML
-      console.log(section4+":--------: "+stage_id+" 2")
+      //console.log(section4+":--------: "+stage_id+" 2")
   }
 
 }
@@ -258,7 +258,7 @@ function getStep5() {
            // console.log("The card id is: "+card.option_id+". The card heading is: "+card.option_heading)
             // Append the option to select
             $('#tshirtSelect').append('<option value="'+card.option_heading+'">'+card.option_heading+'</option>');
-            console.log((card.option_heading).match(/\d+/g))
+            //console.log((card.option_heading).match(/\d+/g))
             
             // Set the select value with new option
             //  $("#envSelect").val(card.option_heading);
@@ -322,7 +322,7 @@ function step8Var(item,option,i){
 function envSelected(item, option){
   var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
   var elementValue = item.value;
-  console.log(elementValue+'=='+stage_id+" : "+option)
+  //console.log(elementValue+'=='+stage_id+" : "+option)
   changeText(elementValue,option)
 
   if (stage_id==section2.replace(/\s+/g,'') && option==1) {
@@ -341,7 +341,7 @@ function envSelected(item, option){
  }
  else if(stage_id==section3.replace(/\s+/g,'') && option==2){
     var stage_id = document.getElementById("stage4").innerHTML
-    console.log(stage_id+" 1")
+    //console.log(stage_id+" 1")
     $('#current_stage').html(stage_id)
     blockController(stage_id)
 
@@ -350,7 +350,7 @@ function envSelected(item, option){
     document.getElementById('block8').style.display='block'
 }
   else{
-    console.log('step 3/4 error')
+  //  console.log('step 3/4 error')
   }
  
 

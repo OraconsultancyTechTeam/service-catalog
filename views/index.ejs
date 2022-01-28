@@ -26,7 +26,26 @@
           </button>
       </div>
     <%# } %> -->
-    
+
+    <% if (typeof catalogMessages != "undefined" && catalogMessages.length > 0) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success</strong> <%= catalogMessages %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% } %>
+    <div id="emailAlert" style="display:none" >
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Check Manager Email</strong> Please enter a valid email, in email format
+      </div>
+    </div>
+    <div id="commentAlert" style="display:none" >
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Please Enter Comment</strong> Please Enter your Custom T-Shirt Size in the comment section
+      </div>
+    </div>
+
     <div style="height: 100%;">
 
       <div class="row" style="height:100%; margin: 0;">
