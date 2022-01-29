@@ -4,8 +4,7 @@
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
-// var mysql = require('mysql');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt')
 const validator = require('validator')
 var connection = require('../db/mySQL')
 const saltRounds = 10;
@@ -20,14 +19,15 @@ module.exports = function(passport) {
     // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser(function(user,done) {
+        console.log(user)
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
         
-        connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, user){
+        connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err,user){
             done(err, user[0]);
         });
         
@@ -91,7 +91,7 @@ module.exports = function(passport) {
             const permission = req.body.permission
 
             if(!validator.isEmail(email)){
-                return done(null, false, req.flash('registerMessage', 'Please enter correct email format'));
+                return done(null, false, req.flash('registerMessage', 'Please enter correct email format'))
             }
 
             connection.query("SELECT * FROM users WHERE username = ?",[username], function(err,rows) {
@@ -112,7 +112,8 @@ module.exports = function(passport) {
                                 if (err)
                                     return done(err);
                                 else {
-                                    const sql = "insert into users values(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
+                                    const sql = "INSERT INTO users VALUES(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"',null)";
+                                    console.log(sql)
                                     connection.query(sql,(err,users,fields) => {
                                         if(err)
                                           return done(err);
@@ -141,63 +142,77 @@ module.exports = function(passport) {
         })
     )
 
-    // =========================================================================
-    // LOCAL changepassword ============================================================
-    // =========================================================================
+    // // =========================================================================
+    // // LOCAL changepassword ============================================================
+    // // =========================================================================
 
-    passport.use(
-        'local-changepassword',
-        new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-            usernameField : 'username',
-            passwordField : 'newPassword',
-            newPasswordField : 'confirmPassword',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
-        },
-        function(req, username, password, newPassword, done) {
-            // find a user whose email is the same as the forms email
-            // we are checking to see if the user trying to login already exists
+    // passport.use(
+    //     'local-changepassword',
+    //     new LocalStrategy({
+    //         // by default, local strategy uses username and password, we will override with email
+    //         usernameField : 'username',
+    //         passwordField : 'newPassword',
+    //         passReqToCallback : true // allows us to pass back the entire request to the callback
+    //     },
+    //     function(req, username, password, done) {
+    //         // find a user whose email is the same as the forms email
+    //         // we are checking to see if the user trying to login already exists
 
-            const firstName = req.body.firstName
-            const lastName = req.body.lastName
-            const email = req.body.email
-            const permission = req.body.permission
+    //         const firstName = req.body.firstName
+    //         const lastName = req.body.lastName
+    //         const newPassword = req.body.newPassword
+    //         const confirmPassword = req.body.confirmPassword
 
-            if(!validator.isEmail(email)){
-                return done(null, false, req.flash('registerMessage', 'Please enter correct email format'));
-            }
+    //         if (req.body.email) {
+    //             const email = req.body.email
+    //             if(!validator.isEmail(email)){
+    //                 return done(null, false, req.flash('changePasswordMessage', 'Please enter correct email format'));
+    //             }
+    //         }
 
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err,rows) {
-                if (err) return done(err)
-                if (rows.length) {
-                    connection.query("SELECT * FROM users WHERE email = ?",[email],function(err,row) {
-                        if (err) return done(err)
-                        if (row.length) {
-                            return done(null,false,req.flash('changePasswordMessage','That email is already taken'));
-                        }
-                        else{
+    //         if (newPassword != confirmPassword) {
+    //             return done(null, false, req.flash('changePasswordMessage', 'Passwords do not match'))
+    //         }
 
-                            bcrypt.hash(password,saltRounds,(err,hash) => {
-                                if (err)
-                                    return done(err);
-                                else {
-                                    const sql = "insert into users values(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"')";
-                                    connection.query(sql,(err,users,fields) => {
-                                        if(err) throw err
-                                        else{
-                                            // all is well, return successful user
-                                            return done(null, users[0]);
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    })
+    //         connection.query("SELECT * FROM users WHERE username = ?",[username], function(err,rows) {
+    //             if (err) return done(err)
+    //             if (rows.length) {
+    //                 bcrypt.hash(newPassword,saltRounds,(err,hash) => {
+    //                     if (err) return done(err);
+    //                     else {
+    //                         const sql = "UPDATE users SET password='" + hash + "' WHERE username ='" + username + "'";
+    //                         connection.query(sql,(err,users) => {
+    //                             if(err) throw err
+    //                             else{
+    //                                 // all is well, return success message
+    //                                 return done(null, true, req.flash('changePasswordMessage', 'Password Updated Successfully'))
+    //                             }
+    //                         })
+    //                     }
+    //                 })
+    //             } else {
+    //                 connection.query("SELECT * FROM users WHERE email = ?",[email],function(err,row) {
+    //                     if (err) return done(err)
+    //                     if (row.length) {
+    //                         bcrypt.hash(newPassword,saltRounds,(err,hash) => {
+    //                             if (err)
+    //                                 return done(err);
+    //                             else {
+    //                                 const sql = "UPDATE users SET password=" + newPassword + " WHERE email=" + email
+    //                                 connection.query(sql,(err,users) => {
+    //                                     if (err) throw err
+    //                                     else {
+    //                                         // all is well, return success message
+    //                                         return done(null, true, req.flash('changePasswordMessage', 'Password Updated Successfully'))
+    //                                     }
+    //                                 })
+    //                             }
+    //                         })
                     
-                } else {
-                    return done(null, false, req.flash('changePasswordMessage', 'That username is that registered.'));
-                }
-            })
-        })
-    )
+    //                     }
+    //                 })
+    //             }
+    //         })
+    //     })
+    // )
 }

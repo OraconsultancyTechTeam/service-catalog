@@ -1,4 +1,10 @@
+const nodemailer = require('nodemailer')
+
 module.exports = function(app,passport) {
+
+  const connection = require('../db/mySQL.js')
+  var bcrypt = require('bcrypt')
+  const randtoken = require('rand-token')
 
   // =====================================
 	// LOGIN ===============================
@@ -54,15 +60,111 @@ module.exports = function(app,passport) {
 	// =====================================
 
   // Load forgot password page
-  app.get('/forgotpassword', (req,res) => {
-    res.render('forgotpassword', {
-      title: 'Change Password',
-      message: req.flash('changePasswordMessage')
-    })
-  })
+  // app.get('/forgotpassword', (req,res) => {
+  //   res.render('forgotpassword', {
+  //     title: 'Change Password',
+  //     message: req.flash('changePasswordMessage')
+  //   })
+  // })
 
   // Process the forgot password information
-  app.post('/forgotpassword', passport.authenticate('local-changepassword',{ successRedirect:'/login', failureRedirect:'/forgotpassword', failureFlash: true }))
+  // app.post('/forgotpassword', passport.authenticate('local-changepassword',{ successRedirect:'/login', failureRedirect:'/forgotpassword', failureFlash: true }))
+
+  // =====================================
+	// RESET PASSWORD ======================
+	// =====================================
+
+  /* send reset password link in email */
+  app.post('/reset-password-email', function(req, res, next) {
+ 
+    var email = req.body.email
+
+    connection.query('SELECT * FROM users WHERE email ="' + email + '"', function(err,result) {
+      if (err) throw err;
+      
+      var type = ''
+      var msg = ''
+  
+      if (result[0].email.length > 0) {
+
+        var token = randtoken.generate(20);
+
+        var sent = sendEmail(email, token);
+
+          if (sent != '0') {
+
+              var data = {
+                  token: token
+              }
+
+              connection.query('UPDATE users SET ? WHERE email ="' + email + '"', data, function(err,result) {
+                  if(err) throw err
+      
+              })
+
+              type = 'success';
+              msg = 'The reset password link has been sent to your email address'
+
+          } else {
+              type = 'error'
+              msg = 'Something goes to wrong. Please try again'
+          }
+      } else {
+          // console.log('2')
+          type = 'error'
+          msg = 'The Email is not registered with us'
+      }
+      req.flash(type, msg);
+      res.redirect('/');
+    });
+  })
+
+  /* reset page */
+  app.get('/reset-password', function(req, res, next) {
+    res.render('resetpassword', {
+      title: 'Reset Password Page',
+      token: req.query.token
+    });
+  });
+
+  /* update password to database */
+  app.post('/update-password', function(req, res, next) {
+
+    var token = req.body.token;
+    var password = req.body.password;
+
+    connection.query('SELECT * FROM users WHERE token ="' + token + '"', function(err,result) {
+      if (err) throw err;
+
+      var type
+      var msg
+
+      if (result.length > 0) {
+              
+        var saltRounds = 10;
+
+        bcrypt.genSalt(saltRounds, function(err,salt) {
+          bcrypt.hash(password, salt, function(err,hash) {
+            var data = {
+                password: hash
+            }
+            connection.query('UPDATE users SET ? WHERE email ="' + result[0].email + '"', data, function(err,result) {
+                if(err) throw err
+            })
+          })
+        })
+
+        type = 'success'
+        msg = 'Your password has been updated successfully'
+            
+      } else {
+        type = 'success'
+        msg = 'Invalid link; please try again'
+      }
+      req.flash(type, msg);
+      res.redirect('/login');
+    });
+  })
 
   // =====================================
 	// LOGOUT ==============================
@@ -84,4 +186,31 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/profile');
   }
+}
+
+// Send email
+function sendEmail(email,token) {
+  var email = email
+  var token = token
+
+  var mail = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'oraconsultancy22@gmail.com',
+      pass: 'Test1234!'
+    }
+  })
+
+  var mailOptions = {
+    from: 'oraconsultancy22@gmail.com',
+    to: email,
+    subject: 'Reset Password Link - Service Catalog',
+    html: '<p>You requested for a password reset, kindly use this <a href="http://localhost:3000/reset-password?token=' + token + '">link</a> to reset your password</p>'
+  }
+
+  mail.sendMail(mailOptions, function(error,info) {
+    if (error) {
+      console.log('Error sending email...')
+    }
+  })
 }
