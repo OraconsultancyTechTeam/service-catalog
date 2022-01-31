@@ -66,12 +66,9 @@
           
           <form id="addForm" class="form-horizontal" method="post" action="/submit">   
             <div id="step1"> <%-include('partials/step1partial.ejs')%></div>
-            <div id="step3"> <%-include('partials/step3partial.ejs')%></div>
-            <div id="step4"> <%-include('partials/step4partial.ejs')%></div>
+            <div id="step3"> <%-include('partials/step3partial.ejs')%></div>           
             <div id="step5"> <%-include('partials/step5partial.ejs')%></div>
-            <div id="step6"> <%-include('partials/step6partial.ejs')%></div>
             <div id="step7"> <%-include('partials/step7partial.ejs')%></div>
-            <div id="step8"> <%-include('partials/step8partial.ejs')%></div>
             <div id="submitBtn"> <%-include('partials/submit.ejs')%></div>
           </form>
 
@@ -79,24 +76,24 @@
 
         <section id="details" class="col-3 right" style="background-color: #343A40; padding: 2% 0;">
           
-          <h4 style="color:white; text-align: center; padding: 8% 1% 10%; border-bottom: 2px solid white;">Service Details</h4>
+          <h4 style="color:#FFC421; text-align: center; padding: 8% 1% 10%; ">Service Details</h4>
           
           <div style="padding-top: 2%;">
             <%stages.forEach(stage => { %>
-              <h4 id="stage<%= stage.stage_id %>" class="stages" style=" color:white;  text-align: center; margin-bottom: 5%;"><%=stage.stage_name%></h4>
-              <p id="<%= stage.stage_name.replace(/\s+/g,'') %>1" style="font:status-bar; font-weight: bold; font-size: 120%; background-color: #3EB489; padding: 0 5%; ">-------------------------------</p>
-              <p id="<%= stage.stage_name.replace(/\s+/g,'') %>2" style="font:status-bar; font-weight: bold; font-size: 120%; background-color: #3EB489; padding: 0 5%; display:none"></p>
+              <h4 id="stage<%= stage.stage_id %>" class="stages" style=" color:#FFC421;  text-align: center; margin-bottom: 5%; border-top: 2px solid #FFC421;"><%=stage.stage_name%></h4>
+              <p id="<%= stage.stage_name.replace(/\s+/g,'') %>1" style="color:#FFFFFF;font:status-bar; font-weight: bold; font-size: 120%; background-color: #343A40; padding: 0 5%; "></p>
+              <p id="<%= stage.stage_name.replace(/\s+/g,'') %>2" style="color:#FFFFFF;font:status-bar; font-weight: bold; font-size: 120%; background-color: #343A40; padding: 0 5%; display:none"></p>
 
             <% }) %>
           </div>
-          <h4 style="color:white; text-align: center; padding: 8% 1% 10%; border-top: 2px solid white;">Navigate Through Form</h4>
+          <h4 style="color:#FFC421; text-align: center; padding: 8% 1% 10%; border-top: 2px solid #FFC421;">Navigate Through Form</h4>
               <div class="text-center">
                 <div class="row">
                   <div class="col-md-6">
-                     <button type="button" class="btn btn-primary btn-lg"  onclick="cycleThroughPages('L')" style="width:100%; margin-left:5px"><i class='fas fa-angle-left'></i></button>
+                     <button type="button" class="btn btn-warning btn-lg"  onclick="cycleThroughPages('L')" style="width:100%; margin-left:5px;color: white;"><i class='fas fa-angle-left'></i></button>
                   </div>
                  <div class="col-md-6">
-                      <button type="button" class="btn btn-primary btn-lg" onclick="cycleThroughPages('R')" style="width:100%; margin-right:5px"><i class='fas fa-angle-right'></i></button>
+                      <button type="button" class="btn btn-warning btn-lg" onclick="cycleThroughPages('R')" style="width:100%; margin-right:5px; color: white;"><i class='fas fa-angle-right'></i></button>
                   </div>
              </div>
         </section>
