@@ -8,10 +8,14 @@ const methodOverride = require('method-override')
 const connection = require('./db/mySQL')
 var bcrypt = require('bcrypt')
 const randtoken = require('rand-token')
-// module.exports = { connection, bcrypt, randtoken }
+const validator = require('validator')
+const router = new express.Router()
 module.exports.connection = connection
 module.exports.bcrypt = bcrypt
 module.exports.randtoken = randtoken
+module.exports.express = express
+module.exports.validator = validator
+module.exports.router = router
 const app = express()
 const port = process.env.PORT || 3000
 

@@ -1,7 +1,12 @@
-const express = require('express')
-const connection = require('../db/mySQL')
-const validator = require('validator')
-const router = new express.Router()
+// const express = require('express')
+// const connection = require('../db/mySQL')
+// const validator = require('validator')
+// const router = new express.Router()
+
+const express = require('../app.js').express
+const connection = require('../app.js').connection
+const validator = require('../app.js').validator
+const router = require('../app.js').router
 
 // Initial stages data
 let stages
