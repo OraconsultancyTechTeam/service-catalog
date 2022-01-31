@@ -308,7 +308,6 @@ function filterTest(element) {
 var finalText = '';
 var inputA = false;
 var inputB = false;
-var inputC = false;
 function step8Var(item,option,i){
  
   var elementValue = item.value;
@@ -322,11 +321,9 @@ function step8Var(item,option,i){
   else if(i==2){
     inputB = true;
   }
-  else if(i==3){
-    inputC = true;
-  }
+
   
-  if(inputA==true && inputB==true && inputC==true){
+  if(inputA==true && inputB==true){
     document.getElementById('subblock').style.display='block'
   }
 
