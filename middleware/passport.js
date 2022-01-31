@@ -20,7 +20,7 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user,done) {
-        console.log(user)
+        // console.log(user)
         done(null, user.id);
     });
 
@@ -113,7 +113,7 @@ module.exports = function(passport) {
                                     return done(err);
                                 else {
                                     const sql = "INSERT INTO users VALUES(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"',null)";
-                                    console.log(sql)
+                                    // console.log(sql)
                                     connection.query(sql,(err,users,fields) => {
                                         if(err)
                                           return done(err);

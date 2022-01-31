@@ -38,6 +38,15 @@ router.get('/profile',isLoggedIn, (req, res) => {
     req.flash('message')
     permission = req.user.permissions
     if (permission == 1) {
+        console.log(req.user)
+        // Query to pull users requests
+        connection.query(`SELECT * FROM requests WHERE (userId='` + req.body.userId + `')`, (err,response) => {
+            if (err) throw (err) 
+            else {
+                return response
+            }
+        })
+
         res.render('userprofile', {
             title: 'Service Catalog',
             user : req.user
