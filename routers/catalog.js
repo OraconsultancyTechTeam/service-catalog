@@ -122,9 +122,11 @@ router.post('/submit', (req,res) => {
     const due_by = req.body.dueDate;
    
     const mang_email = req.body.mangEmail;
+    
 
     user = req.user;
     const req_by = user.username;
+    const team_id = user.team_id;
    // console.log("This is user id: "+user.id+". This is the name: "+user.username);
 
     if (!validator.isEmail(mang_email)) {
@@ -138,7 +140,7 @@ router.post('/submit', (req,res) => {
             tshirt = tshirt.match(/\d+/g)
         }
 
-        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default,'"+user.id+"')";
+        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default,'"+user.id+"','"+team_id+"')";
         connection.query(sql,(err,rows,fields)=>{
             if(err) throw err
             req.flash('catalogMessage', 'Submission has been sent successfully')

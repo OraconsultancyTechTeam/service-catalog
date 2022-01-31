@@ -89,6 +89,7 @@ module.exports = function(passport) {
             const lastName = req.body.lastName
             const email = req.body.email
             const permission = req.body.permission
+            const teamID = req.body.team_id
 
             if(!validator.isEmail(email)){
                 return done(null, false, req.flash('registerMessage', 'Please enter correct email format'))

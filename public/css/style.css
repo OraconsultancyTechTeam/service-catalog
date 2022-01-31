@@ -11,7 +11,7 @@ html,body {
 .nav-active {
   background-color: white !important;
   border-radius: 4px;
-  color: #28a745 !important;
+  color: #FFC421 !important;
   padding: 0.5rem 1rem;
   font-weight: bold;
 }
@@ -22,7 +22,7 @@ html,body {
 }
 
 .selected {
-  border-color: #3EB489 !important;
+  border-color: #FFC421 !important;
   background-color: #f2f2f2;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -155,4 +155,13 @@ html,body {
 
 #registerBtn{
   color: white;
+}
+
+h4.stages {
+  -webkit-transition: color 2s;
+    transition: color 2s;
+}
+
+h4.stages:hover {
+  color: green;
 }

@@ -29,25 +29,6 @@
       </div>
     <%# } %> -->
 
-    <% if (typeof catalogMessages != "undefined" && catalogMessages.length > 0) { %>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success</strong> <%= catalogMessages %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% } %>
-    <div id="emailAlert" style="display:none" >
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Check Manager Email</strong> Please enter a valid email, in email format
-      </div>
-    </div>
-    <div id="commentAlert" style="display:none" >
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Please Enter Comment</strong> Please Enter your Custom T-Shirt Size in the comment section
-      </div>
-    </div>
-
     <div style="height: 100%;">
 
       <div class="row" style="height:100%; margin: 0;">
@@ -55,8 +36,23 @@
         <section id="display_content" class="col-9" style="display: flex; flex-flow: column; background-color: #F4F6F9;">
 
           <% if (typeof catalogMessages != "undefined" && catalogMessages.length > 0) { %>
-            <div id='catalogAlert' class="alert alert-success" style="margin-bottom: 0;"><%= catalogMessages %></div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Success</strong> <%= catalogMessages %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
           <% } %>
+          <div id="emailAlert" style="display:none" >
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Check Manager Email</strong> Please enter a valid email, in email format
+            </div>
+          </div>
+          <div id="commentAlert" style="display:none" >
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Please Enter Comment</strong> Please Enter your Custom T-Shirt Size in the comment section
+            </div>
+          </div>
           
           <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
 
@@ -66,12 +62,9 @@
           
           <form id="addForm" class="form-horizontal" method="post" action="/submit">   
             <div id="step1"> <%-include('partials/step1partial.ejs')%></div>
-            <div id="step3"> <%-include('partials/step3partial.ejs')%></div>
-            <div id="step4"> <%-include('partials/step4partial.ejs')%></div>
+            <div id="step3"> <%-include('partials/step3partial.ejs')%></div>           
             <div id="step5"> <%-include('partials/step5partial.ejs')%></div>
-            <div id="step6"> <%-include('partials/step6partial.ejs')%></div>
             <div id="step7"> <%-include('partials/step7partial.ejs')%></div>
-            <div id="step8"> <%-include('partials/step8partial.ejs')%></div>
             <div id="submitBtn"> <%-include('partials/submit.ejs')%></div>
           </form>
 
@@ -79,24 +72,24 @@
 
         <section id="details" class="col-3 right" style="background-color: #343A40; padding: 2% 0;">
           
-          <h4 style="color:white; text-align: center; padding: 8% 1% 10%; border-bottom: 2px solid white;">Service Details</h4>
+          <h4 style="color:#FFFFFF; text-align: center; padding: 8% 1% 10%; ">Service Details</h4>
           
           <div style="padding-top: 2%;">
             <%stages.forEach(stage => { %>
-              <h4 id="stage<%= stage.stage_id %>" class="stages" style=" color:white;  text-align: center; margin-bottom: 5%;"><%=stage.stage_name%></h4>
-              <p id="<%= stage.stage_name.replace(/\s+/g,'') %>1" style="font:status-bar; font-weight: bold; font-size: 120%; background-color: #3EB489; padding: 0 5%; ">-------------------------------</p>
-              <p id="<%= stage.stage_name.replace(/\s+/g,'') %>2" style="font:status-bar; font-weight: bold; font-size: 120%; background-color: #3EB489; padding: 0 5%; display:none"></p>
+              <h4 id="stage<%= stage.stage_id %>" class="stages" style=" color:#FFC421;  text-align: center; margin-bottom: 5%; border-top: 2px solid #FFFFFF;"><%=stage.stage_name%></h4>
+              <p id="<%= stage.stage_name.replace(/\s+/g,'') %>1" style="color:#FFFFFF;font:status-bar; font-weight: bold; font-size: 120%; background-color: #343A40; padding: 0 5%; "></p>
+              <p id="<%= stage.stage_name.replace(/\s+/g,'') %>2" style="color:#FFFFFF;font:status-bar; font-weight: bold; font-size: 120%; background-color: #343A40; padding: 0 5%; display:none"></p>
 
             <% }) %>
           </div>
-          <h4 style="color:white; text-align: center; padding: 8% 1% 10%; border-top: 2px solid white;">Navigate Through Form</h4>
+          <h4 style="color:#FFFFFF; text-align: center; padding: 8% 1% 10%; border-top: 2px solid #FFFFFF;">Navigate Through Form</h4>
               <div class="text-center">
                 <div class="row">
                   <div class="col-md-6">
-                     <button type="button" class="btn btn-primary btn-lg"  onclick="cycleThroughPages('L')" style="width:100%; margin-left:5px"><i class='fas fa-angle-left'></i></button>
+                     <button type="button" class="btn btn-warning btn-lg"  onclick="cycleThroughPages('L')" style="width:100%; margin-left:5px;color: white;"><i class='fas fa-angle-left'></i></button>
                   </div>
                  <div class="col-md-6">
-                      <button type="button" class="btn btn-primary btn-lg" onclick="cycleThroughPages('R')" style="width:100%; margin-right:5px"><i class='fas fa-angle-right'></i></button>
+                      <button type="button" class="btn btn-warning btn-lg" onclick="cycleThroughPages('R')" style="width:100%; margin-right:5px; color: white;"><i class='fas fa-angle-right'></i></button>
                   </div>
              </div>
         </section>

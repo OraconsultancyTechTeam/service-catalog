@@ -1,7 +1,7 @@
 /*
 *   Change Menu stage when clicked
 */
-/*
+
 $('.stages').click(function () {
     var id = $(this).attr('id')
     var stage = document.getElementById(id).innerHTML
@@ -10,7 +10,7 @@ $('.stages').click(function () {
     
     // Need to add in loading content specific to chosen stage
     // and set to content div
-})*/
+})
 var step = false;
 var section1 ='Database Engine'
 var section2 = 'Features'
@@ -24,12 +24,15 @@ function blockController(stage){
       document.getElementById('block1').style.display='block'
       document.getElementById('block2').style.display='block'
 
+      document.getElementById('featuresBlock').style.display='none'
       document.getElementById('block3').style.display='none'
       document.getElementById('block4').style.display='none' 
 
+      document.getElementById('SandPBlock').style.display='none'
       document.getElementById('block5').style.display='none'
       document.getElementById('block6').style.display='none'
-      
+     
+      document.getElementById('InfoBlock').style.display='none'
       document.getElementById('block7').style.display='none'
       document.getElementById('block8').style.display='none'
      
@@ -38,12 +41,15 @@ function blockController(stage){
       document.getElementById('block1').style.display='none'
       document.getElementById('block2').style.display='none'
 
+      document.getElementById('featuresBlock').style.display='block'
       document.getElementById('block3').style.display='block'
       document.getElementById('block4').style.display='block'
-      
+    
+      document.getElementById('SandPBlock').style.display='none'
       document.getElementById('block5').style.display='none'
       document.getElementById('block6').style.display='none'
 
+      document.getElementById('InfoBlock').style.display='none'
       document.getElementById('block7').style.display='none'
       document.getElementById('block8').style.display='none'
       
@@ -52,12 +58,15 @@ function blockController(stage){
     document.getElementById('block1').style.display='none'
     document.getElementById('block2').style.display='none'
 
+    document.getElementById('featuresBlock').style.display='none'
     document.getElementById('block3').style.display='none'
     document.getElementById('block4').style.display='none'
 
+    document.getElementById('SandPBlock').style.display='block'
     document.getElementById('block5').style.display='block'
     document.getElementById('block6').style.display='block'
 
+    document.getElementById('InfoBlock').style.display='none'
     document.getElementById('block7').style.display='none'
     document.getElementById('block8').style.display='none'
       
@@ -65,13 +74,16 @@ function blockController(stage){
     case section4:
       document.getElementById('block1').style.display='none'
       document.getElementById('block2').style.display='none'
-  
+
+      document.getElementById('featuresBlock').style.display='none'
       document.getElementById('block3').style.display='none'
       document.getElementById('block4').style.display='none'
   
+      document.getElementById('SandPBlock').style.display='none'
       document.getElementById('block5').style.display='none'
       document.getElementById('block6').style.display='none'
 
+      document.getElementById('InfoBlock').style.display='block'
       document.getElementById('block7').style.display='block'
       document.getElementById('block8').style.display='block'
       break;
