@@ -17,7 +17,7 @@ module.exports.express = express
 module.exports.validator = validator
 module.exports.router = router
 const app = express()
-// const port = 
+const port = process.env.PORT || 3000
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -68,6 +68,6 @@ const catalogRouter = require('./routers/catalog.js')
 app.use(catalogRouter)
 require('./routers/auth.js')(app,passport); 
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Server is up on port ')
+app.listen(port, () => {
+    console.log('Server is up on port ' + port)
 })
