@@ -89,6 +89,7 @@ module.exports = function(passport) {
             const lastName = req.body.lastName
             const email = req.body.email
             const permission = req.body.permission
+            const teamID = req.body.team_id
 
             if(!validator.isEmail(email)){
                 return done(null, false, req.flash('registerMessage', 'Please enter correct email format'))
@@ -112,7 +113,7 @@ module.exports = function(passport) {
                                 if (err)
                                     return done(err);
                                 else {
-                                    const sql = "INSERT INTO users VALUES(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"',null)";
+                                    const sql = "INSERT INTO users VALUES(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"',null,'"+teamID+"')";
                                     console.log(sql)
                                     connection.query(sql,(err,users,fields) => {
                                         if(err)
