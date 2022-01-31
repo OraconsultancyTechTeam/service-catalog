@@ -1,7 +1,7 @@
 /*
 *   Change Menu stage when clicked
 */
-/*
+
 $('.stages').click(function () {
     var id = $(this).attr('id')
     var stage = document.getElementById(id).innerHTML
@@ -10,7 +10,7 @@ $('.stages').click(function () {
     
     // Need to add in loading content specific to chosen stage
     // and set to content div
-})*/
+})
 var step = false;
 var section1 ='Database Engine'
 var section2 = 'Features'

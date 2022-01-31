@@ -156,3 +156,12 @@ html,body {
 #registerBtn{
   color: white;
 }
+
+h4.stages {
+  -webkit-transition: color 2s;
+    transition: color 2s;
+}
+
+h4.stages:hover {
+  color: green;
+}
