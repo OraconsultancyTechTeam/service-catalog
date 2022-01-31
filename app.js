@@ -6,6 +6,12 @@ const ejs = require('ejs')
 const express_layouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
 const connection = require('./db/mySQL')
+var bcrypt = require('bcrypt')
+const randtoken = require('rand-token')
+// module.exports = { connection, bcrypt, randtoken }
+module.exports.connection = connection
+module.exports.bcrypt = bcrypt
+module.exports.randtoken = randtoken
 const app = express()
 const port = process.env.PORT || 3000
 

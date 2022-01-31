@@ -2,9 +2,12 @@ const nodemailer = require('nodemailer')
 
 module.exports = function(app,passport) {
 
-  const connection = require('../db/mySQL.js')
-  var bcrypt = require('bcrypt')
-  const randtoken = require('rand-token')
+  // const connection = require('../db/mySQL.js')
+  // var bcrypt = require('bcrypt')
+  // const randtoken = require('rand-token')
+  const connection = require('../app.js').connection
+  var bcrypt = require('../app.js').bcrypt
+  const randtoken = require('../app.js').randtoken
 
   // =====================================
 	// LOGIN ===============================
