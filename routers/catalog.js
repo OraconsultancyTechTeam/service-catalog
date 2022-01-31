@@ -111,8 +111,12 @@ router.post('/submit', (req,res) => {
     const licence = req.body.licensetype;
     const comment = req.body.commentBox;
     const due_by = req.body.dueDate;
-    const req_by = req.body.reqBy;
+   
     const mang_email = req.body.mangEmail;
+
+    user = req.user;
+    const req_by = user.username;
+   // console.log("This is user id: "+user.id+". This is the name: "+user.username);
 
     if (!validator.isEmail(mang_email)) {
         req.flash('catalogMessage', 'Please enter the manager email in a correct email format')
@@ -125,7 +129,7 @@ router.post('/submit', (req,res) => {
             tshirt = tshirt.match(/\d+/g)
         }
 
-        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default)";
+        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default,'"+user.id+"')";
         connection.query(sql,(err,rows,fields)=>{
             if(err) throw err
             req.flash('catalogMessage', 'Submission has been sent successfully')
