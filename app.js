@@ -68,6 +68,14 @@ const catalogRouter = require('./routers/catalog.js')
 app.use(catalogRouter)
 require('./routers/auth.js')(app,passport); 
 
+
+// Route To 404 Page
+app.use(function(req,res){
+    res.status(404).render('404', {
+        title: 'Service Catalog'
+    })
+});
+
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })

@@ -29,6 +29,10 @@ router.get('/', (req, res) => {
     })
 })
 
+
+
+
+
 // Gets Catalog Page for logged in users
 // =====================================
 // PROFILE SECTION =====================
