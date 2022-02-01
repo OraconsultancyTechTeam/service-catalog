@@ -23,7 +23,7 @@
       
     <div class="jumbotron text-center" style="background-color: #FFC421; margin-bottom: 0; border-radius: 0;">
         <h1><%=title%></h1>
-    </div> -->
+    </div>
    
     <div class="container-fluid" style="flex: 1 1 auto;">
        
@@ -63,8 +63,7 @@
                 </div>
                  
                 <div class="tab-pane" id="requests" role="tabpanel" aria-labelledby="requests-tab">  
-                  <p class="card-text">First settled around 1000 BCE and then founded as the Etruscan Felsina about 500 BCE, it was occupied by the Boii in the 4th century BCE and became a Roman colony and municipium with the name of Bononia in 196 BCE. </p>
-                  <a href="#" class="card-link text-danger">Read more</a>
+                  <p><% requests.forEach(req => { console.log(req) })%></p>
                 </div>
                  
                 <div class="tab-pane" id="reviewdetails" role="tabpanel" aria-labelledby="details-tab">
