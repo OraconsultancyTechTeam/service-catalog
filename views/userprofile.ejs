@@ -47,7 +47,7 @@
                   <a class="nav-link" href="#requests">Requests</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#reviewdetails">Details</a>
+                  <a class="nav-link" href="#userdetails">Details</a>
                 </li>
               </ul>
             </div>
@@ -63,11 +63,113 @@
                 </div>
                  
                 <div class="tab-pane" id="requests" role="tabpanel" aria-labelledby="requests-tab">  
-                  <p><% requests.forEach(req => { console.log(req) })%></p>
+                  <table id="userRequestsTable" class="table table-striped" style="border: 1px solid #ddd;">
+                    <thead>
+                        <tr>
+                            <th>Host</th>
+                            <th>Database</th>
+                            <th>Environment</th>
+                            <th>Tshirt Size</th>
+                            <th>Database Size</th>
+                            <th>Licence</th>
+                            <th>Comments</th>
+                            <th>Due Date</th>
+                            <th>Manager's Email</th>
+                            <th>Delete Request</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% requests.forEach(req => { %>
+                            <tr>
+                                <td><%= req.host %></td>
+                                <td><%= req.db %></td>
+                                <td><%= req.environment %></td>
+                                <td><%= req.tshirt_size %></td>
+                                <td><%= req.db_size %></td>
+                                <td><%= req.licence %></td>
+                                <td><%= req.comments %></td>
+                                <td><%= req.due_by.toLocaleDateString() %></td>
+                                <td><%= req.mang_email %></td>
+                                <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
                 </div>
                  
-                <div class="tab-pane" id="reviewdetails" role="tabpanel" aria-labelledby="details-tab">
-                  <p class="card-text">Immerse yourself in the colours, aromas and traditions of Emilia-Romagna with a holiday in Bologna, and discover the city's rich artistic heritage.</p>
+                <div class="tab-pane" id="userdetails" role="tabpanel" aria-labelledby="details-tab">
+                  <!-- <p><%# console.log(user) %></p> -->
+                  <div class="col-12 col-sm-6 col-md-4 justify-content-center" style="display: flex; padding-top: 1vh;">
+          
+                    <div class="card">
+                      
+                      <div class="card-header">User Details</div>
+                    
+                      <div class="card-body">
+                        
+                        <form id="updateUserDetailsForm" class="form-horizontal p-2" method="post" action="/updateuserdetails">
+          
+                          <div class="row">
+                            <div class="col-md-6 mb-2">
+          
+                              <div class="form-outline">
+                                <label class="form-label" for="firstName" style="margin-left: 0px;">Username</label>
+                                <input type="text" id="username" class="form-control" placeholder="Username" name="username" required>
+                              </div>
+          
+                            </div>
+                            <div class="col-md-6 mb-2">
+          
+                              <div class="form-outline">
+                                <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
+                                <input type="text" id="email" class="form-control" placeholder="Email" name="email" required>
+                              </div>
+          
+                            </div>
+                          </div>
+          
+                          <div class="row">
+                            <div class="col-md-6 mb-2">
+          
+                              <div class="form-outline">
+                                <label class="form-label" for="firstName" style="margin-left: 0px;">First Name</label>
+                                <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName" required>
+                              </div>
+          
+                            </div>
+                            <div class="col-md-6 mb-2">
+          
+                              <div class="form-outline">
+                                <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
+                                <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" required>
+                              </div>
+          
+                            </div>
+                          </div>
+          
+                          <div class="row">
+                            <div class="col-md-6 mb-2">
+          
+                              <div class="form-outline">
+                                <label class="form-label" for="team_id" style="margin-left: 0px;">Team</label>
+                                <input type="text" id="team_id" class="form-control" placeholder="Team ID" name="team_id" required>
+                              </div>
+          
+                            </div>
+                          </div>
+          
+                          <br>
+                            
+                          <div class="updateDetails" style="text-align: center;">
+                              
+                            <a type="button" class="btn btn-success" id="updateBtn">Update Details</a>
+                            
+                          </div>
+                        
+                        </form>
+                    </div>
+                </div>
                 </div>
               </div>
             </div>
