@@ -109,6 +109,7 @@ router.post('/catalog', (req,res) => {
 
 })
 
+
 // Method submits data of catalog to database
 router.post('/submit', (req,res) => {
     const host = req.body.radio1;
@@ -120,33 +121,48 @@ router.post('/submit', (req,res) => {
     const comment = req.body.commentBox;
     const due_by = req.body.dueDate;
    
-    const mang_email = req.body.mangEmail;
+    //const mang_email = req.body.mangEmail;
     
 
     user = req.user;
     const req_by = user.username;
+    //const manager_email = getManagerID(user);
     const team_id = user.team_id;
+  
    // console.log("This is user id: "+user.id+". This is the name: "+user.username);
-
-    if (!validator.isEmail(mang_email)) {
-        req.flash('catalogMessage', 'Please enter the manager email in a correct email format')
-        return res.redirect('/catalog')
-    } else {
        // if user chooses custom, set cpu value to 1 
         if (tshirt=='Custom') {
             tshirt = 1
         } else {
             tshirt = tshirt.match(/\d+/g)
         }
+        
+        connection.query(`select team_manager_email from teams where team_id=`+user.team_id, (error,response) => {
+            if (error) throw error
+           const manager_email = response[0].team_manager_email
+           console.log(manager_email)
 
-        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+mang_email+"',default,'"+user.id+"','"+team_id+"')";
-        connection.query(sql,(err,rows,fields)=>{
-            if(err) throw err
-            req.flash('catalogMessage', 'Submission has been sent successfully')
-            return res.redirect('/catalog')
+
+           const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+manager_email+"',default,'"+user.id+"','"+team_id+"')";
+           connection.query(sql,(err,rows,fields)=>{
+               if(err) throw err
+               req.flash('catalogMessage', 'Submission has been sent successfully')
+               return res.redirect('/catalog')
+           })
+
+
+       
         })
-    }   
+     
+
+       
+      
 })
+
+
+
+
+
 
 // =====================================
 // REQUESTS ============================

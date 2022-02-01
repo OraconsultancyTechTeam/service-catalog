@@ -18,7 +18,7 @@
 
         var mail = document.getElementById("mangEmail");
         var cStage_id = document.getElementById("stage4").innerHTML
-        if(ValidateEmail(mail)==true){
+       
             if(customCheck(cStage_id)==false){
                 document.getElementById("addForm").submit();
                 txt = "Data Submit Confirmed";
@@ -29,12 +29,7 @@
                 return;
             }
 
-        }
-        else{
-            var el = document.getElementById("emailAlert");
-            el.style.display = "block"; 
-            return;
-        }
+        
 
     } else {
       txt = "Data Submit Cancelled";

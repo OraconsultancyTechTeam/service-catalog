@@ -15,7 +15,7 @@ module.exports.bcrypt = bcrypt
 module.exports.randtoken = randtoken
 module.exports.express = express
 module.exports.validator = validator
-module.exports.router = router
+module.exports.router = router 
 const app = express()
 const port = process.env.PORT || 3000
 

@@ -318,28 +318,13 @@ function filterTest(element) {
 }
 
 var finalText = '';
-var inputA = false;
-var inputB = false;
-function step8Var(item,option,i){
+function step8Var(item,option){
  
   var elementValue = item.value;
   finalText = finalText.concat("\n" +elementValue+"\n");
 
   changeText(finalText,option)
-
-  if(i==1){
-    inputA = true;
-  }
-  else if(i==2){
-    inputB = true;
-  }
-
-  
-  if(inputA==true && inputB==true){
-    document.getElementById('subblock').style.display='block'
-  }
-
- 
+  document.getElementById('subblock').style.display='block'
 
 }
 var s3a =false;
