@@ -44,11 +44,24 @@ module.exports = function(app,passport) {
 	// =====================================
 
   // Load register page
-  app.get('/register',isLoggedIn, (req, res) => {
-    res.render('register', {
-        title: 'Service Catalog',
-        message: req.flash('registerMessage') 
-    })
+  app.get('/register', (req, res) => {
+    if(req.user != undefined){
+      permission = req.user.permissions
+      if (permission == 2) {
+          res.render('register', {
+          title: 'Service Catalog',
+          message: req.flash('registerMessage') 
+        })
+      }
+      else{
+        res.redirect('/profile');
+      }
+    }
+    else{
+      res.redirect('/');
+    }
+    
+   
   })
 
 	// Process the signup form

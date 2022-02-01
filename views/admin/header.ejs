@@ -39,6 +39,7 @@
         </div>
     </div> -->
     <div class="navbar-nav" style="flex-direction: row;">
+        <a <% if (active == "Register") { %> class="nav-item nav-active" <% } else { %> class="nav-item nav-link" <% } %> href="/register">New Users <% if (active == "Register") { %> <span class="sr-only">(current)</span> <% } %></a>
         <a <% if (active == "Requests") { %> class="nav-active" <% } else { %> class="nav-link" <% } %> href="/requests">Requests <% if (active == "Requests") { %> <span class="sr-only">(current)</span> <% } %></a>
         <a <% if (active == "Catalog") { %> class="nav-active" <% } else { %> class="nav-link" <% } %> href="/catalog">Catalog <% if (active == "Catalog") { %> <span class="sr-only">(current)</span> <% } %></a>
         <a <% if (active == "Profile") { %> class="nav-active" <% } else { %> class="nav-link" <% } %> href="/profile">Profile <% if (active == "Profile") { %> <span class="sr-only">(current)</span> <% } %></a>
