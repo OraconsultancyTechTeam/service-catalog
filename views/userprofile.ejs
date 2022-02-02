@@ -37,7 +37,7 @@
 
           </div>
 
-          <div class="card text-center" style="width: 100%; margin: 0; transform: scale(1);">
+          <div class="card text-center" style="width: 100%; margin: 0; transform: scale(1); cursor: auto;">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs" id="profileList">
                 <li class="nav-item">
@@ -99,76 +99,93 @@
                 </div>
                  
                 <div class="tab-pane" id="userdetails" role="tabpanel" aria-labelledby="details-tab">
-                  <div class="col-12 col-sm-6 col-md-4" style="padding-top: 1vh;">
-          
-                    <div class="card" style="width: 800px; transform: scale(1);">
+                  <div class="row justify-content-center">
+                    <div class="col-12 col-sm-6 col-md-4" style="padding-top: 1vh;">
+            
+                      <div class="card" style="width: 100%; transform: scale(1); margin: 0; cursor: auto;">
+                        
+                        <div class="card-header">User Details</div>
                       
-                      <div class="card-header">User Details</div>
-                    
-                      <div class="card-body">
-                        
-                        <form id="updateUserDetailsForm" class="form-horizontal p-2" method="post" action="/updateuserdetails">
-          
-                          <div class="row">
-                            <div class="col-md-6 mb-2">
-          
-                              <div class="form-outline">
-                                <label class="form-label" for="username" style="margin-left: 0px;">Username</label>
-                                <input type="text" id="username" class="form-control" placeholder="Username" name="username" value="<%= user.username %>" required>
+                        <div class="card-body">
+
+                          <div id="passwordChanged" class="alert alert-success" style="display: none;">Password changed successfully</div>
+                          <div id="wrongPasswordAlert" class="alert alert-danger" style="display: none;">Confirm password does not match the new password</div>
+                          
+                          <form id="updateUserDetailsForm" class="form-horizontal p-2" method="post" action="/updateuserdetails">
+            
+                            <div class="row">
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="username" style="margin-left: 0px;">Username</label>
+                                  <input type="text" id="username" class="form-control" placeholder="Username" name="username" value="<%= user.username %>" disabled required>
+                                </div>
+            
                               </div>
-          
-                            </div>
-                            <div class="col-md-6 mb-2">
-          
-                              <div class="form-outline">
-                                <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
-                                <input type="text" id="email" class="form-control" placeholder="Email" name="email" value="<%= user.email %>" required>
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
+                                  <input type="text" id="email" class="form-control" placeholder="Email" name="email" value="<%= user.email %>" required>
+                                </div>
+            
                               </div>
-          
                             </div>
-                          </div>
-          
-                          <div class="row">
-                            <div class="col-md-6 mb-2">
-          
-                              <div class="form-outline">
-                                <label class="form-label" for="firstName" style="margin-left: 0px;">First Name</label>
-                                <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName" value="<%= user.first_name %>" required>
+            
+                            <div class="row">
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="firstName" style="margin-left: 0px;">First Name</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName" value="<%= user.first_name %>" disabled required>
+                                </div>
+            
                               </div>
-          
-                            </div>
-                            <div class="col-md-6 mb-2">
-          
-                              <div class="form-outline">
-                                <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
-                                <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" value="<%= user.last_name %>" required>
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
+                                  <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" value="<%= user.last_name %>" disabled required>
+                                </div>
+            
                               </div>
-          
                             </div>
-                          </div>
-          
-                          <div class="row">
-                            <div class="col-md-6 mb-2">
-          
-                              <div class="form-outline">
-                                <label class="form-label" for="team_id" style="margin-left: 0px;">Team</label>
-                                <input type="text" id="team_id" class="form-control" placeholder="Team ID" name="team_id" value="<%= user.team_id %>" required>
+
+                            <hr>
+            
+                            <div class="row">
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="newPassword" style="margin-left: 0px;">New Password</label>
+                                  <input type="text" id="newPassword" class="form-control" placeholder="New Password" name="newPassword" required>
+                                </div>
+            
                               </div>
-          
+
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="confirmPassword" style="margin-left: 0px;">Confirm New Password</label>
+                                  <input type="text" id="confirmPassword" class="form-control" placeholder="Confirm Password" name="confirmPassword" required>
+                                </div>
+            
+                              </div>
                             </div>
-                          </div>
-          
-                          <br>
-                            
-                          <div class="updateDetails" style="text-align: center;">
+            
+                            <br>
                               
-                            <a type="button" class="btn btn-success" id="updateBtn">Update Details</a>
-                            
-                          </div>
-                        
-                        </form>
+                            <div class="updateDetails" style="text-align: center;">
+                                
+                              <a type="button" class="btn btn-success" id="updateBtn" style="color: white;" onclick="submit()">Update Details</a>
+                              <!-- <button type="submit" class="btn btn-success" id="updateBtn" style="color: white;">Update Details</button> -->
+                              
+                            </div>
+                          
+                          </form>
+                      </div>
                     </div>
-                </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -195,6 +212,22 @@
             e.preventDefault()
             $(this).tab('show')
           })
+
+          function submit() {
+            newPass = $('#newPassword').val()
+            confirmPass = $('#confirmPassword').val()
+            $('#wrongPasswordAlert').css('display','none')
+            
+            if (newPass == '') {
+              document.getElementById('updateUserDetailsForm').submit()
+            } else if (newPass != '' && newPass === confirmPass) {
+              document.getElementById('updateUserDetailsForm').submit()
+              $('#passwordChanged').css('display','block')
+              
+            } else {
+              $('#wrongPasswordAlert').css('display','block')
+            }
+          }
 
         </script>
   

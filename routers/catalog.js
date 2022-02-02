@@ -7,6 +7,7 @@ const express = require('../app.js').express
 const connection = require('../app.js').connection
 const validator = require('../app.js').validator
 const router = require('../app.js').router
+const bcrypt = require('../app.js').bcrypt
 
 // Initial stages data
 let stages
@@ -28,10 +29,6 @@ router.get('/', (req, res) => {
         title: 'Service Catalog'
     })
 })
-
-
-
-
 
 // Gets Catalog Page for logged in users
 // =====================================
@@ -60,6 +57,37 @@ router.get('/profile',isLoggedIn, (req, res) => {
             user : req.user
         })
     }
+})
+
+router.post('/updateuserdetails', isLoggedIn, (req,res) => {
+    email = req.body.email
+    userId = req.user.id
+    
+    if (req.body.newPassword != '') {
+        newPass = req.body.newPassword
+        confirmPass = req.body.confirmPassword
+
+        var saltRounds = 10
+
+        bcrypt.genSalt(saltRounds, function(err,salt) {
+            bcrypt.hash(newPass, salt, function(err,hash) {
+                var data = {
+                    email,
+                    password: hash
+                }
+                connection.query(`UPDATE users SET ? WHERE id ='` + userId + `'`, data, function(err,result) {
+                    if(err) throw err
+                })
+            })
+        })
+
+    } else {
+        connection.query(`UPDATE users SET email='`+email+`' WHERE id='` + userId + `'`, (err,response) => {
+            if (err) throw (err) 
+        })
+    }
+
+    res.redirect('/profile')
 })
 
 // =====================================
@@ -154,8 +182,6 @@ router.post('/submit', (req,res) => {
 // =====================================
 // REQUESTS ============================
 // =====================================
-
-// let requests
 
 router.get('/requests', (req,res) => {
     connection.query('SELECT * FROM requests ORDER BY due_by ASC', (err,result) => {
