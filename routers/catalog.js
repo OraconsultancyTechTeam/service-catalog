@@ -90,6 +90,17 @@ router.post('/updateuserdetails', isLoggedIn, (req,res) => {
     res.redirect('/profile')
 })
 
+router.get('/users', isLoggedIn, (req,res) => {
+    connection.query(`SELECT id, username, first_name, last_name, email, team_id, toggle_account FROM users where permissions=1`, (err,users) => {
+        if (err) throw err
+
+        res.render('users', {
+            title: 'Users',
+            users
+        })
+    })
+})
+
 // =====================================
 // CATALOG =============================
 // =====================================
