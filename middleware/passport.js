@@ -60,6 +60,12 @@ module.exports = function(passport) {
                 if (!bcrypt.compareSync(password, users[0].password))
                     return done(null, false,req.flash('loginMessage', 'Oops! Wrong password.') ); // create the loginMessage and save it to session as flashdata
 
+                if (users[0].toggle_account == 0) {
+                    return done(null, false,req.flash('loginMessage', 'Permission, Please Let Admin Know to Activate Your Account') ); // req.flash is the way to set flashdata using connect-flash
+                }
+    
+
+                 
                 // all is well, return successful user
                 return done(null, users[0]);
             });
@@ -90,6 +96,7 @@ module.exports = function(passport) {
             const email = req.body.email
             const permission = req.body.permission
             const teamID = req.body.team_id
+   
 
             if(!validator.isEmail(email)){
                 return done(null, false, req.flash('registerMessage', 'Please enter correct email format'))
@@ -113,7 +120,7 @@ module.exports = function(passport) {
                                 if (err)
                                     return done(err);
                                 else {
-                                    const sql = "INSERT INTO users VALUES(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"',null)";
+                                    const sql = "INSERT INTO users VALUES(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"',null,'"+teamID+"',default)";
                                     // console.log(sql)
                                     connection.query(sql,(err,users,fields) => {
                                         if(err)
@@ -126,12 +133,13 @@ module.exports = function(passport) {
                                                 firstname: firstName,
                                                 lastname: lastName,
                                                 permission:permission,
-                                                email:email
+                                                email:email,
+                                                teamID:teamID
                                                  // use the generateHash function in our user model
                                             };
 
                                             newUserMysql.id = users.insertId;
-                                            return done(null, newUserMysql);
+                                            return done(null, null,req.flash('registerMessage','User Created'));
                                         }
                                     })
                                 }
