@@ -22,55 +22,10 @@
 
           <div class="card" style="width: 100%; margin: 0; transform: scale(1);">
             
-            <!-- <div class="card-header">Login Form</div>
-            
-            <div class="card-body" style="text-align: center;">
-              
-              <form id="loginForm" class="form-horizontal" method="post" action="/login">
-                
-                <div class="form-row">
-                  
-                  <div class="col">
-                    
-                    <div class="form-group">
-                          
-                      <input placeholder="User Name" type="text" name="userName" required> 
-                      
-                    </div>
-                  
-                  </div>
-                  
-                  <div class="col">
-                            
-                    <div class="form-group">
-                      
-                      <div><input placeholder="Password" type="text" name="password" required></div>
-                    
-                    </div>
-                      
-                  </div>
-                  
-                </div>
-                      
-                <div class="dataBtns"><a type="button" id="registerBtn" class="btn btn-success" onclick="myFunction()">Login</a></div>
-              
-              </form>
-            
-            </div> -->
-
             <div class="card-body">
 
               <h4 class="card-title text-center mb-4 mt-1" >Sign in</h4>
               <hr>
-
-              <%# if (message) { %>
-                <!-- <div style="text-align: center;"class="alert alert-<%#= message %>" role="alert">
-                  <strong><%#= message %></strong>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div> -->
-              <%# } %>
 
               <% if (message.length > 0) { %>
                 <div class="alert alert-danger"><%= message %></div>
@@ -88,7 +43,7 @@
                     
                     </div>
 
-                  <input name="username" class="form-control" placeholder="Email or login">
+                  <input name="username" class="form-control" placeholder="Username">
 
                   </div>
 
