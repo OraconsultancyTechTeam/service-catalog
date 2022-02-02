@@ -101,6 +101,20 @@ router.get('/users', isLoggedIn, (req,res) => {
     })
 })
 
+router.post('/users', isLoggedIn, (req,res) => {
+    id = req.body.id
+    buttonState = req.body.buttonState
+    if (buttonState === true) {
+        toggle = 1
+    } else {
+        toggle = 0
+    }
+    
+    connection.query(`UPDATE users SET toggle_account='`+toggle+`' WHERE id='`+id+`'`, (err,response) => {
+        if (err) throw err
+    })
+})
+
 // =====================================
 // CATALOG =============================
 // =====================================

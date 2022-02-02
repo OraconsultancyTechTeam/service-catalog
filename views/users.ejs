@@ -39,7 +39,7 @@
                             <a href="/register" class="btn btn-primary" name="addRequest">Add New User</a>
                         </div>
                     
-                        <div id="pageContent" class="card-deck">
+                        <div id="pageContent">
 
                             <table id="usersTable" class="table table-striped" style="border: 1px solid #ddd;">
                                 <thead>
@@ -54,8 +54,8 @@
                                 </thead>
 
                                 <tbody>
-                                    <% i=1
-                                    users.forEach(user => { %>
+                                    <% i=1; %>
+                                    <% users.forEach(user => { %>
                                         <tr>
                                             <td><%= user.username %></td>
                                             <td><%= user.first_name %></td>
@@ -64,15 +64,15 @@
                                             <td style="text-align: center;"><%= user.team_id %></td>
                                             <td>
                                                 <% if (user.toggle_account == 0) { %>
-                                                    <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>"><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
+                                                    <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>" onclick="updateDB(this,'<%=user.id%>')"><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
                                                 <% } else { %>
-                                                    <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>" checked><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
+                                                    <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>" onclick="updateDB(this,'<%=user.id%>')" checked><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
                                                 <% } %>
                                             </td>
                                             
                                         </tr>
-                                    <%  i += 1
-                                    }) %>
+                                    <%  i += 1; %>
+                                    <%  }) %>
                                     <!-- <td><a href="/deleteRequest/<%#= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td> -->
                                 </tbody>
                             </table>
@@ -92,6 +92,23 @@
         <!-- <div style="flex: 0 1 40px;">
         <%#- include('user/footer.ejs') %>
         </div> -->
+
+        <script>
+            
+            function updateDB(cb,id) {
+                var http = new XMLHttpRequest();
+                http.open("POST", "/users", true);
+                http.setRequestHeader("Content-type","application/json")
+                http.onreadystatechange = () => {
+                    if (http.readyState === 4 && http.status === 200) {
+                        http.abort()
+                    }
+                }
+                var params = JSON.stringify({ 'buttonState': cb.checked, id })
+                http.send(params);
+            }
+        
+        </script>
         
     </body>
 </html>
