@@ -112,7 +112,7 @@ module.exports = function(app,passport) {
 
         var token = randtoken.generate(20);
 
-        var sent = sendEmail(email, token);
+        var sent = sendEmail(email, token,1);
 
           if (sent != '0') {
 
@@ -212,7 +212,7 @@ function isLoggedIn(req, res, next) {
 }
 
 // Send email
-function sendEmail(email,token) {
+function sendEmail(email,token,option) {
   var email = email
   var token = token
 
@@ -224,12 +224,33 @@ function sendEmail(email,token) {
     }
   })
 
-  var mailOptions = {
-    from: 'oraconsultancy22@gmail.com',
-    to: email,
-    subject: 'Reset Password Link - Service Catalog',
-    html: '<p>You requested for a password reset, kindly use this <a href="http://localhost:3000/reset-password?token=' + token + '">link</a> to reset your password</p>'
+  let mailOptions
+  switch(option) {
+    case 1:
+      mailOptions = {
+        from: 'oraconsultancy22@gmail.com',
+        to: email,
+        subject: 'Reset Password Link - Service Catalog',
+        html: '<p>You requested for a password reset, kindly use this <a href="http://localhost:3000/reset-password?token=' + token + '">link</a> to reset your password</p>'
+      }
+      break;
+    case 2:
+      mailOptions = {
+        from: 'oraconsultancy22@gmail.com',
+        to: email,
+        subject: 'Verify Account - Service Catalog',
+        html: '<p>Your account has been created, please verify using this <a href="http://localhost:3000/login?token=' + token + '">link</a> to verify account</p>'
+      }
+      break;
+    default:
+        mailOptions = {
+          from: 'oraconsultancy22@gmail.com',
+          to: email,
+          subject: 'Blank Email - Service Catalog',
+          html: '<p>This is a blank email send from the service catalog server</p>'
+        }
   }
+
 
   mail.sendMail(mailOptions, function(error,info) {
     if (error) {
