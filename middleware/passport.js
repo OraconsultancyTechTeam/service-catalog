@@ -83,11 +83,11 @@ module.exports = function(passport) {
         'local-register',
         new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
-            usernameField : 'username',
-            passwordField : 'password',
+            usernameField : 'email',
+            passwordField : 'firstName',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
-        function(req, username, password, done) {
+        function(req,username,password, done) {
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
 
@@ -96,13 +96,22 @@ module.exports = function(passport) {
             const email = req.body.email
             const permission = req.body.permission
             const teamID = req.body.team_id
-   
+
+            var fname = firstName.substring(0,1).toLowerCase();
+            var lname = lastName.toLowerCase();
+            var randomNum =  Math.floor(Math.random() * 1000);
+            var user_name = lname + fname+ randomNum;
+
+
+            var password = Math.random().toString(36).slice(2);
+            
+
 
             if(!validator.isEmail(email)){
                 return done(null, false, req.flash('registerMessage', 'Please enter correct email format'))
             }
 
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err,rows) {
+            connection.query("SELECT * FROM users WHERE username = ?",[user_name], function(err,rows) {
                 if (err)
                     return done(err);
                 if (rows.length) {
@@ -120,7 +129,7 @@ module.exports = function(passport) {
                                 if (err)
                                     return done(err);
                                 else {
-                                    const sql = "INSERT INTO users VALUES(null,'"+username+"','"+hash+"',null,default,null,default,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"',null,'"+teamID+"',default)";
+                                    const sql = "INSERT INTO users VALUES(null,'"+user_name+"','"+hash+"',null,default,null,'"+firstName+"','"+lastName+"','"+permission+"','"+email+"',null,'"+teamID+"',default)";
                                     // console.log(sql)
                                     connection.query(sql,(err,users,fields) => {
                                         if(err)
@@ -128,18 +137,15 @@ module.exports = function(passport) {
                                         else{
                                             // all is well, return successful user
                                             var newUserMysql = {
-                                                username: username,
-                                                password: hash,
-                                                firstname: firstName,
-                                                lastname: lastName,
-                                                permission:permission,
-                                                email:email,
-                                                teamID:teamID
-                                                 // use the generateHash function in our user model
+                                                username: user_name,
+                                                password: password, 
+                                                email:email                                               
                                             };
-
-                                            newUserMysql.id = users.insertId;
-                                            return done(null, null,req.flash('registerMessage','User Created'));
+                                         
+                                           
+                                            user =req.user
+                                            regMessage = ('User Created')
+                                            return done(null, user,{regMessage,newUserMysql});
                                         }
                                     })
                                 }

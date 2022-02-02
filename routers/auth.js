@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer')
+const { Passport } = require('passport')
+
 
 module.exports = function(app,passport) {
 
@@ -8,6 +10,7 @@ module.exports = function(app,passport) {
   const connection = require('../app.js').connection
   var bcrypt = require('../app.js').bcrypt
   const randtoken = require('../app.js').randtoken
+  
 
   // =====================================
 	// LOGIN ===============================
@@ -47,10 +50,11 @@ module.exports = function(app,passport) {
   app.get('/register', (req, res) => {
     if(req.user != undefined){
       permission = req.user.permissions
+    
       if (permission == 2) {
           res.render('register', {
           title: 'Service Catalog',
-          message: req.flash('registerMessage') 
+         message:req.flash('registerMessage')
         })
       }
       else{
@@ -58,26 +62,35 @@ module.exports = function(app,passport) {
       }
     }
     else{
+     
       res.redirect('/');
     }
     
    
   })
 
-  app.post('/register', passport.authenticate('local-register', {
+  /*
+  app.post('/register', passport.authenticate('local-register',{
 		successRedirect : '/register', // redirect to the secure profile section
 		failureRedirect : '/register', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}))
-
-  /*
-	// Process the signup form
-	app.post('/register', passport.authenticate('local-register', {
-		successRedirect : '/profile', // redirect to the secure profile section
-		failureRedirect : '/register', // redirect back to the signup page if there is an error
-		failureFlash : true // allow flash messages
-	}))
 */
+  
+	// Process the signup form
+	app.post('/register', function(req, res, next) {
+    passport.authenticate('local-register', function(err, user, info) {
+      if (err) { return next(err); }
+      if (!user) { return res.redirect('/login'); }
+      //req.flash NOT WORKING
+      ('registerMessage',info.regMessage)
+      return res.render('register', {
+        title: 'Service Catalog',
+       message:req.flash('registerMessage')
+      })
+      })(req, res, next);
+    });
+
   // =====================================
 	// FORGOT PASSWORD =====================
 	// =====================================
