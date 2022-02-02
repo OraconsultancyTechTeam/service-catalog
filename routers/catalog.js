@@ -44,7 +44,7 @@ router.get('/profile',isLoggedIn, (req, res) => {
     if (permission == 1) {
         
         // Query to pull users requests
-        connection.query(`SELECT * FROM requests WHERE (userId='` + req.user.id + `')`, (err,response) => {
+        connection.query(`SELECT * FROM requests WHERE (teamId='` + req.user.team_id + `')`, (err,response) => {
             if (err) throw (err) 
             
             res.render('userprofile', {
