@@ -139,7 +139,9 @@ module.exports = function(passport) {
                                             var newUserMysql = {
                                                 username: user_name,
                                                 password: password, 
-                                                email:email                                               
+                                                email:email,
+                                                firstName:firstName,
+                                                lastName:lastName                                               
                                             };
                                          
                                            

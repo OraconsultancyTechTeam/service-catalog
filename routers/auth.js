@@ -54,7 +54,8 @@ module.exports = function(app,passport) {
       if (permission == 2) {
           res.render('register', {
           title: 'Service Catalog',
-         message:req.flash('registerMessage')
+         message:req.flash('registerMessage'),
+         successMessage:""
         })
       }
       else{
@@ -82,11 +83,16 @@ module.exports = function(app,passport) {
     passport.authenticate('local-register', function(err, user, info) {
       if (err) { return next(err); }
       if (!user) { return res.redirect('/login'); }
-      //req.flash NOT WORKING
-      ('registerMessage',info.regMessage)
+     
+      var userInfo = info.newUserMysql;
+      var token = randtoken.generate(20);
+
+      var sent = sendEmail(userInfo, token,2);
+
       return res.render('register', {
         title: 'Service Catalog',
-       message:req.flash('registerMessage')
+      successMessage:info.regMessage,
+       message:""
       })
       })(req, res, next);
     });
@@ -112,6 +118,10 @@ module.exports = function(app,passport) {
 
   /* send reset password link in email */
   app.post('/reset-password-email', function(req, res, next) {
+ 
+    var userInfo = {
+      email:req.body.email,                                          
+  };
     var email = req.body.email
 
     connection.query('SELECT * FROM users WHERE email ="' + email + '"', function(err,result) {
@@ -132,7 +142,7 @@ module.exports = function(app,passport) {
 
           var token = randtoken.generate(20);
 
-          var sent = sendEmail(email, token,1);
+          var sent = sendEmail(userInfo, token,1);
 
             if (sent != '0') {
 
@@ -239,8 +249,8 @@ function isLoggedIn(req, res, next) {
 }
 
 // Send email
-function sendEmail(email,token,option) {
-  var email = email
+function sendEmail(user,token,option) {
+  var email = user.email
   var token = token
 
   var mail = nodemailer.createTransport({
@@ -266,7 +276,7 @@ function sendEmail(email,token,option) {
         from: 'oraconsultancy22@gmail.com',
         to: email,
         subject: 'Verify Account - Service Catalog',
-        html: '<p>Your account has been created, please verify using this <a href="http://localhost:3000/login?token=' + token + '">link</a> to verify account</p>'
+        html: '<p>Hi '+user.firstName+' '+user.lastName+'. Your account has been created, please login using the credentials below: username:'+user.username+' password:'+user.password+' kindly use this <a href="http://localhost:3000/login">link</a> </p>'
       }
       break;
     default:
