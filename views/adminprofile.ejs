@@ -7,6 +7,19 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
       <title> <%= title %></title>
+
+      <style>
+
+        li .nav-link {
+          color: #FFC421 !important;
+        }
+
+        li .active {
+          color: black !important;
+          font-weight: bold;
+        }
+
+      </style>
   </head>
 
   <body style="height: 100vh; display: flex; flex-direction: column;">
@@ -15,7 +28,6 @@
       
     <div class="jumbotron text-center" style="background-color: #FFC421; margin-bottom: 0; border-radius: 0;">
         <h1><%=title%></h1>
-        <!-- <p>Home Page</p> -->
     </div>
    
     <div class="container-fluid" style="flex: 1 1 auto;">
@@ -24,24 +36,172 @@
        
         <section id="news_content" class="col-12" style="display: flex; flex-flow: column; background-color: #F4F6F9; height: 100%;">
               
-          <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
+          <!-- <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
 
             <h2>User Profile</h2>
 
+          </div> -->
+
+          <!-- <div style="padding: 1%; margin: 1% 0 2%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;"></div> -->
+          <div class="card text-center" style="width: 100%; margin: 10px 0 0; transform: scale(1); cursor: auto;">
+            <div class="card-header" style="background-color: #343A40;">
+              <ul class="nav nav-tabs card-header-tabs" id="profileList">
+                <li class="nav-item">
+                  <a class="nav-link active menuTab" href="#welcome">Welcome</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link menuTab" href="#teams">Teams</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link menuTab" href="#userdetails">Details</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              
+               <div class="tab-content mt-3">
+                <div class="tab-pane active" id="welcome" role="tabpanel" aria-labelledby="welcome-tab">
+                  <h1>You are logged in</h1>
+                  <h2>Welcome <%= user.first_name %> <%= user.last_name %></h2>
+                  <a href="/logout" class="btn btn-info" role="button">Logout Button</a>
+                </div>
+                 
+                <div class="tab-pane" id="teams" role="tabpanel" aria-labelledby="teams-tab">  
+                  
+                </div>
+                 
+                <div class="tab-pane" id="userdetails" role="tabpanel" aria-labelledby="details-tab">
+                  <div class="row justify-content-center">
+                    <div class="col-12 col-sm-6 col-md-4" style="padding-top: 1vh;">
+            
+                      <div class="card" style="width: 100%; transform: scale(1); margin: 0; cursor: auto;">
+                        
+                        <div class="card-header">User Details</div>
+                      
+                        <div class="card-body">
+
+                          <div id="passwordChanged" class="alert alert-success" style="display: none;">Password changed successfully</div>
+                          <div id="wrongPasswordAlert" class="alert alert-danger" style="display: none;">Confirm password does not match the new password</div>
+                          
+                          <form id="updateUserDetailsForm" class="form-horizontal p-2" method="post" action="/updateuserdetails">
+            
+                            <div class="row">
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="username" style="margin-left: 0px;">Username</label>
+                                  <input type="text" id="username" class="form-control" placeholder="Username" name="username" value="<%= user.username %>" disabled required>
+                                </div>
+            
+                              </div>
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
+                                  <input type="text" id="email" class="form-control" placeholder="Email" name="email" value="<%= user.email %>" required>
+                                </div>
+            
+                              </div>
+                            </div>
+            
+                            <div class="row">
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="firstName" style="margin-left: 0px;">First Name</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName" value="<%= user.first_name %>" disabled required>
+                                </div>
+            
+                              </div>
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
+                                  <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" value="<%= user.last_name %>" disabled required>
+                                </div>
+            
+                              </div>
+                            </div>
+
+                            <hr>
+            
+                            <div class="row">
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="newPassword" style="margin-left: 0px;">New Password</label>
+                                  <input type="text" id="newPassword" class="form-control" placeholder="New Password" name="newPassword" required>
+                                </div>
+            
+                              </div>
+
+                              <div class="col-md-6 mb-2">
+            
+                                <div class="form-outline">
+                                  <label class="form-label" for="confirmPassword" style="margin-left: 0px;">Confirm New Password</label>
+                                  <input type="text" id="confirmPassword" class="form-control" placeholder="Confirm Password" name="confirmPassword" required>
+                                </div>
+            
+                              </div>
+                            </div>
+            
+                            <br>
+                              
+                            <div class="updateDetails" style="text-align: center;">
+                                
+                              <a type="button" class="btn btn-success" id="updateBtn" style="color: white;" onclick="submit()">Update Details</a>
+                              <!-- <button type="submit" class="btn btn-success" id="updateBtn" style="color: white;">Update Details</button> -->
+                              
+                            </div>
+                          
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div style="padding: 1%; margin: 1% 0 2%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;">
+          <!-- <div style="padding: 1%; margin: 1% 0 2%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;">
 
             <div style="margin: 1% 3%; padding: 2%; border-radius: 5px;">
                 <h1>You are logged in</h1>
                 <h1>Admin Profile</h1>
-                <h2>Welcome <%= user.first_name %> <%= user.last_name %></h2>
+                <h2>Welcome <%#= user.first_name %> <%#= user.last_name %></h2>
                 <a href="/logout" class="btn btn-info" role="button">Logout Button</a>
 
-            </div>
-          </div>
-            </section>
+            </div> -->
+          <!-- </div> -->
+
+        </section>
+      </div>
+    </div>
+
+    <script>
+
+      $('#profileList a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
+
+      function submit() {
+        newPass = $('#newPassword').val()
+        confirmPass = $('#confirmPassword').val()
+        $('#wrongPasswordAlert').css('display','none')
+        
+        if (newPass == '') {
+          document.getElementById('updateUserDetailsForm').submit()
+        } else if (newPass != '' && newPass === confirmPass) {
+          document.getElementById('updateUserDetailsForm').submit()
+          $('#passwordChanged').css('display','block')
           
-  
+        } else {
+          $('#wrongPasswordAlert').css('display','block')
+        }
+      }
+
+    </script>
+
   </body>
 </html>
