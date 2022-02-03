@@ -173,13 +173,9 @@ function getStep3() {
         
         step3.forEach(card => { 
 
-          if(card.option_id==1){
-           // console.log("The card id is: "+card.option_id+". The card heading is: "+card.option_heading)
+          if (card.option_id == 1) {
             // Append the option to select
             $('#envSelect').append('<option value="'+card.option_heading+'">'+card.option_heading+'</option>');
-  
-            // Set the select value with new option
-            //  $("#envSelect").val(card.option_heading);
   
             // Refresh the selectpicker
              $("#envSelect").selectpicker("refresh");
@@ -254,20 +250,18 @@ function getStep5() {
 }
 
 function unclickRadio() {
-    $("input:radio").prop("checked", false);
+  $("input:radio").prop("checked", false);
 }
 
 function clickRadio(inputElement) {
-    $("#"+inputElement).prop("checked", true);
+  $("#"+inputElement).prop("checked", true);
 }
 
 function makeSelect(element, group){
 
-    $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected");
-    $('.' + group).addClass('unselected')
-    //$("input:radio").filter("."+group).prop("checked", false);     
-    $("#" + element + "-card").removeClass("unselected").addClass("selected");
-    // $("#"+element).prop("checked", true);
+  $(".card").filter("."+group).filter(".selected").removeClass("selected").addClass("unselected")
+  $('.' + group).addClass('unselected')    
+  $("#" + element + "-card").removeClass("unselected").addClass("selected")
 
 }
 
@@ -277,11 +271,23 @@ function filterTest(element) {
     if ($("#" + id + "-card").hasClass("group1")) {
         makeSelect(id, "group1");
         document.getElementById('block2').style.display='block'
+        // Something here to clear step2 once step1 is changed
+        clearDBSelection()
     } else if ( $("#" + id + "-card").hasClass("group2") ) {
         makeSelect(id, "group2");
         step = true
     }
 
+}
+
+function clearDBSelection() {
+  var stage_id = document.getElementById('current_stage').innerHTML.replace(/\s+/g,'')
+
+  $("input[name=radio2]").prop("checked",false)
+  $(".card").filter(".group2").filter(".selected").removeClass("selected")
+  $(".card").filter(".group2").filter(".unselected").removeClass("unselected")
+  $("#" + stage_id + "2").html("")
+  step = false
 }
 
 var finalText = '';
