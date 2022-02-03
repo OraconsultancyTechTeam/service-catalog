@@ -274,10 +274,10 @@ function sendEmail(user,token,option) {
       break;
     case 2:
       mailOptions = {
-        from: 'oraconsultancy22@gmail.com',
+        from: '"Service Catalog" <oraconsultancy22@gmail.com>',
         to: email,
         subject: 'Verify Account - Service Catalog',
-        html: '<p>Hi '+user.firstName+' '+user.lastName+', </p><br><p>Your account has been created, please login using the credentials below:</p><p>Username: '+user.username+'</p><p>Password: '+user.password+'</p><br><p>kindly use this <a href="http://localhost:3000/login">link</a> to login.</p>'
+        html: sendCredentialsFormat(user)
       }
       break;
     default:
@@ -295,4 +295,16 @@ function sendEmail(user,token,option) {
       console.log('Error sending email...')
     }
   })
+}
+
+function sendCredentialsFormat(user){
+  return output = `
+  <p>Hi ${user.firstName} ${user.lastName}, </p>
+  <br><p>Your account has been created, please login using the credentials below:</p>
+  <p><b>Username:</b> ${user.username}</p>
+  <p><b>Password:</b> ${user.password}</p>
+  <p>Kindly use this <a href="http://localhost:3000/login">link</a> to login.</p>
+  <br><p>Kind Regards,</p>
+  <p><b>Service Catalog</b></p>
+  `;
 }
