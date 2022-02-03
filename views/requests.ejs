@@ -44,7 +44,7 @@
                         <table id="requestsTable" class="table table-striped" style="border: 1px solid #ddd;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Team ID</th>
                                     <th>Host</th>
                                     <th>Database</th>
                                     <th>Environment</th>
@@ -62,7 +62,7 @@
                             <tbody>
                                 <% requests.forEach(req => { %>
                                     <tr>
-                                        <td><%= req.id %></td>
+                                        <td><%= req.teamId %></td>
                                         <td><%= req.host %></td>
                                         <td><%= req.db %></td>
                                         <td><%= req.environment %></td>

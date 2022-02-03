@@ -176,7 +176,8 @@ module.exports = function(app,passport) {
   app.get('/reset-password', function(req, res, next) {
     res.render('forgotpassword', {
       title: 'Reset Password Page',
-      token: req.query.token
+      token: req.query.token,
+      message: ''
     });
   });
 
@@ -276,7 +277,7 @@ function sendEmail(user,token,option) {
         from: 'oraconsultancy22@gmail.com',
         to: email,
         subject: 'Verify Account - Service Catalog',
-        html: '<p>Hi '+user.firstName+' '+user.lastName+'. Your account has been created, please login using the credentials below: username:'+user.username+' password:'+user.password+' kindly use this <a href="http://localhost:3000/login">link</a> </p>'
+        html: '<p>Hi '+user.firstName+' '+user.lastName+', </p><br><p>Your account has been created, please login using the credentials below:</p><p>Username: '+user.username+'</p><p>Password: '+user.password+'</p><br><p>kindly use this <a href="http://localhost:3000/login">link</a> to login.</p>'
       }
       break;
     default:

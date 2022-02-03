@@ -218,10 +218,6 @@ router.get('/requests', (req,res) => {
     
 })
 
-router.post('/requests', (req,res) => {
-
-})
-
 router.get('/deleteRequest/:id', (req,res) => {
     connection.query('DELETE FROM requests WHERE id=' + req.params.id, (err,response) => {
         if (err) throw err

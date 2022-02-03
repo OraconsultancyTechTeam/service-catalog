@@ -62,17 +62,6 @@ html,body {
   background-color: #222;
 }
 
-/* #details {
-  height: 100%;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-} */
-
-/* body {
-  overflow-y: hidden;
-} */
-
 .collapsible {
   background-color: white;
   color: black;

@@ -11,7 +11,12 @@
       <style>
 
         li .nav-link {
+          color: #FFC421 !important;
+        }
+
+        li .active {
           color: black !important;
+          font-weight: bold;
         }
 
       </style>
@@ -31,23 +36,23 @@
        
         <section id="news_content" class="col-12" style="display: flex; flex-flow: column; background-color: #F4F6F9; height: 100%;">
               
-          <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
+          <!-- <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
 
             <h2>User Profile</h2>
 
-          </div>
+          </div> -->
 
           <div class="card text-center" style="width: 100%; margin: 0; transform: scale(1); cursor: auto;">
-            <div class="card-header">
+            <div class="card-header" style="background-color: #222;">
               <ul class="nav nav-tabs card-header-tabs" id="profileList">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#welcome">Welcome</a>
+                  <a class="nav-link active menuTab" href="#welcome">Welcome</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#requests">Requests</a>
+                  <a class="nav-link menuTab" href="#requests">Requests</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#userdetails">Details</a>
+                  <a class="nav-link menuTab" href="#userdetails">Details</a>
                 </li>
               </ul>
             </div>
