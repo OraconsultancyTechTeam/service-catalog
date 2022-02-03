@@ -112,43 +112,50 @@ module.exports = function(app,passport) {
 
   /* send reset password link in email */
   app.post('/reset-password-email', function(req, res, next) {
- 
     var email = req.body.email
 
     connection.query('SELECT * FROM users WHERE email ="' + email + '"', function(err,result) {
-      if (err) throw err;
-      
-      var type = ''
-      var msg = ''
-  
-      if (result[0].email.length > 0) {
+      if (err) throw err
+      else {
+        var type = ''
+        var msg = ''
+        
+        if (result[0] === undefined) {
+          return res.render('forgotpassword', {
+            title: 'Reset Password Page',
+            token: req.query.token,
+            message: 'Incorrect email'
+          })
+        }
 
-        var token = randtoken.generate(20);
+        if (result[0].email.length > 0) {
 
-        var sent = sendEmail(email, token,1);
+          var token = randtoken.generate(20);
 
-          if (sent != '0') {
+          var sent = sendEmail(email, token,1);
 
-              var data = {
-                  token: token
-              }
+            if (sent != '0') {
 
-              connection.query('UPDATE users SET ? WHERE email ="' + email + '"', data, function(err,result) {
-                  if(err) throw err
-      
-              })
+                var data = {
+                    token: token
+                }
 
-              type = 'success';
-              msg = 'The reset password link has been sent to your email address'
+                connection.query('UPDATE users SET ? WHERE email ="' + email + '"', data, function(err,result) {
+                    if(err) throw err
+        
+                })
 
-          } else {
-              type = 'error'
-              msg = 'Something goes to wrong. Please try again'
-          }
-      } else {
-          // console.log('2')
-          type = 'error'
-          msg = 'The Email is not registered with us'
+                type = 'success';
+                msg = 'The reset password link has been sent to your email address'
+
+            } else {
+                type = 'error'
+                msg = 'Something goes to wrong. Please try again'
+            }
+        } else {
+            type = 'error'
+            msg = 'The Email is not registered with us'
+        }
       }
       req.flash(type, msg);
       res.redirect('/');
@@ -157,6 +164,13 @@ module.exports = function(app,passport) {
 
   /* reset page */
   app.get('/reset-password', function(req, res, next) {
+    res.render('forgotpassword', {
+      title: 'Reset Password Page',
+      token: req.query.token
+    });
+  });
+
+  app.get('/update-password', function(req, res, next) {
     res.render('resetpassword', {
       title: 'Reset Password Page',
       token: req.query.token
@@ -244,7 +258,7 @@ function sendEmail(email,token,option) {
         from: 'oraconsultancy22@gmail.com',
         to: email,
         subject: 'Reset Password Link - Service Catalog',
-        html: '<p>You requested for a password reset, kindly use this <a href="http://localhost:3000/reset-password?token=' + token + '">link</a> to reset your password</p>'
+        html: '<p>You requested for a password reset, kindly use this <a href="http://localhost:3000/update-password?token=' + token + '">link</a> to reset your password</p>'
       }
       break;
     case 2:
