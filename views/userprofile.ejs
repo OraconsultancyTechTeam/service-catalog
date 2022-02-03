@@ -43,7 +43,7 @@
           </div> -->
 
           <div class="card text-center" style="width: 100%; margin: 0; transform: scale(1); cursor: auto;">
-            <div class="card-header" style="background-color: #222;">
+            <div class="card-header" style="background-color: #343A40;">
               <ul class="nav nav-tabs card-header-tabs" id="profileList">
                 <li class="nav-item">
                   <a class="nav-link active menuTab" href="#welcome">Welcome</a>
@@ -209,32 +209,35 @@
 
             </div>
           </div> -->
+
         </section>
+      </div>
+    </div>
           
-        <script>
+    <script>
 
-          $('#profileList a').on('click', function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
+      $('#profileList a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
 
-          function submit() {
-            newPass = $('#newPassword').val()
-            confirmPass = $('#confirmPassword').val()
-            $('#wrongPasswordAlert').css('display','none')
-            
-            if (newPass == '') {
-              document.getElementById('updateUserDetailsForm').submit()
-            } else if (newPass != '' && newPass === confirmPass) {
-              document.getElementById('updateUserDetailsForm').submit()
-              $('#passwordChanged').css('display','block')
-              
-            } else {
-              $('#wrongPasswordAlert').css('display','block')
-            }
-          }
+      function submit() {
+        newPass = $('#newPassword').val()
+        confirmPass = $('#confirmPassword').val()
+        $('#wrongPasswordAlert').css('display','none')
+        
+        if (newPass == '') {
+          document.getElementById('updateUserDetailsForm').submit()
+        } else if (newPass != '' && newPass === confirmPass) {
+          document.getElementById('updateUserDetailsForm').submit()
+          $('#passwordChanged').css('display','block')
+          
+        } else {
+          $('#wrongPasswordAlert').css('display','block')
+        }
+      }
 
-        </script>
+    </script>
   
   </body>
 </html>
