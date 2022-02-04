@@ -38,25 +38,51 @@ router.get('/', (req, res) => {
 router.get('/profile',isLoggedIn, (req, res) => {
     req.flash('message')
     permission = req.user.permissions
-    if (permission == 1) {
+
+    function get_preferences(callback) {
         
-        // Query to pull users requests
-        connection.query(`SELECT * FROM requests WHERE (teamId='` + req.user.team_id + `')`, (err,response) => {
-            if (err) throw (err) 
-            
-            res.render('userprofile', {
-                title: 'Service Catalog',
-                user : req.user,
-                requests : response
-            })
+        // Query to pull preferences
+        connection.query(`SELECT * FROM preferences`, (err,response) => {
+            if (err) throw (err)
+
+            return callback(response)
         })
 
-    } else {
-        res.render('adminprofile', {
-            title: 'Service Catalog',
-            user : req.user
-        })
+        // Query to pull specific user preferences
+        // connection.query(`SELECT * FROM user_preferences WHERE user_id='` + req.userId + `'`, (err,response) => {
+        //     if (err) throw (err)
+
+        //     return callback(response)
+        // })
     }
+    
+    get_preferences(function(result) {
+        var preferences = result
+
+        if (permission == 1) {
+        
+            // Query to pull users requests
+            connection.query(`SELECT * FROM requests WHERE (teamId='` + req.user.team_id + `')`, (err,response) => {
+                if (err) throw (err)
+                
+                res.render('userprofile', {
+                    title: 'Service Catalog',
+                    user : req.user,
+                    requests : response,
+                    preferences
+                })
+            })
+    
+        } else {
+            res.render('adminprofile', {
+                title: 'Service Catalog',
+                user : req.user,
+                preferences
+            })
+        }
+    })
+
+    
 })
 
 router.post('/updateuserdetails', isLoggedIn, (req,res) => {
@@ -150,17 +176,24 @@ function stepLooper(stepCard) {
 
 // method is called when card in catalog is selected
 router.post('/catalog', (req,res) => {
-
     connection.query(`select stage_id from stages where (stage_name='` + req.body.stage_id + `' and status=1)`, (err,response) => {
         if (err) throw (err) 
         else {
             var stage_id = response[0].stage_id
             
-            connection.query(`select option_id, option_heading from stage_options where (stage_id=` + stage_id + ` and status=1) order by option_order`, (err,result) => {
-                if (err) throw err
-                step2 = result
-                return res.send(step2)
-            })
+            if (req.body.option_id != undefined) {
+                connection.query(`SELECT option_id, option_heading FROM stage_options WHERE (stage_id=` + stage_id + ` and option_id=` + req.body.option_id + ` and status=1) ORDER BY option_order`, (err,result) => {
+                    if (err) throw err
+                    step2 = result
+                    return res.send(step2)
+                })
+            } else {
+                connection.query(`SELECT option_id, option_heading FROM stage_options WHERE (stage_id=` + stage_id + ` and status=1) ORDER BY option_order`, (err,result) => {
+                    if (err) throw err
+                    step2 = result
+                    return res.send(step2)
+                })
+            }
         }
     })
 

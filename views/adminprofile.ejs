@@ -43,33 +43,33 @@
           </div> -->
 
           <!-- <div style="padding: 1%; margin: 1% 0 2%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;"></div> -->
-          <div class="card text-center" style="width: 100%; margin: 10px 0 0; transform: scale(1); cursor: auto;">
+          <div class="card text-center" style="width: 100%; margin: 10px 0; transform: scale(1); cursor: auto; flex: 1 0 auto;">
             <div class="card-header" style="background-color: #343A40;">
               <ul class="nav nav-tabs card-header-tabs" id="profileList">
                 <li class="nav-item">
                   <a class="nav-link active menuTab" href="#welcome">Welcome</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link menuTab" href="#teams">Teams</a>
+                  <a class="nav-link menuTab" href="#userdetails">Details</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link menuTab" href="#userdetails">Details</a>
+                  <a class="nav-link menuTab" href="#preferences">Preferences</a>
                 </li>
               </ul>
             </div>
+            
             <div class="card-body">
               
-               <div class="tab-content mt-3">
+              <div class="tab-content mt-3">
+                
+                <!-- First Tab -->
                 <div class="tab-pane active" id="welcome" role="tabpanel" aria-labelledby="welcome-tab">
                   <h1>You are logged in</h1>
                   <h2>Welcome <%= user.first_name %> <%= user.last_name %></h2>
                   <a href="/logout" class="btn btn-info" role="button">Logout Button</a>
                 </div>
-                 
-                <div class="tab-pane" id="teams" role="tabpanel" aria-labelledby="teams-tab">  
-                  
-                </div>
-                 
+                
+                <!-- Second Tab -->
                 <div class="tab-pane" id="userdetails" role="tabpanel" aria-labelledby="details-tab">
                   <div class="row justify-content-center">
                     <div class="col-12 col-sm-6 col-md-4" style="padding-top: 1vh;">
@@ -155,10 +155,45 @@
                             </div>
                           
                           </form>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- Third Tab -->
+                <div class="tab-pane" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">  
+                  <table id="preferencesTable" class="table table-striped" style="border: 1px solid #ddd;">
+
+                    <thead>
+                      <tr>
+                        <th>Preference</th>
+                        <th>Choice</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% i = 1 %>
+                      <% preferences.forEach(pref => { %>
+                        <tr>
+
+                          <td><%= pref.name %></td>
+                          <td>
+                            <% if (pref.toggle_account == 0) { %>
+                              <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>" onclick="updateDB(this,'<%=pref.id%>')"><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
+                            <% } else { %>
+                              <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>" onclick="updateDB(this,'<%=pref.id%>')" checked><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
+                            <% } %>
+                          </td>
+
+                        </tr>
+                      <%  i += 1 %>
+                      <% }) %>
+                    </tbody>
+
+                  </table>
+                </div>
+
               </div>
             </div>
           </div>
@@ -200,6 +235,19 @@
           $('#wrongPasswordAlert').css('display','block')
         }
       }
+
+      // function updateDB(cb,id) {
+      //   var http = new XMLHttpRequest();
+      //   http.open("POST", "/users", true);
+      //   http.setRequestHeader("Content-type","application/json")
+      //   http.onreadystatechange = () => {
+      //       if (http.readyState === 4 && http.status === 200) {
+      //           http.abort()
+      //       }
+      //   }
+      //   var params = JSON.stringify({ 'buttonState': cb.checked, id })
+      //   http.send(params);
+      // }
 
     </script>
 

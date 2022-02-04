@@ -5,7 +5,7 @@
     <div id="group1" class="card-deck">
 
       <% step1.forEach(card => { %>
-        <div id="<%= card.service_name.replace(/\s+/g,'') %>-card" class="card group1 card-settings"  onclick="clickTheCard(this,1)" style="text-align: center; max-width: 204px;">
+        <div id="<%= card.service_name.replace(/\s+/g,'') %>-card" class="card group1 card-settings"  onclick="clickTheCard(this,1,'<%=card.service_id%>','group1')" style="text-align: center; max-width: 204px;">
           <img class="card-img-top mx-auto mt-1" src='/img/<%=card.service_icon%>' style="width:5rem; height:5rem;" alt="Card image cap">
           <div class="card-body" role="button">
             <h6 class="card-title"><input id="<%=card.service_name%>" class="" name="radio1" value="<%=card.service_name%>" type="radio">
