@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer')
 const { Passport } = require('passport')
-
+const ejs = require('ejs')
+const fs = require('fs')
 
 module.exports = function(app,passport) {
 
@@ -82,12 +83,12 @@ module.exports = function(app,passport) {
 	app.post('/register', function(req, res, next) {
     passport.authenticate('local-register', function(err, user, info) {
       if (err) { return next(err); }
-      if (!user) { return res.redirect('/login'); }
+      if (!user) { return res.redirect('/register'); }
      
       var userInfo = info.newUserMysql;
       var token = randtoken.generate(20);
 
-      var sent = sendEmail(userInfo, token,2);
+      sendEmail(userInfo, token,1);
 
       return res.render('register', {
         title: 'Service Catalog',
@@ -142,7 +143,7 @@ module.exports = function(app,passport) {
 
           var token = randtoken.generate(20);
 
-          var sent = sendEmail(userInfo, token,1);
+          var sent = sendEmail(userInfo, token,2);
 
             if (sent != '0') {
 
@@ -250,8 +251,8 @@ function isLoggedIn(req, res, next) {
 }
 
 // Send email
-function sendEmail(user,token,option) {
-  var email = user.email
+function sendEmail(newUser,token,option) {
+  var email = newUser.email
   var token = token
 
   var mail = nodemailer.createTransport({
@@ -264,22 +265,51 @@ function sendEmail(user,token,option) {
 
   let mailOptions
   switch(option) {
-    case 1:
-      mailOptions = {
-        from: 'oraconsultancy22@gmail.com',
-        to: email,
-        subject: 'Reset Password Link - Service Catalog',
-        html: '<p>You requested for a password reset, kindly use this <a href="http://localhost:3000/update-password?token=' + token + '">link</a> to reset your password</p>'
-      }
-      break;
-    case 2:
-      mailOptions = {
-        from: 'oraconsultancy22@gmail.com',
-        to: email,
-        subject: 'Verify Account - Service Catalog',
-        html: '<p>Hi '+user.firstName+' '+user.lastName+', </p><br><p>Your account has been created, please login using the credentials below:</p><p>Username: '+user.username+'</p><p>Password: '+user.password+'</p><br><p>kindly use this <a href="http://localhost:3000/login">link</a> to login.</p>'
-      }
-      break;
+       case 1:
+        ejs.renderFile("./views/emailCredentials.ejs", { 
+          fname: newUser.firstName, 
+          lname: newUser.lastName,
+          username: newUser.username,
+          password: newUser.password
+        }, function (err, data) {
+          if (err) {
+              console.log(err);
+          } else {
+              mailOptions = {
+                  from: '"Service Catalog" <oraconsultancy22@gmail.com>',
+                  to: email,
+                  subject: 'Verify Account - Service Catalog',
+                  html: data,
+                  attachments: [{
+                      filename: 'ServiceCatalog.png',
+                      path: 'public/img/ServiceCatalog.png',
+                      cid: 'SCImg' //same cid value as in the html img src
+                  }]
+              };
+            }});
+        break;
+        case 2:
+        ejs.renderFile("./views/resetPasswordEmail.ejs", { 
+          email: email,
+          token: token,
+        }, function (err, data) {
+          if (err) {
+              console.log(err);
+          } else {
+              mailOptions = {
+                  from: '"Service Catalog" <oraconsultancy22@gmail.com>',
+                  to: email,
+                  subject: 'Reset Password Link - Service Catalog',
+                  html: data,
+                  attachments: [{
+                      filename: 'ServiceCatalog.png',
+                      path: 'public/img/ServiceCatalog.png',
+                      cid: 'SCImg' //same cid value as in the html img src
+                  }]
+              };
+            }});
+        break;
+
     default:
         mailOptions = {
           from: 'oraconsultancy22@gmail.com',
@@ -292,7 +322,7 @@ function sendEmail(user,token,option) {
 
   mail.sendMail(mailOptions, function(error,info) {
     if (error) {
-      console.log('Error sending email...')
+      console.log('Error sending email...'+error)
     }
   })
 }
