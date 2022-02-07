@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
-      <title> <%= title %></title>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <title> <%= title %></title>
 
-      <style>
+        <style>
 
-        label {
-          margin-bottom: 0;
-          font-size: small;
-        }
+            label {
+                margin-bottom: 0;
+                font-size: small;
+            }
 
-      </style>
-  
-  </head>
+            .moveall, .removeall {
+                border: 1px solid #ccc !important;
+            }
+
+            .moveall:hover, .removeall:hover {
+                background: #efefef;
+            }
+
+            /* Only included because button labels aren't showing  */
+            .moveall::after {
+                content: attr(title)
+            }
+
+            .removeall::after {
+                content: attr(title);
+            }
+
+            /* Custom styling form */
+            .form-control option {
+                padding: 10px;
+                border-bottom: 1px solid #efefef;
+            }
+
+        </style>
+    
+    </head>
 
   <body style="height: 100vh; background-color: #F4F6F9;">
     
@@ -38,9 +61,9 @@
 
     <div class="container-fluid mt-4">
 
-      <div class="row justify-content-center">
+      <div class="row justify-content-center d-flex">
 
-        <div class="col-12 col-sm-6 col-md-4 justify-content-center" style="display: flex; padding-top: 1vh;">
+        <div class="col-12 col-sm-6 col-md-4 justify-content-center" style="display: flex; padding: 0;">
           
           <div class="card" style="width: 100%; margin: 0; transform: scale(1);">
             
@@ -48,53 +71,35 @@
           
             <div class="card-body">
               
-              <form id="addTeamForm" class="form-horizontal p-2" method="post" action="/addTeam">
+              <form id="addTeamForm" class="form-horizontal" method="post" action="/addTeam">
                 
                 <div class="row">
-                  <div class="col-md-6 mb-2">
+                    <div class="col-md-12 mb-2">
 
-                    <div class="form-outline">
-                      <label class="form-label" for="teamName" style="margin-left: 0px;">Team Name</label>
-                      <input type="text" id="teamName" class="form-control" placeholder="Team Name" name="teamName" required>
+                        <div class="form-outline">
+                            <label class="form-label" for="teamName" style="margin-left: 0px;">Team Name</label>
+                            <input type="text" id="teamName" class="form-control" placeholder="Team Name" name="teamName" required>
+                        </div>
+
                     </div>
+                    <!-- <div class="col-md-6 mb-2">
 
-                  </div>
-                  <div class="col-md-6 mb-2">
+                        <div class="form-outline">
+                            <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
+                            <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" required>
+                        </div>
 
-                    <div class="form-outline">
-                      <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
-                      <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" required>
-                    </div>
-
-                  </div>
+                    </div> -->
                 </div>
-                <div class="row">
                 
-                  <div class="col-md-6 mb-2">
-
-                    <div class="form-outline">
-                      <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
-                      <input type="text" id="email" class="form-control" placeholder="Email" name="email" required>
-                    </div>
-
-                  </div>
-                     <div class="col-md-6 mb-2">
-
-                    <div class="form-outline">
-                      <label class="form-label" for="team_id" style="margin-left: 0px;">Team</label>
-                      <input type="text" id="team_id" class="form-control" placeholder="Team ID" name="team_id" required>
-                    </div>
-
-                  </div>
-                </div>
                 <div class="row">
-                  <div class="col-md-6 mb-2">
+                  <div class="col-md-12 mb-2">
 
                     <div class="form-outline">
-                      <label class="form-label select-label" for="accountType" style="margin-left: 0px;">Access Level</label>
-                      <select id="permission" class="select form-control" name="permission" required>
-                        <option value="" hidden selected disabled>Select access level</option>
+                      <select id="teamMemberSelect" class="select form-control" name="teamMemberSelect[]" title="teamMemberSelect[]" size="10" multiple required>
+                        <!-- <option value="" hidden selected disabled>Select access level</option> -->
                         <option value="1">Member</option>
+                        <option value="2">Admin</option>
                         <option value="2">Admin</option>
                       </select>
                     </div>
@@ -103,17 +108,17 @@
                
                 </div>
 
-                <br>
+                <hr>
                   
                 <div class="dataBtns" style="text-align: center;">
                     
-                  <a type="button" class="btn btn-success" id="registerBtn" onclick="myFunction()">Create</a>
+                  <a type="button" class="btn btn-success" id="registerBtn" onclick="myFunction()">Create Team</a>
                   
                 </div>
               
               </form>
               
-              <hr>
+              
 
           </div>
       </div>
@@ -123,16 +128,23 @@
   
 
     <script>
-      function myFunction() {
-        var txt;
-        if (confirm("Confirm Adding User!")) {
-          document.getElementById("addUserForm").submit();
-          txt = "Add Confirmed";
-        } else {
-          txt = "Add Cancelled";
+        function myFunction() {
+            if (confirm("Confirm Adding User!")) {
+                document.getElementById("addUserForm").submit()
+            }
         }
-        document.getElementById("demo").innerHTML = txt;
-      }
+
+        var demo1 = $('select[name="teamMemberSelect[]"]').bootstrapDualListbox({
+            nonSelectedListLabel: 'Available Users',
+            selectedListLabel: 'Selected Users',
+            preserveSelectionOnMove: 'moved',
+            moveAllLabel: 'Move all',
+            removeAllLabel: 'Remove all'
+        });
+        $("#demoform").submit(function() {
+            alert($('[name="duallistbox_demo1[]"]').val());
+            return false;
+        })
     </script>
   </body>
 </html>
