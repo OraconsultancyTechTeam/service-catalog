@@ -288,6 +288,12 @@ router.get('/deleteRequest/:id', (req,res) => {
     })
 })
 
+// We will want this protected so you have to be logged in to visit
+// We will use route middleware to verify this (the isLoggedIn function)
+router.post('/404Home', isLoggedIn, function(req, res) {
+    return res.redirect('/profile')
+});
+
 // =====================================
 // TEAMS ===============================
 // =====================================
