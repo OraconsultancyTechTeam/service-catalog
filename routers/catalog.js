@@ -47,13 +47,6 @@ router.get('/profile',isLoggedIn, (req, res) => {
 
             return callback(response)
         })
-
-        // Query to pull specific user preferences
-        // connection.query(`SELECT * FROM user_preferences WHERE user_id='` + req.userId + `'`, (err,response) => {
-        //     if (err) throw (err)
-
-        //     return callback(response)
-        // })
     }
     
     get_preferences(function(result) {
@@ -138,6 +131,40 @@ router.post('/users', isLoggedIn, (req,res) => {
     
     connection.query(`UPDATE users SET toggle_account='`+toggle+`' WHERE id='`+id+`'`, (err,response) => {
         if (err) throw err
+    })
+})
+
+router.get('/deleteUser/:id', isLoggedIn, (req,res) => {
+    connection.query('DELETE FROM users WHERE id=' + req.params.id, (err,response) => {
+        if (err) throw err
+        else {
+            console.log('User deleted successfully')
+        }
+        return res.redirect('/users')
+    })
+})
+
+router.get('/editUser/:id', isLoggedIn, (req,res) => {
+    connection.query(`SELECT * FROM users WHERE id=` + req.params.id, (err,result) => {
+        res.render('edituser', {
+            title: 'Edit User Details',
+            user: result[0],
+            id: req.params.id
+        })
+    })
+})
+
+router.post('/editUser', isLoggedIn, (req,res) => {
+    first_name = req.body.firstName
+    last_name = req.body.lastName
+    email = req.body.email
+    team_id = req.body.team_id
+    permission = req.body.permission
+    id = req.body.id
+
+    connection.query(`UPDATE users SET first_name='` + first_name + `',last_name='` + last_name + `',email='` + email + `',team_id=` + team_id + `,permissions=` + permission + ` WHERE id=` + id, (err,result) => {
+        if (err) throw err
+        return res.redirect('/users')
     })
 })
 
@@ -243,7 +270,7 @@ router.post('/submit', (req,res) => {
 
 router.get('/requests', (req,res) => {
     connection.query('SELECT * FROM requests ORDER BY due_by ASC', (err,result) => {
-        res.render('requests',{
+        res.render('requests', {
             title: 'Service Catalog Requests',
             requests: result
         });
@@ -262,8 +289,43 @@ router.get('/deleteRequest/:id', (req,res) => {
 })
 
 // =====================================
-// MIDDLEWARE ============================
+// TEAMS ===============================
 // =====================================
+
+router.get('/teams', (req,res) => {
+    connection.query('SELECT * FROM teams_view ORDER BY team_id ASC', (err,teams_view) => {
+        connection.query('SELECT * FROM teams ORDER BY team_id ASC', (err,teams) => {
+            res.render('teams', {
+                title: 'Teams',
+                teams_view,
+                teams
+            })
+        })
+    })
+})
+
+router.post('/teams', (req,res) => {
+    id = req.body.id
+    team_id = req.body.teamSelect
+
+    connection.query(`UPDATE users SET team_id=` + team_id + ` WHERE id=` + id, (err,result) => {
+        if (err) throw err
+        else {
+            console.log('Updated db successfully')
+        }
+        return res.redirect('/teams')
+    })
+})
+
+router.get('/addTeam', (req,res) => {
+    res.render('addteam', {
+        title: 'Create Team'
+    })
+})
+
+// =======================================
+// MIDDLEWARE ============================
+// =======================================
 
 // Route middleware to make sure user is authenticated
 function isLoggedIn(req, res, next) {

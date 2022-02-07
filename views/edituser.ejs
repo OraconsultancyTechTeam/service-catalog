@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <title><%= title %></title>
+
+        <style>
+
+            label {
+            margin-bottom: 0;
+            font-size: small;
+            }
+
+        </style>
+    
+    </head>
+
+    <body style="height: 100vh; background-color: #F4F6F9;">
+        
+        <div><%- include('admin/header.ejs', {active: "Users"}); %></div>
+
+        <!-- show any messages that come back with authentication -->
+        <!-- <%# if (message.length > 0) { %>
+        <div class="alert alert-danger"><%#= message %></div>
+        <%# } %>
+        <%# if (successMessage.length > 0) { %>
+        <div class="alert alert-success"><%#= successMessage %></div>
+        <%# } %> -->
+
+        <div class="container-fluid mt-4">
+
+            <div class="row justify-content-center">
+
+                <div class="col-12 col-sm-6 col-md-4 justify-content-center" style="display: flex; padding-top: 1vh;">
+                
+                    <div class="card" style="width: 100%; margin: 0; transform: scale(1);">
+                    
+                        <div class="card-header">Update User Details</div>
+                                
+                        <div class="card-body">
+                                    
+                            <form id="editUserForm" class="form-horizontal p-2" method="post" action="/editUser">
+                                
+                                <div class="row">
+
+                                    <div class="col-md-6 mb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="firstName" style="margin-left: 0px;">First Name</label>
+                                            <input type="text" id="firstName" class="form-control" placeholder="First Name" name="firstName" value="<%=user.first_name%>" required>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
+                                            <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" value="<%=user.last_name%>" required>
+                                        </div>
+
+                                    </div>
+                                
+                                </div>
+                                
+                                <div class="row">
+                                
+                                    <div class="col-md-6 mb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="email" style="margin-left: 0px;">Email</label>
+                                            <input type="text" id="email" class="form-control" placeholder="Email" name="email" value="<%=user.email%>" required>
+                                        </div>
+
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-2">
+
+                                        <div class="form-outline">
+                                            <label class="form-label" for="team_id" style="margin-left: 0px;">Team</label>
+                                            <input type="text" id="team_id" class="form-control" placeholder="Team ID" name="team_id" value="<%=user.team_id%>" required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    
+                                    <div class="col-md-6 mb-2">
+
+                                        <div class="form-outline">
+                                            
+                                            <label class="form-label select-label" for="accountType" style="margin-left: 0px;">Access Level</label>
+                                            <select id="permission" class="select form-control" name="permission" required>
+                                                <!-- <option value="" hidden selected disabled>Select access level</option> -->
+                                                <% if (user.permissions == 1) { %>
+                                                    <option value="1" selected>Member</option>
+                                                    <option value="2">Admin</option>
+                                                <% } else { %>
+                                                    <option value="1">Member</option>
+                                                    <option value="2" selected>Admin</option>
+                                                <% } %>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                    
+                                </div>
+
+                                <br>
+                        
+                                <div class="dataBtns" style="text-align: center;">
+
+                                    <input name="id" value="<%= id %>" hidden>
+                                    <a type="button" class="btn btn-success" id="updateBtn" style="color: white;" onclick="updateFunc()">Update</a>
+                                
+                                </div>
+                    
+                            </form>
+                    
+                            <hr>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </div>
+
+        <script>
+            
+            function updateFunc() {
+                if (confirm("Confirm Updating User Details")) {
+                    document.getElementById("editUserForm").submit()
+                }
+            }
+
+        </script>
+
+    </body>
+</html>
