@@ -181,7 +181,7 @@ router.get('/catalog', isLoggedIn, function(req, res) {
         step1,
         stages,
         catalogMessages,
-        permission
+        permission: req.user.permission
     });
 });
 
