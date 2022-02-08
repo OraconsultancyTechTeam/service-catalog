@@ -143,9 +143,12 @@
 
     <script>
         function submitFunc() {
+          console.log($('#mangEmail').val())
+          if (ValidateEmail($('#mangEmail').val()) === true){
             if (confirm("Confirm Adding Team!")) {
                 document.getElementById("addTeamForm").submit()
             }
+          }
         }
 
         var demo1 = $('select[name="teamMemberSelect[]"]').bootstrapDualListbox({
@@ -155,6 +158,32 @@
             moveAllLabel: 'Move all',
             removeAllLabel: 'Remove all'
         })
+
+        function ValidateEmail(input) {
+
+          if (input != undefined) {
+            // var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+            var validRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+
+            if (input.match(validRegex)) {
+
+              console.log('matches')
+
+              document.getElementById('mangEmail').focus()
+
+              return true
+
+            } else {
+
+              alert("Invalid email address!")
+
+              document.getElementById('mangEmail').focus()
+
+              return false
+
+            }
+          }
+        }
     </script>
   </body>
 </html>

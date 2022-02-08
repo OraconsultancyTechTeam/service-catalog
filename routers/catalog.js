@@ -337,15 +337,28 @@ router.post('/addTeam', (req,res) => {
     manager_email = req.body.mangEmail
     manager_name_lower = req.body.mangName
     manager_name = manager_name_lower.charAt(0).toUpperCase() + manager_name_lower.slice(1)
+    team_members = req.body['teamMemberSelect[]']
 
     connection.query(`INSERT INTO teams (team_name,team_manager,team_manager_email) VALUES ('` + team_name + "','" + manager_name + "','" + manager_email + `')`, (err,result) => {
         if (err) throw err
-    })
 
-    team_members = req.body['teamMemberSelect[]']
+        team_id = result.insertId
 
-    team_members.forEach(member => {
+        if (Array.isArray(team_members)) {
+            team_members.forEach(member => {
+                connection.query(`UPDATE users SET ? WHERE id=` + member, { team_id }, (err,result) => {
+                    if (err) throw err
+                })
+            })
+        } else {
+            connection.query(`UPDATE users SET ? WHERE id=` + team_members, { team_id }, (err,result) => {
+                if (err) throw err
+            })
+        }
 
+        
+
+        return res.redirect('/teams')
     })
 })
 
