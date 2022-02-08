@@ -336,8 +336,28 @@ router.post('/teams', (req,res) => {
 })
 
 router.get('/addTeam', (req,res) => {
-    res.render('addteam', {
-        title: 'Create Team'
+    connection.query(`SELECT * FROM users WHERE toggle_account=1`, (err, result) => {
+        res.render('addteam', {
+            title: 'Create Team',
+            users: result
+        })
+    })
+})
+
+router.post('/addTeam', (req,res) => {
+    team_name = req.body.teamName
+    manager_email = req.body.mangEmail
+    manager_name_lower = req.body.mangName
+    manager_name = manager_name_lower.charAt(0).toUpperCase() + manager_name_lower.slice(1)
+
+    connection.query(`INSERT INTO teams (team_name,team_manager,team_manager_email) VALUES ('` + team_name + "','" + manager_name + "','" + manager_email + `')`, (err,result) => {
+        if (err) throw err
+    })
+
+    team_members = req.body['teamMemberSelect[]']
+
+    team_members.forEach(member => {
+
     })
 })
 

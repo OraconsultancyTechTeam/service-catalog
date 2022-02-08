@@ -61,11 +61,11 @@
 
     <div class="container-fluid mt-4">
 
-      <div class="row justify-content-center d-flex">
+      <div class="row justify-content-center">
 
-        <div class="col-12 col-sm-6 col-md-4 justify-content-center" style="display: flex; padding: 0;">
+        <div class="col-12 col-sm-6 col-md-4" style="display: flex; padding: 0; flex: 1 0 100%;">
           
-          <div class="card" style="width: 100%; margin: 0; transform: scale(1);">
+          <div class="card" style="margin: 0; transform: scale(1);">
             
             <div class="card-header">New Team Form</div>
           
@@ -82,15 +82,29 @@
                         </div>
 
                     </div>
-                    <!-- <div class="col-md-6 mb-2">
-
-                        <div class="form-outline">
-                            <label class="form-label" for="lastName" style="margin-left: 0px;">Surname</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Last Name" name="lastName" required>
-                        </div>
-
-                    </div> -->
                 </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+
+                      <div class="form-outline">
+                          <label class="form-label" for="mangName" style="margin-left: 0px;">Manager Name</label>
+                          <input type="text" id="mangName" class="form-control" placeholder="Manager Name" name="mangName" required>
+                      </div>
+
+                  </div>
+
+                  <div class="col-md-6 mb-2">
+
+                    <div class="form-outline">
+                        <label class="form-label" for="mangEmail" style="margin-left: 0px;">Manager Email</label>
+                        <input type="text" id="mangEmail" class="form-control" placeholder="Manager Email" name="mangEmail" required>
+                    </div>
+
+                </div>
+              </div>
+
+                <hr>
                 
                 <div class="row">
                   <div class="col-md-12 mb-2">
@@ -98,9 +112,9 @@
                     <div class="form-outline">
                       <select id="teamMemberSelect" class="select form-control" name="teamMemberSelect[]" title="teamMemberSelect[]" size="10" multiple required>
                         <!-- <option value="" hidden selected disabled>Select access level</option> -->
-                        <option value="1">Member</option>
-                        <option value="2">Admin</option>
-                        <option value="2">Admin</option>
+                        <% users.forEach(user => { %>
+                          <option value="<%= user.id %>"><%= user.first_name %></option>
+                        <% }) %>
                       </select>
                     </div>
 
@@ -112,7 +126,7 @@
                   
                 <div class="dataBtns" style="text-align: center;">
                     
-                  <a type="button" class="btn btn-success" id="registerBtn" onclick="myFunction()">Create Team</a>
+                  <a type="button" class="btn btn-success" id="registerBtn" onclick="submitFunc()">Create Team</a>
                   
                 </div>
               
@@ -128,9 +142,9 @@
   
 
     <script>
-        function myFunction() {
-            if (confirm("Confirm Adding User!")) {
-                document.getElementById("addUserForm").submit()
+        function submitFunc() {
+            if (confirm("Confirm Adding Team!")) {
+                document.getElementById("addTeamForm").submit()
             }
         }
 
@@ -140,10 +154,6 @@
             preserveSelectionOnMove: 'moved',
             moveAllLabel: 'Move all',
             removeAllLabel: 'Remove all'
-        });
-        $("#demoform").submit(function() {
-            alert($('[name="duallistbox_demo1[]"]').val());
-            return false;
         })
     </script>
   </body>
