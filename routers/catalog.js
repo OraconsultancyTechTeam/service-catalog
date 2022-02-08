@@ -8,6 +8,8 @@ const connection = require('../app.js').connection
 const validator = require('../app.js').validator
 const router = require('../app.js').router
 const bcrypt = require('../app.js').bcrypt
+const io = require("socket.io-client");
+const socket = io('http://localhost:3000')
 
 // Initial stages data
 let stages
@@ -25,6 +27,9 @@ connection.query(`select * from catalog_services where status=1`, (err,res) => {
 
 // Route To Home Page
 router.get('/', (req, res) => {
+    
+    socket.on('connection')
+
     res.render('home', {
         title: 'Service Catalog'
     })
@@ -257,6 +262,13 @@ router.post('/submit', (req,res) => {
         connection.query(sql,(err,rows,fields)=>{
             if(err) throw err
             req.flash('catalogMessage', 'Submission has been sent successfully')
+            const rm = user.username+" has created a new request"
+
+            socket.emit("requestMade",rm);
+
+
+
+
             return res.redirect('/catalog')
         })
 
