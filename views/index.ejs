@@ -14,10 +14,12 @@
 
   <body>
 
-    <% if (permission == 1) { %>
+    <% if (user.permissions == 1) { %>
       <div id="header"> <%-include('user/header.ejs', { active: 'Catalog' })%></div>
+     
     <% } else { %>
       <div id="header"> <%-include('admin/header.ejs', { active: 'Catalog' })%></div>
+
     <% } %>
 
     <div style="height: 100%;">
@@ -58,7 +60,6 @@
             <div id="step7"> <%-include('partials/step7partial.ejs')%></div>
             <div id="submitBtn"> <%-include('partials/submit.ejs')%></div>
           </form>
-
         </section>
 
         <section id="details" class="col-3 right" style="background-color: #343A40; padding: 2% 0;">
@@ -90,19 +91,8 @@
     </div>
     
     <script src="scripts/index.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"/>
-    <script type="text/javascript">
-      var socket = io("http://localhost:3000")
-      socket.on("requestMade1",function(data){
-        $.notify(data,{
-          autoHide:false,
-          className:"success"
-        })
-      })
-      
-      </script>
-  
+    <script src="scripts/notification.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
   </body>
 </html>

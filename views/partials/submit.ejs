@@ -10,11 +10,14 @@
         </div>
     </div>
 </div>
-
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"></script>
 <script>
+     
     function submitTest() {
     var txt;
     if (confirm("Confirm Submitting!")) {
+      
 
         var mail = document.getElementById("mangEmail");
         var cStage_id = document.getElementById("stage4").innerHTML
@@ -22,6 +25,7 @@
             if(customCheck(cStage_id)==false){
                 document.getElementById("addForm").submit();
                 txt = "Data Submit Confirmed";
+                
             }
             else{
                 var comAl = document.getElementById("commentAlert");
@@ -33,8 +37,12 @@
 
     } else {
       txt = "Data Submit Cancelled";
-      customCheck()
-      
+      const socket = io();
+      socket.emit("requestMade",{
+          "name":"<%= user.username %>",
+          "message":"Service Request Has Been Made"
+      })
+      console.log("This is the user0 "+"<%= user.username %>")
      }
 
     }

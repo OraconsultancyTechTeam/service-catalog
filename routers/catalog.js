@@ -2,14 +2,12 @@
 // const connection = require('../db/mySQL')
 // const validator = require('validator')
 // const router = new express.Router()
-
 const express = require('../app.js').express
 const connection = require('../app.js').connection
 const validator = require('../app.js').validator
 const router = require('../app.js').router
 const bcrypt = require('../app.js').bcrypt
-const io = require("socket.io-client");
-const socket = io('http://localhost:3000')
+
 
 // Initial stages data
 let stages
@@ -27,9 +25,6 @@ connection.query(`select * from catalog_services where status=1`, (err,res) => {
 
 // Route To Home Page
 router.get('/', (req, res) => {
-    
-    socket.on('connection')
-
     res.render('home', {
         title: 'Service Catalog'
     })
@@ -115,14 +110,23 @@ router.post('/updateuserdetails', isLoggedIn, (req,res) => {
 })
 
 router.get('/users', isLoggedIn, (req,res) => {
-    connection.query(`SELECT id, username, first_name, last_name, email, team_id, toggle_account FROM users where permissions=1`, (err,users) => {
-        if (err) throw err
+    permission = req.user.permissions
 
-        res.render('users', {
-            title: 'Users',
-            users
+    if(permission==1){
+        return res.redirect('/profile')
+    }
+    else{
+        connection.query(`SELECT id, username, first_name, last_name, email, team_id, toggle_account FROM users where permissions=1`, (err,users) => {
+            if (err) throw err
+    
+            res.render('users', {
+                title: 'Users',
+                users
+            })
         })
-    })
+    }
+    
+
 })
 
 router.post('/users', isLoggedIn, (req,res) => {
@@ -181,12 +185,14 @@ router.post('/editUser', isLoggedIn, (req,res) => {
 // We will use route middleware to verify this (the isLoggedIn function)
 router.get('/catalog', isLoggedIn, function(req, res) {
     const catalogMessages = req.flash('catalogMessage')
+
     res.render('index',{
         title: 'Service Catalog',
         step1,
         stages,
         catalogMessages,
-        permission: req.user.permission
+        permission: req.user.permissions,
+        user:req.user
     });
 });
 
@@ -262,13 +268,6 @@ router.post('/submit', (req,res) => {
         connection.query(sql,(err,rows,fields)=>{
             if(err) throw err
             req.flash('catalogMessage', 'Submission has been sent successfully')
-            const rm = user.username+" has created a new request"
-
-            socket.emit("requestMade",rm);
-
-
-
-
             return res.redirect('/catalog')
         })
 
@@ -281,13 +280,17 @@ router.post('/submit', (req,res) => {
 // =====================================
 
 router.get('/requests', (req,res) => {
+    permission = req.user.permissions
+    if(permission==1){
+        return res.redirect('/profile')
+    }else{
     connection.query('SELECT * FROM requests ORDER BY due_by ASC', (err,result) => {
         res.render('requests', {
             title: 'Service Catalog Requests',
             requests: result
         });
     })
-    
+}
 })
 
 router.get('/deleteRequest/:id', (req,res) => {
@@ -311,15 +314,21 @@ router.post('/404Home', isLoggedIn, function(req, res) {
 // =====================================
 
 router.get('/teams', (req,res) => {
-    connection.query('SELECT * FROM teams_view ORDER BY team_id ASC', (err,teams_view) => {
-        connection.query('SELECT * FROM teams ORDER BY team_id ASC', (err,teams) => {
-            res.render('teams', {
-                title: 'Teams',
-                teams_view,
-                teams
+    permission = req.user.permissions
+    if(permission==1){
+        return res.redirect('/profile')
+    }else{
+        connection.query('SELECT * FROM teams_view ORDER BY team_id ASC', (err,teams_view) => {
+            connection.query('SELECT * FROM teams ORDER BY team_id ASC', (err,teams) => {
+                res.render('teams', {
+                    title: 'Teams',
+                    teams_view,
+                    teams
+                })
             })
         })
-    })
+    }
+
 })
 
 router.post('/teams', (req,res) => {

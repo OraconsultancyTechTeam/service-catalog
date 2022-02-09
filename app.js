@@ -16,11 +16,10 @@ module.exports.randtoken = randtoken
 module.exports.express = express
 module.exports.validator = validator
 module.exports.router = router 
-const app = express()
+const app = express();
 const port = process.env.PORT || 3000
-const httpServer = require("http").createServer(app);
-const options = { cors : {origin:"*"} };
-const io = require("socket.io")(httpServer, options);
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -81,20 +80,22 @@ app.use(function(req,res){
 });
 
 
-io.on('connection', function(socket){
-    console.log(socket.id);
+io.on("connection", (socket)=>{
+    console.log("new connection: "+socket.id);
 
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-    });
-
-    socket.on("requestMade",(data)=>{
-        console.log(data);
-        socket.broadcast.emit('requestMade1',data)
+    socket.on("disconnect",()=>{
+        console.log("disconnected")
     })
+
+    socket.on("requestMade",data =>{
+        console.log("Request was made by: "+data);
+        io.emit("notification",data)
+    })
+
+
 });
 
-httpServer.listen(port, () => {
+server.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
 

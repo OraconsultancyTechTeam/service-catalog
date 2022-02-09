@@ -11,9 +11,11 @@
 
     <body style="height: 100vh; display: flex; flex-direction: column;">
         
-        <div style="flex: 0 1 auto;">
-            <%- include('admin/header.ejs', {active: "Requests"}); %>
-        </div>
+        <% if (permission == 1) { %>
+            <div id="header"> <%-include('user/header.ejs', { active: 'Requests' })%></div>
+          <% } else { %>
+            <div id="header"> <%-include('admin/header.ejs', { active: 'Requests' })%></div>
+          <% } %>
         
         <!-- <div class="jumbotron text-center" style="background-color: #3EB489; margin-bottom: 0; border-radius: 0;">
             <h1><%#=title%></h1>
@@ -94,7 +96,8 @@
         <!-- <div style="flex: 0 1 40px;">
         <%#- include('user/footer.ejs') %>
         </div> -->
-        
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="scripts/notification.js"></script>
         
         
     </body>
