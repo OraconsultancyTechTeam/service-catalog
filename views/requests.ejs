@@ -41,9 +41,9 @@
                             <a href="/catalog" class="btn btn-primary" name="addRequest">Add New Request</a>
                         </div>
                     
-                        <div id="pageContent">
+                        <div id="pageContent" class="table-responsive"> 
 
-                            <table id="requestsTable" class="table table-striped" style="border: 1px solid #ddd;">
+                            <table id="requestsTable" class="table table-striped " style="border: 1px solid #ddd;">
                                 <thead>
                                     <tr>
                                         <th>Team ID</th>
@@ -59,7 +59,6 @@
                                         <th>Manager's Email</th>
                                         <th>Status</th>
                                         <th>Update Request</th>
-                                        <th>Update</th>
                                         <th>Delete Request</th>
                                     </tr>
                                 </thead>
@@ -89,8 +88,6 @@
                                                             <option value="Archived">Archived</option>
                                                           </select>
                                                     </td>
-                                                    <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
-                                                    <td style="text-align: center;"><input name="id" value="<%= req.id %>" hidden><button class="btn btn-success" type="submit">Update</button></td>
                                                  
                                                 </form>
                                             <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>

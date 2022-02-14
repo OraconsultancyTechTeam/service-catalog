@@ -73,9 +73,9 @@
                                         <td><%= team.first_name %></td>
                                         <td><%= team.last_name %></td>
                                         <td><%= team.team_manager %></td>
-                                        <form method="post" action="/teams">
+                                        <form id="teamUpdate<%=team.id%>" method="post" action="/teams">
                                         <td style="text-align: center; border-left: 1px solid;">
-                                            <select name="teamSelect" id="teamSelect" required>
+                                            <select name="teamSelect" id="teamSelect" required onchange="changeTeam('<%=team.id%>')" >
                                                 <option value="" disabled selected hidden>Update</option>
                                                 <% teams.forEach(team => { %>
                                                     <option value="<%= team.team_id %>"><%= team.team_name %></option>    
@@ -105,7 +105,15 @@
         <!-- <div style="flex: 0 1 40px;">
         <%#- include('user/footer.ejs') %>
         </div> -->
+        <script>
 
+            function changeTeam(teamid){
+           
+                document.getElementById("teamUpdate"+teamid).submit()
+               
+            }
+
+        </script>
         
     </body>
 </html>

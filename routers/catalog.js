@@ -345,6 +345,7 @@ router.post('/requestStatus', (req,res) => {
 
 router.post('/teams', (req,res) => {
     id = req.body.id
+    console.log(req.body)
     team_id = req.body.teamSelect
 
     connection.query(`UPDATE users SET team_id=` + team_id + ` WHERE id=` + id, (err,result) => {
