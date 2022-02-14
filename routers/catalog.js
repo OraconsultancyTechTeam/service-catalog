@@ -264,7 +264,7 @@ router.post('/submit', (req,res) => {
         if (error) throw error
         const manager_email = response[0].team_manager_email
 
-        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+manager_email+"',default,'"+user.id+"','"+team_id+"')";
+        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+manager_email+"',default,'"+user.id+"','"+team_id+"',default)";
         connection.query(sql,(err,rows,fields)=>{
             if(err) throw err
             req.flash('catalogMessage', 'Submission has been sent successfully')
@@ -329,6 +329,18 @@ router.get('/teams', (req,res) => {
         })
     }
 
+})
+router.post('/requestStatus', (req,res) => {
+    id = req.body.id
+    requestStatus= req.body.requestStatus
+
+    connection.query(`UPDATE requests SET status="` + requestStatus + `" WHERE id=` + id, (err,result) => {
+        if (err) throw err
+        else {
+            console.log('Updated db successfully')
+        }
+        return res.redirect('/requests')
+    })
 })
 
 router.post('/teams', (req,res) => {

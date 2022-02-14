@@ -71,6 +71,7 @@
                                                     <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>" onclick="updateDB(this,'<%=user.id%>')" checked><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
                                                 <% } %>
                                             </td>
+                                            
                                             <td style="text-align: center;"><a href="/editUser/<%= user.id %>" class="btn btn-primary" name="editUserRequest">Edit</a></td>
                                             <td style="text-align: center;"><a href="/deleteUser/<%= user.id %>" class="btn btn-danger" name="deleteUserRequest" onclick="confirm('Are you certain you would like to delete this user?') || event.preventDefault()">Delete</a></td>
                                         </tr>
@@ -95,8 +96,7 @@
         <%#- include('user/footer.ejs') %>
         </div> -->
       
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="scripts/notification.js"></script>
+
         <script>
             
             function updateDB(cb,id) {
