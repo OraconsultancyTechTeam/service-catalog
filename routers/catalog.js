@@ -130,6 +130,7 @@ router.post('/users', isLoggedIn, (req,res) => {
     id = req.body.id
     buttonState = req.body.buttonState
     operation = req.body.func
+    console.log(buttonState)
     
     if (operation == 'access') {
         if (buttonState === true) {
@@ -143,10 +144,15 @@ router.post('/users', isLoggedIn, (req,res) => {
         })
     } else if (operation == 'admin') {
         user_password = req.user.password
-        if (bcrypt.compareSync(user_password, req.body.password)) {
-            console.log('correct')
+        
+        if (bcrypt.compareSync(req.body.password, user_password)) {
+            if (buttonState === true) { toggle = 2 } else { toggle = 1 }
+            connection.query(`UPDATE users SET permissions='`+toggle+`' WHERE id='`+id+`'`, (err,response) => {
+                if (err) throw err
+            })
+            return res.redirect('/users')
         } else {
-            console.log('incorrect')
+            return res.redirect('/users')
         }
     }
 })
@@ -272,7 +278,7 @@ router.post('/submit', (req,res) => {
         if (error) throw error
         const manager_email = response[0].team_manager_email
 
-        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+manager_email+"',default,'"+user.id+"','"+team_id+"')";
+        const sql = "insert into requests values(null,'"+host+"','"+db+"','"+env+"','"+tshirt+"','"+dbsize+"','"+licence+"','"+comment+"','"+due_by+"','"+req_by+"','"+manager_email+"',default,'"+user.id+"','"+team_id+"',default)";
         connection.query(sql,(err,rows,fields)=>{
             if(err) throw err
             req.flash('catalogMessage', 'Submission has been sent successfully')
@@ -337,6 +343,18 @@ router.get('/teams', (req,res) => {
         })
     }
 
+})
+router.post('/requestStatus', (req,res) => {
+    id = req.body.id
+    requestStatus= req.body.requestStatus
+
+    connection.query(`UPDATE requests SET status="` + requestStatus + `" WHERE id=` + id, (err,result) => {
+        if (err) throw err
+        else {
+            console.log('Updated db successfully')
+        }
+        return res.redirect('/requests')
+    })
 })
 
 router.post('/teams', (req,res) => {

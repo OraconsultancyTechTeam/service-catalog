@@ -10,8 +10,7 @@
         </div>
     </div>
 </div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"></script>
+
 <script>
      
     function submitTest() {
@@ -37,12 +36,6 @@
 
     } else {
       txt = "Data Submit Cancelled";
-      const socket = io();
-      socket.emit("requestMade",{
-          "name":"<%= user.username %>",
-          "message":"Service Request Has Been Made"
-      })
-      console.log("This is the user0 "+"<%= user.username %>")
      }
 
     }

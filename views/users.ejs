@@ -103,8 +103,7 @@
         <%#- include('user/footer.ejs') %>
         </div> -->
       
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="scripts/notification.js"></script>
+
         <script>
             
             function updateDB(cb,id) {
@@ -122,25 +121,26 @@
             }
 
             function toggleAdmin(cb,id,i) {
+                event.preventDefault()
                 var proceed = confirm('Are you certain you would like to change this users permissions?')
                 console.log(i)
 
                 if (proceed) {
 
                     var password = prompt("Enter in the password")
-                    // if (password == "1234") {
-                    //     alert('correct password, send to backend')
-                    // } else {
-                    //     alert('password incorrect!')
-                    //     $("#adminSwitch" + i).prop("checked", false)
-                    // }
 
                     var http = new XMLHttpRequest();
                     http.open("POST", "/users", true);
                     http.setRequestHeader("Content-type","application/json")
                     http.onreadystatechange = () => {
                         if (http.readyState === 4 && http.status === 200) {
-                            http.abort()
+                            // var response = JSON.parse(http.responseText)
+                            // var adminToggle = response.adminToggle
+                            // if (adminToggle === false) {
+                            //     $("#adminSwitch" + i).prop("checked", false)
+                            // } else if (adminToggle === true) {
+                            //     $("#adminSwitch" + i).prop("checked", true)
+                            // }
                         }
                     }
                     var func = 'admin'
@@ -148,7 +148,8 @@
                     http.send(params);
 
                 } else {
-                    $("#adminSwitch" + i).prop("checked", false)
+                    event.preventDefault()
+                    // $("#adminSwitch" + i).prop("checked", false)
                 }
                 
             }
