@@ -18,8 +18,6 @@ module.exports.validator = validator
 module.exports.router = router 
 const app = express();
 const port = process.env.PORT || 3000
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
 
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -80,22 +78,7 @@ app.use(function(req,res){
 });
 
 
-io.on("connection", (socket)=>{
-    console.log("new connection: "+socket.id);
-
-    socket.on("disconnect",()=>{
-        console.log("disconnected")
-    })
-
-    socket.on("requestMade",data =>{
-        console.log("Request was made by: "+data);
-        io.emit("notification",data)
-    })
-
-
-});
-
-server.listen(port, () => {
+app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
 
