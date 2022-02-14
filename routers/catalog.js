@@ -111,12 +111,11 @@ router.post('/updateuserdetails', isLoggedIn, (req,res) => {
 
 router.get('/users', isLoggedIn, (req,res) => {
     permission = req.user.permissions
-
-    if(permission==1){
+    
+    if (permission == 1) {
         return res.redirect('/profile')
-    }
-    else{
-        connection.query(`SELECT id, username, first_name, last_name, email, team_id, toggle_account FROM users where permissions=1`, (err,users) => {
+    } else {
+        connection.query(`SELECT id, username, first_name, last_name, email, team_id, toggle_account, permissions FROM users`, (err,users) => {
             if (err) throw err
     
             res.render('users', {
@@ -125,22 +124,31 @@ router.get('/users', isLoggedIn, (req,res) => {
             })
         })
     }
-    
-
 })
 
 router.post('/users', isLoggedIn, (req,res) => {
     id = req.body.id
     buttonState = req.body.buttonState
-    if (buttonState === true) {
-        toggle = 1
-    } else {
-        toggle = 0
-    }
+    operation = req.body.func
     
-    connection.query(`UPDATE users SET toggle_account='`+toggle+`' WHERE id='`+id+`'`, (err,response) => {
-        if (err) throw err
-    })
+    if (operation == 'access') {
+        if (buttonState === true) {
+            toggle = 1
+        } else {
+            toggle = 0
+        }
+
+        connection.query(`UPDATE users SET toggle_account='`+toggle+`' WHERE id='`+id+`'`, (err,response) => {
+            if (err) throw err
+        })
+    } else if (operation == 'admin') {
+        user_password = req.user.password
+        if (bcrypt.compareSync(user_password, req.body.password)) {
+            console.log('correct')
+        } else {
+            console.log('incorrect')
+        }
+    }
 })
 
 router.get('/deleteUser/:id', isLoggedIn, (req,res) => {

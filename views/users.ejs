@@ -49,7 +49,8 @@
                                         <th>Last Name</th>
                                         <th>Email</th>
                                         <th style="text-align: center;">Team Id</th>
-                                        <th style="text-align: center;">Toggle Account Access</th>
+                                        <th style="text-align: center;">Toggle Access</th>
+                                        <th style="text-align: center;">Toggle Admin</th>
                                         <th style="text-align: center;">Edit User</th>
                                         <th style="text-align: center;">Delete User</th>
                                     </tr>
@@ -69,6 +70,13 @@
                                                     <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>" onclick="updateDB(this,'<%=user.id%>')"><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
                                                 <% } else { %>
                                                     <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="customSwitch<%=i%>" onclick="updateDB(this,'<%=user.id%>')" checked><label class="custom-control-label" for="customSwitch<%=i%>"></label></div>
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <% if (user.permissions == 1) { %>
+                                                    <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="adminSwitch<%=i%>" onclick="toggleAdmin(this,'<%=user.id%>', '<%=i%>')"><label class="custom-control-label" for="adminSwitch<%=i%>"></label></div>
+                                                <% } else { %>
+                                                    <div class="custom-control custom-switch" style="text-align: center;"><input type="checkbox" class="custom-control-input" id="adminSwitch<%=i%>" onclick="toggleAdmin(this,'<%=user.id%>', '<%=i%>')" checked><label class="custom-control-label" for="adminSwitch<%=i%>"></label></div>
                                                 <% } %>
                                             </td>
                                             <td style="text-align: center;"><a href="/editUser/<%= user.id %>" class="btn btn-primary" name="editUserRequest">Edit</a></td>
@@ -108,8 +116,41 @@
                         http.abort()
                     }
                 }
-                var params = JSON.stringify({ 'buttonState': cb.checked, id })
+                var func = 'access'
+                var params = JSON.stringify({ 'buttonState': cb.checked, id, func })
                 http.send(params);
+            }
+
+            function toggleAdmin(cb,id,i) {
+                var proceed = confirm('Are you certain you would like to change this users permissions?')
+                console.log(i)
+
+                if (proceed) {
+
+                    var password = prompt("Enter in the password")
+                    // if (password == "1234") {
+                    //     alert('correct password, send to backend')
+                    // } else {
+                    //     alert('password incorrect!')
+                    //     $("#adminSwitch" + i).prop("checked", false)
+                    // }
+
+                    var http = new XMLHttpRequest();
+                    http.open("POST", "/users", true);
+                    http.setRequestHeader("Content-type","application/json")
+                    http.onreadystatechange = () => {
+                        if (http.readyState === 4 && http.status === 200) {
+                            http.abort()
+                        }
+                    }
+                    var func = 'admin'
+                    var params = JSON.stringify({ 'buttonState': cb.checked, id, func, password })
+                    http.send(params);
+
+                } else {
+                    $("#adminSwitch" + i).prop("checked", false)
+                }
+                
             }
         
         </script>
