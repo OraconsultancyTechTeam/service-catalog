@@ -293,9 +293,7 @@ router.post('/submit', (req,res) => {
 // =====================================
 
 router.get('/requests', (req,res) => {
-    console.log(req.user)
-    // permission = req.user.permission
-    permission = 0
+    permission = req.user.permission
     if (permission == 1) {
         return res.redirect('/profile')
     } else {
