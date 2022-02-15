@@ -293,17 +293,32 @@ router.post('/submit', (req,res) => {
 // =====================================
 
 router.get('/requests', (req,res) => {
-    permission = req.user.permissions
-    if(permission==1){
+    console.log(req.user)
+    // permission = req.user.permission
+    permission = 0
+    if (permission == 1) {
         return res.redirect('/profile')
-    }else{
-    connection.query('SELECT * FROM requests ORDER BY due_by ASC', (err,result) => {
-        res.render('requests', {
-            title: 'Service Catalog Requests',
-            requests: result
-        });
-    })
-}
+    } else {
+        connection.query(`SELECT * FROM requests WHERE status='new' ORDER BY due_by ASC`, (err,newResult) => {
+            if (err) throw err
+            connection.query(`SELECT * FROM requests WHERE status='pending' ORDER BY due_by ASC`, (err,pending) => {
+                if (err) throw err
+                connection.query(`SELECT * FROM requests WHERE status='approved' ORDER BY due_by ASC`, (err,approved) => {
+                    if (err) throw err
+                    connection.query(`SELECT * FROM requests WHERE status='archived' ORDER BY due_by ASC`, (err,archived) => {
+                        if (err) throw err
+                        res.render('requests', {
+                            title: 'Service Catalog Requests',
+                            newRequests: newResult,
+                            pendingRequests: pending,
+                            approvedRequests: approved,
+                            archivedRequests: archived
+                        });
+                    })
+                })
+            })
+        })
+    }
 })
 
 router.get('/deleteRequest/:id', (req,res) => {
