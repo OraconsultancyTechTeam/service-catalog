@@ -79,16 +79,16 @@
                                             <!-- <td><%#= req.mang_email %></td> -->
                                             <td><%= req.status %></td>
                                                 <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
-                                                <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
+                                                <form id="changeStatus<%=req.id%>"method="post" action="/requestStatus">
                                                     <td style="text-align: center; border-left: 1px solid;">
-                                                        <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
+                                                        <select id="requestStatus" class="select form-control" name="requestStatus"  required onchange="changeStatus('<%=req.id%>')" >
                                                             <option value="" hidden selected disabled>Select access level</option>
                                                             <option value="Approved">Approved</option>
                                                             <option value="Pending">Pending</option>
                                                             <option value="Archived">Archived</option>
-                                                        </select>
+                                                          </select>
                                                     </td>
-                                                 
+                                                    <td style="text-align: center;"><input name="id" value="<%= req.id %>" hidden><button class="btn btn-success" type="submit">Update</button></td>
                                                 </form>
                                             <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>
                                         </tr>
