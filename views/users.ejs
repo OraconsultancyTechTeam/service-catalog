@@ -41,6 +41,20 @@
                     
                         <div id="pageContent">
 
+                            <div id="successMessage" class="alert alert-success" style="display: none;">
+                                <strong id="successMessageContent"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            
+                            <div id="failMessage" class="alert alert-danger" style="display: none;">
+                                <strong id="failMessageContent"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
                             <table id="usersTable" class="table table-striped" style="border: 1px solid #ddd;">
                                 <thead>
                                     <tr>
@@ -123,7 +137,6 @@
             function toggleAdmin(cb,id,i) {
                 event.preventDefault()
                 var proceed = confirm('Are you certain you would like to change this users permissions?')
-                console.log(i)
 
                 if (proceed) {
 
@@ -134,13 +147,25 @@
                     http.setRequestHeader("Content-type","application/json")
                     http.onreadystatechange = () => {
                         if (http.readyState === 4 && http.status === 200) {
-                            // var response = JSON.parse(http.responseText)
-                            // var adminToggle = response.adminToggle
-                            // if (adminToggle === false) {
-                            //     $("#adminSwitch" + i).prop("checked", false)
-                            // } else if (adminToggle === true) {
-                            //     $("#adminSwitch" + i).prop("checked", true)
-                            // }
+                            var data = JSON.parse(http.responseText)
+                            var toggle = data.toggle
+                            var buttonCurrentState = document.getElementById('adminSwitch' + i).checked
+                            console.log(data.message)
+                            if (toggle === true) {
+                                if (buttonCurrentState === false) {
+                                    $("#adminSwitch" + i).prop("checked", true)
+                                } else if (buttonCurrentState === true) {
+                                    $("#adminSwitch" + i).prop("checked", false)
+                                }
+                                $('#failMessage').hide()
+                                $('#successMessageContent').html(data.message)
+                                $('#successMessage').show()
+                            } else {
+                                $('#successMessage').hide()
+                                $('#failMessageContent').html(data.message)
+                                $('#failMessage').show()
+                                event.preventDefault()
+                            }
                         }
                     }
                     var func = 'admin'
@@ -149,7 +174,6 @@
 
                 } else {
                     event.preventDefault()
-                    // $("#adminSwitch" + i).prop("checked", false)
                 }
                 
             }

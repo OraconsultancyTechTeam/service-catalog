@@ -35,7 +35,7 @@
 
                 <div style="padding: 1%; margin: 1% 0 2%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;">
 
-                    <div style="margin: 1% 3%; padding: 0 1%; border-radius: 5px;">
+                    <div style="margin: 1% 2%; padding: 0 1%; border-radius: 5px;">
 
                         <div class="col-md-12" style="margin-bottom: 2%; text-align: right;">
                             <a href="/catalog" class="btn btn-primary" name="addRequest">Add New Request</a>
@@ -56,9 +56,9 @@
                                         <th>Comments</th>
                                         <th>Due Date</th>
                                         <th>Requested By</th>
-                                        <th>Manager's Email</th>
+                                        <!-- <th>Manager's Email</th> -->
                                         <th>Status</th>
-                                        <th>Update Request</th>
+                                        <th>Update Status</th>
                                         <th>Delete Request</th>
                                     </tr>
                                 </thead>
@@ -76,17 +76,17 @@
                                             <td><%= req.comments %></td>
                                             <td><%= req.due_by.toLocaleDateString() %></td>
                                             <td><%= req.req_by %></td>
-                                            <td><%= req.mang_email %></td>
+                                            <!-- <td><%#= req.mang_email %></td> -->
                                             <td><%= req.status %></td>
                                                 <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
-                                                <form id="changeStatus<%=req.id%>"method="post" action="/requestStatus">
+                                                <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
                                                     <td style="text-align: center; border-left: 1px solid;">
-                                                        <select id="requestStatus" class="select form-control" name="requestStatus"  required onchange="changeStatus('<%=req.id%>')" >
+                                                        <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
                                                             <option value="" hidden selected disabled>Select access level</option>
                                                             <option value="Approved">Approved</option>
                                                             <option value="Pending">Pending</option>
                                                             <option value="Archived">Archived</option>
-                                                          </select>
+                                                        </select>
                                                     </td>
                                                  
                                                 </form>

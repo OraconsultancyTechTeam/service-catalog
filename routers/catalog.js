@@ -130,7 +130,6 @@ router.post('/users', isLoggedIn, (req,res) => {
     id = req.body.id
     buttonState = req.body.buttonState
     operation = req.body.func
-    console.log(buttonState)
     
     if (operation == 'access') {
         if (buttonState === true) {
@@ -150,9 +149,9 @@ router.post('/users', isLoggedIn, (req,res) => {
             connection.query(`UPDATE users SET permissions='`+toggle+`' WHERE id='`+id+`'`, (err,response) => {
                 if (err) throw err
             })
-            return res.redirect('/users')
+            res.send({ toggle: true, message: 'User permissions updated successfully' })
         } else {
-            return res.redirect('/users')
+            res.send({ toggle: false, message: 'Incorrect Password...' })
         }
     }
 })
