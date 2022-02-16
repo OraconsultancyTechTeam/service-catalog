@@ -119,6 +119,7 @@
                                                         <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
                                                         <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
                                                             <td style="text-align: center; border-left: 1px solid;">
+                                                                <input name="id" value="<%= req.id %>" hidden>
                                                                 <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
                                                                     <option value="" hidden selected disabled>Status</option>
                                                                     <option value="Approved">Approved</option>
@@ -175,6 +176,7 @@
                                                         <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
                                                         <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
                                                             <td style="text-align: center; border-left: 1px solid;">
+                                                                <input name="id" value="<%= req.id %>" hidden>
                                                                 <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
                                                                     <option value="" hidden selected disabled>Status</option>
                                                                     <option value="Approved">Approved</option>
@@ -231,6 +233,7 @@
                                                         <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
                                                         <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
                                                             <td style="text-align: center; border-left: 1px solid;">
+                                                                <input name="id" value="<%= req.id %>" hidden>
                                                                 <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
                                                                     <option value="" hidden selected disabled>Status</option>
                                                                     <option value="Approved">Approved</option>
@@ -287,6 +290,7 @@
                                                         <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
                                                         <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
                                                             <td style="text-align: center; border-left: 1px solid;">
+                                                                <input name="id" value="<%= req.id %>" hidden>
                                                                 <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
                                                                     <option value="" hidden selected disabled>Status</option>
                                                                     <option value="Approved">Approved</option>
@@ -307,63 +311,7 @@
                             </div>
                           </div>
                     
-                        <div id="pageContent" class="table-responsive"> 
-
-                            <table id="requestsTable" class="table table-striped " style="border: 1px solid #ddd;">
-                                <thead>
-                                    <tr>
-                                        <th>Team ID</th>
-                                        <th>Host</th>
-                                        <th>Database</th>
-                                        <th>Environment</th>
-                                        <th>Tshirt Size</th>
-                                        <th>Database Size</th>
-                                        <th>Licence</th>
-                                        <th>Comments</th>
-                                        <th>Due Date</th>
-                                        <th>Requested By</th>
-                                        <!-- <th>Manager's Email</th> -->
-                                        <th>Status</th>
-                                        <th>Update Status</th>
-                                        <th>Delete Request</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <% requests.forEach(req => { %>
-                                        <tr>
-                                            <td><%= req.teamId %></td>
-                                            <td><%= req.host %></td>
-                                            <td><%= req.db %></td>
-                                            <td><%= req.environment %></td>
-                                            <td><%= req.tshirt_size %></td>
-                                            <td><%= req.db_size %></td>
-                                            <td><%= req.licence %></td>
-                                            <td><%= req.comments %></td>
-                                            <td><%= req.due_by.toLocaleDateString() %></td>
-                                            <td><%= req.req_by %></td>
-                                            <!-- <td><%#= req.mang_email %></td> -->
-                                            <td><%= req.status %></td>
-                                                <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
-                                                <form id="changeStatus<%=req.id%>"method="post" action="/requestStatus">
-                                                    <td style="text-align: center; border-left: 1px solid;">
-                                                        <select id="requestStatus" class="select form-control" name="requestStatus"  required onchange="changeStatus('<%=req.id%>')" >
-                                                            <option value="" hidden selected disabled>Select access level</option>
-                                                            <option value="Approved">Approved</option>
-                                                            <option value="Pending">Pending</option>
-                                                            <option value="Archived">Archived</option>
-                                                          </select>
-                                                          <input name="id" value="<%= req.id %>" hidden>
-                                                    </td>
-                                                   
-                                                </form>
-                                            <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>
-                                        </tr>
-                                    <% }) %>
-                                </tbody>
-                            </table>
-
-                        </div>
+                       
 
                     </div>
 
