@@ -223,3 +223,15 @@ html,body {
     width: 100%;
   }
 }
+
+@media screen and (min-width:748px) {
+  #teamsTable {
+    display: inline-table;
+  }
+}
+
+@media screen and (min-width:1000px) {
+  #usersTable, #requestsTable {
+    display: inline-table;
+  }
+}
