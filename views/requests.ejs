@@ -7,6 +7,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <title> <%= title %></title>
+
+        <style>
+
+            li .nav-link {
+              color: #FFC421 !important;
+            }
+    
+            li .active {
+              color: black !important;
+              font-weight: bold;
+            }
+    
+          </style>
     </head>
 
     <body style="height: 100vh; display: flex; flex-direction: column;">
@@ -27,19 +40,272 @@
         
             <section id="news_content" class="col-12" style="display: flex; flex-flow: column; background-color: #F4F6F9; height: 100%;">
                 
-                <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
+                <!-- <div id="heading" style="padding: 2%; margin: 2% 0 1%; border: 2px solid #343A40; border-radius: 5px; text-align: center; background-color: #FFFFFF;">
 
-                    <h2><%=title%></h2>
+                    <h2><%#= title %></h2>
 
-                </div>
+                </div> -->
 
-                <div style="padding: 1%; margin: 1% 0 2%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;">
+                <!-- <div style="padding: 1%; margin: 1% 0 2%; border: 2px solid #343A40; border-radius: 5px; flex: 1 1 auto; background-color: #FFFFFF;"> -->
 
                     <div style="margin: 1% 2%; padding: 0 1%; border-radius: 5px;">
 
-                        <div class="col-md-12" style="margin-bottom: 2%; text-align: right;">
-                            <a href="/catalog" class="btn btn-primary" name="addRequest">Add New Request</a>
-                        </div>
+                        
+
+                        <div class="card text-center" style="width: 100%; margin: 10px 0; transform: scale(1); cursor: auto; flex: 1 0 auto;">
+                            <div class="card-header" style="background-color: #343A40;">
+                                <ul class="nav nav-tabs card-header-tabs" id="requestsList">
+                                    <li class="nav-item">
+                                        <a class="nav-link active menuTab" href="#newRequests">New</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link menuTab" href="#pendingRequests">Pending</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link menuTab" href="#approvedRequests">Approved</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link menuTab" href="#archivedRequests">Archived</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="card-body">
+                              
+                              <div class="tab-content mt-3">
+                                
+                                <!-- First Tab -->
+                                <div class="tab-pane active" id="newRequests" role="tabpanel" aria-labelledby="new-tab">
+
+                                    <div class="col-md-12" style="margin-bottom: 1%; text-align: right; margin-top: -1%;">
+                                        <a href="/catalog" class="btn btn-primary" name="addRequest">Add New Request</a>
+                                    </div>
+
+                                    <table id="requestsTable" class="table table-striped table-responsive requestsTable" style="border: 1px solid #ddd;">
+                                        <thead>
+                                            <tr>
+                                                <th>Team ID</th>
+                                                <th>Host</th>
+                                                <th>Database</th>
+                                                <th>Environment</th>
+                                                <th>Tshirt Size</th>
+                                                <th>Database Size</th>
+                                                <th>Licence</th>
+                                                <th>Comments</th>
+                                                <th>Due Date</th>
+                                                <th>Requested By</th>
+                                                <!-- <th>Manager's Email</th> -->
+                                                <!-- <th>Status</th> -->
+                                                <th>Update Status</th>
+                                                <th>Delete Request</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            <% newRequests.forEach(req => { %>
+                                                <tr>
+                                                    <td><%= req.teamId %></td>
+                                                    <td><%= req.host %></td>
+                                                    <td><%= req.db %></td>
+                                                    <td><%= req.environment %></td>
+                                                    <td><%= req.tshirt_size %></td>
+                                                    <td><%= req.db_size %></td>
+                                                    <td><%= req.licence %></td>
+                                                    <td><%= req.comments %></td>
+                                                    <td><%= req.due_by.toLocaleDateString() %></td>
+                                                    <td><%= req.req_by %></td>
+                                                    <!-- <td><%#= req.mang_email %></td> -->
+                                                    <!-- <td><%# req.status %></td> -->
+                                                        <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
+                                                        <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
+                                                            <td style="text-align: center; border-left: 1px solid;">
+                                                                <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
+                                                                    <option value="" hidden selected disabled>Status</option>
+                                                                    <option value="Approved">Approved</option>
+                                                                    <option value="Pending">Pending</option>
+                                                                    <option value="Archived">Archived</option>
+                                                                </select>
+                                                            </td>
+                                                         
+                                                        </form>
+                                                    <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>
+                                                </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- Second Tab -->
+                                <div class="tab-pane" id="pendingRequests" role="tabpanel" aria-labelledby="pending-tab">
+                                    <table id="requestsTable" class="table table-striped table-responsive requestsTable" style="border: 1px solid #ddd;">
+                                        <thead>
+                                            <tr>
+                                                <th>Team ID</th>
+                                                <th>Host</th>
+                                                <th>Database</th>
+                                                <th>Environment</th>
+                                                <th>Tshirt Size</th>
+                                                <th>Database Size</th>
+                                                <th>Licence</th>
+                                                <th>Comments</th>
+                                                <th>Due Date</th>
+                                                <th>Requested By</th>
+                                                <!-- <th>Manager's Email</th> -->
+                                                <!-- <th>Status</th> -->
+                                                <th>Update Status</th>
+                                                <th>Delete Request</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            <% pendingRequests.forEach(req => { %>
+                                                <tr>
+                                                    <td><%= req.teamId %></td>
+                                                    <td><%= req.host %></td>
+                                                    <td><%= req.db %></td>
+                                                    <td><%= req.environment %></td>
+                                                    <td><%= req.tshirt_size %></td>
+                                                    <td><%= req.db_size %></td>
+                                                    <td><%= req.licence %></td>
+                                                    <td><%= req.comments %></td>
+                                                    <td><%= req.due_by.toLocaleDateString() %></td>
+                                                    <td><%= req.req_by %></td>
+                                                    <!-- <td><%#= req.mang_email %></td> -->
+                                                    <!-- <td><%#= req.status %></td> -->
+                                                        <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
+                                                        <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
+                                                            <td style="text-align: center; border-left: 1px solid;">
+                                                                <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
+                                                                    <option value="" hidden selected disabled>Status</option>
+                                                                    <option value="Approved">Approved</option>
+                                                                    <option value="Pending">Pending</option>
+                                                                    <option value="Archived">Archived</option>
+                                                                </select>
+                                                            </td>
+                                                         
+                                                        </form>
+                                                    <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>
+                                                </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                
+                                <!-- Third Tab -->
+                                <div class="tab-pane" id="approvedRequests" role="tabpanel" aria-labelledby="pending-tab">
+                                    <table id="requestsTable" class="table table-striped table-responsive requestsTable" style="border: 1px solid #ddd;">
+                                        <thead>
+                                            <tr>
+                                                <th>Team ID</th>
+                                                <th>Host</th>
+                                                <th>Database</th>
+                                                <th>Environment</th>
+                                                <th>Tshirt Size</th>
+                                                <th>Database Size</th>
+                                                <th>Licence</th>
+                                                <th>Comments</th>
+                                                <th>Due Date</th>
+                                                <th>Requested By</th>
+                                                <!-- <th>Manager's Email</th> -->
+                                                <!-- <th>Status</th> -->
+                                                <th>Update Status</th>
+                                                <th>Delete Request</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            <% approvedRequests.forEach(req => { %>
+                                                <tr>
+                                                    <td><%= req.teamId %></td>
+                                                    <td><%= req.host %></td>
+                                                    <td><%= req.db %></td>
+                                                    <td><%= req.environment %></td>
+                                                    <td><%= req.tshirt_size %></td>
+                                                    <td><%= req.db_size %></td>
+                                                    <td><%= req.licence %></td>
+                                                    <td><%= req.comments %></td>
+                                                    <td><%= req.due_by.toLocaleDateString() %></td>
+                                                    <td><%= req.req_by %></td>
+                                                    <!-- <td><%#= req.mang_email %></td> -->
+                                                    <!-- <td><%#= req.status %></td> -->
+                                                        <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
+                                                        <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
+                                                            <td style="text-align: center; border-left: 1px solid;">
+                                                                <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
+                                                                    <option value="" hidden selected disabled>Status</option>
+                                                                    <option value="Approved">Approved</option>
+                                                                    <option value="Pending">Pending</option>
+                                                                    <option value="Archived">Archived</option>
+                                                                </select>
+                                                            </td>
+                                                         
+                                                        </form>
+                                                    <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>
+                                                </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Fourth Tab -->
+                                <div class="tab-pane" id="archivedRequests" role="tabpanel" aria-labelledby="pending-tab">
+                                    <table id="requestsTable" class="table table-striped table-responsive requestsTable" style="border: 1px solid #ddd;">
+                                        <thead>
+                                            <tr>
+                                                <th>Team ID</th>
+                                                <th>Host</th>
+                                                <th>Database</th>
+                                                <th>Environment</th>
+                                                <th>Tshirt Size</th>
+                                                <th>Database Size</th>
+                                                <th>Licence</th>
+                                                <th>Comments</th>
+                                                <th>Due Date</th>
+                                                <th>Requested By</th>
+                                                <!-- <th>Manager's Email</th> -->
+                                                <!-- <th>Status</th> -->
+                                                <th>Update Status</th>
+                                                <th>Delete Request</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            <% archivedRequests.forEach(req => { %>
+                                                <tr>
+                                                    <td><%= req.teamId %></td>
+                                                    <td><%= req.host %></td>
+                                                    <td><%= req.db %></td>
+                                                    <td><%= req.environment %></td>
+                                                    <td><%= req.tshirt_size %></td>
+                                                    <td><%= req.db_size %></td>
+                                                    <td><%= req.licence %></td>
+                                                    <td><%= req.comments %></td>
+                                                    <td><%= req.due_by.toLocaleDateString() %></td>
+                                                    <td><%= req.req_by %></td>
+                                                    <!-- <td><%#= req.mang_email %></td> -->
+                                                    <!-- <td><%#= req.status %></td> -->
+                                                        <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
+                                                        <form id="changeStatus<%=req.id%>" method="post" action="/requestStatus">
+                                                            <td style="text-align: center; border-left: 1px solid;">
+                                                                <select id="requestStatus" class="select form-control" name="requestStatus" onchange="changeStatus('<%=req.id%>')" required>
+                                                                    <option value="" hidden selected disabled>Status</option>
+                                                                    <option value="Approved">Approved</option>
+                                                                    <option value="Pending">Pending</option>
+                                                                    <option value="Archived">Archived</option>
+                                                                </select>
+                                                            </td>
+                                                         
+                                                        </form>
+                                                    <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>
+                                                </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                
+                              </div>
+                            </div>
+                          </div>
                     
                         <div id="pageContent" class="table-responsive"> 
 
@@ -101,7 +367,7 @@
 
                     </div>
 
-                </div>
+                <!-- </div> -->
                 
             </section>
         
@@ -115,11 +381,14 @@
        
         <script>
 
-            function changeStatus(statusid){
-           
-                document.getElementById("changeStatus"+statusid).submit()
-               
+            function changeStatus(statusid) {
+                document.getElementById("changeStatus" + statusid).submit()
             }
+
+            $('#requestsList a').on('click', function(e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
 
         </script>
         
