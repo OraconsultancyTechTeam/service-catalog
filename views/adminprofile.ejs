@@ -153,6 +153,11 @@
                               <!-- <button type="submit" class="btn btn-success" id="updateBtn" style="color: white;">Update Details</button> -->
                               
                             </div>
+                            <div class="deleteAdmin" style="text-align: center;">
+                                
+                              <a  class="btn btn-danger" name="deleteUserRequest" onclick="deleteAdmin('<%=user.id%>') || event.preventDefault()">Delete Account</a>
+                              
+                            </div>
                           
                           </form>
                         </div>
@@ -212,8 +217,6 @@
         </section>
       </div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="scripts/notification.js"></script>
     <script>
 
       $('#profileList a').on('click', function (e) {
@@ -237,18 +240,36 @@
         }
       }
 
-      // function updateDB(cb,id) {
-      //   var http = new XMLHttpRequest();
-      //   http.open("POST", "/users", true);
-      //   http.setRequestHeader("Content-type","application/json")
-      //   http.onreadystatechange = () => {
-      //       if (http.readyState === 4 && http.status === 200) {
-      //           http.abort()
-      //       }
-      //   }
-      //   var params = JSON.stringify({ 'buttonState': cb.checked, id })
-      //   http.send(params);
-      // }
+      function deleteAdmin(id) {
+                event.preventDefault()
+                var proceed = confirm('Are you certain you would like to delete your Admin Account?')
+
+                if (proceed) {
+
+                    var password = prompt("Enter in the password")
+                  console.log(id)
+                    var http = new XMLHttpRequest();
+                    http.open("POST", "/deleteAdmin", true);
+                    http.setRequestHeader("Content-type","application/json")
+                    http.onreadystatechange = () => {
+                        if (http.readyState === 4 && http.status === 200) {
+                           /* var data = JSON.parse(http.responseText)
+
+                                $('#failMessageContent').html(data.message)
+                                $('#failMessage').show()
+                          */
+                        }
+                    }
+                    console.log(id+" : "+password)
+                    var params = JSON.stringify({ id, password })
+                    console.log(params)
+                    http.send(params);
+
+                } else {
+                    event.preventDefault()
+                }
+                
+            }
 
     </script>
 
