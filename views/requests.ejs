@@ -87,8 +87,9 @@
                                                             <option value="Pending">Pending</option>
                                                             <option value="Archived">Archived</option>
                                                           </select>
+                                                          <input name="id" value="<%= req.id %>" hidden>
                                                     </td>
-                                                    <td style="text-align: center;"><input name="id" value="<%= req.id %>" hidden><button class="btn btn-success" type="submit">Update</button></td>
+                                                   
                                                 </form>
                                             <td><a href="/deleteRequest/<%= req.id %>" class="btn btn-danger" name="deleteRequest" onclick="confirm('Are you certain you would like to delete this request?') || event.preventDefault()">Delete</a></td>
                                         </tr>

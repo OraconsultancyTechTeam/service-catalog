@@ -61,7 +61,6 @@
                                     <th>Last Name</th>
                                     <th>Team Manager</th>
                                     <th style="text-align: center; border-left: 1px solid;">Update Team</th>
-                                    <th style="text-align: center;">Submit Team Change</th>
                                     
                                 </tr>
                             </thead>
@@ -81,9 +80,9 @@
                                                     <option value="<%= team.team_id %>"><%= team.team_name %></option>    
                                                 <% }) %>
                                             </select>
+                                            <input name="id" value="<%= team.id %>" hidden>
                                         </td>
-                                        <!-- <td style="text-align: center;"><a href="/changeteam/<%#= teams_view.id %>" class="btn btn-primary" name="userChangeTeam" onclick="confirm('Are you certain you would like to move this user to a different team?') || event.preventDefault()">Change</a></td> -->
-                                        <td style="text-align: center;"><input name="id" value="<%= team.id %>" hidden><button class="btn btn-success" type="submit">Update</button></td>
+                                        
                                         </form>
                                     </tr>
                                 <% }) %>
