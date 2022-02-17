@@ -3,6 +3,7 @@
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
 
+
 // load up the user model
 var bcrypt = require('bcrypt')
 const validator = require('validator')
@@ -159,77 +160,5 @@ module.exports = function(passport) {
         })
     )
 
-    // // =========================================================================
-    // // LOCAL changepassword ============================================================
-    // // =========================================================================
-
-    // passport.use(
-    //     'local-changepassword',
-    //     new LocalStrategy({
-    //         // by default, local strategy uses username and password, we will override with email
-    //         usernameField : 'username',
-    //         passwordField : 'newPassword',
-    //         passReqToCallback : true // allows us to pass back the entire request to the callback
-    //     },
-    //     function(req, username, password, done) {
-    //         // find a user whose email is the same as the forms email
-    //         // we are checking to see if the user trying to login already exists
-
-    //         const firstName = req.body.firstName
-    //         const lastName = req.body.lastName
-    //         const newPassword = req.body.newPassword
-    //         const confirmPassword = req.body.confirmPassword
-
-    //         if (req.body.email) {
-    //             const email = req.body.email
-    //             if(!validator.isEmail(email)){
-    //                 return done(null, false, req.flash('changePasswordMessage', 'Please enter correct email format'));
-    //             }
-    //         }
-
-    //         if (newPassword != confirmPassword) {
-    //             return done(null, false, req.flash('changePasswordMessage', 'Passwords do not match'))
-    //         }
-
-    //         connection.query("SELECT * FROM users WHERE username = ?",[username], function(err,rows) {
-    //             if (err) return done(err)
-    //             if (rows.length) {
-    //                 bcrypt.hash(newPassword,saltRounds,(err,hash) => {
-    //                     if (err) return done(err);
-    //                     else {
-    //                         const sql = "UPDATE users SET password='" + hash + "' WHERE username ='" + username + "'";
-    //                         connection.query(sql,(err,users) => {
-    //                             if(err) throw err
-    //                             else{
-    //                                 // all is well, return success message
-    //                                 return done(null, true, req.flash('changePasswordMessage', 'Password Updated Successfully'))
-    //                             }
-    //                         })
-    //                     }
-    //                 })
-    //             } else {
-    //                 connection.query("SELECT * FROM users WHERE email = ?",[email],function(err,row) {
-    //                     if (err) return done(err)
-    //                     if (row.length) {
-    //                         bcrypt.hash(newPassword,saltRounds,(err,hash) => {
-    //                             if (err)
-    //                                 return done(err);
-    //                             else {
-    //                                 const sql = "UPDATE users SET password=" + newPassword + " WHERE email=" + email
-    //                                 connection.query(sql,(err,users) => {
-    //                                     if (err) throw err
-    //                                     else {
-    //                                         // all is well, return success message
-    //                                         return done(null, true, req.flash('changePasswordMessage', 'Password Updated Successfully'))
-    //                                     }
-    //                                 })
-    //                             }
-    //                         })
-                    
-    //                     }
-    //                 })
-    //             }
-    //         })
-    //     })
-    // )
+  
 }

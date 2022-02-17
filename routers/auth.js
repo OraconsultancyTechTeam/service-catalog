@@ -3,6 +3,7 @@ const { Passport } = require('passport')
 const ejs = require('ejs')
 const fs = require('fs')
 
+
 module.exports = function(app,passport) {
 
   // const connection = require('../db/mySQL.js')
@@ -43,6 +44,15 @@ module.exports = function(app,passport) {
       res.redirect('/login');
   })
 
+  app.get('/auth/google', passport.authenticate('google',{scope:['email','profile']
+
+  }))
+
+  app.get('/google/callback',passport.authenticate('google',{
+    successRedirect : '/requests', // redirect to the secure profile section
+      failureRedirect : '/login', // redirect back to the signup page if there is an error
+      failureFlash : true // allow flash messages
+  }))
   // =====================================
 	// SIGNUP ==============================
 	// =====================================

@@ -42,6 +42,7 @@ const passport = require('passport')
 const flash = require('connect-flash')
 
 require('./middleware/passport')(passport)
+require('./middleware/google-passport')(passport)
 
 //config session
 app.use(session({
