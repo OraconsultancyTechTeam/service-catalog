@@ -7,6 +7,14 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
       <title> <%= title %></title>
+
+      <style>
+
+        .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+          background-color: #c0392b !important;
+        }
+
+      </style>
   
   </head>
 
@@ -64,9 +72,12 @@
                   </div>
 
                 </div>
-                 <div class="form-group">
-                    <label>Remember Me</label>
-                    <input type="checkbox" class="form-control" name="remember" value="yes">
+                
+                <div class="form-group">
+
+                  <label>Remember Me</label>
+                  <input type="checkbox" name="remember" value="yes">
+
                 </div>
                 
                 <div class="form-group">
