@@ -1,10 +1,9 @@
-<div class="container collapse" id="subblock" style="margin-bottom: 50px; display: none;">
+<div class="container collapse" id="subblock" style="margin-bottom: 10px; display: none;">
     <div class="row mt-2">
         <div class="col-md-12">
             <div style="text-align: center;">
-                
 
-                <button type="button" class="active btn btn-primary" id="submitBtn" onclick="submitTest()">Submit</button>
+                <button type="button" class="active btn btn-success" id="submitBtn" onclick="submitRequest()">Submit Request</button>
                 
             </div>
         </div>
@@ -13,66 +12,54 @@
 
 <script>
      
-    function submitTest() {
-    var txt;
-    if (confirm("Confirm Submitting!")) {
-      
-
-        var mail = document.getElementById("mangEmail");
-        var cStage_id = document.getElementById("stage4").innerHTML
-       
-            if(customCheck(cStage_id)==false){
-                document.getElementById("addForm").submit();
-                txt = "Data Submit Confirmed";
-                
-            }
-            else{
-                var comAl = document.getElementById("commentAlert");
-                 comAl.style.display = "block"; 
-                return;
-            }
-
+    function submitRequest() {
+        var txt;
         
+        if (confirm("Are you sure you'd like to make this request?")) {
+        
+            var mail = document.getElementById("mangEmail")
+            var cStage_id = document.getElementById("stage4").innerHTML
+        
+            if (customCheck(cStage_id) == false) {
+                document.getElementById("addForm").submit()
+                txt = "Data Submit Confirmed"
+            } else {
+                var comAl = document.getElementById("commentAlert")
+                comAl.style.display = "block"
+                return
+            }
 
-    } else {
-      txt = "Data Submit Cancelled";
-     }
+        } else {
+            txt = "Data Submit Cancelled";
+        }
 
     }
 
-  
-
-    function ValidateEmail(inputText) 
-{
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(inputText.value.match(mailformat)){
-       
-    
-        return true}
-    else{
-    
-        return false}
-}
-
-
-function customCheck(cStage_id){
-    var stage_id = document.getElementById("stage3").innerHTML
-    var stage = stage_id.replace(/\s+/g,'')+'1';
-    var tshirtcheck = document.getElementById(stage).innerHTML
-
-    if(tshirtcheck=='Custom'){
-        
-        var cStage = cStage_id.replace(/\s+/g,'')+'1';
-        var commentcheck = document.getElementById(cStage).innerHTML
-        if(typeof commentcheck == "undefined" || commentcheck.length == 0 || commentcheck=="-------------------------------" ){
-           return true;
-        }
-        else{
-            return false;
+    function ValidateEmail(inputText) {
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (inputText.value.match(mailformat)) {
+            return true
+        } else {
+            return false
         }
     }
-    return false
-}
 
+    function customCheck(cStage_id) {
+        var stage_id = document.getElementById("stage3").innerHTML
+        var stage = stage_id.replace(/\s+/g,'')+'1';
+        var tshirtcheck = document.getElementById(stage).innerHTML
+
+        if (tshirtcheck=='Custom') {
+            
+            var cStage = cStage_id.replace(/\s+/g,'')+'1';
+            var commentcheck = document.getElementById(cStage).innerHTML
+            if (typeof commentcheck == "undefined" || commentcheck.length == 0 || commentcheck=="-------------------------------" ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false
+    }
 
 </script>

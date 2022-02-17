@@ -25,10 +25,10 @@
 
       <div class="row" style="height:100%; margin: 0;">
 
-        <section id="display_content" class="col-9" style="display: flex; flex-flow: column; background-color: #F4F6F9;">
+        <section id="display_content" class="col-9" style="display: flex; flex-flow: column; background-color: #F4F6F9; padding-top: 10px;">
 
           <% if (typeof catalogMessages != "undefined" && catalogMessages.length > 0) { %>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom: 0;">
               <strong>Success</strong> <%= catalogMessages %>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -57,13 +57,15 @@
             <div id="step3"> <%-include('partials/step3partial.ejs')%></div>           
             <div id="step5"> <%-include('partials/step5partial.ejs')%></div>
             <div id="step7"> <%-include('partials/step7partial.ejs')%></div>
-            <div id="submitBtn"> <%-include('partials/submit.ejs')%></div>
+            
           </form>
         </section>
 
         <section id="details" class="col-3 right" style="background-color: #343A40; padding: 2% 0;">
           
-          <h4 style="color:#FFFFFF; text-align: center; padding: 8% 1% 10%; ">Service Details</h4>
+          <h4 style="color:#FFFFFF; text-align: center; padding: 8% 0 10%; ">Service Details</h4>
+
+          <div id="submitBtn"> <%-include('partials/submit.ejs')%></div>
           
           <div style="padding-top: 2%;">
             <%stages.forEach(stage => { %>
