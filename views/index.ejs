@@ -6,7 +6,6 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<!--Get your own code at fontawesome.com-->
         
       <title> <%= title %></title>
 
@@ -91,6 +90,21 @@
     </div>
     
     <script src="scripts/index.js"></script>
+
+    <script>
+
+      $(window).on('resize', function() {
+        var win = $(this);
+        if (win.width() < 768) {
+          $('#display_content').removeClass('col-9').addClass('col-7')
+          $('#details').removeClass('col-3').addClass('col-5')
+        } else {
+          $('#display_content').removeClass('col-7').addClass('col-9')
+          $('#details').removeClass('col-5').addClass('col-3')
+        }
+      })
+
+    </script>
 
   </body>
 </html>

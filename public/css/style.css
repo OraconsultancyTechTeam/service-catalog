@@ -111,19 +111,34 @@ html,body {
   margin: 5px 0;
 }
 
+#registerBtn{
+  color: white;
+}
+
+.stages:hover {
+  color: white !important;
+}
+
+.navbar-brand {
+  font-size: 1.5rem; 
+  font-weight: bold; 
+  margin-right: 120px;
+}
+
 /*
 * Breakpoints
 */
+
 @media screen and (max-width:768px) {
   
-  #servDetails {
+  /* #servDetails {
     width: 100%;
     margin-right: 0;
-    /* right: 0;
+    right: 0;
     left: 0;
-    top: 224px; */
+    top: 224px;
     position: static;
-  }
+  } */
 
   #details {
     /* top: 0; */
@@ -140,12 +155,83 @@ html,body {
     margin-right: 0;
     left: 0;
   }
+
+  body {
+    flex-direction: row;
+  }
 }
 
-#registerBtn{
-  color: white;
+@media screen and (max-width:930px) {
+  #generalHeaderForm {
+    display: none;
+  }
+
+  nav {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .navbar-brand {
+    margin: 0 !important;
+    font-size: 10rem;
+  }
+
+  #logoutButton {
+    margin: 0 0 1% !important;
+  }
 }
 
-.stages:hover {
-  color: white !important;
+@media screen and (max-width:768px) {
+  nav {
+      flex-direction: column !important;
+      text-align: center;
+  }
+
+  .navbar-brand {
+    margin: 0 !important;
+    font-size: 10rem;
+  }
+
+  #generalHeaderForm {
+    display: none;
+  }
+
+  .navbar-nav {
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #logoutButton {
+    margin: 0 0 1% !important;
+  }
+
+  #newRequestDiv {
+    text-align: center !important;
+    margin: -7% 0 5% !important;
+  }
+
+  #newUserDiv, #newTeamDiv {
+    text-align: center !important;
+  }
+
+  #group1, #group2 {
+    align-items: center;
+  }
+
+  #featuresBlock .dropdown {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width:748px) {
+  #teamsTable {
+    display: inline-table;
+  }
+}
+
+@media screen and (min-width:1000px) {
+  #usersTable, #requestsTable {
+    display: inline-table;
+  }
 }
