@@ -42,11 +42,11 @@ module.exports = function(passport) {
         if (err)
             return done(err);
         if (!users.length) {
-            return done(null, false,req.flash('loginMessage', 'No user found.') ); // req.flash is the way to set flashdata using connect-flash
+            return done(null, false,request.flash('loginMessage', 'No user found.') ); // req.flash is the way to set flashdata using connect-flash
         }
 
         if (users[0].toggle_account == 0) {
-            return done(null, false,req.flash('loginMessage', 'Permission, Please Let Admin Know to Activate Your Account') ); // req.flash is the way to set flashdata using connect-flash
+            return done(null, false,request.flash('loginMessage', 'Permission, Please Let Admin Know to Activate Your Account') ); // req.flash is the way to set flashdata using connect-flash
         }
 
         // all is well, return successful user
