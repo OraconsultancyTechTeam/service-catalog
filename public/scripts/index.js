@@ -115,7 +115,7 @@ function stepToBackend(inputElement, stage_id, option, option_id, group) {
           var newdiv = document.createElement('div')
           newdiv.setAttribute('id',card.option_heading.replace(/\s+/g,'') + '-card')
           newdiv.setAttribute('class','card group2 card-settings')
-          newdiv.setAttribute('style','text-align: center; max-width: 204px;')
+          newdiv.setAttribute('style','text-align: center; max-width: 204px; flex: 0 10%; margin-bottom: 2%;')
           newdiv.setAttribute('onclick',"clickTheCard(this,2)")
           var img = document.createElement('img')
           img.setAttribute('class','card-img-top mx-auto mt-1')
