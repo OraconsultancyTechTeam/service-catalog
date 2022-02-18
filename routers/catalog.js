@@ -166,27 +166,32 @@ router.get('/deleteUser/:id', isLoggedIn, (req,res) => {
     })
 })
 
-router.post('/deleteAdmin', isLoggedIn, (req,res) => {
+
+
+
+
+router.post('/passwordCheck', isLoggedIn, (req,res) => {
    
     id = req.body.id
     user_password = req.user.password
     if (bcrypt.compareSync(req.body.password, user_password)) {
-        
         connection.query('DELETE FROM users WHERE id=' + id, (err,response) => {
             if (err) throw err
             else {
-                console.log('User deleted successfully')                		
+                console.log('User deleted successfully')          
+                res.send({match:true,message: 'User permissions updated successfully' })      		
             }
      
     }) 
-
+      
 }
     else{
-        res.send({ message: 'Incorrect Password...' })
+        res.send({ match:false,message: 'Incorrect Password...' })
     }
-    res.redirect('/logout')
-    })
 
+})
+
+       
 
 router.get('/editUser/:id', isLoggedIn, (req,res) => {
     connection.query(`SELECT * FROM users WHERE id=` + req.params.id, (err,result) => {
