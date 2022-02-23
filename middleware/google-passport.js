@@ -27,12 +27,23 @@ module.exports = function(passport) {
                 done(null, user);
         });
     });
+    const port = process.env.PORT || 3000
+    let cbURL
+    console.log(port)
+  
+    if(port==3000){
+        cbURL = "http://localhost:3000/google/callback"
+    }
+    else{
+        cbURL = "https://ora-service-catalog.herokuapp.com/google/callback"
+    }
+
 
   //google login
   passport.use(new GoogleStrategy({
     clientID:     process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/google/callback"||"https://ora-service-catalog.herokuapp.com/google/callback",
+    callbackURL: cbURL,
     passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, done) {
