@@ -32,7 +32,7 @@ module.exports = function(passport) {
   passport.use(new GoogleStrategy({
     clientID:     process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/google/callback"||process.env.GOOGLE_CALLBACK_URL,
+    callbackURL: "http://localhost:3000/google/callback"||"https://ora-service-catalog.herokuapp.com/google/callback",
     passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, done) {
