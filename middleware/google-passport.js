@@ -27,15 +27,16 @@ module.exports = function(passport) {
                 done(null, user);
         });
     });
+    //If statement to switch google callback link depending if localhost or live site
     const port = process.env.PORT || 3000
     let cbURL
-    console.log(port)
+    //console.log(port)
   
     if(port==3000){
         cbURL = "http://localhost:3000/google/callback"
     }
     else{
-        cbURL = "https://ora-service-catalog.herokuapp.com/google/callback"
+        cbURL = process.env.GOOGLE_CALLBACK_URL
     }
 
 
