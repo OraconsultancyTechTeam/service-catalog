@@ -269,7 +269,7 @@ function sendEmail(newUser,token,option) {
     service: 'gmail',
     auth: {
       user: 'oraconsultancy22@gmail.com',
-      pass: 'Test1234!'
+      pass: 'OraTestEmail!'
     }
   })
 
